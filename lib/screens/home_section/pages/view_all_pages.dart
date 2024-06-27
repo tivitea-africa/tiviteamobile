@@ -3,6 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
+import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
+import 'package:tivi_tea/screens/home_section/pages/rent_page.dart';
 
 class ViewAll extends StatelessWidget {
   const ViewAll({
@@ -171,7 +173,7 @@ class ViewAll extends StatelessWidget {
                         size: 20,
                         color: Colors.grey[60],
                       ),
-                      Gap(8),
+                      const Gap(8),
                       _textDescription(
                         '+234 12 36 31 54 32',
                       ),
@@ -184,14 +186,101 @@ class ViewAll extends StatelessWidget {
                         size: 20,
                         color: Colors.grey[60],
                       ),
-                      Gap(8),
+                      const Gap(8),
                       _textDescription(
                         'contact@tivitea.com',
                       ),
                     ],
                   ),
+                  const Gap(60),
+                  rentContainer(context),
+                  const Gap(60),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget rentContainer(BuildContext context) {
+    return Center(
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          // color: Colors.tr,
+          border: Border.all(color: Colors.black, width: 0.5),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Caution Fee (Refundable)',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  '2%',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const Row(
+              children: [
+                Text(
+                  'Total',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  '₦ 18,500',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                'Bargain price',
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+            const Gap(16),
+            FullButton(
+              text: 'Rent Now',
+              width: double.infinity,
+              height: 44,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RentalPage(),
+                  ),
+                );
+              },
+              color: Colors.white,
+              bgColor: AppColors.deepBlue,
             ),
           ],
         ),

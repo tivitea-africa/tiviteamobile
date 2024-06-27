@@ -155,14 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ViewAll(),
-                      ),
-                    );
-                  },
+                  onTap: () {},
                   child: const Text(
                     'View All',
                     style: TextStyle(
@@ -183,7 +176,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) {
-                  return const FashionCard();
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewAll(),
+                          ),
+                        );
+                      },
+                      child: const FashionCard());
                 },
               ),
             ),
