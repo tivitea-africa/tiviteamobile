@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
 import 'package:tivi_tea/core/widget/reusbale_containers.dart';
+import 'package:tivi_tea/screens/home_section/pages/summary_page.dart';
 
 class RentalPage extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class _RentalPageState extends State<RentalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rental Page'),
+        title: const Text('Start Rentingl Page'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -68,17 +69,17 @@ class _RentalPageState extends State<RentalPage> {
                 border: const OutlineInputBorder(),
               ),
             ),
-            const Spacer(),
+            const Gap(70),
             FullButton(
               text: 'Continue',
               width: double.infinity,
               height: 44,
               onPressed: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => const SignInScreen(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SummaryPage(),
+                  ),
+                );
               },
               color: Colors.white,
               bgColor: AppColors.deepBlue,
