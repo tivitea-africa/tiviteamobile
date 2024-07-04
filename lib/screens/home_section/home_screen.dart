@@ -85,25 +85,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(30.0),
                         color: const Color(0xFFE8E8EB),
                       ),
-                      child: TextFormField(
+                      child: TextField(
                         decoration: InputDecoration(
-                          hintText: 'Search',
-                          hintStyle: const TextStyle(
-                            color: Color(0xFF8A8A99),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            borderSide: BorderSide.none,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 8),
-
-                          border: InputBorder.none, // Remove the underline
-                          enabledBorder: InputBorder
-                              .none, // Remove the underline for enabled state
-                          focusedBorder: InputBorder.none,
-                          prefixIcon: IconButton(
-                            icon: const Icon(
-                              Icons.search,
-                              color: Color(0xFF8A8A99),
-                            ),
+                          hintText: 'Search note',
+                          suffixIcon: IconButton(
                             onPressed: () {},
+                            icon: const Icon(Icons.highlight_remove_rounded),
+                          ),
+                          fillColor: const Color(0xffEFF2F9),
+                          filled: true,
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 0.7),
                           ),
                         ),
                       ),
