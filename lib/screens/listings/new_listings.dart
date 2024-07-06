@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:tivi_tea/screens/bottomNav/bottom_nav.dart';
+import 'package:tivi_tea/screens/listings/other_listing.dart';
+import 'package:tivi_tea/screens/listings/space_details.dart';
+import 'package:tivi_tea/screens/listings/work_tool.dart';
 
 class NewListings extends StatefulWidget {
   const NewListings({super.key});
@@ -11,12 +13,13 @@ class NewListings extends StatefulWidget {
   State<NewListings> createState() => _NewListingsState();
 }
 
-String selectedValue = '';
+String? selectedValue = '';
 
 class _NewListingsState extends State<NewListings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
@@ -59,170 +62,107 @@ class _NewListingsState extends State<NewListings> {
                 style: GoogleFonts.poppins(
                     color: const Color(0xff000050),
                     fontWeight: FontWeight.w600,
-                    fontSize: 17),
+                    fontSize: 20),
               ),
               const Gap(40),
-              RadioMenuButton(
-                style: ButtonStyle(
-                  overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
-                  backgroundColor:
-                      const MaterialStatePropertyAll(Color(0xffF3F3F4)),
-                  elevation: MaterialStateProperty.all(1),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: selectedValue == "Co-Working Space"
-                            ? Color(0xff000050)
-                            : Colors.transparent,
-                      ),
-                    ),
-                  ),
-                  minimumSize: MaterialStateProperty.all(
-                      const Size(double.infinity, 60)),
+              RadioListTile(
+                toggleable: true,
+                activeColor: const Color(0xff000050),
+                secondary: const Icon(Iconsax.people,
+                    size: 18, color: Color(0xff000050)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                value: "Co-Working Space",
+                controlAffinity: ListTileControlAffinity.trailing,
+                value: 'working space',
+                tileColor: const Color(0xffF3F3F4),
                 groupValue: selectedValue,
                 onChanged: (newValue) {
                   setState(() {
-                    selectedValue = newValue!;
+                    selectedValue = newValue;
                   });
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(
-                      Iconsax.people,
-                      size: 18,
-                      color: Color(0xff000050),
-                    ),
-                    const Gap(15),
-                    Text(
-                      "Co-Working Space",
-                      style: GoogleFonts.poppins(
-                          color: const Color(0xff000050),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
+                title: Text(
+                  "Co-Working Space",
+                  style: GoogleFonts.poppins(
+                      color: const Color(0xff000050),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
-              Gap(15),
-              RadioMenuButton(
-                style: ButtonStyle(
-                  overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
-                  backgroundColor:
-                      const MaterialStatePropertyAll(Color(0xffF3F3F4)),
-                  elevation: MaterialStateProperty.all(1),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: selectedValue == "Work Tool"
-                            ? Color(0xff000050)
-                            : Colors.transparent,
-                      ),
-                    ),
-                  ),
-                  minimumSize: MaterialStateProperty.all(
-                      const Size(double.infinity, 60)),
+              Gap(10),
+              RadioListTile(
+                toggleable: true,
+                activeColor: const Color(0xff000050),
+                secondary: const Icon(Iconsax.briefcase,
+                    size: 18, color: Color(0xff000050)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                value: "Work Tool",
+                controlAffinity: ListTileControlAffinity.trailing,
+                value: 'work tool',
+                tileColor: const Color(0xffF3F3F4),
                 groupValue: selectedValue,
                 onChanged: (newValue) {
                   setState(() {
-                    selectedValue = newValue!;
+                    selectedValue = newValue;
                   });
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(
-                      Iconsax.bag,
-                      size: 18,
-                      color: Color(0xff000050),
-                    ),
-                    const Gap(15),
-                    Text(
-                      "Work Tool",
-                      style: GoogleFonts.poppins(
-                          color: const Color(0xff000050),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
+                title: Text(
+                  "Work Tool",
+                  style: GoogleFonts.poppins(
+                      color: const Color(0xff000050),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
-              Gap(15),
-              RadioMenuButton(
-                style: ButtonStyle(
-                  overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
-                  backgroundColor:
-                      const MaterialStatePropertyAll(Color(0xffF3F3F4)),
-                  elevation: MaterialStateProperty.all(1),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: selectedValue == "Other Listing"
-                            ? Color(0xff000050)
-                            : Colors.transparent,
-                      ),
-                    ),
-                  ),
-                  minimumSize: MaterialStateProperty.all(
-                      const Size(double.infinity, 60)),
+              Gap(10),
+              RadioListTile(
+                toggleable: true,
+                activeColor: const Color(0xff000050),
+                secondary:
+                    const Icon(Iconsax.box, size: 18, color: Color(0xff000050)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                value: "Other Listing",
+                controlAffinity: ListTileControlAffinity.trailing,
+                value: 'other listing',
+                tileColor: const Color(0xffF3F3F4),
                 groupValue: selectedValue,
                 onChanged: (newValue) {
                   setState(() {
-                    selectedValue = newValue!;
+                    selectedValue = newValue;
                   });
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(
-                      Iconsax.box,
-                      size: 18,
-                      color: Color(0xff000050),
-                    ),
-                    const Gap(15),
-                    Text(
-                      "Other Listing",
-                      style: GoogleFonts.poppins(
-                          color: const Color(0xff000050),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
+                title: Text(
+                  "Other Listing",
+                  style: GoogleFonts.poppins(
+                      color: const Color(0xff000050),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
-              Gap(20),
+              const Gap(20),
               DropdownMenu(
-                leadingIcon: Icon(
+                leadingIcon: const Icon(
                   Iconsax.box,
                   size: 18,
                   color: Color(0xff9D9DAA),
                 ),
                 enabled: false,
                 textStyle: GoogleFonts.poppins(
-                    color: Color(0xff0E0E1B),
+                    color: const Color(0xff0E0E1B),
                     fontWeight: FontWeight.w400,
                     fontSize: 14),
-                selectedTrailingIcon: Icon(Iconsax.arrow_circle_up),
+                selectedTrailingIcon: const Icon(Iconsax.arrow_circle_up),
                 hintText: 'Other Listing Category',
-                trailingIcon: Icon(Iconsax.arrow_circle_down),
+                trailingIcon: const Icon(Iconsax.arrow_circle_down),
                 width: MediaQuery.of(context).size.width * 0.93,
-                dropdownMenuEntries: <DropdownMenuEntry>[
+                dropdownMenuEntries: const <DropdownMenuEntry>[
                   DropdownMenuEntry(value: 'value', label: 'label'),
                 ],
               ),
-              Gap(40),
+              const Gap(40),
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
@@ -231,7 +171,24 @@ class _NewListingsState extends State<NewListings> {
                             MaterialStateProperty.all(const Color(0xff000050)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)))),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (selectedValue == "working space") {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SpaceDetails()));
+                      } else if (selectedValue == "work tool") {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WorkDetails()));
+                      } else if (selectedValue == "other listing") {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OtherListing()));
+                      } else {}
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
