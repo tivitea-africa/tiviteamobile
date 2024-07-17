@@ -21,6 +21,7 @@ class _NewListingsState extends State<NewListings> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        backgroundColor: const Color(0xffFFFFFF),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 17),

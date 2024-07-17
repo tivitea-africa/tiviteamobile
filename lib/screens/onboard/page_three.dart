@@ -72,7 +72,7 @@ class PageThree extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const OPtionsRegistserScreen(),
+                  builder: (context) => const OptionsRegisterScreen(),
                 ),
               );
             },

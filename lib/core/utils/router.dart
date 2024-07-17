@@ -25,7 +25,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/roleOptions',
       builder: (BuildContext context, GoRouterState state) {
-        return const OPtionsRegistserScreen();
+        return const OptionsRegisterScreen();
       },
     ),
     GoRoute(
