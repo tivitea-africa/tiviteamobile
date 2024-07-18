@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:tivi_tea/screens/listings/new_listings.dart';
+
+import '../../core/widget/reusable_add_text_button.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -11,6 +14,7 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
         appBar: AppBar(
           centerTitle: true,
           leading: const Icon(Icons.arrow_back_ios_new_outlined, size: 17),
@@ -34,126 +38,84 @@ class HistoryScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 40,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color(0xffF3F3F4),
-                          hintText: 'Search',
-                          hintStyle: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xff8A8A99)),
-                          suffixIcon: const Icon(
-                            Icons.clear_all_outlined,
-                            size: 20,
-                            color: Colors.grey,
-                          ),
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 20.0),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                          height: 40,
+                          child: buildTextField(
+                              "Search",
+                              Icons.clear_all_outlined,
+                              20,
+                              40,
+                              const Color(0xffF3F3F4),
+                              BorderSide.none, false)),
                     ),
-                  ),
-                  const Gap(20),
-                  SizedBox(
-                    height: 40,
-                    child: TextButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color(0xff000050)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)))),
-                        onPressed: () {
+                    const Gap(20),
+                    SizedBox(
+                      height: 40,
+                      child: ReusableAddTextButton(
+                        onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NewListings()));
+                                  builder: (context) => const NewListings()));
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Icon(Iconsax.add,
-                                  color: Colors.white, size: 15),
-                              const SizedBox(width: 7),
-                              Text(
-                                "New",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
-                              )
-                            ],
-                          ),
-                        )),
-                  )
-                ],
-              ),
-              const Gap(30),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 2),
-                decoration: BoxDecoration(
-                    color: const Color(0xffF3F3F4),
-                    borderRadius: BorderRadius.circular(15)),
-                child: ListView(
-                  shrinkWrap: true,
-                  children: const [
-                    ListingWidget(
-                        title: 'Regal Hub',
-                        subtitle: 'Workspace',
-                        price: '3 Rooms',
-                        status: 'assets/placeholders/published.png'),
-                    ListingWidget(
-                        title: 'Sony x4 Drone',
-                        subtitle: 'Tool',
-                        price: '# 25,000',
-                        status: 'assets/placeholders/published.png'),
-                    ListingWidget(
-                        title: 'Canon EOS 60D',
-                        subtitle: 'Tool',
-                        price: '# 25,000',
-                        status: 'assets/placeholders/draft.png'),
-                    ListingWidget(
-                        title: 'Canon EOS 60D',
-                        subtitle: 'Tool',
-                        price: '# 25,000',
-                        status: 'assets/placeholders/draft.png'),
-                    ListingWidget(
-                        title: 'Canon EOS 60D',
-                        subtitle: 'Tool',
-                        price: '# 25,000',
-                        status: 'assets/placeholders/draft.png'),
+                        title: 'New',
+                        color: Color(0xff000050),
+                        fontColor: Colors.white,
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ],
+                const Gap(30),
+                Container(
+                  // padding: EdgeInsets.symmetric(vertical: 3, horizontal: 2),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(15)),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: const [
+                      ListingWidget(
+                          title: 'Regal Hub',
+                          subtitle: 'Workspace',
+                          price: '3 Rooms',
+                          status: 'assets/placeholders/published.png'),
+                      ListingWidget(
+                          title: 'Sony x4 Drone',
+                          subtitle: 'Tool',
+                          price: '# 25,000',
+                          status: 'assets/placeholders/published.png'),
+                      ListingWidget(
+                          title: 'Canon EOS 60D',
+                          subtitle: 'Tool',
+                          price: '# 25,000',
+                          status: 'assets/placeholders/draft.png'),
+                      ListingWidget(
+                          title: 'Canon EOS 60D',
+                          subtitle: 'Tool',
+                          price: '# 25,000',
+                          status: 'assets/placeholders/draft.png'),
+                      ListingWidget(
+                          title: 'Canon EOS 60D',
+                          subtitle: 'Tool',
+                          price: '# 25,000',
+                          status: 'assets/placeholders/draft.png'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -178,9 +140,10 @@ class ListingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color(0xffFFFFFF),
       elevation: 0,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         child: Column(
           children: [
             Row(
