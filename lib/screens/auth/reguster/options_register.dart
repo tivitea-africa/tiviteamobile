@@ -60,12 +60,12 @@ class _OptionsRegisterScreenState extends State<OptionsRegisterScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CreateBuyerAccount()));
+                          builder: (context) => const SpaceOwnerAccount()));
                 } else if (selectedRole == 'Customer') {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SpaceOwnerAccount()));
+                          builder: (context) => const CreateBuyerAccount()));
                 }
               },
               color: Colors.white,

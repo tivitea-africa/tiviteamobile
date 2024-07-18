@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
-
+import 'package:tivi_tea/screens/bottomNav/navbar.dart';
 import '../../core/widget/reusbale_buttons.dart';
-import 'documents_submitted.dart';
 
 class AccountVerificationSuccessful extends StatelessWidget {
   const AccountVerificationSuccessful({super.key});
@@ -21,22 +19,22 @@ class AccountVerificationSuccessful extends StatelessWidget {
           children: [
             Column(
               children: [
-                Gap(50),
-                Icon(
+                const Gap(50),
+                const Icon(
                   Icons.receipt_long_outlined,
                   size: 60,
                   color: Color(0xff006400),
                 ),
-                Gap(40),
+                const Gap(40),
                 Text(
                   'Account Verification Successful!',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
-                      color: Color(0xff0E0E1B)),
+                      color: const Color(0xff0E0E1B)),
                 ),
-                Gap(20),
+                const Gap(20),
                 Text(
                   'Your account has been verified successfully!',
                   textAlign: TextAlign.center,
@@ -51,10 +49,8 @@ class AccountVerificationSuccessful extends StatelessWidget {
               width: double.infinity,
               height: 44,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const NaviBar()));
               },
               color: Colors.white,
             ),

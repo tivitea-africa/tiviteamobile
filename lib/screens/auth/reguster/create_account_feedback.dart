@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tivi_tea/screens/bottomNav/navbar.dart';
 import 'package:tivi_tea/screens/home_section/home_screen.dart';
 
 class OnAccountCreation extends StatelessWidget {
@@ -68,10 +69,10 @@ class OnAccountCreation extends StatelessWidget {
                 height: 40,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
+                            builder: (context) => const NaviBar()));
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff000080),
