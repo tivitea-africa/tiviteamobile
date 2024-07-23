@@ -21,22 +21,22 @@ class AccountVerificationSuccessful extends StatelessWidget {
           children: [
             Column(
               children: [
-                Gap(50),
-                Icon(
+                const Gap(50),
+                const Icon(
                   Icons.receipt_long_outlined,
                   size: 60,
                   color: Color(0xff006400),
                 ),
-                Gap(40),
+                const Gap(40),
                 Text(
                   'Account Verification Successful!',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
-                      color: Color(0xff0E0E1B)),
+                      color: const Color(0xff0E0E1B)),
                 ),
-                Gap(20),
+                const Gap(20),
                 Text(
                   'Your account has been verified successfully!',
                   textAlign: TextAlign.center,
@@ -54,7 +54,7 @@ class AccountVerificationSuccessful extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                        builder: (context) => const HomeScreen()));
               },
               color: Colors.white,
             ),

@@ -7,6 +7,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tivi_tea/screens/auth/login/log_in_screen.dart';
 import 'package:tivi_tea/screens/auth/reguster/create_account_feedback.dart';
 import '../../../core/const/app_assets.dart';
+import '../../../core/widget/phone_number_field.dart';
 import '../../../core/widget/reusbale_buttons.dart';
 
 class CreateBuyerAccount extends StatelessWidget {
@@ -126,48 +127,7 @@ class CreateBuyerAccount extends StatelessWidget {
                         fontSize: 12,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
-                SizedBox(
-                  height: 45,
-                  child: IntlPhoneField(
-                    showCountryFlag: true,
-                    dropdownDecoration: const BoxDecoration(
-                        border: Border(
-                            right: BorderSide(color: Color(0xffD8D8DD)))),
-                    dropdownIconPosition: IconPosition.trailing,
-                    disableLengthCheck: true,
-                    dropdownIcon: const Icon(Icons.keyboard_arrow_down),
-                    flagsButtonPadding: const EdgeInsets.only(left: 20),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(left: 5),
-                      filled: true,
-                      fillColor: const Color(0xffFFFFFF),
-                      hintText: 'Enter Phone Number',
-                      hintStyle: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xff8A8A99)),
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Color(0xffD8D8DD)),
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Color(0xffD8D8DD)),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Color(0xffD8D8DD)),
-                      ),
-                    ),
-                    languageCode: "en",
-                    onChanged: (phone) {
-                      print(phone.completeNumber);
-                    },
-                    onCountryChanged: (country) {
-                      print('Country changed to: ' + country.name);
-                    },
-                  ),
-                ),
+                BuildPhoneNumberField(hintText: 'Enter Phone Number'),
                 const Gap(15),
                 Text('Email',
                     style: GoogleFonts.poppins(
