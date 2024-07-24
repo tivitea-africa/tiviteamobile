@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
@@ -22,6 +23,12 @@ class _ServiceProvideHomeScreenState extends State<ServiceProvideHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff000050),
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(

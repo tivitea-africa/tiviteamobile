@@ -4,6 +4,7 @@ import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/screens/listings/history.dart';
 import 'package:tivi_tea/screens/service_provider/dashboard/dashboard_screen.dart';
+import 'package:tivi_tea/screens/service_provider/profile/profile_screen.dart';
 
 class SidebarMenu extends StatelessWidget {
   const SidebarMenu({super.key});
@@ -39,8 +40,13 @@ class SidebarMenu extends StatelessWidget {
             icon: Icons.person_outline,
             text: 'My Profile',
             onTap: () {
-              Navigator.pop(context);
-              // Navigate to the My Profile screen or perform an action
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ServiceProfileScreen(),
+                ),
+              );
+              // Navigate to the My Profile screen or perform an action ServiceProfileScreen
             },
           ),
           _createDrawerItem(

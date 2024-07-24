@@ -17,6 +17,7 @@ class ImageAssets {
   static const _base = BasePaths.baseImagePath;
 
   static const logo = '$_base/logo.png';
+  static const success = '$_base/success.png';
 }
 
 class SvgAssets {
