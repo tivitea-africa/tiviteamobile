@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tivi_tea/core/utils/router.dart';
-import 'package:tivi_tea/screens/service_provider/bottomNav/navbar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

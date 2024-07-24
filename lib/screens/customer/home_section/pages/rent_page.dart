@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
 import 'package:tivi_tea/core/widget/reusbale_containers.dart';
-import 'package:tivi_tea/screens/home_section/pages/summary_page.dart';
+import 'package:tivi_tea/screens/customer/home_section/pages/summary_page.dart';
 
 class RentalPage extends StatefulWidget {
   @override

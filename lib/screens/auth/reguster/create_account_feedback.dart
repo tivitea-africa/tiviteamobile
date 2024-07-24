@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/screens/bottomNav/navbar.dart';
+import 'package:tivi_tea/screens/customer/bottomNav/navbar.dart';
 
 class OnAccountCreation extends StatelessWidget {
   const OnAccountCreation({super.key});

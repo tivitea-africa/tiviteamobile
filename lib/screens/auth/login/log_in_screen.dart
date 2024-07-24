@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/screens/auth/password_screens/forgot_password.dart';
 import 'package:tivi_tea/screens/auth/reguster/options_register.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
+import 'package:tivi_tea/screens/customer/home_section/home_screen.dart';
 import '../../../core/const/app_assets.dart';
 import '../../../core/widget/custom_clip_path.dart';
 import '../../../core/widget/reusable_textfield.dart';

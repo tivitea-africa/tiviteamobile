@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
-import 'package:tivi_tea/screens/kyc/verify_address.dart';
+import 'package:tivi_tea/screens/auth/kyc/verify_address.dart';
 
 class VerifyDoc extends StatelessWidget {
   const VerifyDoc({super.key});

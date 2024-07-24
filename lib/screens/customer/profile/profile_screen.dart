@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/core/widget/phone_number_field.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
+import 'package:tivi_tea/screens/customer/profile/change_password.dart';
 
-import '../../core/const/app_assets.dart';
-import '../../core/const/app_colors.dart';
+import '../../../core/const/app_assets.dart';
+import '../../../core/const/app_colors.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -77,20 +78,30 @@ class ProfileScreen extends StatelessWidget {
                     fontSize: 20,
                     color: const Color(0xff000035))),
             const Gap(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.lock_outline_rounded,
-                  size: 14,
-                ),
-                const Gap(5),
-                Text(
-                  'Change password',
-                  style: GoogleFonts.poppins(
-                      fontSize: 14, fontWeight: FontWeight.w500),
-                )
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChangePasswordScreen(),
+                  ),
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.lock_outline_rounded,
+                    size: 14,
+                  ),
+                  const Gap(5),
+                  Text(
+                    'Change password',
+                    style: GoogleFonts.poppins(
+                        fontSize: 14, fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
             ),
             const Gap(30),
             buildTextField('John Doe D', null, 8, 58, const Color(0xffFFFFFF),

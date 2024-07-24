@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
+import 'package:tivi_tea/screens/customer/dashboard/dashboard_screen.dart';
+import 'package:tivi_tea/screens/customer/history/history_screen.dart';
+import 'package:tivi_tea/screens/customer/profile/profile_screen.dart';
 import 'package:tivi_tea/screens/service_provider/history_section/history_page.dart';
-import 'package:tivi_tea/screens/service_provider/listings/history.dart';
 import 'package:tivi_tea/screens/service_provider/dashboard/dashboard_screen.dart';
 import 'package:tivi_tea/screens/service_provider/profile/profile_screen.dart';
 
-class SidebarMenu extends StatelessWidget {
-  const SidebarMenu({super.key});
+class CustomerSidebarMenu extends StatelessWidget {
+  const CustomerSidebarMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class SidebarMenu extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DashboardScreen(),
+                  builder: (context) => const CustomerDashboardScreen(),
                 ),
               );
               // Navigate to the Dashboard screen or perform an action
@@ -44,25 +46,25 @@ class SidebarMenu extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ServiceProfileScreen(),
+                  builder: (context) => const ProfileScreen(),
                 ),
               );
               // Navigate to the My Profile screen or perform an action ServiceProfileScreen
             },
           ),
-          _createDrawerItem(
-            icon: Icons.list,
-            text: 'My Listings',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ListingScreen(),
-                ),
-              );
-              // Navigate to the My Listings screen or perform an action
-            },
-          ),
+          // _createDrawerItem(
+          //   icon: Icons.list,
+          //   text: 'My Listings',
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => const CustomerHistoryScreen(),
+          //       ),
+          //     );
+          //     // Navigate to the My Listings screen or perform an action
+          //   },
+          // ),
           _createDrawerItem(
             icon: Icons.history,
             text: 'Booking history',
@@ -70,7 +72,7 @@ class SidebarMenu extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HistoryScreen(),
+                  builder: (context) => const CustomerHistoryScreen(),
                 ),
               );
               // Navigate to the Booking history screen or perform an action HistoryScreen

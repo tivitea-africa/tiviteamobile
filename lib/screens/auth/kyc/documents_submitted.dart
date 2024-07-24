@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/screens/bottomNav/navbar.dart';
-import '../../core/widget/reusbale_buttons.dart';
 
-class AccountVerificationSuccessful extends StatelessWidget {
-  const AccountVerificationSuccessful({super.key});
+import '../../../core/widget/reusbale_buttons.dart';
+import 'account_verification_successful.dart';
+
+class DocumentsSubmitted extends StatelessWidget {
+  const DocumentsSubmitted({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +20,24 @@ class AccountVerificationSuccessful extends StatelessWidget {
           children: [
             Column(
               children: [
-                const Gap(50),
-                const Icon(
-                  Icons.receipt_long_outlined,
+                Gap(50),
+                Icon(
+                  Icons.check_circle_outline_rounded,
                   size: 60,
-                  color: Color(0xff006400),
+                  color: Color(0xff000050),
                 ),
-                const Gap(40),
+                Gap(40),
                 Text(
-                  'Account Verification Successful!',
+                  'Documents submitted \nfor verification!',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
-                      color: const Color(0xff0E0E1B)),
+                      color: Color(0xff0E0E1B)),
                 ),
-                const Gap(20),
+                Gap(20),
                 Text(
-                  'Your account has been verified successfully!',
+                  'We will notify you about your verification status after 2 business days. ',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       fontSize: 14, fontWeight: FontWeight.w400),
@@ -49,8 +50,10 @@ class AccountVerificationSuccessful extends StatelessWidget {
               width: double.infinity,
               height: 44,
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const NaviBar()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AccountVerificationSuccessful()));
               },
               color: Colors.white,
             ),

@@ -5,11 +5,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/container_sample.dart';
+import 'package:tivi_tea/core/widget/customer_sidebar_menu.dart';
 import 'package:tivi_tea/core/widget/options_tab.dart';
 import 'package:tivi_tea/core/widget/reusbale_containers.dart';
-import 'package:tivi_tea/screens/home_section/pages/view_all_pages.dart';
-import 'package:tivi_tea/screens/kyc/verify_document.dart';
-import 'package:tivi_tea/screens/profile/profile_screen.dart';
+import 'package:tivi_tea/screens/customer/home_section/pages/view_all_pages.dart';
+import 'package:tivi_tea/screens/auth/kyc/verify_document.dart';
+import 'package:tivi_tea/screens/customer/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,18 +20,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         //leading navigates to the profile screen
         ///TODO: This navigates to the shorter profile details
         leading: Row(
           children: [
-            Gap(8),
+            const Gap(8),
             GestureDetector(
-              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));},
-              child: CircleAvatar(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+              },
+              child: const CircleAvatar(
                 radius: 22.5,
                 backgroundImage: AssetImage(
                   PlaceholderAssets.pfp,
@@ -69,8 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => VerifyDoc()));
+              _scaffoldKey.currentState?.openDrawer();
             },
             icon: const Icon(
               Iconsax.element_4,
@@ -79,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      drawer: const CustomerSidebarMenu(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 24),
         child: Column(
@@ -97,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: TextField(
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -191,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ViewAll(),
+                            builder: (context) => const ViewAll(),
                           ),
                         );
                       },

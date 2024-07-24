@@ -3,12 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
-import 'package:tivi_tea/screens/listings/new_listings.dart';
+import 'package:tivi_tea/screens/service_provider/listings/new_listings.dart';
 
-import '../../core/widget/reusable_add_text_button.dart';
+import '../../../core/widget/reusable_add_text_button.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
+class ListingScreen extends StatelessWidget {
+  const ListingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
-import 'package:tivi_tea/screens/home_section/pages/rent_page.dart';
+import 'package:tivi_tea/screens/service_provider/home_section/pages/rent_page.dart';
 
 class ViewAll extends StatelessWidget {
   const ViewAll({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/widget/reusbale_buttons.dart';
+import '../../../core/widget/reusbale_buttons.dart';
 import 'documents_submitted.dart';
 
 class AccountVerification extends StatelessWidget {

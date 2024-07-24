@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/screens/auth/login/log_in_screen.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
+import 'package:tivi_tea/screens/customer/home_section/home_screen.dart';
 
 class PasswordFeedback extends StatelessWidget {
   const PasswordFeedback({super.key});

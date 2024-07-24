@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:tivi_tea/screens/listings/other_listing.dart';
-import 'package:tivi_tea/screens/listings/space_details.dart';
-import 'package:tivi_tea/screens/listings/work_tool.dart';
+import 'package:tivi_tea/screens/service_provider/listings/other_listing.dart';
+import 'package:tivi_tea/screens/service_provider/listings/space_details.dart';
+import 'package:tivi_tea/screens/service_provider/listings/work_tool.dart';
 
 class NewListings extends StatefulWidget {
   const NewListings({super.key});

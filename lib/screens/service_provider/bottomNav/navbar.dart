@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:tivi_tea/screens/bottomNav/bottom_nav.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
-import 'package:tivi_tea/screens/listings/history.dart';
+import 'package:tivi_tea/screens/customer/bottomNav/bottom_nav.dart';
+import 'package:tivi_tea/screens/customer/home_section/home_screen.dart';
+import 'package:tivi_tea/screens/service_provider/history_section/history_page.dart';
+import 'package:tivi_tea/screens/service_provider/listings/history.dart';
 import 'package:tivi_tea/screens/service_provider/home_section/home_screen.dart';
 import 'package:tivi_tea/screens/services_section/service_screen.dart';
 

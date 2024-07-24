@@ -7,14 +7,15 @@ import 'package:tivi_tea/core/widget/transaction_container.dart';
 import 'package:tivi_tea/screens/service_provider/dashboard/widget/info_card.dart';
 import 'package:tivi_tea/screens/service_provider/dashboard/widget/pie_chart.dart';
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+class CustomerDashboardScreen extends StatefulWidget {
+  const CustomerDashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<CustomerDashboardScreen> createState() =>
+      _CustomerDashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Map<String, String>> transactions = [
@@ -109,10 +110,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             totalEarningWidget(),
             const Gap(16),
-            financialSummaryWidget(),
-            const Gap(16),
-            bookingSummaryWidget(),
-            const Gap(16),
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -132,76 +129,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget totalEarningWidget() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          'Total Earning',
-          style: TextStyle(color: Colors.grey, fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        const Text(
-          '₦ 85,000.81',
-          style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: AppColors.deepBlue),
-        ),
-        const SizedBox(height: 5),
-        Row(
-          children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.arrow_upward, color: Colors.green, size: 16),
-                SizedBox(width: 5),
-                Text(
-                  '32.54%',
-                  style: TextStyle(color: Colors.green, fontSize: 16),
-                ),
-              ],
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () {
-                // Handle view report action
-              },
-              child: const Text(
-                'View Report',
-                style: TextStyle(
-                    color: Color(0xFF5041BC),
-                    fontSize: 16,
-                    decoration: TextDecoration.underline),
-              ),
-            ),
-          ],
-        ),
-        const Gap(31),
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InfoCard(
-                count: '12',
-                label: 'Total Listing',
-                icon: Icons.list_alt,
-                backgroundColor: const Color(0xFFF9E6D0),
-                iconColor: const Color(0xFFEC8305),
-              ),
-              const Gap(10),
-              InfoCard(
-                count: '85',
-                label: 'Total Bookings',
-                icon: Icons.bookmark,
-                backgroundColor: const Color(0xFFCCCCDC),
-                iconColor: AppColors.deepBlue,
-              ),
-            ],
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InfoCard(
+            count: '12',
+            label: 'Total Listing',
+            icon: Icons.list_alt,
+            backgroundColor: const Color(0xFFF9E6D0),
+            iconColor: const Color(0xFFEC8305),
           ),
-        ),
-      ],
+          const Gap(10),
+          InfoCard(
+            count: '85',
+            label: 'Total Bookings',
+            icon: Icons.bookmark,
+            backgroundColor: const Color(0xFFCCCCDC),
+            iconColor: AppColors.deepBlue,
+          ),
+        ],
+      ),
     );
   }
 

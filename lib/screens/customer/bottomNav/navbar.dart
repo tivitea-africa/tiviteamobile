@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:tivi_tea/screens/bottomNav/bottom_nav.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
-import 'package:tivi_tea/screens/listings/history.dart';
+import 'package:tivi_tea/screens/customer/bottomNav/bottom_nav.dart';
+import 'package:tivi_tea/screens/customer/history/history_screen.dart';
+import 'package:tivi_tea/screens/customer/home_section/home_screen.dart';
 import 'package:tivi_tea/screens/services_section/service_screen.dart';
-
 
 class NaviBar extends StatefulWidget {
   const NaviBar({
@@ -21,7 +20,7 @@ class _NaviBarState extends State<NaviBar> {
   late List<Widget> pageList = const [
     HomeScreen(),
     ServiceScreen(),
-    HistoryScreen(),
+    CustomerHistoryScreen(),
     HomeScreen(),
   ];
   int pageIndex = 0;
