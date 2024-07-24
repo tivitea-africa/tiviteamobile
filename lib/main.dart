@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tivi_tea/core/utils/router.dart';
+import 'package:tivi_tea/screens/service_provider/bottomNav/navbar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
     );
 
     return SafeArea(
-      child: MaterialApp.router(
+      child: MaterialApp
+          // .router
+          (
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -34,8 +36,8 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        // home: const OnboardView(),
-        routerConfig: router,
+        home: const ServiceNaviBar(),
+        // routerConfig: router,
       ),
     );
   }

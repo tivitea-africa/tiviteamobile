@@ -13,7 +13,11 @@ class HistoryScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          leading: const Icon(Icons.arrow_back_ios_new_outlined, size: 17),
+          leading: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back_ios_new_outlined, size: 17)),
           title: Text(
             "New Listing",
             style: GoogleFonts.poppins(
@@ -84,16 +88,16 @@ class HistoryScreen extends StatelessWidget {
                     height: 40,
                     child: TextButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
+                            backgroundColor: WidgetStateProperty.all(
                                 const Color(0xff000050)),
-                            shape: MaterialStateProperty.all(
+                            shape: WidgetStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)))),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NewListings()));
+                                  builder: (context) => const NewListings()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),

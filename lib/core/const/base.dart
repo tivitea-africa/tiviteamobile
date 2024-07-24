@@ -1,5 +1,5 @@
 class BasePaths {
-  static const baseImagePath = "assets";
+  static const baseImagePath = "assets/images";
   static const baseSvgPath = "asset/svg";
   static const baseIconPath = "assets/iconsAsset";
   static const baseAnimationPath = "assets/animations";
