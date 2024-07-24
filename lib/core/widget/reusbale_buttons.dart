@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FullButton extends StatelessWidget {
   final String text;
   final Color color;
-  final Color bgColor;
+  final Color? bgColor;
   final double width;
   final double height;
   final VoidCallback onPressed;
@@ -19,7 +20,7 @@ class FullButton extends StatelessWidget {
     required this.onPressed,
     required this.color,
     this.longPressed,
-    required this.bgColor,
+    this.bgColor,
     this.fontSize = 15,
   });
 
@@ -38,11 +39,7 @@ class FullButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
-              color: color,
-              fontSize: fontSize,
-              fontWeight: FontWeight.w500,
-            ),
+            style: GoogleFonts.poppins(color: Color(0xffFFFFFF), fontSize: 14, fontWeight: FontWeight.w700)
           ),
         ),
       ),
@@ -247,18 +244,16 @@ class ImgTxtButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              height: 24,
-              width: 24,
+              height: 20,
+              width: 20,
               image,
             ),
             const Gap(6),
             Text(
               text,
-              style: TextStyle(
-                color: color,
-                fontSize: fontSize,
-                fontWeight: FontWeight.w500,
-              ),
+              style: GoogleFonts.poppins(
+                color: Color(0xff737380), fontWeight: FontWeight.w400, fontSize: 14
+              )
             )
           ],
         ),

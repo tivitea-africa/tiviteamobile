@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
+import 'package:tivi_tea/screens/auth/reguster/create_space_tool_owner_account.dart';
 
-class OPtionsRegistserScreen extends StatefulWidget {
-  const OPtionsRegistserScreen({super.key});
+import 'create_buyer_customer_accout.dart';
+
+class OptionsRegisterScreen extends StatefulWidget {
+  const OptionsRegisterScreen({super.key});
 
   @override
-  State<OPtionsRegistserScreen> createState() => _OPtionsRegistserScreenState();
+  State<OptionsRegisterScreen> createState() => _OptionsRegisterScreenState();
 }
 
-class _OPtionsRegistserScreenState extends State<OPtionsRegistserScreen> {
+class _OptionsRegisterScreenState extends State<OptionsRegisterScreen> {
   String selectedRole = 'Service Provider';
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,19 @@ class _OPtionsRegistserScreenState extends State<OPtionsRegistserScreen> {
               text: 'Continue',
               width: double.infinity,
               height: 44,
-              onPressed: () {},
+              onPressed: () {
+                if (selectedRole == 'Service Provider') {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SpaceOwnerAccount()));
+                } else if (selectedRole == 'Customer') {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CreateBuyerAccount()));
+                }
+              },
               color: Colors.white,
               bgColor: AppColors.deepBlue,
             ),

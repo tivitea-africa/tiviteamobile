@@ -8,6 +8,7 @@ import 'package:tivi_tea/core/widget/container_sample.dart';
 import 'package:tivi_tea/core/widget/options_tab.dart';
 import 'package:tivi_tea/core/widget/reusbale_containers.dart';
 import 'package:tivi_tea/screens/home_section/pages/view_all_pages.dart';
+import 'package:tivi_tea/screens/kyc/verify_document.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,7 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VerifyDoc()));
+            },
             icon: const Icon(
               Iconsax.element_4,
               color: AppColors.deepBlue,
