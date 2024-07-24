@@ -3,8 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/screens/bottomNav/navbar.dart';
 
-class OnAccountCreation extends StatelessWidget {
-  const OnAccountCreation({super.key});
+class ServiceOnAccountCreation extends StatelessWidget {
+  const ServiceOnAccountCreation({super.key});
 
   @override
   Widget build(BuildContext context) {
