@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tivi_tea/screens/auth/reguster/create_space_tool_owner_account_2.dart';
-import '../../../core/const/app_assets.dart';
 import '../../../core/widget/reusbale_buttons.dart';
 
 class SpaceOwnerAccount extends StatelessWidget {

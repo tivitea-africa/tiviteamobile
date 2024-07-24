@@ -9,6 +9,7 @@ import 'package:tivi_tea/core/widget/options_tab.dart';
 import 'package:tivi_tea/core/widget/reusbale_containers.dart';
 import 'package:tivi_tea/screens/home_section/pages/view_all_pages.dart';
 import 'package:tivi_tea/screens/kyc/verify_document.dart';
+import 'package:tivi_tea/screens/profile/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,13 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Row(
+        //leading navigates to the profile screen
+        ///TODO: This navigates to the shorter profile details
+        leading: Row(
           children: [
             Gap(8),
-            CircleAvatar(
-              radius: 22.5,
-              backgroundImage: AssetImage(
-                PlaceholderAssets.pfp,
+            GestureDetector(
+              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));},
+              child: CircleAvatar(
+                radius: 22.5,
+                backgroundImage: AssetImage(
+                  PlaceholderAssets.pfp,
+                ),
               ),
             ),
           ],
