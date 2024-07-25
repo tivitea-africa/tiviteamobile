@@ -10,6 +10,7 @@ Widget buildTextField(
   BorderSide borderSide,
   bool focus, {
   TextInputType? type = TextInputType.text,
+  IconData? prefixIcon,
 }) {
   return SizedBox(
     height: height,
@@ -17,6 +18,7 @@ Widget buildTextField(
       keyboardType: type,
       autofocus: focus,
       decoration: InputDecoration(
+        prefixIcon: Icon(prefixIcon, size: 20, color: Colors.grey),
         filled: true,
         fillColor: color,
         hintText: hintText,

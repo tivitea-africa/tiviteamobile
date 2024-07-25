@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 
+import '../../screens/services/photography_screen.dart';
+
 class OptionsSelector extends StatefulWidget {
   const OptionsSelector({Key? key}) : super(key: key);
 
@@ -35,6 +37,9 @@ class _OptionsSelectorState extends State<OptionsSelector> {
               onTap: () {
                 setState(() {
                   highlightedIndex = index;
+                  if (index == 2) {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PhotographyCategoryScreen()));
+                  }
                 });
               },
               child: Container(
