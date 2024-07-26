@@ -5,6 +5,7 @@ import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/screens/customer/dashboard/dashboard_screen.dart';
 import 'package:tivi_tea/screens/customer/history/history_screen.dart';
 import 'package:tivi_tea/screens/customer/profile/profile_screen.dart';
+import 'package:tivi_tea/screens/profile/favourites_screen.dart';
 
 class CustomerSidebarMenu extends StatelessWidget {
   const CustomerSidebarMenu({super.key});
@@ -49,19 +50,19 @@ class CustomerSidebarMenu extends StatelessWidget {
               // Navigate to the My Profile screen or perform an action ServiceProfileScreen
             },
           ),
-          // _createDrawerItem(
-          //   icon: Icons.list,
-          //   text: 'My Listings',
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => const CustomerHistoryScreen(),
-          //       ),
-          //     );
-          //     // Navigate to the My Listings screen or perform an action
-          //   },
-          // ),
+          _createDrawerItem(
+            icon: Icons.star_outlined,
+            text: 'My Favourites',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FavouritesScreen(),
+                ),
+              );
+              // Navigate to the My favourite screen or perform an action
+            },
+          ),
           _createDrawerItem(
             icon: Icons.history,
             text: 'Booking history',

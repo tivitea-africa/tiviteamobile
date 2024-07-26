@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
+import 'package:tivi_tea/screens/profile/reviews_screen.dart';
 import 'package:tivi_tea/screens/service_provider/history_section/history_page.dart';
 import 'package:tivi_tea/screens/service_provider/listings/history.dart';
 import 'package:tivi_tea/screens/service_provider/dashboard/dashboard_screen.dart';
@@ -112,7 +113,12 @@ class SidebarMenu extends StatelessWidget {
             icon: Icons.reviews_outlined,
             text: 'Customer Review',
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ReviewsScreen(),
+                ),
+              );
               // Navigate to the Customer Review screen or perform an action
             },
           ),

@@ -11,6 +11,7 @@ import 'package:tivi_tea/core/widget/reusbale_containers.dart';
 import 'package:tivi_tea/screens/customer/home_section/pages/view_all_pages.dart';
 import 'package:tivi_tea/screens/auth/kyc/verify_document.dart';
 import 'package:tivi_tea/screens/customer/profile/profile_screen.dart';
+import 'package:tivi_tea/screens/profile/notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -70,7 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationsScreen(),
+                ),
+              );
+            },
             icon: const Icon(
               Iconsax.notification,
               color: AppColors.deepBlue,
