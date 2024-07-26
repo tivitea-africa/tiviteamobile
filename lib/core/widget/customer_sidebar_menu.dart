@@ -5,9 +5,6 @@ import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/screens/customer/dashboard/dashboard_screen.dart';
 import 'package:tivi_tea/screens/customer/history/history_screen.dart';
 import 'package:tivi_tea/screens/customer/profile/profile_screen.dart';
-import 'package:tivi_tea/screens/service_provider/history_section/history_page.dart';
-import 'package:tivi_tea/screens/service_provider/dashboard/dashboard_screen.dart';
-import 'package:tivi_tea/screens/service_provider/profile/profile_screen.dart';
 
 class CustomerSidebarMenu extends StatelessWidget {
   const CustomerSidebarMenu({super.key});
