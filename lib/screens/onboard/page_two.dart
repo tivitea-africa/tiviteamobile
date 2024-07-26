@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
+import 'package:tivi_tea/screens/onboard/widget/skip_text.dart';
 
 import '../../core/widget/custom_clip_path.dart';
 
@@ -28,15 +29,7 @@ class PageTwo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-              ),
+              SkipText(),
               const Gap(43),
               Container(
                 width: 250,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
@@ -17,6 +18,12 @@ class _OptionsRegisterScreenState extends State<OptionsRegisterScreen> {
   String selectedRole = 'Service Provider';
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -60,12 +67,12 @@ class _OptionsRegisterScreenState extends State<OptionsRegisterScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CreateBuyerAccount()));
+                          builder: (context) => const SpaceOwnerAccount()));
                 } else if (selectedRole == 'Customer') {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SpaceOwnerAccount()));
+                          builder: (context) => const CreateBuyerAccount()));
                 }
               },
               color: Colors.white,

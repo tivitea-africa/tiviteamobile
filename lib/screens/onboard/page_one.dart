@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
+import 'package:tivi_tea/screens/onboard/widget/skip_text.dart';
 
 import '../../core/widget/custom_clip_path.dart';
 
@@ -10,6 +12,12 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff000050),
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -28,16 +36,7 @@ class PageOne extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.fontColor,
-                  ),
-                ),
-              ),
+              SkipText(),
               const Gap(43),
               Container(
                 width: 250,

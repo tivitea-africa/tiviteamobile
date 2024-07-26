@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        // home: const OnboardView(),
+        // home: const ServiceNaviBar(),
         routerConfig: router,
       ),
     );

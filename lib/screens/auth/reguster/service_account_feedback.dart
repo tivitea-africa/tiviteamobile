@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/screens/customer/bottomNav/navbar.dart';
+import 'package:tivi_tea/screens/service_provider/bottomNav/navbar.dart';
 
-class OnAccountCreation extends StatelessWidget {
-  const OnAccountCreation({super.key});
+class ServiceOnAccountCreation extends StatelessWidget {
+  const ServiceOnAccountCreation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class OnAccountCreation extends StatelessWidget {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const NaviBar()));
+                            builder: (context) => const ServiceNaviBar()));
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff000080),

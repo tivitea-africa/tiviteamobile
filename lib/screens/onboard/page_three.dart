@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
 import 'package:tivi_tea/screens/auth/reguster/options_register.dart';
-import 'package:tivi_tea/screens/auth/signIn_screen.dart';
+import 'package:tivi_tea/screens/onboard/widget/skip_text.dart';
 
 import '../../core/widget/custom_clip_path.dart';
 
@@ -14,6 +14,12 @@ class PageThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff000050),
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -32,15 +38,7 @@ class PageThree extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-              ),
+              SkipText(),
               const Gap(43),
               Container(
                 width: 250,
@@ -81,7 +79,7 @@ class PageThree extends StatelessWidget {
                 width: double.infinity,
                 height: 44,
                 onPressed: () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const OptionsRegisterScreen(),
                     ),
@@ -91,20 +89,6 @@ class PageThree extends StatelessWidget {
                 bgColor: AppColors.deepBlue,
               ),
               const Gap(12),
-              FullButton(
-                text: 'Log In',
-                width: double.infinity,
-                height: 44,
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SignInScreen(),
-                    ),
-                  );
-                },
-                color: AppColors.deepBlue,
-                bgColor: Colors.white,
-              ),
             ],
           ),
         )

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tivi_tea/screens/auth/reguster/create_account_feedback.dart';
+import 'package:tivi_tea/screens/auth/reguster/service_account_feedback.dart';
 import '../../../core/const/app_assets.dart';
 import '../../../core/widget/reusbale_buttons.dart';
 import '../login/log_in_screen.dart';
@@ -267,7 +268,7 @@ class SpaceOwnerAccountInformation extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => OnAccountCreation()));
+                            builder: (context) => ServiceOnAccountCreation()));
                   },
                   color: Colors.white,
                 ),
