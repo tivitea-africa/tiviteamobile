@@ -33,11 +33,16 @@ class _ServiceProvideHomeScreenState extends State<ServiceProvideHomeScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        leading: const CircleAvatar(
-          radius: 22.5,
-          backgroundImage: AssetImage(
-            PlaceholderAssets.pfp,
-          ),
+        leading: const Row(
+          children: [
+            Gap(8),
+            CircleAvatar(
+              radius: 22.5,
+              backgroundImage: AssetImage(
+                PlaceholderAssets.pfp,
+              ),
+            ),
+          ],
         ),
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +91,7 @@ class _ServiceProvideHomeScreenState extends State<ServiceProvideHomeScreen> {
           ),
         ],
       ),
-      drawer: SidebarMenu(),
+      drawer: const SidebarMenu(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 24),
         child: Column(

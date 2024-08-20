@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/screens/customer/bottomNav/bottom_nav.dart';
 import 'package:tivi_tea/screens/customer/history/history_screen.dart';
 import 'package:tivi_tea/screens/customer/home_section/home_screen.dart';
+import 'package:tivi_tea/screens/customer/profile/profile_screen.dart';
 import 'package:tivi_tea/screens/services_section/service_screen.dart';
 
 class NaviBar extends StatefulWidget {
@@ -21,7 +22,7 @@ class _NaviBarState extends State<NaviBar> {
     HomeScreen(),
     ServiceScreen(),
     CustomerHistoryScreen(),
-    HomeScreen(),
+    ProfileScreen(),
   ];
   int pageIndex = 0;
   Color color = Colors.grey;
@@ -90,7 +91,7 @@ class _NaviBarState extends State<NaviBar> {
                   changePage(3);
                 },
                 icon: Iconsax.user,
-                label: 'Inbox',
+                label: 'Profile',
                 color: pageIndex == 3 ? Colors.black : Colors.grey,
               ),
             ],

@@ -210,7 +210,7 @@ class ServiceProfileScreen extends StatelessWidget {
                 const Color(0xffFFFFFF),
                 const BorderSide(width: 1, color: Color(0xffD8D8DD)),
                 false),
-            const Gap(20),
+            const Gap(200),
           ],
         ),
       ),
