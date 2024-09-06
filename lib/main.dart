@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/utils/router.dart';
 
 void main() {
@@ -23,20 +24,27 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return SafeArea(
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-            color: Colors.white,
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return SafeArea(
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              scaffoldBackgroundColor: Color(0xffFFFFFF),
+              appBarTheme: const AppBarTheme(
+                color: Colors.white,
+              ),
+              useMaterial3: true,
+            ),
+            // home: const OnboardView(),
+            routerConfig: router,
           ),
-          useMaterial3: true,
-        ),
-        // home: const OnboardView(),
-        routerConfig: router,
-      ),
+        );
+      },
     );
   }
 }

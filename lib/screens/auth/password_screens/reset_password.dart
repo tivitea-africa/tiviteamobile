@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/screens/auth/password_screens/password_changed_feedback.dart';
@@ -24,7 +25,7 @@ class ResetPassword extends StatelessWidget {
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         colors: [Color(0xff000090), Color(0xff000050)])),
-                height: 160,
+                height: 120.h,
               ),
             ),
             SafeArea(
@@ -33,19 +34,19 @@ class ResetPassword extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        icon: const Icon(Icons.chevron_left),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Icon(
+                            Icons.chevron_left,
+                            size: 30,
+                          )),
                     ),
-                    const SizedBox(height: 40),
+                    SizedBox(height: 20.h),
                     Text('Reset Password',
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xff0E0E1B), // Dark blue color
                         )),
@@ -53,7 +54,7 @@ class ResetPassword extends StatelessWidget {
                     Text('Set a new password for your account',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w400,
                             color: const Color(0xff737380))),
                     const Gap(30),
@@ -64,7 +65,7 @@ class ResetPassword extends StatelessWidget {
                         Text('New Password',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 color: const Color(0xff0E0E1B))),
                         const Gap(4),
                         const PasswordField(hintText: 'Enter Password'),
@@ -72,7 +73,7 @@ class ResetPassword extends StatelessWidget {
                         Text('Confirm Password',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 color: const Color(0xff0E0E1B))),
                         const Gap(4),
                         const PasswordField(hintText: 'Enter Password Again'),
@@ -81,7 +82,7 @@ class ResetPassword extends StatelessWidget {
                           bgColor: const Color(0xff000050),
                           text: 'Submit',
                           width: double.infinity,
-                          height: 40,
+                          height: 40.h,
                           onPressed: () {
                             Navigator.push(
                                 context,

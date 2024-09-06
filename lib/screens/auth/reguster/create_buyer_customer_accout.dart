@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:tivi_tea/main.dart';
 import 'package:tivi_tea/screens/auth/login/log_in_screen.dart';
 import 'package:tivi_tea/screens/auth/reguster/create_account_feedback.dart';
 import '../../../core/const/app_assets.dart';
@@ -44,8 +46,8 @@ class CreateBuyerAccount extends StatelessWidget {
             const Gap(10),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: 105,
-              width: 380,
+              height: 105.h,
+              width: 380.w,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/Section Header.png'),
@@ -58,14 +60,14 @@ class CreateBuyerAccount extends StatelessWidget {
                     'Buyer/Customer',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         color: Colors.white),
                   ),
                   const Gap(10),
                   Text(
                     'New to tiviTea? create your account and get started.',
                     style: GoogleFonts.poppins(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         color: Colors.white),
                   )
@@ -77,14 +79,14 @@ class CreateBuyerAccount extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text('Register as a space or tool user',
                     style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600, fontSize: 18))),
+                        fontWeight: FontWeight.w600, fontSize: 18.sp))),
             const Gap(2),
             Align(
                 alignment: Alignment.center,
                 child: Text(
                   'Provide correct information to setup your account',
                   style: GoogleFonts.poppins(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                      fontSize: 14.sp, fontWeight: FontWeight.w400),
                 )),
             const Gap(20),
             Column(
@@ -93,7 +95,7 @@ class CreateBuyerAccount extends StatelessWidget {
                 Text('First Name',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -108,7 +110,7 @@ class CreateBuyerAccount extends StatelessWidget {
                 Text('Last Name',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -123,11 +125,11 @@ class CreateBuyerAccount extends StatelessWidget {
                 Text('Phone Number',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 SizedBox(
-                  height: 45,
+                  height: 45.h,
                   child: IntlPhoneField(
                     showCountryFlag: true,
                     dropdownDecoration: const BoxDecoration(
@@ -143,7 +145,7 @@ class CreateBuyerAccount extends StatelessWidget {
                       fillColor: const Color(0xffFFFFFF),
                       hintText: 'Enter Phone Number',
                       hintStyle: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xff8A8A99)),
                       border: const OutlineInputBorder(
@@ -172,7 +174,7 @@ class CreateBuyerAccount extends StatelessWidget {
                 Text('Email',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -188,7 +190,7 @@ class CreateBuyerAccount extends StatelessWidget {
                 Text('Create Password',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 const PasswordField(hintText: 'Enter New Password'),
@@ -196,7 +198,7 @@ class CreateBuyerAccount extends StatelessWidget {
                 Text('Confirm Password',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 const PasswordField(hintText: 'Confirm New Password'),
@@ -205,7 +207,7 @@ class CreateBuyerAccount extends StatelessWidget {
                   bgColor: const Color(0xff000050),
                   text: 'Create Account',
                   width: double.infinity,
-                  height: 44,
+                  height: 44.h,
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -223,7 +225,7 @@ class CreateBuyerAccount extends StatelessWidget {
                         TextSpan(
                             text: 'Already have a account? ',
                             style: GoogleFonts.poppins(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xff737380))),
                         TextSpan(
@@ -235,7 +237,7 @@ class CreateBuyerAccount extends StatelessWidget {
                           text: 'Login',
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w700,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               color: const Color(0xffEC8305)),
                         ),
                       ],
@@ -245,13 +247,13 @@ class CreateBuyerAccount extends StatelessWidget {
                 const Gap(30),
                 ImgTxtButton(
                   bgColor: Colors.transparent,
-                  height: 44,
+                  height: 44.h,
                   onPressed: () {},
                   width: double.infinity,
                   image: PlaceholderAssets.google,
                   color: Colors.grey,
                   text: 'Sign Up with Google',
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
                 const Gap(30),
               ],

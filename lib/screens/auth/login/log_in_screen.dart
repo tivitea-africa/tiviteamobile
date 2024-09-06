@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/screens/auth/password_screens/forgot_password.dart';
@@ -33,7 +34,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         colors: [Color(0xff000090), Color(0xff000050)])),
-                height: 160,
+                height: 120.h,
               ),
             ),
             SafeArea(
@@ -42,26 +43,26 @@ class _LogInScreenState extends State<LogInScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        icon: const Icon(Icons.chevron_left),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Icon(
+                            Icons.chevron_left,
+                            size: 30,
+                          )),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.h),
                     Text('Login',
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.w500,
                           color: const Color(0xff000050), // Dark blue color
                         )),
                     const Gap(2),
                     Text('Provide your credentials to access your account',
                         style: GoogleFonts.poppins(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w400,
                             color: const Color(0xff737380))),
                     const Gap(30),
@@ -72,7 +73,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Text('Email',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: const Color(0xff0E0E1B))),
                         const Gap(4),
                         buildTextField(
@@ -88,7 +89,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Text('Password',
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: const Color(0xff0E0E1B))),
                         const Gap(4),
                         const PasswordField(hintText: 'Enter Password'),
@@ -113,7 +114,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 Text(
                                   'Remember me',
                                   style: GoogleFonts.poppins(
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
@@ -130,7 +131,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 'Forgot Password?',
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     color: const Color(0xffD9291E)),
                               ),
                             ),
@@ -141,7 +142,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           bgColor: const Color(0xff000050),
                           text: 'Log into Account',
                           width: double.infinity,
-                          height: 40,
+                          height: 40.h,
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -153,13 +154,13 @@ class _LogInScreenState extends State<LogInScreen> {
                         const Gap(20),
                         ImgTxtButton(
                           bgColor: Colors.transparent,
-                          height: 40,
+                          height: 40.h,
                           onPressed: () {},
                           width: double.infinity,
                           image: PlaceholderAssets.google,
                           color: Colors.grey,
                           text: 'Sign Up with Google',
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         const Gap(20),
                         Center(
@@ -170,7 +171,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 TextSpan(
                                     text: 'Don’t have account? ',
                                     style: GoogleFonts.poppins(
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.w400,
                                         color: const Color(0xff737380))),
                                 TextSpan(
@@ -183,7 +184,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                   text: 'Sign Up',
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       color: const Color(0xffEC8305)),
                                 ),
                               ],

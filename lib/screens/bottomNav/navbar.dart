@@ -7,7 +7,6 @@ import 'package:tivi_tea/screens/home_section/home_screen.dart';
 import 'package:tivi_tea/screens/listings/history.dart';
 import 'package:tivi_tea/screens/services_section/service_screen.dart';
 
-
 class NaviBar extends StatefulWidget {
   const NaviBar({
     super.key,
@@ -40,62 +39,60 @@ class _NaviBarState extends State<NaviBar> {
         statusBarIconBrightness: Brightness.dark,
       ),
     );
-    return SafeArea(
-      child: Scaffold(
-        extendBody: true,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: pageList[pageIndex],
-        bottomNavigationBar: BottomAppBar(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          height: 65,
-          elevation: 1,
-          color: Colors.white,
-          clipBehavior: Clip.antiAlias,
-          notchMargin: 5,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              BottomNav(
-                index: 0,
-                onTap: () {
-                  changePage(0);
-                },
-                icon: Iconsax.home,
-                label: 'Home',
-                color: pageIndex == 0 ? Colors.black : Colors.grey,
-              ),
-              BottomNav(
-                index: 1,
-                onTap: () {
-                  changePage(1);
-                },
-                icon: Icons.person,
-                label: 'Categories',
-                color: pageIndex == 1 ? Colors.black : Colors.grey,
-              ),
-              // Gap(20),
-              BottomNav(
-                index: 2,
-                onTap: () {
-                  changePage(2);
-                },
-                icon: Iconsax.activity,
-                label: 'My History',
-                color: pageIndex == 2 ? Colors.black : Colors.grey,
-              ),
-              BottomNav(
-                index: 3,
-                onTap: () {
-                  changePage(3);
-                },
-                icon: Iconsax.user,
-                label: 'Inbox',
-                color: pageIndex == 3 ? Colors.black : Colors.grey,
-              ),
-            ],
-          ),
+    return Scaffold(
+      extendBody: true,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: pageList[pageIndex],
+      bottomNavigationBar: BottomAppBar(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        height: 65,
+        elevation: 1,
+        color: const Color(0xff000050),
+        clipBehavior: Clip.antiAlias,
+        notchMargin: 5,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            BottomNav(
+              index: 0,
+              onTap: () {
+                changePage(0);
+              },
+              icon: Iconsax.home,
+              label: 'Home',
+              color: pageIndex == 0 ? Colors.white : const Color(0xff737380),
+            ),
+            BottomNav(
+              index: 1,
+              onTap: () {
+                changePage(1);
+              },
+              icon: Icons.person,
+              label: 'Services',
+              color: pageIndex == 1 ? Colors.white : const Color(0xff737380),
+            ),
+            // Gap(20),
+            BottomNav(
+              index: 2,
+              onTap: () {
+                changePage(2);
+              },
+              icon: Iconsax.activity,
+              label: 'My History',
+              color: pageIndex == 2 ? Colors.white : const Color(0xff737380),
+            ),
+            BottomNav(
+              index: 3,
+              onTap: () {
+                changePage(3);
+              },
+              icon: Iconsax.user,
+              label: 'Profile',
+              color: pageIndex == 3 ? Colors.white : const Color(0xff737380),
+            ),
+          ],
         ),
       ),
     );

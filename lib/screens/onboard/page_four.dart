@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/custom_clip_path.dart';
-import 'package:tivi_tea/main.dart';
 
-class PageTwo extends StatelessWidget {
-  const PageTwo({super.key});
+class PageFour extends StatelessWidget {
+  const PageFour({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +31,22 @@ class PageTwo extends StatelessWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/placeholders/o2.png'),
+                      image: AssetImage('assets/placeholders/o1.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
               const Gap(10),
-              Center(
-                child: Text(
-                  'Explore Our Features',
-                  style: GoogleFonts.dmSans(
-                      fontSize: 24.sp, fontWeight: FontWeight.w700),
-                ),
+              Text(
+                textAlign: TextAlign.center,
+                'Ready To Set Up an Account ?',
+                style: GoogleFonts.dmSans(
+                    fontSize: 24.sp, fontWeight: FontWeight.w700),
               ),
               const Gap(20),
               Text(
-                  'Find the right workspace or Tool, connect with members and find what you need for work!',
+                  'Take the next 3 minutes to set up your account and get started!',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.inter(
                       fontSize: 16.sp, fontWeight: FontWeight.w300)),

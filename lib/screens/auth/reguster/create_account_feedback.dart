@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:tivi_tea/screens/bottomNav/navbar.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
 
 class OnAccountCreation extends StatelessWidget {
   const OnAccountCreation({super.key});
@@ -14,8 +15,8 @@ class OnAccountCreation extends StatelessWidget {
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
-          height: 380,
-          width: 320,
+          height: 380.h,
+          width: 320.w,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -48,7 +49,7 @@ class OnAccountCreation extends StatelessWidget {
               Text(
                 'All done !',
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: const Color(0xff0E0E1B),
                 ),
@@ -57,7 +58,7 @@ class OnAccountCreation extends StatelessWidget {
               Text(
                 'Your account has been setup.',
                 style: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   color: const Color(0xff737380),
                 ),
@@ -81,7 +82,7 @@ class OnAccountCreation extends StatelessWidget {
                   child: Text(
                     'Go to Home',
                     style: GoogleFonts.poppins(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),

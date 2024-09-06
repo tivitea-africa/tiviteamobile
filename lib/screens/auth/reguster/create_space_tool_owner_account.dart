@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:tivi_tea/main.dart';
 import 'package:tivi_tea/screens/auth/reguster/create_space_tool_owner_account_2.dart';
 import '../../../core/const/app_assets.dart';
 import '../../../core/widget/reusbale_buttons.dart';
@@ -56,14 +58,14 @@ class SpaceOwnerAccount extends StatelessWidget {
                     'Space/Tool Owner',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         color: Colors.white),
                   ),
                   const Gap(10),
                   Text(
                     'Registration is quick and easy, Lets help you reach a wider audience  today!',
                     style: GoogleFonts.poppins(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         color: Colors.white),
                   )
@@ -75,14 +77,14 @@ class SpaceOwnerAccount extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text('Register as a space or tool user',
                     style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600, fontSize: 18))),
+                        fontWeight: FontWeight.w600, fontSize: 18.sp))),
             const Gap(2),
             Align(
                 alignment: Alignment.center,
                 child: Text(
                   'Provide correct information to setup your account',
                   style: GoogleFonts.poppins(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                      fontSize: 14.sp, fontWeight: FontWeight.w400),
                 )),
             const Gap(20),
             Column(
@@ -92,13 +94,13 @@ class SpaceOwnerAccount extends StatelessWidget {
                     style: GoogleFonts.poppins(
                         backgroundColor: Color(0xffE6F6FD),
                         fontWeight: FontWeight.w500,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: const Color(0xff0E0E1B))),
                 Gap(20),
                 Text('First Name',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -113,7 +115,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('Last Name',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -128,7 +130,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('Phone Number',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 SizedBox(
@@ -148,7 +150,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                       fillColor: const Color(0xffFFFFFF),
                       hintText: 'Enter Phone Number',
                       hintStyle: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xff8A8A99)),
                       border: const OutlineInputBorder(
@@ -177,7 +179,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('Email',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -194,13 +196,13 @@ class SpaceOwnerAccount extends StatelessWidget {
                     style: GoogleFonts.poppins(
                         backgroundColor: Color(0xffE6F6FD),
                         fontWeight: FontWeight.w500,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: const Color(0xff0E0E1B))),
                 Gap(20),
                 Text('Your Address',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -216,7 +218,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('City',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField('', null, 8, 45, const Color(0xffFFFFFF),
@@ -226,7 +228,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('Country',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 SizedBox(
@@ -247,7 +249,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                       fillColor: const Color(0xffFFFFFF),
                       hintText: 'Enter Country',
                       hintStyle: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: const Color(0xff8A8A99)),
                       border: const OutlineInputBorder(
@@ -276,7 +278,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('State/Province',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(
@@ -292,7 +294,7 @@ class SpaceOwnerAccount extends StatelessWidget {
                 Text('Postal/Zip Code',
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: const Color(0xff0E0E1B))),
                 const Gap(4),
                 buildTextField(

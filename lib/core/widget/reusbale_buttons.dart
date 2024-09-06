@@ -6,7 +6,7 @@ class FullButton extends StatelessWidget {
   final String text;
   final Color color;
   final Color? bgColor;
-  final double width;
+  final double? width;
   final double height;
   final VoidCallback onPressed;
   final VoidCallback? longPressed;
@@ -15,7 +15,7 @@ class FullButton extends StatelessWidget {
   const FullButton({
     super.key,
     required this.text,
-    required this.width,
+    this.width,
     required this.height,
     required this.onPressed,
     required this.color,
@@ -37,10 +37,11 @@ class FullButton extends StatelessWidget {
           color: bgColor,
         ),
         child: Center(
-          child: Text(
-            text,
-            style: GoogleFonts.poppins(color: Color(0xffFFFFFF), fontSize: 14, fontWeight: FontWeight.w700)
-          ),
+          child: Text(text,
+              style: GoogleFonts.poppins(
+                  color: Color(0xffFFFFFF),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700)),
         ),
       ),
     );
@@ -249,12 +250,11 @@ class ImgTxtButton extends StatelessWidget {
               image,
             ),
             const Gap(6),
-            Text(
-              text,
-              style: GoogleFonts.poppins(
-                color: Color(0xff737380), fontWeight: FontWeight.w400, fontSize: 14
-              )
-            )
+            Text(text,
+                style: GoogleFonts.poppins(
+                    color: Color(0xff737380),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14))
           ],
         ),
       ),
@@ -295,19 +295,13 @@ class FullIconButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(30),
           color: bgColor,
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                icon,
-                size: 15,
-                color: color,
-              ),
-              const Gap(6),
               Text(
                 text,
                 style: TextStyle(
@@ -316,6 +310,13 @@ class FullIconButton extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              Gap(10),
+              Icon(
+                icon,
+                size: 15,
+                color: color,
+              ),
+              const Gap(6),
             ],
           ),
         ),

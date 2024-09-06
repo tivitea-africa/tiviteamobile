@@ -1,101 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tivi_tea/core/const/app_assets.dart';
-import 'package:tivi_tea/core/const/app_colors.dart';
-import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
-import 'package:tivi_tea/screens/auth/reguster/options_register.dart';
-import 'package:tivi_tea/screens/auth/signIn_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tivi_tea/core/widget/custom_clip_path.dart';
 
 class PageThree extends StatelessWidget {
   const PageThree({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 28,
-        vertical: 20,
-      ),
-      child: Column(
-        children: [
-          const Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              'Skip',
-              style: TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          const Gap(43),
-          Container(
-            width: 250,
-            height: 235,
+    return Column(
+      children: [
+        ClipPath(
+          clipper: CustomClipperPath(),
+          child: Container(
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  PlaceholderAssets.onbrd2,
+                gradient: LinearGradient(
+                    colors: [Color(0xff000090), Color(0xff000050)])),
+            height: 120.h,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AspectRatio(
+                aspectRatio: 1.2,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/placeholders/o3.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                fit: BoxFit.cover,
               ),
-            ),
-          ),
-          const Gap(80),
-          const Center(
-            child: Text(
-              'Ready to Setup\nan Account?',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 28,
-                color: AppColors.deepBlue,
-                fontWeight: FontWeight.bold,
+              const Gap(10),
+              Text(
+                textAlign: TextAlign.center,
+                'Book Your Workspace or Rent Your Tool',
+                style: GoogleFonts.dmSans(
+                    fontSize: 24.sp, fontWeight: FontWeight.w700),
               ),
-            ),
+              const Gap(20),
+              Text(
+                  'Easily find and book a workspace or rent tools and get to work wherever business takes you!',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                      fontSize: 16.sp, fontWeight: FontWeight.w300)),
+            ],
           ),
-          const Gap(24),
-          const Text(
-            'Take the next 3 minutes to  setup your account and get started. ',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              color: AppColors.fontColor,
-            ),
-          ),
-          const Gap(40),
-          FullButton(
-            text: 'Get Started',
-            width: double.infinity,
-            height: 44,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const OptionsRegisterScreen(),
-                ),
-              );
-            },
-            color: Colors.white,
-            bgColor: AppColors.deepBlue,
-          ),
-          const Gap(12),
-          FullButton(
-            text: 'Log In',
-            width: double.infinity,
-            height: 44,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SignInScreen(),
-                ),
-              );
-            },
-            color: AppColors.deepBlue,
-            bgColor: Colors.white,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

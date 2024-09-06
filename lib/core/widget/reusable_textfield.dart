@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tivi_tea/main.dart';
 
 Widget buildTextField(
   String hintText,
@@ -12,7 +14,7 @@ Widget buildTextField(
   TextInputType? type = TextInputType.text,
 }) {
   return SizedBox(
-    height: height,
+    height: height.h,
     child: TextField(
       keyboardType: type,
       autofocus: focus,
@@ -21,12 +23,12 @@ Widget buildTextField(
         fillColor: color,
         hintText: hintText,
         hintStyle: GoogleFonts.poppins(
-            fontSize: 14,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
             color: const Color(0xff8A8A99)),
         suffixIcon: Icon(
           icon,
-          size: 20,
+          size: 20.sp,
           color: Colors.grey,
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -69,7 +71,7 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: 45.h,
       child: TextField(
         obscureText: _obscureText,
         keyboardType: TextInputType.visiblePassword,
@@ -78,14 +80,14 @@ class _PasswordFieldState extends State<PasswordField> {
           fillColor: const Color(0xffFFFFFF),
           hintText: widget.hintText,
           hintStyle: GoogleFonts.poppins(
-            fontSize: 14,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
             color: const Color(0xff8A8A99),
           ),
           suffixIcon: IconButton(
             icon: Icon(
               _obscureText ? Icons.visibility_off_outlined : Icons.visibility,
-              size: 20,
+              size: 20.sp,
               color: Colors.grey,
             ),
             onPressed: _toggleVisibility,

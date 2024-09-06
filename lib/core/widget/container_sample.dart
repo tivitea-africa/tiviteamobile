@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
+import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 
 class CustomPageView extends StatefulWidget {
   const CustomPageView({super.key});
@@ -45,7 +47,7 @@ class _CustomPageViewState extends State<CustomPageView> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: 104,
+          height: 104.h,
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {

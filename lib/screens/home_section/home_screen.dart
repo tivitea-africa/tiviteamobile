@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/container_sample.dart';
+import 'package:tivi_tea/core/widget/custom_app_bar.dart';
 import 'package:tivi_tea/core/widget/options_tab.dart';
 import 'package:tivi_tea/core/widget/reusbale_containers.dart';
 import 'package:tivi_tea/screens/home_section/pages/view_all_pages.dart';
-import 'package:tivi_tea/screens/kyc/verify_document.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,130 +22,57 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Row(
-          children: [
-            Gap(8),
-            CircleAvatar(
-              radius: 22.5,
-              backgroundImage: AssetImage(
-                PlaceholderAssets.pfp,
-              ),
-            ),
-          ],
+      appBar: customAppBar(
+        leading: const Drawer(
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          child: Icon(Icons.reorder),
         ),
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Welcome Back!',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppColors.deepBlue,
-              ),
-            ),
-            Text(
-              'Richard Steinberg',
-              style: TextStyle(
-                fontSize: 12,
-                color: AppColors.fontColor,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Iconsax.notification,
-              color: AppColors.deepBlue,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => VerifyDoc()));
-            },
-            icon: const Icon(
-              Iconsax.element_4,
-              color: AppColors.deepBlue,
-            ),
-          ),
-        ],
+        title: '',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 24),
+        padding:
+            const EdgeInsets.only(right: 13, top: 24, bottom: 24, left: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 44,
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 44,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
-                        color: const Color(0xFFE8E8EB),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            borderSide: BorderSide.none,
-                          ),
-                          hintText: 'Search note',
-                          suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.highlight_remove_rounded),
-                          ),
-                          fillColor: const Color(0xffEFF2F9),
-                          filled: true,
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 0.7),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Gap(11),
-                  Container(
-                    height: 44,
-                    width: 84,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: const Color(0xFFE8E8EB),
-                      border: Border.all(
-                        color: const Color(0xFF000050),
-                        width: 0.5,
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Iconsax.filter),
-                        Gap(6),
-                        Text(
-                          'Filters',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.fontColor,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+            Text('Welcome Back!',
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20.sp,
+                    color: Color(0xff000050))),
+            Gap(4),
+            Text('Hi richard, welcome back to tiviTea admin!',
+                style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff737380))),
+            const Gap(17),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                height: 40.h,
+                width: 73.w,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: const Color(0xFF000050))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Iconsax.filter),
+                    Gap(6),
+                    Text('Filters',
+                        style: GoogleFonts.poppins(
+                            color: Color(0xff5C5C66),
+                            fontSize: 14.5,
+                            fontWeight: FontWeight.w400))
+                  ],
+                ),
               ),
             ),
-            const Gap(24),
+            const Gap(10),
             const CustomPageView(),
             const Gap(24),
             Row(
@@ -185,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ViewAll(),
+                            builder: (context) => const ViewAll(),
                           ),
                         );
                       },
