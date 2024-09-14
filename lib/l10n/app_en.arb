@@ -1,0 +1,50 @@
+{
+    "welcomeToTiviTea":"Welcome to tiviTea",
+    "@welcomeToTiviTea":{
+        "description": "First onboarding slide title"
+    },
+    "discoverWorkSpace":"Discover the perfect workspace/tool to boost your productivity. Let,s get you set up!",
+    "@discoverWorkSpace":{
+        "description": "First onboarding slide subtitle"
+    },
+    "exploreFeatures":"Explore our features",
+    "@exploreFeatures":{
+        "description": "Second onboarding slide title"
+    },
+    "findWorkspaceOrtool":"Find the right workspace or Tool, connect with members and find what you need for work!",
+    "@findWorkspaceOrtool":{
+        "description": "Second onboarding slide subtitle"
+    },
+    "bookWorkspace":"Book Your Workspace or Rent Your Tool",
+    "@bookWorkspace":{
+        "description": "Third onboarding slide title"
+    },
+    "findAndBook":"Easily find and book a workspace or rent tools and get to work wherever business takes you!",
+    "@findAndBook":{
+        "description": "Third onboarding slide subtitle"
+    },
+    "readyToSetUpAccount":"Ready To Set Up an Account?",
+    "@readyToSetUpAccount":{
+        "description": "Last onboarding slide title"
+    },
+    "takeNext3Minutes":"Take the next 3 minutes to set up your account and get started!",
+    "@takeNext3Minutes":{
+        "description": "Last onboarding slide subtitle"
+    },
+    "skip":"Skip",
+    "@skip":{
+        "description": "Skip text"
+    },
+    "continue_":"Continue",
+    "@continue_":{
+        "description": "Continue text"
+    },
+    "next":"Next",
+    "@next":{
+        "description": "Next text"
+    },
+    "getStarted":"Get Started",
+    "@getStarted":{
+        "description": "Get Started text"
+    }
+}

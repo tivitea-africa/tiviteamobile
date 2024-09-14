@@ -156,6 +156,9 @@ class $AssetsPlaceholdersGen {
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
+  /// File path: assets/svgs/back_button.svg
+  String get backButton => 'assets/svgs/back_button.svg';
+
   /// File path: assets/svgs/envelope.svg
   String get envelope => 'assets/svgs/envelope.svg';
 
@@ -176,7 +179,7 @@ class $AssetsSvgsGen {
 
   /// List of all assets
   List<String> get values =>
-      [envelope, eye, eyeSlash, greenCheck, profileIcon, suitcase];
+      [backButton, envelope, eye, eyeSlash, greenCheck, profileIcon, suitcase];
 }
 
 class Assets {

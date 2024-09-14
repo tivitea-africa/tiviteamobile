@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/core/const/app_colors.dart';
-import 'package:tivi_tea/gen/assets.gen.dart';
-import 'package:tivi_tea/screens/auth/reguster/options_register.dart';
-import 'package:tivi_tea/screens/onboard/page_four.dart';
-import 'package:tivi_tea/screens/onboard/page_one.dart';
-import 'package:tivi_tea/screens/onboard/page_three.dart';
-import 'package:tivi_tea/screens/onboard/page_two.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/widget/reusbale_buttons.dart';
+import 'package:tivi_tea/core/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/features/common/app_button.dart';
+import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
+import 'package:tivi_tea/features/onboarding/presentation/widgets/slide_indicator.dart';
+import 'package:tivi_tea/gen/assets.gen.dart';
+import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({
@@ -27,6 +24,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     Assets.images.onboardingSlide1.path,
     Assets.images.onboardingSlide2.path,
     Assets.images.onboardingSlide3.path,
+    Assets.images.onboardingSlide4.path,
   ];
 
   @override
@@ -44,107 +42,86 @@ class _OnboardingViewState extends State<OnboardingView> {
     }
   }
 
-  final PageController pageController = PageController(initialPage: 0);
+  @override
+  Widget build(BuildContext context) {
+    return OnboardingScaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          30.verticalSpace,
+          SizedBox(
+            height: context.height / 1.5,
+            child: PageView.builder(
+              controller: _controller,
+              itemCount: imagePaths.length,
+              itemBuilder: (context, index) {
+                final image = imagePaths[index];
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      image,
+                      fit: BoxFit.scaleDown,
+                    ),
+                    Text(
+                      _getTitleText(context, index),
+                      textAlign: TextAlign.center,
+                      style: context.theme.textTheme.titleMedium,
+                    ),
+                    20.verticalSpace,
+                    Text(
+                      _getSubtitleText(context, index),
+                      textAlign: TextAlign.center,
+                      style: context.theme.textTheme.bodySmall,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          AnimatedScale(
+            scale: currentIndex == (imagePaths.length - 1) ? 0.0 : 1.0,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            child: SlideIndicatorWidget(
+              currentIndex: currentIndex,
+              slideLength: imagePaths.length - 1,
+            ),
+          ),
+          50.verticalSpace,
+          AppButton(
+            buttonText: currentIndex == (imagePaths.length - 1)
+                ? context.l10n.getStarted
+                : null,
+          ),
+        ],
+      ),
+    );
+  }
 
-  int activePage = 0;
-
-  final List<Widget> pages = [
-    const PageOne(),
-    const PageTwo(),
-    const PageThree(),
-    const PageFour(),
-  ];
-
-  void nextPage() {
-    if (activePage < pages.length - 1) {
-      pageController.animateToPage(activePage + 1,
-          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-    } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (c) => OptionsRegisterScreen()));
+  String _getTitleText(BuildContext context, int slideIndex) {
+    switch (slideIndex) {
+      case 0:
+        return context.l10n.welcomeToTiviTea;
+      case 1:
+        return context.l10n.exploreFeatures;
+      case 2:
+        return context.l10n.bookWorkspace;
+      default:
+        return context.l10n.readyToSetUpAccount;
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      children: [
-        PageView.builder(
-          itemCount: pages.length,
-          controller: pageController,
-          onPageChanged: (int page) {
-            setState(() {
-              activePage = page;
-            });
-          },
-          itemBuilder: (BuildContext context, index) {
-            return pages[index % pages.length];
-          },
-        ),
-        Positioned(
-          right: 10.w,
-          top: 115.h,
-          child: GestureDetector(
-            onTap: () => context.go('/optionToRegister'),
-            child: Text('Skip',
-                style: GoogleFonts.inter(
-                    color: Color(0xff000000),
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500)),
-          ),
-        ),
-        Positioned(
-          bottom: 90.h,
-          left: 20.w,
-          right: 20.w,
-          child: FullButton(
-            text: activePage == pages.length - 1 ? 'Get Started' : 'Next',
-            height: 44,
-            onPressed: nextPage,
-            color: Colors.white,
-            bgColor: AppColors.deepBlue,
-          ),
-        ),
-        Positioned(
-            bottom: 120.h,
-            left: 0,
-            right: 0,
-            height: 50,
-            child: Container(
-              color: Colors.transparent,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 10.0,
-                    child: ListView.builder(
-                      itemCount: 4,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 3.0),
-                                width: activePage == index ? 25 : 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  color: activePage == index
-                                      ? AppColors.deepBlue
-                                      : Colors.blueGrey,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                            ]);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            )),
-      ],
-    ));
+  String _getSubtitleText(BuildContext context, int slideIndex) {
+    switch (slideIndex) {
+      case 0:
+        return context.l10n.discoverWorkSpace;
+      case 1:
+        return context.l10n.findWorkspaceOrtool;
+      case 2:
+        return context.l10n.findAndBook;
+      default:
+        return context.l10n.takeNext3Minutes;
+    }
   }
 }
