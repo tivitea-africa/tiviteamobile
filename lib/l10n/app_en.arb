@@ -46,5 +46,17 @@
     "getStarted":"Get Started",
     "@getStarted":{
         "description": "Get Started text"
+    },
+    "howToRegister":"How do you want to register?",
+    "@howToRegister":{
+        "description": "Select user type text"
+    },
+    "serviceProvider":"Service Provider",
+    "@serviceProvider":{
+        "description": "Service Provider text"
+    },
+    "customer":"Customer",
+    "@customer":{
+        "description": "Customer text"
     }
 }

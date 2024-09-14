@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
@@ -64,13 +66,13 @@ class _OnboardingViewState extends State<OnboardingView> {
                       fit: BoxFit.scaleDown,
                     ),
                     Text(
-                      _getTitleText(context, index),
+                      _getTitleText(index),
                       textAlign: TextAlign.center,
                       style: context.theme.textTheme.titleMedium,
                     ),
                     20.verticalSpace,
                     Text(
-                      _getSubtitleText(context, index),
+                      _getSubtitleText(index),
                       textAlign: TextAlign.center,
                       style: context.theme.textTheme.bodySmall,
                     ),
@@ -90,6 +92,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           ),
           50.verticalSpace,
           AppButton(
+            onPressed: _onButtonPressed,
             buttonText: currentIndex == (imagePaths.length - 1)
                 ? context.l10n.getStarted
                 : null,
@@ -99,7 +102,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     );
   }
 
-  String _getTitleText(BuildContext context, int slideIndex) {
+  String _getTitleText(int slideIndex) {
     switch (slideIndex) {
       case 0:
         return context.l10n.welcomeToTiviTea;
@@ -112,7 +115,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     }
   }
 
-  String _getSubtitleText(BuildContext context, int slideIndex) {
+  String _getSubtitleText(int slideIndex) {
     switch (slideIndex) {
       case 0:
         return context.l10n.discoverWorkSpace;
@@ -122,6 +125,35 @@ class _OnboardingViewState extends State<OnboardingView> {
         return context.l10n.findAndBook;
       default:
         return context.l10n.takeNext3Minutes;
+    }
+  }
+
+  void _onButtonPressed() {
+    final isLastSlide = currentIndex == (imagePaths.length - 1);
+    isLastSlide ? context.go(AppRoutes.selectUserTypeView) : _goToNextSlide();
+  }
+
+  void _goToNextSlide() {
+    if (currentIndex < imagePaths.length - 1) {
+      setState(() => currentIndex++);
+
+      _controller.animateToPage(
+        currentIndex,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _goToPreviousSlide() {
+    if (currentIndex > 0) {
+      setState(() => currentIndex--);
+
+      _controller.animateToPage(
+        currentIndex,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
   }
 }
