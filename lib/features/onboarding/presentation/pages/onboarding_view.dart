@@ -2,26 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
-import 'package:tivi_tea/core/utils/router.dart';
+import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/screens/auth/reguster/options_register.dart';
-import 'package:tivi_tea/screens/auth/signIn_screen.dart';
 import 'package:tivi_tea/screens/onboard/page_four.dart';
 import 'package:tivi_tea/screens/onboard/page_one.dart';
 import 'package:tivi_tea/screens/onboard/page_three.dart';
 import 'package:tivi_tea/screens/onboard/page_two.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../core/widget/reusbale_buttons.dart';
+import '../../../../core/widget/reusbale_buttons.dart';
 
-class OnboardView extends StatefulWidget {
-  const OnboardView({
+class OnboardingView extends StatefulWidget {
+  const OnboardingView({
     super.key,
   });
 
   @override
-  State<OnboardView> createState() => _OnboardViewState();
+  State<OnboardingView> createState() => _OnboardingViewState();
 }
 
-class _OnboardViewState extends State<OnboardView> {
+class _OnboardingViewState extends State<OnboardingView> {
+  int currentIndex = 0;
+  final PageController _controller = PageController();
+  final List<String> imagePaths = [
+    Assets.images.onboardingSlide1.path,
+    Assets.images.onboardingSlide2.path,
+    Assets.images.onboardingSlide3.path,
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(indicatorListener);
+  }
+
+  void indicatorListener() {
+    final newPage = _controller.page?.round() ?? 0;
+    if (newPage != currentIndex) {
+      setState(() {
+        currentIndex = newPage;
+      });
+    }
+  }
+
   final PageController pageController = PageController(initialPage: 0);
 
   int activePage = 0;
