@@ -138,5 +138,49 @@
     "provideInfo":"Provide correct information to setup your account",
     "@provideInfo":{
         "description": "Provide correct info text"
+    },
+    "spaceOrTool":"Space/Tool",
+    "@spaceOrTool":{
+        "description": "Space/Tool text"
+    },
+    "regIsEasy":"Registration is quick and easy, Lets help you reach a wider audience  today!",
+    "@regIsEasy":{
+        "description": "Registration is easy text"
+    },
+    "registerAsSpaceOwner":"Register as a space or tool owner",
+    "@registerAsSpaceOwner":{
+        "description": "Register as space owner text"
+    },
+    "personalInfo":"Personal Information",
+    "@personalInfo":{
+        "description": "Personal Information text"
+    },
+    "locationDetails":"Location Details",
+    "@locationDetails":{
+        "description": "Location Details text"
+    },
+    "accountInfo":"Account Information",
+    "@accountInfo":{
+        "description": "Account Information text"
+    },
+    "businessDetails":"Business Details",
+    "@businessDetails":{
+        "description": "Business Details text"
+    },
+    "bankDetails":"Bank Details",
+    "@bankDetails":{
+        "description": "Bank Details text"
+    },
+    "yourAddress":"Your Address",
+    "@yourAddress":{
+        "description": "Your Address text"
+    },
+    "yourAddressHintText":"Enter Address",
+    "@yourAddressHintText":{
+        "description": "Your Address hint text"
+    },
+    "city":"City",
+    "@city":{
+        "description": "City text"
     }
 }

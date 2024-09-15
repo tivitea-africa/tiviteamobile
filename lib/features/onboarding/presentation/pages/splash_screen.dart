@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _navigate() {
     Future.delayed(const Duration(milliseconds: 1000), () {
       if (mounted) {
-        context.go(AppRoutes.onboardingView);
+        context.push(AppRoutes.onboardingView);
       }
     });
   }

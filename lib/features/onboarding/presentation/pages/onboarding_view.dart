@@ -130,7 +130,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   void _onButtonPressed() {
     final isLastSlide = currentIndex == (imagePaths.length - 1);
-    isLastSlide ? context.go(AppRoutes.selectUserTypeView) : _goToNextSlide();
+    isLastSlide ? context.push(AppRoutes.selectUserTypeView) : _goToNextSlide();
   }
 
   void _goToNextSlide() {

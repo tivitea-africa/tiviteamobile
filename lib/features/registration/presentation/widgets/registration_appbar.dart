@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
@@ -48,7 +49,7 @@ class RegistrationAppBar extends ConsumerWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: onTap,
+                onTap: onTap ?? () => context.pop(),
                 child: const Icon(CupertinoIcons.chevron_left),
               ),
               AppSvgWidget(path: Assets.svgs.hamburger)
@@ -85,6 +86,6 @@ class RegistrationAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   //static final _appBar = AppBar();
 
-@override
+  @override
   Size get preferredSize => Size.fromHeight(appBarHeight);
 }
