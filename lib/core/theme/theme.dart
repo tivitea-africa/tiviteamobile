@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 const Color _primaryColor = Color(0xFF000050);
 
+double _textFieldLabelFontSize = 12.sp;
 double _buttonTextFontSize = 14.sp;
 double _bodySmallFontSize = 16.sp;
 double _titleSmallFontSize = 15.sp;
@@ -14,6 +15,7 @@ double _titleLargeFontSize = 28.sp;
 final lightTheme = Provider<ThemeData>(
   (_) => ThemeData(
     primaryColor: _primaryColor,
+    scaffoldBackgroundColor: Colors.white,
     cardColor: const Color(0xFF037EE6).withOpacity(0.5),
     brightness: Brightness.light,
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -56,6 +58,11 @@ final lightTheme = Provider<ThemeData>(
       displaySmall: GoogleFonts.poppins(
         fontSize: _buttonTextFontSize,
         fontWeight: FontWeight.w400,
+      ),
+      labelMedium: GoogleFonts.poppins(
+        fontSize: _textFieldLabelFontSize,
+        fontWeight: FontWeight.w500,
+        color: const Color(0xFF0E0E1B),
       ),
     ),
   ),

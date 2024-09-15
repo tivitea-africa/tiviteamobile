@@ -39,6 +39,10 @@ class $AssetsImagesGen {
   AssetGenImage get scaffoldArc =>
       const AssetGenImage('assets/images/scaffold-arc.png');
 
+  /// File path: assets/images/section_header.png
+  AssetGenImage get sectionHeader =>
+      const AssetGenImage('assets/images/section_header.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         appLogo,
@@ -47,7 +51,8 @@ class $AssetsImagesGen {
         onboardingSlide2,
         onboardingSlide3,
         onboardingSlide4,
-        scaffoldArc
+        scaffoldArc,
+        sectionHeader
       ];
 }
 
@@ -171,6 +176,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/green-check.svg
   String get greenCheck => 'assets/svgs/green-check.svg';
 
+  /// File path: assets/svgs/hamburger.svg
+  String get hamburger => 'assets/svgs/hamburger.svg';
+
   /// File path: assets/svgs/profile_icon.svg
   String get profileIcon => 'assets/svgs/profile_icon.svg';
 
@@ -178,8 +186,16 @@ class $AssetsSvgsGen {
   String get suitcase => 'assets/svgs/suitcase.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [backButton, envelope, eye, eyeSlash, greenCheck, profileIcon, suitcase];
+  List<String> get values => [
+        backButton,
+        envelope,
+        eye,
+        eyeSlash,
+        greenCheck,
+        hamburger,
+        profileIcon,
+        suitcase
+      ];
 }
 
 class Assets {

@@ -100,7 +100,6 @@ class _ItemRow extends StatelessWidget {
             fit: BoxFit.scaleDown,
             width: 20.w,
             height: 20.h,
-            color: Colors.red,
           ),
           Text(
             context.l10n.skip,

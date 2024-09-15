@@ -6,10 +6,20 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String? buttonText;
   final bool isLoading;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? textColor;
+  final TextStyle? textStyle;
+  final Widget? prefixIcon;
   const AppButton({
     super.key,
     this.onPressed,
     this.buttonText,
+    this.textColor,
+    this.textStyle,
+    this.borderColor,
+    this.backgroundColor,
+    this.prefixIcon,
     this.isLoading = false,
   });
 
@@ -20,9 +30,29 @@ class AppButton extends StatelessWidget {
       width: isLoading ? null : double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
+        style: ButtonStyle(
+          elevation: const WidgetStatePropertyAll<double>(0),
+          side: WidgetStatePropertyAll<BorderSide>(
+              BorderSide(color: borderColor ?? Colors.transparent)),
+          backgroundColor: backgroundColor == null
+              ? null
+              : WidgetStatePropertyAll<Color>(backgroundColor!),
+          foregroundColor: textColor == null
+              ? null
+              : WidgetStatePropertyAll<Color>(textColor!),
+        ),
         child: switch (isLoading) {
           true => const CupertinoActivityIndicator(),
-          _ => Text(buttonText ?? context.l10n.next),
+          _ => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (prefixIcon != null) prefixIcon!,
+                Text(
+                  buttonText ?? context.l10n.next,
+                  style: textStyle,
+                ),
+              ],
+            ),
         },
       ),
     );

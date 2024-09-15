@@ -58,5 +58,85 @@
     "customer":"Customer",
     "@customer":{
         "description": "Customer text"
+    },
+    "firstName":"First Name",
+    "@firstName":{
+        "description": "First Name text"
+    },
+    "firstNameHintText":"Enter First Name",
+    "@firstNameHintText":{
+        "description": "First Name hint text"
+    },
+    "lastName":"Last Name",
+    "@lastName":{
+        "description": "Last Name text"
+    },
+    "lastNameHintText":"Enter Last Name",
+    "@lastNameHintText":{
+        "description": "Last Name hint text"
+    },
+    "phoneNumber":"Phone Number",
+    "@phoneNumber":{
+        "description": "Phone Number text"
+    },
+    "phoneNumberHintText":"Enter Phone Number",
+    "@phoneNumberHintText":{
+        "description": "Phone Number hint text"
+    },
+    "email":"Email",
+    "@email":{
+        "description": "Email text"
+    },
+    "emailHintText":"Enter Email",
+    "@emailHintText":{
+        "description": "Email hint text"
+    },
+    "createPassword":"Create Password",
+    "@createPassword":{
+        "description": "Create Password text"
+    },
+    "createPasswordHintText":"Create New Password",
+    "@createPasswordHintText":{
+        "description": "Create Password hint text"
+    },
+    "confirmPassword":"Confirm Password",
+    "@confirmPassword":{
+        "description": "Confirm Password text"
+    },
+    "confirmPasswordHintText":"Confirm New Password",
+    "@confirmPasswordHintText":{
+        "description": "Confirm Password hint text"
+    },
+    "createAccount":"Create Account",
+    "@createAccount":{
+        "description": "Create Account text"
+    },
+    "alreadyHaveAccount":"Already have an account? ",
+    "@alreadyHaveAccount":{
+        "description": "Already have Account text"
+    },
+    "login":"Login",
+    "@login":{
+        "description": "Login text"
+    },
+    "googleSignUp":"Sign up with Google",
+    "@googleSignUp":{
+        "description": "Sign up with Google text"
+    },
+    "buyerOrCustomer":"Buyer/Customer",
+    "@buyerOrCustomer":{
+        "description": "Buyer/Customer text"
+    },
+    "newTo":"New to tiviTea? create your account and get started.",
+    "@newTo":{
+        "description": "New to tiviTea text"
+    },
+    "registerAsSpaceUser":"Register as a space or tool user",
+    "@registerAsSpaceUser":{
+        "description": "Register as space user text"
+    },
+    "provideInfo":"Provide correct information to setup your account",
+    "@provideInfo":{
+        "description": "Provide correct info text"
     }
 }

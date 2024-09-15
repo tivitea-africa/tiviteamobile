@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
@@ -42,7 +44,7 @@ class _SelectUserTypeViewState extends State<SelectUserTypeView> {
             isSelected: selectedAppUserType == AppUserType.customer,
           ),
           100.verticalSpace,
-          AppButton(onPressed: () {}),
+          AppButton(onPressed: _navigateToCreateAccountView),
         ],
       ),
     );
@@ -52,6 +54,15 @@ class _SelectUserTypeViewState extends State<SelectUserTypeView> {
     if (selectedAppUserType != type) {
       selectedAppUserType = type;
       setState(() {});
+    }
+  }
+
+  void _navigateToCreateAccountView() {
+    switch (selectedAppUserType) {
+      case AppUserType.serviceProvier:
+        context.go(AppRoutes.createCustomerAccount);
+      default:
+        context.go(AppRoutes.createCustomerAccount);
     }
   }
 }
@@ -82,7 +93,8 @@ class _UserTypeContainer extends StatelessWidget {
             color: const Color(0xFFF9F9F9),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isSelected ? context.theme.primaryColor : Colors.transparent,
+              color:
+                  isSelected ? context.theme.primaryColor : Colors.transparent,
             ),
           ),
           child: Row(
