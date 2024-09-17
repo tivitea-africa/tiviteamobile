@@ -12,7 +12,6 @@ import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
-import 'package:tivi_tea/features/registration/view_model/service_provider/registration_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/models/address_model.dart';
@@ -171,6 +170,7 @@ class _CreateServiceProviderAccountState
       phoneNumber: phoneNumber,
       email: emailController.text,
       address: Address(
+        street: addressController.text,
         city: cityController.text,
         country: countryController.text,
         state: stateOrProvinceController.text,
@@ -178,11 +178,9 @@ class _CreateServiceProviderAccountState
       ),
     );
 
-    final notifier = ref.read(registrationNotifierProvider.notifier);
-    notifier.saveFirstViewRegistrationDetails(data);
-
     context.push(
       AppRoutes.createServiceProviderAccountSecondView,
+      extra: data,
     );
   }
 }

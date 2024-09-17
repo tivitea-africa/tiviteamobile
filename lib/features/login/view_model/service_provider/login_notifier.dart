@@ -3,37 +3,37 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
-import 'package:tivi_tea/features/registration/view_model/service_provider/registration_state.dart';
+import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
+import 'package:tivi_tea/features/login/view_model/service_provider/login_state.dart';
 import 'package:tivi_tea/repositories/authentication/service_provider/service_provider_authentication_repo.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
-part 'registration_notifier.g.dart';
+part 'login_notifier.g.dart';
 
 @riverpod
-class RegistrationNotifier extends _$RegistrationNotifier {
+class LoginNotifier extends _$LoginNotifier {
   late final ServiceProviderAuthenticationRepo _repo;
   late final UserRepository _userRepo;
 
   @override
-  RegistrationState build() {
+  LoginState build() {
     _userRepo = ref.read(userRepositoryProvider);
     _repo = ServiceProviderAuthenticationRepo(
       restClient: ref.read(restClient),
       userRepository: _userRepo,
     );
-    return RegistrationState.initial();
+    return LoginState.initial();
   }
 
-  void signUpAsServiceProvider(
-    ServiceProviderSignUpRequestBody data, {
+  void loginAsServiceProvider(
+    LoginRequestObject data, {
     VoidCallback? onSuccess,
     void Function(String)? onError,
   }) async {
     state = state.copyWith(loadState: LoadState.loading);
     try {
-      final response = await _repo.signUpAsServiceProvider(data);
+      final response = await _repo.loginAsServiceProvider(data);
       if (!response.isSuccess()) {
         throw response.error?.message ?? '';
       }
@@ -41,6 +41,25 @@ class RegistrationNotifier extends _$RegistrationNotifier {
       if (onSuccess != null) onSuccess();
     } catch (e) {
       state = state.copyWith(loadState: LoadState.error);
+      if (onError != null) onError(e.toString());
+    }
+  }
+
+  void forgotPassword(
+    ForgotPasswordRequestObject data, {
+    VoidCallback? onSuccess,
+    void Function(String)? onError,
+  }) async {
+    state = state.copyWith(forgotPasswordLoadState: LoadState.loading);
+    try {
+      final response = await _repo.forgotPassword(data);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? '';
+      }
+      state = state.copyWith(forgotPasswordLoadState: LoadState.success);
+      if (onSuccess != null) onSuccess();
+    } catch (e) {
+      state = state.copyWith(forgotPasswordLoadState: LoadState.error);
       if (onError != null) onError(e.toString());
     }
   }

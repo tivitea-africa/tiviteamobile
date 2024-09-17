@@ -51,6 +51,8 @@ dependencies:
   hive_flutter: ^1.1.0
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
+  retrofit: ^4.4.1
+  riverpod_annotation: ^2.3.5
 
 # flutter_native_splash:
 #   android: true

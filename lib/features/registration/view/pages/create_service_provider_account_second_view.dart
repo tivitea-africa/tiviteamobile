@@ -9,6 +9,7 @@ import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_phone_text_field.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
+import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
 import 'package:tivi_tea/features/registration/view_model/service_provider/registration_notifier.dart';
@@ -16,7 +17,8 @@ import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class CreateServiceProviderAccountSecondView extends ConsumerStatefulWidget {
-  const CreateServiceProviderAccountSecondView({super.key});
+  final ServiceProviderSignUpRequestBody data;
+  const CreateServiceProviderAccountSecondView({super.key, required this.data});
 
   @override
   ConsumerState<CreateServiceProviderAccountSecondView> createState() =>
@@ -196,11 +198,7 @@ class _CreateServiceProviderAccountSecondViewState
   }
 
   void _submit() {
-    final dataFromFirstView = ref.watch(registrationNotifierProvider.select(
-      (value) => value.requestBody,
-    ));
-
-    final completeData = dataFromFirstView?.copyWith(
+    final completeData = widget.data.copyWith(
       alternatePhoneNumber: alternativePhoneNumber,
       password: passwordController.text,
       confirmPassword: confirmPasswordController.text,
@@ -209,7 +207,7 @@ class _CreateServiceProviderAccountSecondViewState
       businessDescription: businessDescriptionController.text,
     );
 
-    if (completeData == null) return;
+    debugLog(completeData.toString());
 
     final notifier = ref.read(registrationNotifierProvider.notifier);
     notifier.signUpAsServiceProvider(

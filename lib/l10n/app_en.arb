@@ -254,5 +254,77 @@
     "enterAccountNumber":"Enter Account Number",
     "@enterAccountNumber":{
         "description": "Account Number hint text"
+    },
+    "allDone":"All Done!",
+    "@allDone":{
+        "description": "All Done text"
+    },
+    "accountSetup":"Your account has been setup",
+    "@accountSetup":{
+        "description": "Account has been setup text"
+    },
+    "proceedToLogin":"Proceed to Login",
+    "@proceedToLogin":{
+        "description": "Proceed to login text"
+    },
+    "goToHome":"Go to home",
+    "@goToHome":{
+        "description": "Go to home text"
+    },
+    "provideCredentials":"Provide your credentials to access your account",
+    "@provideCredentials":{
+        "description": "Provide credentials text"
+    },
+    "rememberMe":"Remember me",
+    "@rememberMe":{
+        "description": "Remember me text"
+    },
+    "forgotPassword":"Forgot Password",
+    "@forgotPassword":{
+        "description": "Forgot Password text"
+    },
+    "logIntoAccount":"Log into Account",
+    "@logIntoAccount":{
+        "description": "Log into Account text"
+    },
+    "dontHaveAccount":"Don't have an account? ",
+    "@dontHaveAccount":{
+        "description": "Don't have an account text"
+    },
+    "signUp":"Sign Up",
+    "@signUp":{
+        "description": "Sign Up text"
+    },
+    "enterYourEmailForReset":"Enter your email to receive a password reset link",
+    "@enterYourEmailForReset":{
+        "description": "Enter your email to receive a password reset link text"
+    },
+    "sendLink":"Send link",
+    "@sendLink":{
+        "description": "Send link text"
+    },
+    "setNewPassword":"Set a new password for your account",
+    "@setNewPassword":{
+        "description": "Set a new password for your account text"
+    },
+    "enterPass":"Enter Password",
+    "@enterPass":{
+        "description": "Enter Password text"
+    },
+    "enterPassAgain":"Enter Password Again",
+    "@enterPassAgain":{
+        "description": "Enter Password Again text"
+    },
+    "passwordChanged":"Password Changed!",
+    "@passwordChanged":{
+        "description": "Password Changed text"
+    },
+    "youHaveChangedPassword":"You have successfully changed your password",
+    "@youHaveChangedPassword":{
+        "description": "You have successfully changed your password text"
+    },
+    "googleContinue":"Continue with Google",
+    "@googleContinue":{
+        "description": "Continue with Google text"
     }
 }

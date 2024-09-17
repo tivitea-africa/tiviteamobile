@@ -23,10 +23,6 @@ Address _$AddressFromJson(Map<String, dynamic> json) => Address(
     );
 
 Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
-      'id': instance.id,
-      'date_created': instance.dateCreated?.toIso8601String(),
-      'last_updated': instance.lastUpdated?.toIso8601String(),
-      'meta': instance.meta,
       'street': instance.street,
       'city': instance.city,
       'state': instance.state,

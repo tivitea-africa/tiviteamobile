@@ -4,11 +4,13 @@ part 'address_model.g.dart';
 
 @JsonSerializable()
 class Address {
+  @JsonKey(includeToJson: false)
   final String? id;
-  @JsonKey(name: 'date_created')
+  @JsonKey(name: 'date_created', includeToJson: false)
   final DateTime? dateCreated;
-  @JsonKey(name: 'last_updated')
+  @JsonKey(name: 'last_updated', includeToJson: false)
   final DateTime? lastUpdated;
+  @JsonKey(includeToJson: false)
   final Map<String, dynamic>? meta;
   final String? street;
   final String? city;
@@ -29,9 +31,8 @@ class Address {
     this.postalCode,
   });
 
-  /// Factory method for JSON deserialization
-  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 
-  /// Method for JSON serialization
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }

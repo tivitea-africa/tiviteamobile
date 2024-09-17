@@ -5,7 +5,9 @@ part 'service_provider_sign_up_request_body.g.dart';
 
 @JsonSerializable()
 class ServiceProviderSignUpRequestBody {
+  @JsonKey(name: 'first_name')
   final String? firstName;
+  @JsonKey(name: 'last_name')
   final String? lastName;
   final String? email;
   @JsonKey(name: 'phone_number')

@@ -9,8 +9,8 @@ part of 'service_provider_sign_up_request_body.dart';
 ServiceProviderSignUpRequestBody _$ServiceProviderSignUpRequestBodyFromJson(
         Map<String, dynamic> json) =>
     ServiceProviderSignUpRequestBody(
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
       email: json['email'] as String?,
       phoneNumber: json['phone_number'] as String?,
       password: json['password'] as String?,
@@ -27,8 +27,8 @@ ServiceProviderSignUpRequestBody _$ServiceProviderSignUpRequestBodyFromJson(
 Map<String, dynamic> _$ServiceProviderSignUpRequestBodyToJson(
         ServiceProviderSignUpRequestBody instance) =>
     <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'email': instance.email,
       'phone_number': instance.phoneNumber,
       'password': instance.password,

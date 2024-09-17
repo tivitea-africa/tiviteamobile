@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tivi_tea/features/common/app_dialog.dart';
 
 extension BuildContextExt on BuildContext {
   double get height => MediaQuery.of(this).size.height;
@@ -43,26 +44,24 @@ extension BuildContextExt on BuildContext {
   //       },
   //     );
 
-  // Future<T?> showCustomDialog<T>({
-  //   required Widget child,
-  // }) =>
-  //     showGeneralDialog(
-  //       barrierDismissible: true,
-  //       barrierLabel: 'label',
-  //       context: this,
-  //       transitionDuration: const Duration(milliseconds: 400),
-  //       pageBuilder: (context, animation, secondaryAnimation) {
-  //         return SlideTransition(
-  //           position: animation.drive(
-  //             Tween<Offset>(
-  //               begin: const Offset(0, 1),
-  //               end: Offset.zero,
-  //             ),
-  //           ),
-  //           child: AppDialog(
-  //             child: child,
-  //           ),
-  //         );
-  //       },
-  //     );
+  Future<T?> showCustomDialog<T>({
+    required Widget child,
+    bool dismissible = true,
+  }) =>
+      showGeneralDialog(
+        barrierDismissible: dismissible,
+        context: this,
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return SlideTransition(
+            position: animation.drive(
+              Tween<Offset>(
+                begin: const Offset(0, 1),
+                end: Offset.zero,
+              ),
+            ),
+            child: AppDialog(child: child),
+          );
+        },
+      );
 }
