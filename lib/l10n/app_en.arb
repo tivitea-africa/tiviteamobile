@@ -182,5 +182,77 @@
     "city":"City",
     "@city":{
         "description": "City text"
+    },
+    "country":"Country",
+    "@country":{
+        "description": "Country text"
+    },
+    "stateOrProvince":"State/Province",
+    "@stateOrProvince":{
+        "description": "State/Province text"
+    },
+    "postalOrZipCode":"Postal/Zip Code",
+    "@postalOrZipCode":{
+        "description": "Postal/Zip Code text"
+    },
+    "username":"Username",
+    "@username":{
+        "description": "Username text"
+    },
+    "alternativePhone":"Alternative Phone Number",
+    "@alternativePhone":{
+        "description": "Alternative Phone Number text"
+    },
+    "businessName":"Business Name",
+    "@businessName":{
+        "description": "Business name text"
+    },
+    "companyName":"Company Name",
+    "@companyName":{
+        "description": "Business Name hint text"
+    },
+    "registrationStatus":"Registration Status",
+    "@registrationStatus":{
+        "description": "Registration Status text"
+    },
+    "registeredOrIndividual":"Registered or individual business",
+    "@registeredOrIndividual":{
+        "description": "Registration Status hint text"
+    },
+    "website":"Website",
+    "@website":{
+        "description": "Website text"
+    },
+    "optional":"Optional",
+    "@optional":{
+        "description": "Optional text"
+    },
+    "businessDescription":"Business Description",
+    "@businessDescription":{
+        "description": "Business Description text"
+    },
+    "briefDescription":"Brief description of space or tool offered",
+    "@briefDescription":{
+        "description": "Business description hint text"
+    },
+    "bankName":"Bank Name",
+    "@bankName":{
+        "description": "Bank Name text"
+    },
+    "accountName":"Account Name",
+    "@accountName":{
+        "description": "Account Name text"
+    },
+    "enterAccountName":"Enter Account Name",
+    "@enterAccountName":{
+        "description": "Account Name hint text"
+    },
+    "accountNumber":"Account Number",
+    "@accountNumber":{
+        "description": "Account Number text"
+    },
+    "enterAccountNumber":"Enter Account Number",
+    "@enterAccountNumber":{
+        "description": "Account Number hint text"
     }
 }

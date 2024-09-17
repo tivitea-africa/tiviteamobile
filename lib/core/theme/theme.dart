@@ -7,14 +7,17 @@ const Color _primaryColor = Color(0xFF000050);
 
 double _textFieldLabelFontSize = 12.sp;
 double _buttonTextFontSize = 14.sp;
-double _bodySmallFontSize = 16.sp;
 double _titleSmallFontSize = 15.sp;
+double _bodySmallFontSize = 16.sp;
+double _bodyLargeFontSize = 18.sp;
+double _displayLargeFontSize = 22.sp;
 double _titleMediumFontSize = 24.sp;
 double _titleLargeFontSize = 28.sp;
 
 final lightTheme = Provider<ThemeData>(
   (_) => ThemeData(
     primaryColor: _primaryColor,
+    secondaryHeaderColor: const Color(0xFFE6F6FD),
     scaffoldBackgroundColor: Colors.white,
     cardColor: const Color(0xFF037EE6).withOpacity(0.5),
     brightness: Brightness.light,
@@ -54,6 +57,14 @@ final lightTheme = Provider<ThemeData>(
         fontSize: _bodySmallFontSize,
         fontWeight: FontWeight.w300,
         color: Colors.black,
+      ),
+      bodyLarge: GoogleFonts.poppins(
+        fontSize: _bodyLargeFontSize,
+        fontWeight: FontWeight.w500,
+      ),
+      displayLarge: GoogleFonts.poppins(
+        fontSize: _displayLargeFontSize,
+        fontWeight: FontWeight.w500,
       ),
       displaySmall: GoogleFonts.poppins(
         fontSize: _buttonTextFontSize,

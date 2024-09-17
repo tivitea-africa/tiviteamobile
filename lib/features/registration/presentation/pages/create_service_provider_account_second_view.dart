@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
-import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/registration/presentation/widgets/registration_appbar.dart';
 import 'package:tivi_tea/features/registration/presentation/widgets/registration_scaffold.dart';
-import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class CreateServiceProviderAccount extends StatefulWidget {
-  const CreateServiceProviderAccount({super.key});
+class CreateServiceProviderAccountSecondView extends StatefulWidget {
+  const CreateServiceProviderAccountSecondView({super.key});
 
   @override
-  State<CreateServiceProviderAccount> createState() =>
-      _CreateServiceProviderAccountState();
+  State<CreateServiceProviderAccountSecondView> createState() =>
+      _CreateServiceProviderAccountSecondViewState();
 }
 
-class _CreateServiceProviderAccountState
-    extends State<CreateServiceProviderAccount> {
+class _CreateServiceProviderAccountSecondViewState
+    extends State<CreateServiceProviderAccountSecondView> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
@@ -74,16 +70,15 @@ class _CreateServiceProviderAccountState
                 ),
               ),
               20.verticalSpace,
-              _FormSectionHeader(title: context.l10n.personalInfo),
+              _FormSectionHeader(title: context.l10n.accountInfo),
               AppTextField(
                 controller: firstNameController,
-                label: context.l10n.firstName,
-                hintText: context.l10n.firstNameHintText,
+                label: context.l10n.username,
+                hintText: context.l10n.username,
               ),
               AppTextField(
                 controller: lastNameController,
-                label: context.l10n.lastName,
-                hintText: context.l10n.lastNameHintText,
+                label: context.l10n.alternativePhone,
               ),
               AppTextField(
                 controller: phoneNumberController,
@@ -91,42 +86,57 @@ class _CreateServiceProviderAccountState
                 hintText: context.l10n.phoneNumberHintText,
               ),
               AppTextField(
-                controller: emailNameController,
-                label: context.l10n.email,
-                hintText: context.l10n.emailHintText,
-                suffixIcon: AppSvgWidget(
-                  path: Assets.svgs.envelope,
-                  fit: BoxFit.scaleDown,
-                ),
-              ),
-              _FormSectionHeader(title: context.l10n.locationDetails),
-              AppTextField(
                 controller: passwordController,
-                label: context.l10n.yourAddress,
-                hintText: context.l10n.yourAddressHintText,
-              ),
-              AppTextField(
-                controller: confirmPasswordController,
-                label: context.l10n.city,
-              ),
-              AppTextField(
-                controller: passwordController,
-                label: context.l10n.country,
+                label: context.l10n.createPassword,
                 hintText: context.l10n.createPasswordHintText,
               ),
               AppTextField(
                 controller: confirmPasswordController,
-                label: context.l10n.stateOrProvince,
-                hintText: context.l10n.confirmPasswordHintText,
+                label: context.l10n.confirmPasswordHintText,
+              ),
+              _FormSectionHeader(title: context.l10n.businessDetails),
+              AppTextField(
+                controller: passwordController,
+                label: context.l10n.businessName,
+                hintText: context.l10n.yourAddressHintText,
+              ),
+              AppTextField(
+                controller: confirmPasswordController,
+                label: context.l10n.registrationStatus,
+              ),
+              AppTextField(
+                controller: passwordController,
+                label: context.l10n.website,
+                hintText: context.l10n.optional,
+              ),
+              AppTextField(
+                controller: confirmPasswordController,
+                label: context.l10n.businessDescription,
+                hintText: context.l10n.briefDescription,
               ),
               AppTextField(
                 controller: confirmPasswordController,
                 label: context.l10n.postalOrZipCode,
                 hintText: context.l10n.confirmPasswordHintText,
               ),
+              _FormSectionHeader(title: context.l10n.bankDetails),
+              AppTextField(
+                controller: passwordController,
+                label: context.l10n.bankName,
+                hintText: context.l10n.bankName,
+              ),
+              AppTextField(
+                controller: confirmPasswordController,
+                label: context.l10n.accountName,
+              ),
+              AppTextField(
+                controller: passwordController,
+                label: context.l10n.accountNumber,
+                hintText: context.l10n.accountNumber,
+              ),
               20.verticalSpace,
               AppButton(
-                onPressed: () => context.push(AppRoutes.createServiceProviderAccountSecondView),
+                onPressed: () {}
               ),
               50.verticalSpace,
             ],

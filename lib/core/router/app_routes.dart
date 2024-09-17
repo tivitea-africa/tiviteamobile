@@ -6,4 +6,5 @@ class AppRoutes {
   static const String homeView = '/';
   static const String createCustomerAccount = '/createCustomerAccount';
   static const String createServiceProviderAccount = '/createServiceProviderAccount';
+  static const String createServiceProviderAccountSecondView = '/createServiceProviderAccountSecondView';
 }
