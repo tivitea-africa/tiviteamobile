@@ -1,4 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tivi_tea/core/config/dio_config.dart';
+import 'package:tivi_tea/core/services/local_storage/local_storage.dart';
+import 'package:tivi_tea/core/services/local_storage/local_storage_impl.dart';
 import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
 import 'package:tivi_tea/models/user_model.dart';
 import 'package:tivi_tea/repositories/enums.dart';
@@ -6,11 +9,11 @@ import 'package:tivi_tea/repositories/user/user_repo.dart';
 
 class UserRepoImpl implements UserRepository {
   UserRepoImpl(
-    //this._storage,
+    this._storage,
     this._ref,
     this._restClient,
   );
-  //final LocalStorage _storage;
+  final LocalStorage _storage;
   final Ref _ref;
   final RestClient _restClient;
   @override
@@ -69,3 +72,7 @@ class UserRepoImpl implements UserRepository {
     throw UnimplementedError();
   }
 }
+
+final userRepositoryProvider = Provider<UserRepository>(
+  (ref) => UserRepoImpl(ref.read(localDB), ref, ref.read(restClient)),
+);

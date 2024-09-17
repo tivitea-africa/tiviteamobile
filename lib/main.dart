@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tivi_tea/core/router/router_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
 import 'package:tivi_tea/core/theme/theme.dart';
 
 void main() {
@@ -13,7 +15,9 @@ void main() {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ],
-  ).then((_) {
+  ).then((_) async {
+    await Hive.initFlutter();
+    await Hive.openBox(HiveKeys.appBox);
     runApp(const ProviderScope(child: MyApp()));
   });
 }

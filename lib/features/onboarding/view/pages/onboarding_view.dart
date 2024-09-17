@@ -6,7 +6,7 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
-import 'package:tivi_tea/features/onboarding/presentation/widgets/slide_indicator.dart';
+import 'package:tivi_tea/features/onboarding/view/widgets/slide_indicator.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 

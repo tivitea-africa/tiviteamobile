@@ -1,43 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
+import 'package:tivi_tea/features/common/app_phone_text_field.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
-import 'package:tivi_tea/features/registration/presentation/widgets/registration_appbar.dart';
-import 'package:tivi_tea/features/registration/presentation/widgets/registration_scaffold.dart';
+import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
+import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
+import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
+import 'package:tivi_tea/features/registration/view_model/service_provider/registration_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/models/address_model.dart';
 
-class CreateServiceProviderAccount extends StatefulWidget {
+class CreateServiceProviderAccount extends ConsumerStatefulWidget {
   const CreateServiceProviderAccount({super.key});
 
   @override
-  State<CreateServiceProviderAccount> createState() =>
+  ConsumerState<CreateServiceProviderAccount> createState() =>
       _CreateServiceProviderAccountState();
 }
 
 class _CreateServiceProviderAccountState
-    extends State<CreateServiceProviderAccount> {
+    extends ConsumerState<CreateServiceProviderAccount> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController emailNameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
+  final TextEditingController stateOrProvinceController =
+      TextEditingController();
+  final TextEditingController postalOrZipCodeController =
       TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  bool isEnabled = false;
+  String phoneNumber = "";
 
   @override
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
-    emailNameController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    emailController.dispose();
+    addressController.dispose();
+    cityController.dispose();
+    countryController.dispose();
+    stateOrProvinceController.dispose();
+    postalOrZipCodeController.dispose();
 
     super.dispose();
   }
@@ -53,7 +68,7 @@ class _CreateServiceProviderAccountState
         key: _formKey,
         onChanged: () {
           setState(() {
-            //isEnabled = _formKey.currentState!.validate();
+            isEnabled = _formKey.currentState!.validate();
           });
         },
         child: SingleChildScrollView(
@@ -77,23 +92,33 @@ class _CreateServiceProviderAccountState
               _FormSectionHeader(title: context.l10n.personalInfo),
               AppTextField(
                 controller: firstNameController,
+                validateFunction: Validators.name(),
                 label: context.l10n.firstName,
                 hintText: context.l10n.firstNameHintText,
               ),
               AppTextField(
                 controller: lastNameController,
+                validateFunction: Validators.name(),
                 label: context.l10n.lastName,
                 hintText: context.l10n.lastNameHintText,
               ),
-              AppTextField(
-                controller: phoneNumberController,
+              AppPhoneTextField(
                 label: context.l10n.phoneNumber,
                 hintText: context.l10n.phoneNumberHintText,
+                // validateFunction: (phone) {
+                //   Validators.phone(phone?.number);
+                //   return phone?.completeNumber;
+                // },
+                onChanged: (phone) {
+                  phoneNumber = phone;
+                  setState(() {});
+                },
               ),
               AppTextField(
-                controller: emailNameController,
+                controller: emailController,
                 label: context.l10n.email,
                 hintText: context.l10n.emailHintText,
+                validateFunction: Validators.email(),
                 suffixIcon: AppSvgWidget(
                   path: Assets.svgs.envelope,
                   fit: BoxFit.scaleDown,
@@ -101,38 +126,63 @@ class _CreateServiceProviderAccountState
               ),
               _FormSectionHeader(title: context.l10n.locationDetails),
               AppTextField(
-                controller: passwordController,
+                controller: addressController,
                 label: context.l10n.yourAddress,
                 hintText: context.l10n.yourAddressHintText,
+                validateFunction: Validators.notEmpty(),
               ),
               AppTextField(
-                controller: confirmPasswordController,
+                controller: cityController,
                 label: context.l10n.city,
+                validateFunction: Validators.notEmpty(),
               ),
               AppTextField(
-                controller: passwordController,
+                controller: countryController,
                 label: context.l10n.country,
-                hintText: context.l10n.createPasswordHintText,
+                validateFunction: Validators.notEmpty(),
               ),
               AppTextField(
-                controller: confirmPasswordController,
+                controller: stateOrProvinceController,
                 label: context.l10n.stateOrProvince,
-                hintText: context.l10n.confirmPasswordHintText,
+                validateFunction: Validators.notEmpty(),
               ),
               AppTextField(
-                controller: confirmPasswordController,
+                controller: postalOrZipCodeController,
                 label: context.l10n.postalOrZipCode,
-                hintText: context.l10n.confirmPasswordHintText,
+                validateFunction: Validators.notEmpty(),
               ),
               20.verticalSpace,
               AppButton(
-                onPressed: () => context.push(AppRoutes.createServiceProviderAccountSecondView),
+                isEnabled: isEnabled,
+                onPressed: _navigateToSecondView,
               ),
               50.verticalSpace,
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _navigateToSecondView() {
+    final data = ServiceProviderSignUpRequestBody(
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      phoneNumber: phoneNumber,
+      email: emailController.text,
+      address: Address(
+        city: cityController.text,
+        country: countryController.text,
+        state: stateOrProvinceController.text,
+        postalCode: postalOrZipCodeController.text,
+      ),
+    );
+
+    final notifier = ref.read(registrationNotifierProvider.notifier);
+    notifier.saveFirstViewRegistrationDetails(data);
+
+    context.push(
+      AppRoutes.createServiceProviderAccountSecondView,
     );
   }
 }

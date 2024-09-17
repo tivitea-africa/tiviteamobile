@@ -23,6 +23,7 @@ final lightTheme = Provider<ThemeData>(
     brightness: Brightness.light,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+        elevation: const WidgetStatePropertyAll<double>(0),
         backgroundColor: const WidgetStatePropertyAll<Color>(_primaryColor),
         foregroundColor: const WidgetStatePropertyAll<Color>(Color(0xFFE6E6EE)),
         shape: WidgetStatePropertyAll<OutlinedBorder>(

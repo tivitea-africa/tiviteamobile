@@ -6,6 +6,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String? buttonText;
   final bool isLoading;
+  final bool isEnabled;
   final Color? backgroundColor;
   final Color? borderColor;
   final Color? textColor;
@@ -21,6 +22,7 @@ class AppButton extends StatelessWidget {
     this.backgroundColor,
     this.prefixIcon,
     this.isLoading = false,
+    this.isEnabled = true,
   });
 
   @override
@@ -29,17 +31,25 @@ class AppButton extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       width: isLoading ? null : double.infinity,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isEnabled ? onPressed : null,
         style: ButtonStyle(
-          elevation: const WidgetStatePropertyAll<double>(0),
           side: WidgetStatePropertyAll<BorderSide>(
-              BorderSide(color: borderColor ?? Colors.transparent)),
-          backgroundColor: backgroundColor == null
-              ? null
-              : WidgetStatePropertyAll<Color>(backgroundColor!),
-          foregroundColor: textColor == null
-              ? null
-              : WidgetStatePropertyAll<Color>(textColor!),
+            BorderSide(
+              color: !isEnabled
+                  ? const Color(0xFFD8D8DD)
+                  : borderColor ?? Colors.transparent,
+            ),
+          ),
+          backgroundColor: !isEnabled
+              ? const WidgetStatePropertyAll<Color>(Colors.transparent)
+              : backgroundColor == null
+                  ? null
+                  : WidgetStatePropertyAll<Color>(backgroundColor!),
+          foregroundColor: !isEnabled
+              ? const WidgetStatePropertyAll<Color>(Color(0xFFD8D8DD))
+              : textColor == null
+                  ? null
+                  : WidgetStatePropertyAll<Color>(textColor!),
         ),
         child: switch (isLoading) {
           true => const CupertinoActivityIndicator(),

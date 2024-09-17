@@ -5,8 +5,8 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
-import 'package:tivi_tea/features/registration/presentation/widgets/registration_appbar.dart';
-import 'package:tivi_tea/features/registration/presentation/widgets/registration_scaffold.dart';
+import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
+import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 

@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tivi_tea/core/services/local_storage/local_storage_impl.dart';
+import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
 import 'package:tivi_tea/core/services/rest_client/app_interceptor.dart';
 import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
@@ -19,7 +22,7 @@ ProviderFamily<Dio, String> _dio = Provider.family<Dio, String>((ref, baseUrl) {
     DioInterceptor(
       dio: dio,
       userRepository: UserRepoImpl(
-        //LocalStorageImpl(Hive.box(HiveKeys.appBox)),
+        LocalStorageImpl(Hive.box(HiveKeys.appBox)),
         ref,
         RestClient(dio),
       ),
