@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
+import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/login/view/pages/forgot_password.dart';
 import 'package:tivi_tea/features/login/view/pages/login_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/select_user_type_view.dart';
@@ -12,13 +13,81 @@ import 'package:tivi_tea/features/registration/view/pages/create_service_provide
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_view.dart';
 import 'package:tivi_tea/screens/bottomNav/navbar.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/onboarding_view.dart';
+import 'package:tivi_tea/screens/home_section/home_screen.dart';
+import 'package:tivi_tea/screens/listings/history.dart';
+import 'package:tivi_tea/screens/services_section/service_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+final _shellNavigatorHomeKey = GlobalKey<NavigatorState>(
+  debugLabel: 'home',
+);
+final _shellNavigatorServicesKey = GlobalKey<NavigatorState>(
+  debugLabel: 'services',
+);
+final _shellNavigatorHistoryKey = GlobalKey<NavigatorState>(
+  debugLabel: 'history',
+);
+final _shellNavigatoProfileKey = GlobalKey<NavigatorState>(
+  debugLabel: 'profile',
+);
 
 final GoRouter router = GoRouter(
   initialLocation: AppRoutes.splashScreen,
   navigatorKey: _rootNavigatorKey,
   routes: [
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return Navbar(navigationShell: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          initialLocation: AppRoutes.homeView,
+          navigatorKey: _shellNavigatorHomeKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.homeView,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: HomeScreen(),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorServicesKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.servicesView,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: ServiceScreen(),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorHistoryKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.historyView,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: HistoryScreen(),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatoProfileKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.profile,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: HomeScreen(),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
     GoRoute(
       path: AppRoutes.splashScreen,
       builder: (BuildContext context, GoRouterState state) {
@@ -69,7 +138,7 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/bottomNav',
+      path: AppRoutes.homeView,
       builder: (BuildContext context, GoRouterState state) {
         return const NaviBar();
       },

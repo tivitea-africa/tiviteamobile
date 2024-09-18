@@ -179,8 +179,20 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/hamburger.svg
   String get hamburger => 'assets/svgs/hamburger.svg';
 
+  /// File path: assets/svgs/history_nav_bar_icon.svg
+  String get historyNavBarIcon => 'assets/svgs/history_nav_bar_icon.svg';
+
+  /// File path: assets/svgs/home_nav_bar_icon.svg
+  String get homeNavBarIcon => 'assets/svgs/home_nav_bar_icon.svg';
+
   /// File path: assets/svgs/profile_icon.svg
   String get profileIcon => 'assets/svgs/profile_icon.svg';
+
+  /// File path: assets/svgs/profile_nav_bar_icon.svg
+  String get profileNavBarIcon => 'assets/svgs/profile_nav_bar_icon.svg';
+
+  /// File path: assets/svgs/services_nav_bar_icon.svg
+  String get servicesNavBarIcon => 'assets/svgs/services_nav_bar_icon.svg';
 
   /// File path: assets/svgs/suitcase.svg
   String get suitcase => 'assets/svgs/suitcase.svg';
@@ -193,7 +205,11 @@ class $AssetsSvgsGen {
         eyeSlash,
         greenCheck,
         hamburger,
+        historyNavBarIcon,
+        homeNavBarIcon,
         profileIcon,
+        profileNavBarIcon,
+        servicesNavBarIcon,
         suitcase
       ];
 }

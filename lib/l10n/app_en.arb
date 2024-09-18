@@ -326,5 +326,21 @@
     "googleContinue":"Continue with Google",
     "@googleContinue":{
         "description": "Continue with Google text"
+    },
+    "home":"Home",
+    "@home":{
+        "description": "Nav bar Home text"
+    },
+    "services":"Services",
+    "@services":{
+        "description": "Nav bar Services text"
+    },
+    "myHistory":"My History",
+    "@myHistory":{
+        "description": "Nav bar My History text"
+    },
+    "profile":"Profile",
+    "@profile":{
+        "description": "Nav bar Profile text"
     }
 }
