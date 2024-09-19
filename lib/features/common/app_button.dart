@@ -31,7 +31,7 @@ class AppButton extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       width: isLoading ? null : double.infinity,
       child: ElevatedButton(
-        onPressed: isEnabled ? onPressed : null,
+        onPressed: (isEnabled && (isLoading == false)) ? onPressed : null,
         style: ButtonStyle(
           side: WidgetStatePropertyAll<BorderSide>(
             BorderSide(
@@ -52,7 +52,7 @@ class AppButton extends StatelessWidget {
                   : WidgetStatePropertyAll<Color>(textColor!),
         ),
         child: switch (isLoading) {
-          true => const CupertinoActivityIndicator(),
+          true => const CupertinoActivityIndicator(color: Colors.white),
           _ => Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

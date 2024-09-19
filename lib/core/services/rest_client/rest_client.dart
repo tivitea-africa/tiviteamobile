@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
+import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
 
@@ -16,6 +17,10 @@ abstract class RestClient {
   @POST('/authentication/partner/sign-up')
   Future<BaseResponse<ServiceProviderSignUpResponse>> signUpAsServiceProvider(
     @Body() ServiceProviderSignUpRequestBody data,
+  );
+  @POST('/authentication/client/sign-up')
+  Future<BaseResponse<CustomerSignUpResponseBody>> signUpAsCustomer(
+    @Body() CustomerSignUpRequestBody data,
   );
   @POST('/authentication/login')
   Future<BaseResponse<LoginResponseObject>> login(

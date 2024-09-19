@@ -28,7 +28,11 @@ class AppException {
             status: e.response?.data["status"] ?? "",
             data: data,
             message: errorData["message"] ?? "Unknown error",
-            error: errorData["reason"] ?? "",
+            error: ErrorResponseObject(
+              reason: errorData["reason"] ?? "",
+              message: errorData["message"] ?? "",
+            ),
+            
           );
         }
 

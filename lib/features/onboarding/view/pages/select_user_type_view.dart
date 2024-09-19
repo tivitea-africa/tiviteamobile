@@ -60,8 +60,7 @@ class _SelectUserTypeViewState extends State<SelectUserTypeView> {
   void _navigateToCreateAccountView() {
     switch (selectedAppUserType) {
       case AppUserType.serviceProvier:
-      ///TODO: Switch back to [AppRoutes.createServiceProviderAccount]
-        context.push(AppRoutes.homeView);
+        context.push(AppRoutes.createServiceProviderAccount);
       default:
         context.push(AppRoutes.createCustomerAccount);
     }

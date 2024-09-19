@@ -23,7 +23,7 @@ class _MessageDialogState extends State<AppDialog> {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 58),
-        child: widget.child,
+        child: IntrinsicHeight(child: widget.child),
       ),
     );
   }

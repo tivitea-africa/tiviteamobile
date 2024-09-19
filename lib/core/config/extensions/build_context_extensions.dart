@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tivi_tea/features/common/app_dialog.dart';
 
+enum SnackbarState { error, success }
+
 extension BuildContextExt on BuildContext {
   double get height => MediaQuery.of(this).size.height;
 
@@ -50,6 +52,7 @@ extension BuildContextExt on BuildContext {
   }) =>
       showGeneralDialog(
         barrierDismissible: dismissible,
+        barrierLabel: 'appDialog',
         context: this,
         transitionDuration: const Duration(milliseconds: 400),
         pageBuilder: (context, animation, secondaryAnimation) {
@@ -64,4 +67,75 @@ extension BuildContextExt on BuildContext {
           );
         },
       );
+
+  void showSnackbar({
+    required String message,
+    required SnackbarState state,
+  }) {
+    final color = state == SnackbarState.error ? Colors.red : Colors.green;
+    final overlay = Overlay.of(this);
+
+    final animationController = AnimationController(
+      vsync: Navigator.of(this),
+      duration: const Duration(milliseconds: 300),
+    );
+
+    final animation = Tween<Offset>(
+      begin: const Offset(0, -1),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeInOut,
+    ));
+
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 50,
+        left: 16,
+        right: 16,
+        child: SlideTransition(
+          position: animation,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+
+    animationController.forward();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      animationController.reverse().then((_) {
+        overlayEntry.remove();
+      });
+    });
+  }
+
+  void showError(String message) {
+    showSnackbar(message: message, state: SnackbarState.error);
+  }
+
+  void showSuccess(String message) {
+    showSnackbar(message: message, state: SnackbarState.success);
+  }
 }
