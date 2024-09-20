@@ -11,7 +11,7 @@ import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
-import 'package:tivi_tea/features/login/view_model/service_provider/login_notifier.dart';
+import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 

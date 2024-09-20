@@ -16,6 +16,10 @@ class $AssetsImagesGen {
   AssetGenImage get appLogo =>
       const AssetGenImage('assets/images/app_logo.png');
 
+  /// File path: assets/images/app_logo_blue.png
+  AssetGenImage get appLogoBlue =>
+      const AssetGenImage('assets/images/app_logo_blue.png');
+
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
 
@@ -46,6 +50,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         appLogo,
+        appLogoBlue,
         google,
         onboardingSlide1,
         onboardingSlide2,
@@ -161,8 +166,14 @@ class $AssetsPlaceholdersGen {
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
+  /// File path: assets/svgs/activities_drawer_icon.svg
+  String get activitiesDrawerIcon => 'assets/svgs/activities_drawer_icon.svg';
+
   /// File path: assets/svgs/back_button.svg
   String get backButton => 'assets/svgs/back_button.svg';
+
+  /// File path: assets/svgs/dashboard_drawer_icon.svg
+  String get dashboardDrawerIcon => 'assets/svgs/dashboard_drawer_icon.svg';
 
   /// File path: assets/svgs/envelope.svg
   String get envelope => 'assets/svgs/envelope.svg';
@@ -179,11 +190,35 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/hamburger.svg
   String get hamburger => 'assets/svgs/hamburger.svg';
 
+  /// File path: assets/svgs/headphones_drawer_icon.svg
+  String get headphonesDrawerIcon => 'assets/svgs/headphones_drawer_icon.svg';
+
+  /// File path: assets/svgs/history_drawer_icon.svg
+  String get historyDrawerIcon => 'assets/svgs/history_drawer_icon.svg';
+
   /// File path: assets/svgs/history_nav_bar_icon.svg
   String get historyNavBarIcon => 'assets/svgs/history_nav_bar_icon.svg';
 
   /// File path: assets/svgs/home_nav_bar_icon.svg
   String get homeNavBarIcon => 'assets/svgs/home_nav_bar_icon.svg';
+
+  /// File path: assets/svgs/listing_drawer_icon.svg
+  String get listingDrawerIcon => 'assets/svgs/listing_drawer_icon.svg';
+
+  /// File path: assets/svgs/logout.svg
+  String get logout => 'assets/svgs/logout.svg';
+
+  /// File path: assets/svgs/messages_drawer_icon.svg
+  String get messagesDrawerIcon => 'assets/svgs/messages_drawer_icon.svg';
+
+  /// File path: assets/svgs/notification_icon.svg
+  String get notificationIcon => 'assets/svgs/notification_icon.svg';
+
+  /// File path: assets/svgs/payment_drawer_icon.svg
+  String get paymentDrawerIcon => 'assets/svgs/payment_drawer_icon.svg';
+
+  /// File path: assets/svgs/profile_drawer_icon.svg
+  String get profileDrawerIcon => 'assets/svgs/profile_drawer_icon.svg';
 
   /// File path: assets/svgs/profile_icon.svg
   String get profileIcon => 'assets/svgs/profile_icon.svg';
@@ -191,25 +226,47 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/profile_nav_bar_icon.svg
   String get profileNavBarIcon => 'assets/svgs/profile_nav_bar_icon.svg';
 
+  /// File path: assets/svgs/report.svg
+  String get report => 'assets/svgs/report.svg';
+
   /// File path: assets/svgs/services_nav_bar_icon.svg
   String get servicesNavBarIcon => 'assets/svgs/services_nav_bar_icon.svg';
+
+  /// File path: assets/svgs/settings_drawer_icon.svg
+  String get settingsDrawerIcon => 'assets/svgs/settings_drawer_icon.svg';
+
+  /// File path: assets/svgs/soldiers_drawer_icon.svg
+  String get soldiersDrawerIcon => 'assets/svgs/soldiers_drawer_icon.svg';
 
   /// File path: assets/svgs/suitcase.svg
   String get suitcase => 'assets/svgs/suitcase.svg';
 
   /// List of all assets
   List<String> get values => [
+        activitiesDrawerIcon,
         backButton,
+        dashboardDrawerIcon,
         envelope,
         eye,
         eyeSlash,
         greenCheck,
         hamburger,
+        headphonesDrawerIcon,
+        historyDrawerIcon,
         historyNavBarIcon,
         homeNavBarIcon,
+        listingDrawerIcon,
+        logout,
+        messagesDrawerIcon,
+        notificationIcon,
+        paymentDrawerIcon,
+        profileDrawerIcon,
         profileIcon,
         profileNavBarIcon,
+        report,
         servicesNavBarIcon,
+        settingsDrawerIcon,
+        soldiersDrawerIcon,
         suitcase
       ];
 }

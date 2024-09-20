@@ -342,5 +342,102 @@
     "profile":"Profile",
     "@profile":{
         "description": "Nav bar Profile text"
+    },
+    "dashboard":"Dashboard",
+    "@dashboard":{
+        "description": "Dashboard text"
+    },
+    "myProfile":"My Profile",
+    "@myProfile":{
+        "description": "My Profile text"
+    },
+    "myListing":"My Listing",
+    "@myListing":{
+        "description": "My Listing text"
+    },
+    "bookingHistory":"Booking History",
+    "@bookingHistory":{
+        "description": "Booking History text"
+    },
+    "payments":"Payments",
+    "@payments":{
+        "description": "Payments text"
+    },
+    "activities":"Activities",
+    "@activities":{
+        "description": "Activities text"
+    },
+    "messages":"Messages",
+    "@messages":{
+        "description": "Messages text"
+    },
+    "addFootSoldiers":"Add Foot Soldiers",
+    "@addFootSoldiers":{
+        "description": "Add Foot Soldiers text"
+    },
+    "customerReview":"Customer Review",
+    "@customerReview":{
+        "description": "Customer Review text"
+    },
+    "customerSupport":"Customer Support",
+    "@customerSupport":{
+        "description": "Customer Support text"
+    },
+    "settings":"Settings",
+    "@settings":{
+        "description": "Settings text"
+    },
+    "report":"Report",
+    "@report":{
+        "description": "Report text"
+    },
+    "logOut":"Log out",
+    "@logOut":{
+        "description": "Log out text"
+    },
+    "welcomeBack":"Welcome Back!",
+    "@welcomeBack":{
+        "description": "Welcome Back text"
+    },
+    "hiUser": "Hi {firstName}, welcome back to tiviTea admin",
+    "@hiUser": {
+      "description": "Hi user",
+      "placeholders": {
+         "firstName": {
+           "type": "String"
+         }
+      }
+    },
+    "filters":"Filters",
+    "@filters":{
+        "description": "Filters text"
+    },
+    "findAll":"Find all you need",
+    "@findAll":{
+        "description": "Find all you need text"
+    },
+    "fromWorkTooks":"From work tools to co-working space.",
+    "@fromWorkTooks":{
+        "description": "From work tools to co-working space text"
+    },
+    "category":"Caterory",
+    "@category":{
+        "description": "Caterory text"
+    },
+    "viewAll":"View All",
+    "@viewAll":{
+        "description": "View All text"
+    },
+    "mostPopular":"Most Popular",
+    "@mostPopular":{
+        "description": "Most Popular text"
+    },
+    "createListing":"Create Listing",
+    "@createListing":{
+        "description": "Create Listing text"
+    },
+    "addAccountDetails":"Add Account Details",
+    "@addAccountDetails":{
+        "description": "Add Account Details text"
     }
 }

@@ -12,12 +12,10 @@ class LoginRequestObject {
     this.password,
   });
 
-  factory LoginRequestObject.fromJson(
-          Map<String, dynamic> json) =>
+  factory LoginRequestObject.fromJson(Map<String, dynamic> json) =>
       _$LoginRequestObjectFromJson(json);
 
-  Map<String, dynamic> toJson() =>
-      _$LoginRequestObjectToJson(this);
+  Map<String, dynamic> toJson() => _$LoginRequestObjectToJson(this);
 }
 
 @JsonSerializable()

@@ -66,7 +66,7 @@ final lightTheme = Provider<ThemeData>(
       displayLarge: GoogleFonts.poppins(
         fontSize: _displayLargeFontSize,
         fontWeight: FontWeight.w500,
-      ),
+      ),      
       displaySmall: GoogleFonts.poppins(
         fontSize: _buttonTextFontSize,
         fontWeight: FontWeight.w400,

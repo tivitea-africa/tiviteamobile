@@ -76,3 +76,8 @@ class UserRepoImpl implements UserRepository {
 final userRepositoryProvider = Provider<UserRepository>(
   (ref) => UserRepoImpl(ref.read(localDB), ref, ref.read(restClient)),
 );
+
+final currentUserProvider = Provider<User>((ref) {
+  final user = ref.read(userRepositoryProvider).getUser();
+  return user;
+});

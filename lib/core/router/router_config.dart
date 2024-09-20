@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
+import 'package:tivi_tea/features/home/view/client/customer_home_screen.dart';
+import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
+import 'package:tivi_tea/features/home/view/service_provider/service_provider_home_view.dart';
 import 'package:tivi_tea/features/login/view/pages/forgot_password.dart';
 import 'package:tivi_tea/features/login/view/pages/login_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/select_user_type_view.dart';
@@ -11,6 +14,7 @@ import 'package:tivi_tea/features/registration/model/service_provider/service_pr
 import 'package:tivi_tea/features/registration/view/pages/create_customer_account_view.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_second_view.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_view.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/screens/bottomNav/navbar.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/onboarding_view.dart';
 import 'package:tivi_tea/screens/home_section/home_screen.dart';
@@ -32,6 +36,13 @@ final _shellNavigatoProfileKey = GlobalKey<NavigatorState>(
   debugLabel: 'profile',
 );
 
+final serviceProviderDashboard = GoRoute(
+  path: AppRoutes.homeView,
+  builder: (BuildContext context, GoRouterState state) {
+    return const ServiceProviderDashboard();
+  },
+);
+
 final GoRouter router = GoRouter(
   initialLocation: AppRoutes.splashScreen,
   navigatorKey: _rootNavigatorKey,
@@ -47,9 +58,20 @@ final GoRouter router = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.homeView,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: HomeScreen(),
-              ),
+              pageBuilder: (context, state) {
+                final entityType = state.extra as EntityType;
+                return switch (entityType) {
+                  EntityType.partner => const NoTransitionPage(
+                      child: ServiceProviderHomeScreen(),
+                    ),
+                  EntityType.client => const NoTransitionPage(
+                      child: CustomerHomeScreen(),
+                    ),
+                };
+              },
+              routes: [
+                serviceProviderDashboard,
+              ],
             ),
           ],
         ),

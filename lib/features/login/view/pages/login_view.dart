@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/core/utils/logger.dart';
+import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_checkbox.dart';
 import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
-import 'package:tivi_tea/features/login/view_model/service_provider/login_notifier.dart';
+import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
@@ -31,12 +32,18 @@ class _LoginViewState extends State<LoginView> {
 
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
+  bool obscurePass = true;
 
   @override
   void dispose() {
     emailNameController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void _obscurePass() {
+    obscurePass = !obscurePass;
+    setState(() {});
   }
 
   @override
@@ -74,15 +81,19 @@ class _LoginViewState extends State<LoginView> {
                 path: Assets.svgs.envelope,
                 fit: BoxFit.scaleDown,
               ),
+              validateFunction: Validators.email(),
             ),
             AppTextField(
               controller: passwordController,
               label: context.l10n.enterPass,
               hintText: context.l10n.createPasswordHintText,
-              obscureText: true,
-              suffixIcon: AppSvgWidget(
-                path: Assets.svgs.eye,
-                fit: BoxFit.scaleDown,
+              obscureText: obscurePass,
+              suffixIcon: InkWell(
+                onTap: _obscurePass,
+                child: AppSvgWidget(
+                  path: obscurePass ? Assets.svgs.eye : Assets.svgs.eyeSlash,
+                  fit: BoxFit.scaleDown,
+                ),
               ),
             ),
             Row(
@@ -171,10 +182,13 @@ class _LoginViewState extends State<LoginView> {
     );
 
     final notifier = ref.read(loginNotifierProvider.notifier);
-    notifier.loginAsServiceProvider(
+    notifier.login(
       data,
-      onSuccess: () => context.pushReplacement(AppRoutes.loginView),
-      onError: (error) => debugLog(error),
+      onSuccess: (entityType) => context.pushReplacement(
+        AppRoutes.homeView,
+        extra: entityType,
+      ),
+      onError: (error) => context.showError(error),
     );
   }
 }

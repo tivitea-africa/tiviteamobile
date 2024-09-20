@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
 
 part 'user_model.g.dart';
 
 @JsonSerializable()
 class User {
   final String? id;
-  @JsonKey(name: 'entity_type')
-  final String? entityType;
+  @JsonKey(name: 'entity_type', defaultValue: EntityType.client)
+  final EntityType? entityType;
   @JsonKey(name: 'last_login')
   final DateTime? lastLogin;
   @JsonKey(name: 'is_superuser')
@@ -59,7 +60,7 @@ class User {
 
   User copyWith({
     String? id,
-    String? entityType,
+    EntityType? entityType,
     DateTime? lastLogin,
     bool? isSuperuser,
     String? firstName,
