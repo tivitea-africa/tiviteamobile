@@ -29,7 +29,6 @@ class LoginNotifier extends _$LoginNotifier {
 
   void login(
     LoginRequestObject data, {
-    
     ///Pass [EntityType] to determine what dashboard would be loaded
     void Function(EntityType?)? onSuccess,
     void Function(String)? onError,
@@ -65,5 +64,13 @@ class LoginNotifier extends _$LoginNotifier {
       state = state.copyWith(forgotPasswordLoadState: LoadState.error);
       if (onError != null) onError(e.toString());
     }
+  }
+
+  void rememberUser(bool value) {
+    _userRepo.saveRememberMe(value);
+  }
+
+  bool getRememberUserValue() {
+    return _userRepo.getRememberMe() ?? false;
   }
 }

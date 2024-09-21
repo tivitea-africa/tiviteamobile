@@ -16,9 +16,17 @@ final class GeneralAuthenticationRepo {
   });
 
   Future<BaseResponse<LoginResponseObject>> login(
-      LoginRequestObject data) async {
+    LoginRequestObject data,
+  ) async {
     try {
-      return await restClient.login(data);
+      final result = await restClient.login(data);
+      final userLoginData = result.data;
+      userRepository.saveToken(userLoginData?.tokens?.access ?? '');
+      userRepository.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
+
+      userRepository.saveUser(userLoginData?.user);
+
+      return result;
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

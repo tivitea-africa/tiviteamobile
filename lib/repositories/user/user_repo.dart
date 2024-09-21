@@ -3,7 +3,7 @@ import 'package:tivi_tea/repositories/enums.dart';
 
 abstract interface class UserRepository {
   User getUser();
-  Future<void> updateUser(User user);
+  Future<void> saveUser(User? user);
   String getToken();
   String getRefreshToken();
   void saveToken(String token);

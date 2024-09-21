@@ -5,4 +5,6 @@ class HiveKeys {
   static const String user = 'user';
   static const String currentState = 'current_state';
   static const String fcmToken = 'fcmToken';
+  static const String rememberMe = 'rememberMe';
+  static const String refreshToken = 'refreshToken';
 }

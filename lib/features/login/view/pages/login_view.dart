@@ -33,6 +33,7 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
   bool obscurePass = true;
+  bool rememberMe = false;
 
   @override
   void dispose() {
@@ -99,7 +100,10 @@ class _LoginViewState extends State<LoginView> {
             Row(
               children: [
                 AppCheckbox(
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    rememberMe = value;
+                    setState(() {});
+                  },
                 ),
                 5.horizontalSpace,
                 Text(
@@ -184,10 +188,15 @@ class _LoginViewState extends State<LoginView> {
     final notifier = ref.read(loginNotifierProvider.notifier);
     notifier.login(
       data,
-      onSuccess: (entityType) => context.pushReplacement(
-        AppRoutes.homeView,
-        extra: entityType,
-      ),
+      onSuccess: (entityType) {
+        if (rememberMe == true) {
+          notifier.rememberUser(rememberMe);
+        }
+        context.pushReplacement(
+          AppRoutes.homeView,
+          extra: entityType,
+        );
+      },
       onError: (error) => context.showError(error),
     );
   }

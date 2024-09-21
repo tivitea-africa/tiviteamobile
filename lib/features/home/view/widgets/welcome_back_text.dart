@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class WelcomeBackText extends StatelessWidget {
   final bool dashboard;
@@ -21,11 +23,16 @@ class WelcomeBackText extends StatelessWidget {
               color: context.theme.primaryColor,
             ),
           ),
-          Text(
-            context.l10n.hiUser('Damian'),
-            style: context.theme.textTheme.labelMedium?.copyWith(
-              color: const Color(0xFF737380),
-            ),
+          Consumer(
+            builder: (context, ref, _) {
+              final user = ref.read(currentUserProvider);
+              return Text(
+                context.l10n.hiUser(user.firstName ?? ''),
+                style: context.theme.textTheme.labelMedium?.copyWith(
+                  color: const Color(0xFF737380),
+                ),
+              );
+            }
           ),
         ],
       ),

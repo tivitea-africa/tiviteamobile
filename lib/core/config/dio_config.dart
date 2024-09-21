@@ -23,8 +23,6 @@ ProviderFamily<Dio, String> _dio = Provider.family<Dio, String>((ref, baseUrl) {
       dio: dio,
       userRepository: UserRepoImpl(
         LocalStorageImpl(Hive.box(HiveKeys.appBox)),
-        ref,
-        RestClient(dio),
       ),
       //ref: ref,
     ),
