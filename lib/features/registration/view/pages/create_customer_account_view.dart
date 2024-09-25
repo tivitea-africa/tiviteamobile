@@ -78,6 +78,20 @@ class _CreateCustomerAccountState extends State<CreateCustomerAccount> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Text(
+                context.l10n.registerAsSpaceUser,
+                textAlign: TextAlign.center,
+                style: context.theme.textTheme.displayLarge,
+              ),
+              10.verticalSpace,
+              Text(
+                context.l10n.provideInfo,
+                textAlign: TextAlign.center,
+                style: context.theme.textTheme.displaySmall?.copyWith(
+                  color: const Color(0xFF737380),
+                ),
+              ),
+              30.verticalSpace,
               AppTextField(
                 controller: firstNameController,
                 label: context.l10n.firstName,

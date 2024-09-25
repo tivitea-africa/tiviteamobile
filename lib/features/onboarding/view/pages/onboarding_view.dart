@@ -47,57 +47,59 @@ class _OnboardingViewState extends State<OnboardingView> {
   @override
   Widget build(BuildContext context) {
     return OnboardingScaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          30.verticalSpace,
-          SizedBox(
-            height: context.height / 1.5,
-            child: PageView.builder(
-              controller: _controller,
-              itemCount: imagePaths.length,
-              itemBuilder: (context, index) {
-                final image = imagePaths[index];
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      image,
-                      fit: BoxFit.scaleDown,
-                    ),
-                    Text(
-                      _getTitleText(index),
-                      textAlign: TextAlign.center,
-                      style: context.theme.textTheme.titleMedium,
-                    ),
-                    20.verticalSpace,
-                    Text(
-                      _getSubtitleText(index),
-                      textAlign: TextAlign.center,
-                      style: context.theme.textTheme.bodySmall,
-                    ),
-                  ],
-                );
-              },
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            30.verticalSpace,
+            SizedBox(
+              height: context.height / 1.5,
+              child: PageView.builder(
+                controller: _controller,
+                itemCount: imagePaths.length,
+                itemBuilder: (context, index) {
+                  final image = imagePaths[index];
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        image,
+                        fit: BoxFit.scaleDown,
+                      ),
+                      Text(
+                        _getTitleText(index),
+                        textAlign: TextAlign.center,
+                        style: context.theme.textTheme.titleMedium,
+                      ),
+                      20.verticalSpace,
+                      Text(
+                        _getSubtitleText(index),
+                        textAlign: TextAlign.center,
+                        style: context.theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-          AnimatedScale(
-            scale: currentIndex == (imagePaths.length - 1) ? 0.0 : 1.0,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            child: SlideIndicatorWidget(
-              currentIndex: currentIndex,
-              slideLength: imagePaths.length - 1,
+            AnimatedScale(
+              scale: currentIndex == (imagePaths.length - 1) ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: SlideIndicatorWidget(
+                currentIndex: currentIndex,
+                slideLength: imagePaths.length - 1,
+              ),
             ),
-          ),
-          50.verticalSpace,
-          AppButton(
-            onPressed: _onButtonPressed,
-            buttonText: currentIndex == (imagePaths.length - 1)
-                ? context.l10n.getStarted
-                : null,
-          ),
-        ],
+            50.verticalSpace,
+            AppButton(
+              onPressed: _onButtonPressed,
+              buttonText: currentIndex == (imagePaths.length - 1)
+                  ? context.l10n.getStarted
+                  : null,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -20,6 +20,7 @@ final lightTheme = Provider<ThemeData>(
     secondaryHeaderColor: const Color(0xFFE6F6FD),
     scaffoldBackgroundColor: Colors.white,
     cardColor: const Color(0xFF037EE6).withOpacity(0.5),
+    primaryColorLight: const Color(0xFFE7E9EF),
     brightness: Brightness.light,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(

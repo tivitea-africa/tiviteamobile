@@ -23,6 +23,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
 
+  /// File path: assets/images/home_container_image.png
+  AssetGenImage get homeContainerImage =>
+      const AssetGenImage('assets/images/home_container_image.png');
+
   /// File path: assets/images/onboarding_slide_1.png
   AssetGenImage get onboardingSlide1 =>
       const AssetGenImage('assets/images/onboarding_slide_1.png');
@@ -52,6 +56,7 @@ class $AssetsImagesGen {
         appLogo,
         appLogoBlue,
         google,
+        homeContainerImage,
         onboardingSlide1,
         onboardingSlide2,
         onboardingSlide3,
@@ -184,6 +189,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/eye_slash.svg
   String get eyeSlash => 'assets/svgs/eye_slash.svg';
 
+  /// File path: assets/svgs/filter_icon.svg
+  String get filterIcon => 'assets/svgs/filter_icon.svg';
+
   /// File path: assets/svgs/green-check.svg
   String get greenCheck => 'assets/svgs/green-check.svg';
 
@@ -249,6 +257,7 @@ class $AssetsSvgsGen {
         envelope,
         eye,
         eyeSlash,
+        filterIcon,
         greenCheck,
         hamburger,
         headphonesDrawerIcon,

@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
+import 'package:tivi_tea/core/response/generic_paginated_response.dart';
+import 'package:tivi_tea/features/home/model/client/category_response_model.dart';
+import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
@@ -28,4 +31,12 @@ abstract class RestClient {
   );
   @POST('/authentication/reset-password')
   Future<BaseResponse> forgotPassword(@Body() ForgotPasswordRequestObject data);
+
+  //<====================> Service <====================>
+  @GET('/listings/')
+  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
+      getListing();
+  @GET('/listings/categories')
+  Future<BaseResponse<GenericPaginatedResponse<CategoryResponseModel>>>
+      getCategories();
 }

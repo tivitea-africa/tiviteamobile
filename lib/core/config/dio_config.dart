@@ -12,8 +12,12 @@ class BaseEnv {
 }
 
 ProviderFamily<Dio, String> _dio = Provider.family<Dio, String>((ref, baseUrl) {
+  const int connectTimeout = 5000;
+  const int receiveTimeout = 5000;
   final dio = Dio();
   dio.options.baseUrl = baseUrl;
+  dio.options.connectTimeout = const Duration(milliseconds: connectTimeout);
+  dio.options.receiveTimeout = const Duration(milliseconds: receiveTimeout);
   dio.options.headers = {
     'Content-Type': 'application/json',
     'accept': 'application/json',

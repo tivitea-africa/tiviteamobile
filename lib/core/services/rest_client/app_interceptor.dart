@@ -16,10 +16,10 @@ class DioInterceptor extends Interceptor {
   ) async {
     try {
       final String token = userRepository.getToken();
-      if (token.isEmpty) {
-        options.headers['Authorization'] = 'Bearer $token';
-        debugLog('[TOKEN]$token');
-      }
+      // if (token.isNotEmpty) {
+      //   options.headers['Authorization'] = 'Bearer $token';
+      //   debugLog('[TOKEN]$token');
+      // }
     } catch (e) {
       debugLog(e);
     }

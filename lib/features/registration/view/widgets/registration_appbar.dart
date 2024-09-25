@@ -57,10 +57,12 @@ class RegistrationAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
           10.verticalSpace,
           Container(
+            width: context.width,
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(Assets.images.sectionHeader.path),
+                fit: BoxFit.fitWidth
               ),
             ),
             child: Column(
