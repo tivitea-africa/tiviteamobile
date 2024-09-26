@@ -25,7 +25,7 @@ class _CustomerHomeScreenState extends ConsumerState<CustomerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return const AppScaffold(
-      appbar: CustomAppBar(),
+      appbar: CustomAppBar(homeScreenAppBar: true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

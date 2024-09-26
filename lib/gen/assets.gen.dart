@@ -177,6 +177,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/back_button.svg
   String get backButton => 'assets/svgs/back_button.svg';
 
+  /// File path: assets/svgs/chevron-left.svg
+  String get chevronLeft => 'assets/svgs/chevron-left.svg';
+
   /// File path: assets/svgs/dashboard_drawer_icon.svg
   String get dashboardDrawerIcon => 'assets/svgs/dashboard_drawer_icon.svg';
 
@@ -213,6 +216,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/listing_drawer_icon.svg
   String get listingDrawerIcon => 'assets/svgs/listing_drawer_icon.svg';
 
+  /// File path: assets/svgs/location.svg
+  String get location => 'assets/svgs/location.svg';
+
   /// File path: assets/svgs/logout.svg
   String get logout => 'assets/svgs/logout.svg';
 
@@ -237,6 +243,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/report.svg
   String get report => 'assets/svgs/report.svg';
 
+  /// File path: assets/svgs/search.svg
+  String get search => 'assets/svgs/search.svg';
+
   /// File path: assets/svgs/services_nav_bar_icon.svg
   String get servicesNavBarIcon => 'assets/svgs/services_nav_bar_icon.svg';
 
@@ -249,10 +258,14 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/suitcase.svg
   String get suitcase => 'assets/svgs/suitcase.svg';
 
+  /// File path: assets/svgs/verified.svg
+  String get verified => 'assets/svgs/verified.svg';
+
   /// List of all assets
   List<String> get values => [
         activitiesDrawerIcon,
         backButton,
+        chevronLeft,
         dashboardDrawerIcon,
         envelope,
         eye,
@@ -265,6 +278,7 @@ class $AssetsSvgsGen {
         historyNavBarIcon,
         homeNavBarIcon,
         listingDrawerIcon,
+        location,
         logout,
         messagesDrawerIcon,
         notificationIcon,
@@ -273,10 +287,12 @@ class $AssetsSvgsGen {
         profileIcon,
         profileNavBarIcon,
         report,
+        search,
         servicesNavBarIcon,
         settingsDrawerIcon,
         soldiersDrawerIcon,
-        suitcase
+        suitcase,
+        verified
       ];
 }
 

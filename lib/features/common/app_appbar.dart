@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/common/customizable_row.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 
 class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -13,6 +16,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
     this.userName,
     this.onTap,
     this.color,
+    this.padding,
     super.key,
   });
   final bool homeScreenAppBar;
@@ -21,32 +25,67 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String? userName;
   final Color? color;
   final VoidCallback? onTap;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        left: 20.w,
-        right: 20.w,
-        bottom: 10.h,
-      ),
+      padding: padding ??
+          EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top,
+            left: 18.w,
+            right: 18.w,
+            bottom: 10.h,
+          ),
       decoration: const BoxDecoration(color: Colors.white),
       width: MediaQuery.sizeOf(context).width,
       child: Row(
         children: [
-          Builder(
-            builder: (context) {
-              return InkWell(
-                onTap: () => scaffoldKey.currentState?.openDrawer(),
-                child: AppSvgWidget(path: Assets.svgs.hamburger),
-              );
-            }
-          ),
-          const Spacer(),
-          AppSvgWidget(path: Assets.svgs.notificationIcon),
-          10.horizontalSpace,
-          const CircleAvatar(),
+          if (homeScreenAppBar) ...[
+            Builder(
+              builder: (context) {
+                return InkWell(
+                  onTap: () => scaffoldKey.currentState?.openDrawer(),
+                  child: AppSvgWidget(path: Assets.svgs.hamburger),
+                );
+              },
+            ),
+            const Spacer(),
+            AppSvgWidget(path: Assets.svgs.notificationIcon),
+            10.horizontalSpace,
+            const CircleAvatar(),
+          ] else ...[
+            Expanded(
+              child: CustomizableRow(
+                flexValues: const [1, 4, 1],
+                children: [
+                  switch (showBackButton) {
+                    true => AppSvgWidget(
+                        path: Assets.svgs.chevronLeft,
+                        onTap: onTap ?? () => context.pop(),
+                      ),
+                    _ => const SizedBox(),
+                  },
+                  Center(
+                    child: Text(
+                      title ?? '',
+                      style: context.theme.textTheme.titleLarge?.copyWith(
+                        fontSize: 16.sp,
+                        color: context.theme.primaryColor,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      AppSvgWidget(path: Assets.svgs.notificationIcon),
+                      10.horizontalSpace,
+                      const CircleAvatar(),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ]
         ],
       ),
     );

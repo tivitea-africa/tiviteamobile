@@ -6,15 +6,17 @@ class AppImageWidget extends StatelessWidget {
     super.key,
     required this.imagePath,
     this.fit,
+    this.borderRadius,
   });
 
   final String imagePath;
   final BoxFit? fit;
+  final BorderRadiusGeometry? borderRadius; 
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: borderRadius ?? BorderRadius.circular(10),
       child: CachedNetworkImage(
         imageUrl: imagePath,
         progressIndicatorBuilder: (context, url, downloadProgress) =>

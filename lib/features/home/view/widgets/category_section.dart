@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/home/model/client/category_response_model.dart';
 import 'package:tivi_tea/features/home/view/widgets/listing_widget.dart';
@@ -41,11 +43,16 @@ class _ViewAllRow extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          Text(
-            context.l10n.viewAll,
-            style: context.theme.textTheme.bodySmall?.copyWith(
-              fontWeight: FontWeight.w300,
-              fontSize: 14.sp,
+          InkWell(
+            onTap: () => context.push(
+              '${AppRoutes.homeView}${AppRoutes.allListingsView}',
+            ),
+            child: Text(
+              context.l10n.viewAll,
+              style: context.theme.textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w300,
+                fontSize: 14.sp,
+              ),
             ),
           ),
         ],

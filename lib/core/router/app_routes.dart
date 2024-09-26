@@ -13,5 +13,5 @@ class AppRoutes {
   static const String servicesView = '/servicesView';
   static const String historyView = '/historyView';
   static const String profile = '/profile';
-  //static const String navbar = '/navbar';
+  static const String allListingsView = 'allListingsView';
 }

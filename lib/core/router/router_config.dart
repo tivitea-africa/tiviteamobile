@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
+import 'package:tivi_tea/features/home/view/client/all_listing_view.dart';
 import 'package:tivi_tea/features/home/view/general_widget.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/login/view/pages/forgot_password.dart';
@@ -39,6 +40,12 @@ final serviceProviderDashboard = GoRoute(
     return const ServiceProviderDashboard();
   },
 );
+final allListingsView = GoRoute(
+  path: AppRoutes.allListingsView,
+  builder: (BuildContext context, GoRouterState state) {
+    return const AllListingsView();
+  },
+);
 
 final GoRouter router = GoRouter(
   initialLocation: AppRoutes.splashScreen,
@@ -57,10 +64,13 @@ final GoRouter router = GoRouter(
               path: AppRoutes.homeView,
               name: AppRoutes.homeView,
               pageBuilder: (context, state) {
-                return const NoTransitionPage(child: GeneralHomeScreeen());
+                return const NoTransitionPage(
+                  child: GeneralHomeScreeen(),
+                );
               },
               routes: [
                 serviceProviderDashboard,
+                allListingsView,
               ],
             ),
           ],

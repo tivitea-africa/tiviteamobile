@@ -412,6 +412,14 @@
     "@filters":{
         "description": "Filters text"
     },
+    "listings":"Listings",
+    "@listings":{
+        "description": "Listings text"
+    },
+    "search":"Search",
+    "@search":{
+        "description": "Search text"
+    },
     "findAll":"Find all you need",
     "@findAll":{
         "description": "Find all you need text"
@@ -439,5 +447,9 @@
     "addAccountDetails":"Add Account Details",
     "@addAccountDetails":{
         "description": "Add Account Details text"
+    },
+    "listedBy":"Listed by",
+    "@listedBy":{
+        "description": "Listed by text"
     }
 }

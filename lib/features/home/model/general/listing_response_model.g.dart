@@ -36,11 +36,11 @@ ListingResponseModel _$ListingResponseModelFromJson(
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       listingType: json['listing_type'] as String?,
-      amount: (json['amount'] as num?)?.toInt(),
+      amount: json['amount'] as num?,
       status: json['status'] as String?,
       pricingOption: json['pricing_option'] as String?,
       footSoldier: json['foot_soldier'] as bool?,
-      cautionaryFee: (json['cautionary_fee'] as num?)?.toInt(),
+      cautionaryFee: json['cautionary_fee'] as num?,
       isFavorites: json['is_favorites'] as bool?,
     );
 
@@ -82,7 +82,7 @@ Room _$RoomFromJson(Map<String, dynamic> json) => Room(
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       description: json['description'] as String?,
       maxCapacity: (json['max_capacity'] as num?)?.toInt(),
-      amount: (json['amount'] as num?)?.toInt(),
+      amount: json['amount'] as num?,
       listing: json['listing'] as String?,
     );
 

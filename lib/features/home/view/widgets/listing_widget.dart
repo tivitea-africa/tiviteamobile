@@ -21,7 +21,7 @@ class ListingsView extends ConsumerWidget {
     return Column(
       children: [
         SizedBox(
-          height: 290.h,
+          height: 300.h,
           width: context.width,
           child: Padding(
             padding: EdgeInsets.only(left: 18.w, top: 10.h),
@@ -69,6 +69,7 @@ class __ListingWidgetState extends State<_ListingWidget> {
       child: Column(
         children: [
           Container(
+            margin: EdgeInsets.only(bottom: 7.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -118,7 +119,7 @@ class _ImageDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 0.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
