@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
@@ -39,57 +41,72 @@ class SecondaryListingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final int remainingImageCount = (listing.images?.length ?? 0) - 1;
     final bool moreThanOneImage = (listing.images?.length ?? 0) > 1;
-    return Container(
-      width: context.width,
-      height: containerHeight.h,
-      margin: EdgeInsets.symmetric(horizontal: 18.w),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 0.5,
-          color: const Color(0xFFD8D8DD),
-        ),
-        borderRadius: BorderRadius.circular(8.sp),
+    return InkWell(
+      onTap: () => context.go(
+        '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
+        extra: listing,
       ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: containerHeight.w,
-            height: containerHeight.h,
-            child: Stack(
-              children: [
-                AppImageWidget(
-                  imagePath: listing.images?.first ?? '',
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8.sp),
-                    bottomLeft: Radius.circular(8.sp),
+      child: Container(
+        width: context.width,
+        height: containerHeight.h,
+        margin: EdgeInsets.symmetric(horizontal: 18.w),
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 0.5,
+            color: const Color(0xFFD8D8DD),
+          ),
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: containerHeight.w,
+              height: containerHeight.h,
+              child: Stack(
+                children: [
+                  AppImageWidget(
+                    imagePath: listing.images?.first ?? '',
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.sp),
+                      bottomLeft: Radius.circular(8.sp),
+                    ),
                   ),
-                ),
-                if (moreThanOneImage)
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      padding: const EdgeInsets.all(7),
-                      margin: EdgeInsets.all(10.sp),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: context.theme.primaryColor,
-                      ),
-                      child: Text(
-                        '${remainingImageCount.toString()}+',
-                        style: context.theme.textTheme.displaySmall?.copyWith(
-                          color: Colors.white,
+                  if (moreThanOneImage)
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        padding: const EdgeInsets.all(7),
+                        margin: EdgeInsets.all(10.sp),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: context.theme.primaryColor,
+                        ),
+                        child: Text(
+                          '${remainingImageCount.toString()}+',
+                          style: context.theme.textTheme.displaySmall?.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
-          _ImageDetails(listing: listing)
-        ],
+            _ImageDetails(listing: listing)
+          ],
+        ),
       ),
     );
   }
+
+//   void _goToServiceListing(BuildContext context) {
+//   final navigationShell = GoRouter.of(context).
+  
+//   navigationShell.goBranch(1, initialLocation: false); 
+
+//   // After switching, navigate to the target route
+//   context.push(AppRoutes.listingDetails);
+// }
 }
 
 class _ImageDetails extends StatelessWidget {

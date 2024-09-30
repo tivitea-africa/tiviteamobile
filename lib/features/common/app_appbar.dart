@@ -12,15 +12,19 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const CustomAppBar({
     this.homeScreenAppBar = false,
     this.showBackButton = true,
+    this.showBackButtonForHomeScreenAppBar = false,
     this.title,
     this.userName,
     this.onTap,
+    this.onHomeBackButtonTap,
     this.color,
     this.padding,
     super.key,
   });
   final bool homeScreenAppBar;
   final bool showBackButton;
+  final bool showBackButtonForHomeScreenAppBar;
+  final VoidCallback? onHomeBackButtonTap;
   final String? title;
   final String? userName;
   final Color? color;
@@ -45,8 +49,16 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
             Builder(
               builder: (context) {
                 return InkWell(
-                  onTap: () => scaffoldKey.currentState?.openDrawer(),
-                  child: AppSvgWidget(path: Assets.svgs.hamburger),
+                  onTap: () => showBackButtonForHomeScreenAppBar
+                      ? onHomeBackButtonTap != null
+                          ? onHomeBackButtonTap!()
+                          : null
+                      : scaffoldKey.currentState?.openDrawer(),
+                  child: AppSvgWidget(
+                    path: showBackButtonForHomeScreenAppBar
+                        ? Assets.svgs.chevronLeft
+                        : Assets.svgs.hamburger,
+                  ),
                 );
               },
             ),

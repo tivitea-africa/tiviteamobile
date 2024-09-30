@@ -23,6 +23,7 @@ class AppTextField extends StatefulWidget {
     this.controller,
     this.minLines = 1,
     this.obscureText = false,
+    this.showCursor = true,
     this.enabled = true,
     this.fillTextField = true,
     this.validateFunction,
@@ -85,6 +86,7 @@ class AppTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool isLoading;
   final bool readOnly;
+  final bool showCursor;
   final double borderRadius;
   final double labelSpace;
   final String? initialValue;
@@ -120,6 +122,7 @@ class _AppTextFieldState extends State<AppTextField> {
           clipBehavior: Clip.none,
           children: [
             TextFormField(
+              showCursor: widget.showCursor,
               maxLength: widget.maxLength,
               textCapitalization: widget.textCapitalization,
               onTap: widget.onTap,

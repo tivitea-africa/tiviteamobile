@@ -451,5 +451,57 @@
     "listedBy":"Listed by",
     "@listedBy":{
         "description": "Listed by text"
+    },
+    "description":"Description",
+    "@description":{
+        "description": "Description text"
+    },
+    "facilities":"Facilities available here",
+    "@facilities":{
+        "description": "Facilities available text"
+    },
+    "location":"Location",
+    "@location":{
+        "description": "Location available text"
+    },
+    "contact":"Contact",
+    "@contact":{
+        "description": "Contact available text"
+    },
+    "youCan":"You can",
+    "@youCan":{
+        "description": "You can text"
+    },
+    "getQuotation":"Get a Quotation",
+    "@getQuotation":{
+        "description": "Get a Quotation text"
+    },
+    "pricesAreAvailable":"Prices are available per room and available facility",
+    "@pricesAreAvailable":{
+        "description": "Prices are available text"
+    },
+    "bookNow":"Book now",
+    "@bookNow":{
+        "description": "Book now text"
+    },
+    "dateFrom":"Date from",
+    "@dateFrom":{
+        "description": "Date from text"
+    },
+    "dateTo":"Date to",
+    "@dateTo":{
+        "description": "Date to text"
+    },
+    "numberOfPeople":"No. of people",
+    "@numberOfPeople":{
+        "description": "No. of people text"
+    },
+    "payNow":"Pay Now",
+    "@payNow":{
+        "description": "Pay Now text"
+    },
+    "summary":"Summary",
+    "@summary":{
+        "description": "Summary text"
     }
 }

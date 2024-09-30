@@ -14,4 +14,6 @@ class AppRoutes {
   static const String historyView = '/historyView';
   static const String profile = '/profile';
   static const String allListingsView = 'allListingsView';
+  static const String listingDetailsView = 'listingDetailsView';
+  static const String bookListingView = 'bookListingView';
 }

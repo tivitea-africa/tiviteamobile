@@ -174,8 +174,17 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/activities_drawer_icon.svg
   String get activitiesDrawerIcon => 'assets/svgs/activities_drawer_icon.svg';
 
+  /// File path: assets/svgs/arrow-up-split.svg
+  String get arrowUpSplit => 'assets/svgs/arrow-up-split.svg';
+
   /// File path: assets/svgs/back_button.svg
   String get backButton => 'assets/svgs/back_button.svg';
+
+  /// File path: assets/svgs/calendar.svg
+  String get calendar => 'assets/svgs/calendar.svg';
+
+  /// File path: assets/svgs/call-outgoing.svg
+  String get callOutgoing => 'assets/svgs/call-outgoing.svg';
 
   /// File path: assets/svgs/chevron-left.svg
   String get chevronLeft => 'assets/svgs/chevron-left.svg';
@@ -213,6 +222,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/home_nav_bar_icon.svg
   String get homeNavBarIcon => 'assets/svgs/home_nav_bar_icon.svg';
 
+  /// File path: assets/svgs/lightning.svg
+  String get lightning => 'assets/svgs/lightning.svg';
+
   /// File path: assets/svgs/listing_drawer_icon.svg
   String get listingDrawerIcon => 'assets/svgs/listing_drawer_icon.svg';
 
@@ -221,6 +233,12 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/logout.svg
   String get logout => 'assets/svgs/logout.svg';
+
+  /// File path: assets/svgs/mail.svg
+  String get mail => 'assets/svgs/mail.svg';
+
+  /// File path: assets/svgs/map-marker.svg
+  String get mapMarker => 'assets/svgs/map-marker.svg';
 
   /// File path: assets/svgs/messages_drawer_icon.svg
   String get messagesDrawerIcon => 'assets/svgs/messages_drawer_icon.svg';
@@ -258,13 +276,25 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/suitcase.svg
   String get suitcase => 'assets/svgs/suitcase.svg';
 
+  /// File path: assets/svgs/taxi.svg
+  String get taxi => 'assets/svgs/taxi.svg';
+
+  /// File path: assets/svgs/user-group.svg
+  String get userGroup => 'assets/svgs/user-group.svg';
+
   /// File path: assets/svgs/verified.svg
   String get verified => 'assets/svgs/verified.svg';
+
+  /// File path: assets/svgs/video.svg
+  String get video => 'assets/svgs/video.svg';
 
   /// List of all assets
   List<String> get values => [
         activitiesDrawerIcon,
+        arrowUpSplit,
         backButton,
+        calendar,
+        callOutgoing,
         chevronLeft,
         dashboardDrawerIcon,
         envelope,
@@ -277,9 +307,12 @@ class $AssetsSvgsGen {
         historyDrawerIcon,
         historyNavBarIcon,
         homeNavBarIcon,
+        lightning,
         listingDrawerIcon,
         location,
         logout,
+        mail,
+        mapMarker,
         messagesDrawerIcon,
         notificationIcon,
         paymentDrawerIcon,
@@ -292,7 +325,10 @@ class $AssetsSvgsGen {
         settingsDrawerIcon,
         soldiersDrawerIcon,
         suitcase,
-        verified
+        taxi,
+        userGroup,
+        verified,
+        video
       ];
 }
 
