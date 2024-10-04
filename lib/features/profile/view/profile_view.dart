@@ -9,7 +9,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appbar: const CustomAppBar(homeScreenAppBar: true),
+      appbar: const CustomAppBar(showHamburgerMenu: true),
       body: Center(
         child: Text(context.l10n.profile),
       ),

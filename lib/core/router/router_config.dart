@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/router/home_router.dart';
+import 'package:tivi_tea/core/router/my_listings_router.dart';
 import 'package:tivi_tea/core/router/services_router.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/home/view/general_widget.dart';
@@ -16,7 +17,7 @@ import 'package:tivi_tea/features/registration/view/pages/create_customer_accoun
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_second_view.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/onboarding_view.dart';
-import 'package:tivi_tea/screens/listings/history.dart';
+import 'package:tivi_tea/features/services/view/pages/my_listing_view.dart';
 import 'package:tivi_tea/screens/services_section/service_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -81,10 +82,13 @@ final GoRouter router = GoRouter(
           navigatorKey: _shellNavigatorHistoryKey,
           routes: [
             GoRoute(
-              path: AppRoutes.historyView,
+              path: AppRoutes.myListingView,
               pageBuilder: (context, state) => const NoTransitionPage(
-                child: HistoryScreen(),
+                child: MyListingView(),
               ),
+              routes: [
+                MyListingsRouter.serviceProviderDashboard,
+              ]
             ),
           ],
         ),

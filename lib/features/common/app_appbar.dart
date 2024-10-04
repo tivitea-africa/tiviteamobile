@@ -13,6 +13,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
     this.homeScreenAppBar = false,
     this.showBackButton = true,
     this.showBackButtonForHomeScreenAppBar = false,
+    this.showHamburgerMenu = false,
     this.title,
     this.userName,
     this.onTap,
@@ -22,6 +23,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
     super.key,
   });
   final bool homeScreenAppBar;
+  final bool showHamburgerMenu;
   final bool showBackButton;
   final bool showBackButtonForHomeScreenAppBar;
   final VoidCallback? onHomeBackButtonTap;
@@ -69,15 +71,36 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ] else ...[
             Expanded(
               child: CustomizableRow(
-                flexValues: const [1, 4, 1],
+                flexValues: const [1, 4, 0],
                 children: [
-                  switch (showBackButton) {
-                    true => AppSvgWidget(
-                        path: Assets.svgs.chevronLeft,
-                        onTap: onTap ?? () => context.pop(),
+                  if (showHamburgerMenu)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Builder(
+                        builder: (context) {
+                          return InkWell(
+                            onTap: () => showBackButtonForHomeScreenAppBar
+                                ? onHomeBackButtonTap != null
+                                    ? onHomeBackButtonTap!()
+                                    : null
+                                : scaffoldKey.currentState?.openDrawer(),
+                            child: AppSvgWidget(
+                              path: showBackButtonForHomeScreenAppBar
+                                  ? Assets.svgs.chevronLeft
+                                  : Assets.svgs.hamburger,
+                            ),
+                          );
+                        },
                       ),
-                    _ => const SizedBox(),
-                  },
+                    )
+                  else
+                    switch (showBackButton) {
+                      true => AppSvgWidget(
+                          path: Assets.svgs.chevronLeft,
+                          onTap: onTap ?? () => context.pop(),
+                        ),
+                      _ => const SizedBox(),
+                    },
                   Center(
                     child: Text(
                       title ?? '',

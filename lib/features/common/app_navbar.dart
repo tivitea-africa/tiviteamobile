@@ -72,7 +72,7 @@ class Navbar extends StatelessWidget {
               ),
             ),
             NavigationDestination(
-              label: context.l10n.myHistory,
+              label: context.l10n.myListing,
               icon: AppSvgWidget(path: Assets.svgs.historyNavBarIcon),
               selectedIcon: AppSvgWidget(
                 path: Assets.svgs.historyNavBarIcon,

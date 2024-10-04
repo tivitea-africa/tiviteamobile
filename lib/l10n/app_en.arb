@@ -543,5 +543,146 @@
     "viewReport":"View Report",
     "@viewReport":{
         "description": "View Report text"
+    },
+    "newListing":"New listing",
+    "@newListing":{
+        "description": "New listing text"
+    },
+    "whatToList":"What do you want to list?",
+    "@whatToList":{
+        "description": "What do you want to list text"
+    },
+    "coWorkingSpace":"Co-Working Space",
+    "@coWorkingSpace":{
+        "description": "Co-Working Space text"
+    },
+    "workTool":"Work Tool",
+    "@workTool":{
+        "description": "Work Tool text"
+    },
+    "otherListing":"Other Listing",
+    "@otherListing":{
+        "description": "Other Listing text"
+    },
+    "otherListingCategory":"Other Listing Category",
+    "@otherListingCategory":{
+        "description": "Other Listing Category text"
+    },
+    "spaceDetails":"Space Details",
+    "@spaceDetails":{
+        "description": "Space Details text"
+    },
+    "nameOfSpace":"Name of Space",
+    "@nameOfSpace":{
+        "description": "Name of Space text"
+    },
+    "shortDescription":"Short Description",
+    "@shortDescription":{
+        "description": "Short Description text"
+    },
+    "addressOfSpace":"Address of Space",
+    "@addressOfSpace":{
+        "description": "Address of Space text"
+    },
+    "spaceAmenities":"Space Amenities",
+    "@spaceAmenities":{
+        "description": "Space Amenities text"
+    },
+    "e24hr":"24 hrs electricity",
+    "@e24hr":{
+        "description": "24 hrs electricity text"
+    },
+    "parking":"Parking",
+    "@parking":{
+        "description": "Parking text"
+    },
+    "wifi":"WiFi",
+    "@wifi":{
+        "description": "WiFi text"
+    },
+    "cctv":"CCTV",
+    "@cctv":{
+        "description": "CCTV text"
+    },
+    "cafeteria":"Cafeteria",
+    "@cafeteria":{
+        "description": "Cafeteria text"
+    },
+    "addMore":"Add More",
+    "@addMore":{
+        "description": "Add More text"
+    },
+    "uploadImagesOf": "Upload images of {tool}",
+    "@uploadImagesOf": {
+      "description": "Upload images of tool or workspace",
+      "placeholders": {
+         "tool": {
+           "type": "String"
+         }
+      }
+    },
+    "addImage":"Add Image",
+    "@addImage":{
+        "description": "Add Image text"
+    },
+    "roomDetails":"Room Details",
+    "@roomDetails":{
+        "description": "Room Details text"
+    },
+    "nameOfRoom":"Name of Room",
+    "@nameOfRoom":{
+        "description": "Name of Room text"
+    },
+    "availableSeats":"Available Seats",
+    "@availableSeats":{
+        "description": "Available Seats text"
+    },
+    "pricingType":"Pricing Type",
+    "@pricingType":{
+        "description": "Pricing Type text"
+    },
+    "saveAndPublish":"Save and Publish",
+    "@saveAndPublish":{
+        "description": "Save and Publish text"
+    },
+    "hourly":"Hourly",
+    "@hourly":{
+        "description": "Hourly text"
+    },
+    "fixed":"Fixed",
+    "@fixed":{
+        "description": "Fixed text"
+    },
+    "add":"Add",
+    "@add":{
+        "description": "Add text"
+    },
+    "addAmenities":"Add Amentities",
+    "@addAmenities":{
+        "description": "Add Amentities text"
+    },
+    "workToolDetails":"Work Tool Details",
+    "@workToolDetails":{
+        "description": "Work Tool Details text"
+    },
+    "nameOfWorkTool":"Name of Work Tool",
+    "@nameOfWorkTool":{
+        "description": "Name of Work Tool text"
+    },
+    "nameOfWhatYouSelling":"Name of What you are listing",
+    "@nameOfWhatYouSelling":{
+        "description": "Name of What you are listing text"
+    },
+    "pickUpLocation":"Pick Up Location",
+    "@pickUpLocation":{
+        "description": "Pick Up Location text"
+    },
+    "rentPrice":"Rent Price",
+    "@rentPrice":{
+        "description": "Rent Price text"
+    },
+    "addnew":"New",
+    "@addnew":{
+        "description": "New text"
     }
 }

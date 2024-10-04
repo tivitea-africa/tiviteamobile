@@ -31,7 +31,7 @@ class _ServiceProviderDashboardState
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appbar: const CustomAppBar(homeScreenAppBar: true),
+      appbar: const CustomAppBar(showHamburgerMenu: true),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,33 +81,36 @@ class CreateListingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: context.theme.primaryColor,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: context.theme.primaryColor,
+          ),
+          borderRadius: BorderRadius.circular(22),
+          color: hasWhiteBackground ? Colors.white : context.theme.primaryColor,
         ),
-        borderRadius: BorderRadius.circular(22),
-        color: hasWhiteBackground ? Colors.white : context.theme.primaryColor,
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.add_rounded,
-            color:
-                hasWhiteBackground ? context.theme.primaryColor : Colors.white,
-          ),
-          5.horizontalSpace,
-          Text(
-            text,
-            style: context.theme.textTheme.titleLarge?.copyWith(
-              fontSize: 12.sp,
-              color: hasWhiteBackground
-                  ? context.theme.primaryColor
-                  : Colors.white,
+        child: Row(
+          children: [
+            Icon(
+              Icons.add_rounded,
+              color:
+                  hasWhiteBackground ? context.theme.primaryColor : Colors.white,
             ),
-          ),
-        ],
+            5.horizontalSpace,
+            Text(
+              text,
+              style: context.theme.textTheme.titleLarge?.copyWith(
+                fontSize: 12.sp,
+                color: hasWhiteBackground
+                    ? context.theme.primaryColor
+                    : Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

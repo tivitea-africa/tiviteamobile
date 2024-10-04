@@ -101,6 +101,7 @@ class ServiceProviderAppDrawer extends StatelessWidget {
                   icon: Assets.svgs.logout,
                   label: context.l10n.logOut,
                   logOutButton: true,
+                  onTap: () => context.pushReplacement(AppRoutes.loginView),
                 ),
               ],
             ),

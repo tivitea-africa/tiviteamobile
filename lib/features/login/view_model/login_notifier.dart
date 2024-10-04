@@ -37,7 +37,7 @@ class LoginNotifier extends _$LoginNotifier {
     try {
       final response = await _repo.login(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? 'An error occurred';
       }
       state = state.copyWith(loadState: LoadState.success);
       if (onSuccess != null) onSuccess(response.data?.user?.entityType);

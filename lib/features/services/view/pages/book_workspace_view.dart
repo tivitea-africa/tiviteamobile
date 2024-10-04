@@ -45,7 +45,7 @@ class _BookWorkSpaceViewState extends State<BookWorkSpaceView> {
   Widget build(BuildContext context) {
     return AppScaffold(
       appbar: CustomAppBar(
-        homeScreenAppBar: true,
+        showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
         onHomeBackButtonTap: () => context.pop(),
       ),

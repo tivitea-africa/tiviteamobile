@@ -16,4 +16,6 @@ class AppRoutes {
   static const String allListingsView = 'allListingsView';
   static const String listingDetailsView = 'listingDetailsView';
   static const String bookListingView = 'bookListingView';
+  static const String myListingView = '/myListingView';
+  static const String createListingView = 'createListingView';
 }

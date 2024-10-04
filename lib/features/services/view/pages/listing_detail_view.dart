@@ -21,7 +21,7 @@ class ListingDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       appbar: CustomAppBar(
-        homeScreenAppBar: true,
+        showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
         onHomeBackButtonTap: () => context.go(
           '${AppRoutes.homeView}${AppRoutes.allListingsView}',

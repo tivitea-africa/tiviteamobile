@@ -37,11 +37,15 @@ abstract class RestClient {
   @GET('/listings/')
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
       getListing();
+  @GET('/listings/partner/listings')
+  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
+      getPartnerListing();
   @GET('/listings/categories')
   Future<BaseResponse<GenericPaginatedResponse<CategoryResponseModel>>>
       getCategories();
 
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')
-  Future<BaseResponse<ServiceProviderDashboardModel>> getServiceProviderDashboard();
+  Future<BaseResponse<ServiceProviderDashboardModel>>
+      getServiceProviderDashboard();
 }
