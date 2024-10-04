@@ -6,17 +6,16 @@ import 'package:tivi_tea/core/router/home_router.dart';
 import 'package:tivi_tea/core/router/services_router.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/home/view/general_widget.dart';
-import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/login/view/pages/forgot_password.dart';
 import 'package:tivi_tea/features/login/view/pages/login_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/select_user_type_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/splash_screen.dart';
+import 'package:tivi_tea/features/profile/view/profile_view.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_customer_account_view.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_second_view.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/onboarding_view.dart';
-import 'package:tivi_tea/screens/home_section/home_screen.dart';
 import 'package:tivi_tea/screens/listings/history.dart';
 import 'package:tivi_tea/screens/services_section/service_screen.dart';
 
@@ -33,13 +32,6 @@ final _shellNavigatorHistoryKey = GlobalKey<NavigatorState>(
 );
 final _shellNavigatoProfileKey = GlobalKey<NavigatorState>(
   debugLabel: 'profile',
-);
-
-final serviceProviderDashboard = GoRoute(
-  path: AppRoutes.serviceProviderDasboard,
-  builder: (BuildContext context, GoRouterState state) {
-    return const ServiceProviderDashboard();
-  },
 );
 
 final GoRouter router = GoRouter(
@@ -64,7 +56,7 @@ final GoRouter router = GoRouter(
                 );
               },
               routes: [
-                serviceProviderDashboard,
+                HomeRouter.serviceProviderDashboard,
                 HomeRouter.allListingsView,
               ],
             ),
@@ -102,7 +94,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: AppRoutes.profile,
               pageBuilder: (context, state) => const NoTransitionPage(
-                child: HomeScreen(),
+                child: ProfileView(),
               ),
             ),
           ],

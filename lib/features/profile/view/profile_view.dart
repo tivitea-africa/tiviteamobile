@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tivi_tea/features/common/app_appbar.dart';
+import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class ProfileView extends StatelessWidget {
@@ -6,7 +8,8 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
+      appbar: const CustomAppBar(homeScreenAppBar: true),
       body: Center(
         child: Text(context.l10n.profile),
       ),

@@ -10,7 +10,7 @@ class AppTextField extends StatefulWidget {
     this.textStyle,
     this.width,
     this.labelSpace = 10,
-    this.textCapitalization = TextCapitalization.sentences,
+    this.textCapitalization = TextCapitalization.none,
     this.padding = const SizedBox(height: 24.0),
     this.onTap,
     this.decoration,

@@ -32,7 +32,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         }
 
         ///TODO: Check user states here and decide screne to navigate to
-        context.push(AppRoutes.onboardingView);
+        context.push(AppRoutes.loginView);
       }
     });
   }

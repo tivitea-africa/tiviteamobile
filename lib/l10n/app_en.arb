@@ -503,5 +503,45 @@
     "summary":"Summary",
     "@summary":{
         "description": "Summary text"
+    },
+    "totalBooking":"Total Booking",
+    "@totalBooking":{
+        "description": "Total Booking text"
+    },
+    "totalListing":"Total Listing",
+    "@totalListing":{
+        "description": "Total Listing text"
+    },
+    "totalEarning":"Total Earning",
+    "@totalEarning":{
+        "description": "Total Earning text"
+    },
+    "totalReceived":"Total Received",
+    "@totalReceived":{
+        "description": "Total Received text"
+    },
+    "bookingSummary":"Booking Summary",
+    "@bookingSummary":{
+        "description": "Booking Summary text"
+    },
+    "incomingBookings":"Incoming Bookings",
+    "@incomingBookings":{
+        "description": "Incoming Bookings text"
+    },
+    "ongoingBookings":"Ongoing Bookings",
+    "@ongoingBookings":{
+        "description": "Ongoing Bookings text"
+    },
+    "completedBookings":"Completed Bookings",
+    "@completedBookings":{
+        "description": "Completed Bookings text"
+    },
+    "financialSummary":"Financial Summary",
+    "@financialSummary":{
+        "description": "Financial Summary text"
+    },
+    "viewReport":"View Report",
+    "@viewReport":{
+        "description": "View Report text"
     }
 }

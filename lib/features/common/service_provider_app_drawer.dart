@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/common/app_drawer_list_tile.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -9,6 +11,9 @@ class ServiceProviderAppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final routePath = GoRouterState.of(context).matchedLocation;
+    const dashboard =
+        '${AppRoutes.homeView}${AppRoutes.serviceProviderDashboard}';
     return Drawer(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -32,11 +37,20 @@ class ServiceProviderAppDrawer extends StatelessWidget {
           DrawerListTile(
             icon: Assets.svgs.dashboardDrawerIcon,
             label: context.l10n.dashboard,
-            isSelected: true,
+            isSelected: routePath == dashboard,
+            onTap: () {
+              if (routePath == dashboard) {
+                context.go(AppRoutes.homeView);
+                return;
+              }
+              context.go(dashboard);
+            },
           ),
           DrawerListTile(
             icon: Assets.svgs.profileDrawerIcon,
             label: context.l10n.profile,
+            isSelected: routePath == AppRoutes.profile,
+            onTap: () => context.go(AppRoutes.profile),
           ),
           DrawerListTile(
             icon: Assets.svgs.listingDrawerIcon,

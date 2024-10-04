@@ -180,6 +180,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/back_button.svg
   String get backButton => 'assets/svgs/back_button.svg';
 
+  /// File path: assets/svgs/brand-booking.svg
+  String get brandBooking => 'assets/svgs/brand-booking.svg';
+
   /// File path: assets/svgs/calendar.svg
   String get calendar => 'assets/svgs/calendar.svg';
 
@@ -293,6 +296,7 @@ class $AssetsSvgsGen {
         activitiesDrawerIcon,
         arrowUpSplit,
         backButton,
+        brandBooking,
         calendar,
         callOutgoing,
         chevronLeft,

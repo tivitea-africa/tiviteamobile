@@ -9,7 +9,7 @@ class AppRoutes {
   static const String createCustomerAccount = '/createCustomerAccount';
   static const String createServiceProviderAccount = '/createServiceProviderAccount';
   static const String createServiceProviderAccountSecondView = '/createServiceProviderAccountSecondView';
-  static const String serviceProviderDasboard = 'serviceProviderDasboard';
+  static const String serviceProviderDashboard = 'serviceProviderDashboard';
   static const String servicesView = '/servicesView';
   static const String historyView = '/historyView';
   static const String profile = '/profile';
