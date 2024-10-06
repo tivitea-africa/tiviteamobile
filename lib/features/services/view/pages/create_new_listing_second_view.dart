@@ -11,6 +11,7 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/services/view/pages/create_new_listing_view.dart';
+import 'package:tivi_tea/features/services/view/widgets/add_room_section.dart';
 import 'package:tivi_tea/features/services/view/widgets/selected_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -42,6 +43,9 @@ class CreateNewListingSecondView extends StatelessWidget {
                 AppTextField(hintText: context.l10n.shortDescription),
                 AppTextField(hintText: context.l10n.addressOfSpace),
                 const SpaceAmenitiesSection(),
+                20.verticalSpace,
+                const AddRoomSection(),
+                20.verticalSpace,
               ] else ...[
                 Text(
                   context.l10n.workToolDetails,
@@ -55,6 +59,7 @@ class CreateNewListingSecondView extends StatelessWidget {
                 AppTextField(hintText: context.l10n.shortDescription),
                 AppTextField(hintText: context.l10n.pickUpLocation),
                 AppTextField(hintText: context.l10n.rentPrice),
+                20.verticalSpace,
               ],
             ],
           ),
