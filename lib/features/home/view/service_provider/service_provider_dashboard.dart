@@ -72,10 +72,16 @@ class CreateListingButton extends StatelessWidget {
   final VoidCallback? onTap;
   final bool hasWhiteBackground;
   final String text;
+  final Color? backgroundColor;
+  final Color? iconColor;
+  final Color? textColor;
   const CreateListingButton({
     super.key,
     required this.text,
     this.hasWhiteBackground = false,
+    this.backgroundColor,
+    this.iconColor,
+    this.textColor,
     this.onTap,
   });
 
@@ -87,26 +93,30 @@ class CreateListingButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
         decoration: BoxDecoration(
           border: Border.all(
-            color: context.theme.primaryColor,
+            color: backgroundColor ?? context.theme.primaryColor,
           ),
           borderRadius: BorderRadius.circular(22),
-          color: hasWhiteBackground ? Colors.white : context.theme.primaryColor,
+          color: backgroundColor ??
+              (hasWhiteBackground ? Colors.white : context.theme.primaryColor),
         ),
         child: Row(
           children: [
             Icon(
               Icons.add_rounded,
-              color:
-                  hasWhiteBackground ? context.theme.primaryColor : Colors.white,
+              color: iconColor ??
+                  (hasWhiteBackground
+                      ? context.theme.primaryColor
+                      : Colors.white),
             ),
             5.horizontalSpace,
             Text(
               text,
               style: context.theme.textTheme.titleLarge?.copyWith(
                 fontSize: 12.sp,
-                color: hasWhiteBackground
-                    ? context.theme.primaryColor
-                    : Colors.white,
+                color: textColor ??
+                    (hasWhiteBackground
+                        ? context.theme.primaryColor
+                        : Colors.white),
               ),
             ),
           ],

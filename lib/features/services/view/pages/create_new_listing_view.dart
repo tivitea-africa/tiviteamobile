@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
+import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/services/view/widgets/other_category_dropdown.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
@@ -19,6 +23,8 @@ class _CreateNewListingViewState extends State<CreateNewListingView> {
   CreateListingType selectedListingType = CreateListingType.workSpace;
   @override
   Widget build(BuildContext context) {
+    const routePath =
+        '${AppRoutes.myListingView}/${AppRoutes.createListingSecondView}';
     return AppScaffold(
       appbar: CustomAppBar(title: context.l10n.newListing),
       body: Padding(
@@ -30,7 +36,7 @@ class _CreateNewListingViewState extends State<CreateNewListingView> {
               context.l10n.whatToList,
               style: context.theme.textTheme.displayLarge?.copyWith(
                 color: context.theme.primaryColor,
-                fontSize: 20.sp
+                fontSize: 20.sp,
               ),
             ),
             40.verticalSpace,
@@ -51,6 +57,15 @@ class _CreateNewListingViewState extends State<CreateNewListingView> {
               onTap: (type) => _selectUserType(type),
               isSelected: selectedListingType == CreateListingType.otherListing,
             ),
+            20.verticalSpace,
+            const OtherCategoryDropdown(),
+            30.verticalSpace,
+            AppButton(
+              onPressed: () => context.push(
+                routePath,
+                extra: selectedListingType,
+              ),
+            )
           ],
         ),
       ),

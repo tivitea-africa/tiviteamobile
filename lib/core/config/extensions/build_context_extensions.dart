@@ -48,6 +48,8 @@ extension BuildContextExt on BuildContext {
 
   Future<T?> showCustomDialog<T>({
     required Widget child,
+    double horizontalPadding = 24,
+    double verticalPadding = 58,
     bool dismissible = true,
   }) =>
       showGeneralDialog(
@@ -63,7 +65,11 @@ extension BuildContextExt on BuildContext {
                 end: Offset.zero,
               ),
             ),
-            child: AppDialog(child: child),
+            child: AppDialog(
+              horizontalPadding: horizontalPadding,
+              verticalPadding: verticalPadding,
+              child: child,
+            ),
           );
         },
       );

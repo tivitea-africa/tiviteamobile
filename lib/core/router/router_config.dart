@@ -87,7 +87,8 @@ final GoRouter router = GoRouter(
                 child: MyListingView(),
               ),
               routes: [
-                MyListingsRouter.serviceProviderDashboard,
+                MyListingsRouter.createListingView,
+                MyListingsRouter.createListingSecondView,
               ]
             ),
           ],
