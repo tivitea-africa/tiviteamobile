@@ -8,6 +8,7 @@ import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/other_category_dropdown.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -21,6 +22,7 @@ class CreateNewListingView extends StatefulWidget {
 
 class _CreateNewListingViewState extends State<CreateNewListingView> {
   CreateListingType selectedListingType = CreateListingType.workSpace;
+  String categoryId = '';
   @override
   Widget build(BuildContext context) {
     const routePath =
@@ -58,12 +60,18 @@ class _CreateNewListingViewState extends State<CreateNewListingView> {
               isSelected: selectedListingType == CreateListingType.otherListing,
             ),
             20.verticalSpace,
-            const OtherCategoryDropdown(),
+            OtherCategoryDropdown(
+              onCategorySelected: (value) {
+                categoryId = value;
+                setState(() {});
+              },
+            ),
             30.verticalSpace,
             AppButton(
+              isEnabled: categoryId.isNotEmpty,
               onPressed: () => context.push(
                 routePath,
-                extra: selectedListingType,
+                extra: [selectedListingType, categoryId],
               ),
             )
           ],
@@ -153,5 +161,3 @@ class _ListingTypeContainer extends StatelessWidget {
     );
   }
 }
-
-enum CreateListingType { workSpace, workTool, otherListing }

@@ -1,33 +1,33 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
-import 'package:tivi_tea/core/utils/image_picker_util.dart';
+import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class SelectedImagesView extends StatefulWidget {
+class SelectedImagesView extends ConsumerStatefulWidget {
   const SelectedImagesView({super.key});
 
   @override
-  State<SelectedImagesView> createState() => _SelectedImagesViewState();
+  ConsumerState<SelectedImagesView> createState() => _SelectedImagesViewState();
 }
 
-class _SelectedImagesViewState extends State<SelectedImagesView> {
-  List<XFile> _selectedImages = [];
+class _SelectedImagesViewState extends ConsumerState<SelectedImagesView> {
   @override
   Widget build(BuildContext context) {
+    final selectedImages = ref.watch(imagePickerNotifierProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _selectedImages.isEmpty
+        selectedImages.isEmpty
             ? const Center(child: Text('No images selected.'))
             : GridView.builder(
                 shrinkWrap: true,
-                itemCount: _selectedImages.length,
+                itemCount: selectedImages.length,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -44,7 +44,7 @@ class _SelectedImagesViewState extends State<SelectedImagesView> {
                           height: 160.h,
                           width: context.width,
                           child: Image.file(
-                            File(_selectedImages[index].path),
+                            File(selectedImages[index].path),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -53,7 +53,7 @@ class _SelectedImagesViewState extends State<SelectedImagesView> {
                         top: 8,
                         left: 8,
                         child: _DeleteIcon(
-                          deleteImage: () => _deleteImage(index),
+                          deleteImage: () => _deleteImage(selectedImages[index].path),
                         ),
                       ),
                     ],
@@ -75,16 +75,13 @@ class _SelectedImagesViewState extends State<SelectedImagesView> {
   }
 
   void _pickImages() async {
-    _selectedImages = [
-      ..._selectedImages,
-      ...await ImagePickerUtil.pickImages()
-    ];
-    setState(() {});
+    final notifier = ref.read(imagePickerNotifierProvider.notifier);
+    notifier.selectImages();
   }
 
-  void _deleteImage(int index) {
-    _selectedImages.removeAt(index);
-    setState(() {});
+  void _deleteImage(String imagePath) {
+    final notifier = ref.read(imagePickerNotifierProvider.notifier);
+    notifier.deleteImage(imagePath);
   }
 }
 

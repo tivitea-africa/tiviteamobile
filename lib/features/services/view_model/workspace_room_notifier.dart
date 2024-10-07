@@ -3,7 +3,7 @@ import 'package:tivi_tea/features/services/model/workspace_room_model.dart';
 
 part 'workspace_room_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class WorkspaceRoomNotifier extends _$WorkspaceRoomNotifier {
   @override
   List<WorkspaceRoomModel> build() => [WorkspaceRoomModel()];
@@ -21,4 +21,6 @@ class WorkspaceRoomNotifier extends _$WorkspaceRoomNotifier {
     updatedRooms.removeAt(index);
     state = updatedRooms;
   }
+
+  void clearRooms() => state = [];
 }

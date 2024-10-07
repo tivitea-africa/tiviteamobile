@@ -3,32 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
-import 'package:tivi_tea/features/common/app_svg_widget.dart';
-import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
-import 'package:tivi_tea/gen/assets.gen.dart';
-import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/core/config/extensions/string_extensions.dart';
 
-class OtherCategoryDropdown extends ConsumerStatefulWidget {
-  final void Function(String) onCategorySelected;
-  const OtherCategoryDropdown({super.key, required this.onCategorySelected});
+class CustomDropdown extends ConsumerStatefulWidget {
+  final void Function(String) onOptionSelected;
+  final List<String> items;
+  const CustomDropdown({
+    super.key,
+    required this.onOptionSelected,
+    required this.items,
+  });
 
   @override
-  ConsumerState<OtherCategoryDropdown> createState() =>
-      _OtherCategoryDropdownState();
+  ConsumerState<CustomDropdown> createState() => _CustomDropdownState();
 }
 
-class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
+class _CustomDropdownState extends ConsumerState<CustomDropdown> {
+  String initialText = 'Select Option';
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
-    final categories = ref.watch(servicesNotiferProvider).categories;
     return InkWell(
       onTap: () {
         isExpanded = !isExpanded;
         setState(() {});
       },
       child: AnimatedContainer(
-        height: isExpanded ? 200.h : 71,
+        height: isExpanded ? 140.h : 71,
         width: context.width,
         clipBehavior: Clip.hardEdge,
         duration: const Duration(milliseconds: 300),
@@ -46,12 +47,7 @@ class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
             children: [
               Row(
                 children: [
-                  AppSvgWidget(
-                    path: Assets.svgs.box,
-                    color: const Color(0xFF77797D),
-                  ),
-                  10.horizontalSpace,
-                  Text(context.l10n.otherListingCategory),
+                  Text(initialText),
                   const Spacer(),
                   AnimatedRotation(
                     turns: isExpanded ? 0 : 0.5,
@@ -60,18 +56,24 @@ class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
                   ),
                 ],
               ),
-              if (categories.isNotEmpty && isExpanded)
+              if (widget.items.isNotEmpty && isExpanded)
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      for (var i = 0; i < categories.length; i++)
+                      for (var i = 0; i < widget.items.length; i++)
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: InkWell(
-                            onTap: () => widget.onCategorySelected(categories[i].id ?? ''),
-                            child: Text(categories[i].name ?? ''),
+                            onTap: () {
+                              widget.onOptionSelected(widget.items[i]);
+
+                              initialText = widget.items[i].capiTalizeFirst;
+                              isExpanded = false;
+                              setState(() {});
+                            },
+                            child: Text(widget.items[i]),
                           ),
                         ),
                     ],

@@ -645,6 +645,10 @@
     "@saveAndPublish":{
         "description": "Save and Publish text"
     },
+    "saveToDraft":"Save to Draft",
+    "@saveToDraft":{
+        "description": "Save to Draft text"
+    },
     "hourly":"Hourly",
     "@hourly":{
         "description": "Hourly text"

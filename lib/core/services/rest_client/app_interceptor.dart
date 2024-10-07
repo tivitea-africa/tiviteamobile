@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 
@@ -51,8 +52,9 @@ class DioInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    if (err.response != null && err.response!.statusCode == 401) {
-      //TODO: Refresh token
+    if (err.response != null &&
+        (err.response!.statusCode == 401 || err.response!.statusCode == 403)) {
+      await _refreshToken(err, handler, dio, userRepository);
       return;
     }
     debugLog('[ERROR] ${err.requestOptions.uri}');
@@ -80,5 +82,29 @@ class DioInterceptor extends Interceptor {
     return handler.resolve(cloneReq);
   }
 
-  void _refreshToken(String? token) {}
+  Future<void> _refreshToken(
+    DioException error,
+    ErrorInterceptorHandler handler,
+    Dio dio,
+    UserRepository userRepository,
+  ) async {
+    final refreshToken = userRepository.getRefreshToken();
+    try {
+      final r = await Dio().post(
+        '${BaseEnv.baseUrl}/user/token/refresh',
+        data: {"refresh": refreshToken},
+      );
+
+      if (r.statusCode == 200) {
+        userRepository.saveToken(r.data['access']);
+        userRepository.saveRefreshToken(r.data['refresh']);
+        debugLog("Access Token gotten and saved");
+      }
+      return handleError(handler, error, dio);
+    } on DioException catch (_) {
+      debugLog('refresh error===>> $_');
+      //ref.read(profileNotifierProvider.notifier).logout();
+      return;
+    }
+  }
 }

@@ -220,6 +220,7 @@ class __RoomContainerState extends State<_RoomContainer> {
                         description: shortDescriptionController.text,
                         maxCapacity: int.parse(maxCapacityController.text),
                         amount: double.parse(amountController.text),
+                        images: [],
                       );
                       notifier.updateRoom(widget.index, room);
 

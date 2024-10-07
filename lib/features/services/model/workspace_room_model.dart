@@ -31,4 +31,10 @@ class WorkspaceRoomModel {
       _$WorkspaceRoomModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorkspaceRoomModelToJson(this);
+
+  @override
+  String toString() {
+    return 'WorkspaceRoomModel{name: $name, description: $description, '
+        'maxCapacity: $maxCapacity, images: $images, amount: $amount}';
+  }
 }

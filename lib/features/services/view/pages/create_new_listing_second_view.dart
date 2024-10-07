@@ -4,21 +4,57 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
-import 'package:tivi_tea/features/services/view/pages/create_new_listing_view.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
+import 'package:tivi_tea/features/services/model/post_working_space_model.dart';
 import 'package:tivi_tea/features/services/view/widgets/add_room_section.dart';
+import 'package:tivi_tea/features/services/view/widgets/custom_dropdown.dart';
 import 'package:tivi_tea/features/services/view/widgets/selected_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
+import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
+import 'package:tivi_tea/features/services/view_model/workspace_room_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class CreateNewListingSecondView extends StatelessWidget {
+class CreateNewListingSecondView extends StatefulWidget {
   final CreateListingType listingType;
-  const CreateNewListingSecondView({super.key, required this.listingType});
+  final String categoryId;
+  const CreateNewListingSecondView({
+    super.key,
+    required this.listingType,
+    required this.categoryId,
+  });
+
+  @override
+  State<CreateNewListingSecondView> createState() =>
+      _CreateNewListingSecondViewState();
+}
+
+class _CreateNewListingSecondViewState
+    extends State<CreateNewListingSecondView> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController shortDescription = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController pickUpLocation = TextEditingController();
+  //TextEditingController pricingType = TextEditingController();
+  String pricingType = PricingType.fixed.name;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    shortDescription.dispose();
+    address.dispose();
+    pickUpLocation.dispose();
+    //pricingType.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +66,7 @@ class CreateNewListingSecondView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (listingType == CreateListingType.workSpace) ...[
+              if (widget.listingType == CreateListingType.workSpace) ...[
                 Text(
                   context.l10n.spaceDetails,
                   style: context.theme.textTheme.displayLarge?.copyWith(
@@ -39,13 +75,27 @@ class CreateNewListingSecondView extends StatelessWidget {
                   ),
                 ),
                 20.verticalSpace,
-                AppTextField(hintText: context.l10n.nameOfSpace),
-                AppTextField(hintText: context.l10n.shortDescription),
-                AppTextField(hintText: context.l10n.addressOfSpace),
+                AppTextField(
+                  controller: nameController,
+                  hintText: context.l10n.nameOfSpace,
+                ),
+                AppTextField(
+                  controller: shortDescription,
+                  hintText: context.l10n.shortDescription,
+                ),
+                AppTextField(
+                  controller: address,
+                  hintText: context.l10n.addressOfSpace,
+                ),
+                CustomDropdown(
+                  onOptionSelected: (value) {
+                    pricingType = value;
+                    setState(() {});
+                  },
+                  items: PricingTypeExt.stringValues,
+                ),
+                20.verticalSpace,
                 const SpaceAmenitiesSection(),
-                20.verticalSpace,
-                const AddRoomSection(),
-                20.verticalSpace,
               ] else ...[
                 Text(
                   context.l10n.workToolDetails,
@@ -61,11 +111,96 @@ class CreateNewListingSecondView extends StatelessWidget {
                 AppTextField(hintText: context.l10n.rentPrice),
                 20.verticalSpace,
               ],
+              if (widget.listingType == CreateListingType.workSpace) ...[
+                20.verticalSpace,
+                const AddRoomSection(),
+                20.verticalSpace,
+              ],
+              20.verticalSpace,
+              const SelectedImagesView(),
+              70.verticalSpace,
+              Consumer(
+                builder: (context, ref, _) {
+                  final loadState = ref.watch(
+                    partnerServicesNotiferProvider.select(
+                      (value) => value.postLoadState,
+                    ),
+                  );
+                  final cloudinaryLoadState = ref.watch(
+                    partnerServicesNotiferProvider.select(
+                      (value) => value.cloudinaryUploadState,
+                    ),
+                  );
+                  final isLoading = loadState == LoadState.loading ||
+                      cloudinaryLoadState == LoadState.loading;
+                  return Center(
+                    child: AppButton(
+                      isLoading: isLoading,
+                      buttonText: context.l10n.saveAndPublish,
+                      onPressed: () => _submit(ref),
+                    ),
+                  );
+                },
+              ),
+              10.verticalSpace,
+              Consumer(builder: (context, ref, _) {
+                return AppButton(
+                  buttonText: context.l10n.saveToDraft,
+                  backgroundColor: Colors.white,
+                  textColor: context.theme.primaryColor,
+                  borderColor: context.theme.primaryColor,
+                  onPressed: () {},
+                );
+              }),
+              20.verticalSpace,
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _submit(WidgetRef ref) async {
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    final rooms = ref.watch(workspaceRoomNotifierProvider);
+    final amenities = ref.watch(amenitiesNotifierProvider);
+    final selectedAmenities = amenities
+        .where((amenity) => amenity.isSelected)
+        .map((amenity) => amenity.label)
+        .toList();
+    final images = await _uploadImages(ref);
+
+    final data = PostWorkingSpaceModel(
+      name: nameController.text,
+      description: shortDescription.text,
+      address: address.text,
+      amenities: selectedAmenities,
+      categoryId: widget.categoryId,
+      room: rooms,
+      images: images,
+      listingType: widget.listingType.requestBodyName,
+      pricingOption: pricingType,
+      footSoldier: false,
+    );
+
+    notifier.postWorkSpace(
+      data,
+      onSuccess: () {
+        ref.read(workspaceRoomNotifierProvider.notifier).clearRooms();
+        context.go(AppRoutes.myListingView);
+      },
+    );
+  }
+
+  Future<List<String>> _uploadImages(WidgetRef ref) async {
+    final images = ref.watch(imagePickerNotifierProvider);
+    if (images.isEmpty) {
+      return [];
+    }
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    final imageUrls = await notifier.uploadImages(images);
+
+    return imageUrls;
   }
 }
 
@@ -116,8 +251,6 @@ class SpaceAmenitiesSection extends ConsumerWidget {
             onTap: () => _addNewAmenity(context),
           ),
         ),
-        20.verticalSpace,
-        const SelectedImagesView(),
       ],
     );
   }
