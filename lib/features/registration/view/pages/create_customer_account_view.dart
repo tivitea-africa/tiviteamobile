@@ -7,7 +7,6 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_phone_text_field.dart';
@@ -161,7 +160,6 @@ class _CreateCustomerAccountState extends State<CreateCustomerAccount> {
                 final loadState =
                     ref.watch(customerRegistrationNotifierProvider).loadState;
                 final isLoading = loadState == LoadState.loading;
-                debugLog('isLoading => $isLoading');
                 return AppButton(
                   buttonText: context.l10n.createAccount,
                   isEnabled: isEnabled,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
@@ -30,6 +32,8 @@ class _ServiceProviderDashboardState
 
   @override
   Widget build(BuildContext context) {
+    const createListingPath =
+        '${AppRoutes.myListingView}/${AppRoutes.createListingView}';
     return AppScaffold(
       appbar: const CustomAppBar(showHamburgerMenu: true),
       body: SingleChildScrollView(
@@ -50,6 +54,7 @@ class _ServiceProviderDashboardState
                   10.horizontalSpace,
                   CreateListingButton(
                     text: context.l10n.createListing,
+                    onTap: () => context.push(createListingPath),
                   ),
                   30.verticalSpace,
                 ],

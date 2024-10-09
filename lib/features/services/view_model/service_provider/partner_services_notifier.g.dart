@@ -7,7 +7,7 @@ part of 'partner_services_notifier.dart';
 // **************************************************************************
 
 String _$partnerServicesNotiferHash() =>
-    r'a2619fea19bed87190e8969d21ebef6b52f38be7';
+    r'4b471078f50fed187df5e68a2e1bd0e6716ea34f';
 
 /// See also [PartnerServicesNotifer].
 @ProviderFor(PartnerServicesNotifer)

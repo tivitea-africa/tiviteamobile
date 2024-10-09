@@ -688,5 +688,9 @@
     "addnew":"New",
     "@addnew":{
         "description": "New text"
+    },
+    "changePassword":"Change Password",
+    "@changePassword":{
+        "description": "Change Password text"
     }
 }

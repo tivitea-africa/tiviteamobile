@@ -43,6 +43,10 @@ class $AssetsImagesGen {
   AssetGenImage get onboardingSlide4 =>
       const AssetGenImage('assets/images/onboarding_slide_4.png');
 
+  /// File path: assets/images/profile_appbar_header_background_image.png
+  AssetGenImage get profileAppbarHeaderBackgroundImage => const AssetGenImage(
+      'assets/images/profile_appbar_header_background_image.png');
+
   /// File path: assets/images/scaffold-arc.png
   AssetGenImage get scaffoldArc =>
       const AssetGenImage('assets/images/scaffold-arc.png');
@@ -61,6 +65,7 @@ class $AssetsImagesGen {
         onboardingSlide2,
         onboardingSlide3,
         onboardingSlide4,
+        profileAppbarHeaderBackgroundImage,
         scaffoldArc,
         sectionHeader
       ];
@@ -255,8 +260,32 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/payment_drawer_icon.svg
   String get paymentDrawerIcon => 'assets/svgs/payment_drawer_icon.svg';
 
+  /// File path: assets/svgs/profile-add.svg
+  String get profileAdd => 'assets/svgs/profile-add.svg';
+
+  /// File path: assets/svgs/profile-camera.svg
+  String get profileCamera => 'assets/svgs/profile-camera.svg';
+
+  /// File path: assets/svgs/profile-coworking.svg
+  String get profileCoworking => 'assets/svgs/profile-coworking.svg';
+
+  /// File path: assets/svgs/profile-location.svg
+  String get profileLocation => 'assets/svgs/profile-location.svg';
+
+  /// File path: assets/svgs/profile-mail.svg
+  String get profileMail => 'assets/svgs/profile-mail.svg';
+
+  /// File path: assets/svgs/profile-password.svg
+  String get profilePassword => 'assets/svgs/profile-password.svg';
+
+  /// File path: assets/svgs/profile-phone.svg
+  String get profilePhone => 'assets/svgs/profile-phone.svg';
+
   /// File path: assets/svgs/profile_drawer_icon.svg
   String get profileDrawerIcon => 'assets/svgs/profile_drawer_icon.svg';
+
+  /// File path: assets/svgs/profile_edit.svg
+  String get profileEdit => 'assets/svgs/profile_edit.svg';
 
   /// File path: assets/svgs/profile_icon.svg
   String get profileIcon => 'assets/svgs/profile_icon.svg';
@@ -324,7 +353,15 @@ class $AssetsSvgsGen {
         messagesDrawerIcon,
         notificationIcon,
         paymentDrawerIcon,
+        profileAdd,
+        profileCamera,
+        profileCoworking,
+        profileLocation,
+        profileMail,
+        profilePassword,
+        profilePhone,
         profileDrawerIcon,
+        profileEdit,
         profileIcon,
         profileNavBarIcon,
         report,
