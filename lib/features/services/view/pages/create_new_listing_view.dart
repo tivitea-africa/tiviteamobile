@@ -128,7 +128,7 @@ class _ListingTypeContainer extends StatelessWidget {
                         : const Color(0xFF77797D),
                   ),
                   10.horizontalSpace,
-                  Text(context.l10n.serviceProvider),
+                  Text(context.l10n.coWorkingSpace),
                 ],
               ),
             CreateListingType.workTool => Row(

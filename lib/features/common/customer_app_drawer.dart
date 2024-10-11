@@ -36,7 +36,7 @@ class CustomerAppDrawer extends StatelessWidget {
           ),
           DrawerListTile(
             icon: Assets.svgs.profileDrawerIcon,
-            label: context.l10n.profile,
+            label: context.l10n.myProfile,
           ),
           DrawerListTile(
             icon: Assets.svgs.listingDrawerIcon,
@@ -54,13 +54,13 @@ class CustomerAppDrawer extends StatelessWidget {
             icon: Assets.svgs.activitiesDrawerIcon,
             label: context.l10n.activities,
           ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.soldiersDrawerIcon,
+          //   label: context.l10n.addFootSoldiers,
+          // ),
           DrawerListTile(
             icon: Assets.svgs.messagesDrawerIcon,
             label: context.l10n.messages,
-          ),
-          DrawerListTile(
-            icon: Assets.svgs.soldiersDrawerIcon,
-            label: context.l10n.addFootSoldiers,
           ),
           DrawerListTile(
             icon: Assets.svgs.settingsDrawerIcon,
@@ -78,10 +78,10 @@ class CustomerAppDrawer extends StatelessWidget {
                   icon: Assets.svgs.settingsDrawerIcon,
                   label: context.l10n.settings,
                 ),
-                DrawerListTile(
-                  icon: Assets.svgs.report,
-                  label: context.l10n.report,
-                ),
+                // DrawerListTile(
+                //   icon: Assets.svgs.report,
+                //   label: context.l10n.report,
+                // ),
                 20.verticalSpace,
                 DrawerListTile(
                   icon: Assets.svgs.logout,
