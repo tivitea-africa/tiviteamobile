@@ -180,13 +180,14 @@ class _CreateNewListingSecondViewState
       images: images,
       listingType: widget.listingType.requestBodyName,
       pricingOption: pricingType,
-      footSoldier: false,
+      footSoldier: "False",
     );
 
     notifier.postWorkSpace(
       data,
       onSuccess: () {
         ref.read(workspaceRoomNotifierProvider.notifier).clearRooms();
+        ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
         context.go(AppRoutes.myListingView);
       },
     );

@@ -50,7 +50,7 @@ class _CustomDropdownState extends ConsumerState<CustomDropdown> {
                   Text(initialText),
                   const Spacer(),
                   AnimatedRotation(
-                    turns: isExpanded ? 0 : 0.5,
+                    turns: isExpanded ? 0.5 : 0,
                     duration: const Duration(milliseconds: 300),
                     child: const Icon(CupertinoIcons.chevron_down),
                   ),

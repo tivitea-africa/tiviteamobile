@@ -33,7 +33,7 @@ class PostWorkingSpaceModel {
   final List<WorkspaceRoomModel>? room;
 
   @JsonKey(name: 'foot_soldier')
-  final bool? footSoldier;
+  final String? footSoldier;
 
   PostWorkingSpaceModel({
     this.listingType,

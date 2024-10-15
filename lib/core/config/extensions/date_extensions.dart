@@ -14,6 +14,9 @@ extension ToDateTime on DateTime? {
 
   String get toDateMonthYear =>
       (this == null) ? '' : DateFormat('dd/MM/yy').format(this!.toLocal());
+      
+  String get toDateMonthYear2 =>
+      (this == null) ? '' : DateFormat('dd MMM yyyy').format(this!.toLocal());
 
   String get toTxnDate => (this == null)
       ? ''

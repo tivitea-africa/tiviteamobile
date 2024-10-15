@@ -23,7 +23,7 @@ PostWorkingSpaceModel _$PostWorkingSpaceModelFromJson(
       room: (json['room'] as List<dynamic>?)
           ?.map((e) => WorkspaceRoomModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      footSoldier: json['foot_soldier'] as bool?,
+      footSoldier: json['foot_soldier'] as String?,
     );
 
 Map<String, dynamic> _$PostWorkingSpaceModelToJson(
