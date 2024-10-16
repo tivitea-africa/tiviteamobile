@@ -6,7 +6,6 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
-import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class OtherCategoryDropdown extends ConsumerStatefulWidget {
   final void Function(String) onCategorySelected;
@@ -18,6 +17,7 @@ class OtherCategoryDropdown extends ConsumerStatefulWidget {
 }
 
 class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
+  String initialText = 'Select Option';
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,10 @@ class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
                     color: const Color(0xFF77797D),
                   ),
                   10.horizontalSpace,
-                  Text(context.l10n.otherListingCategory),
+                  Text(initialText),
                   const Spacer(),
                   AnimatedRotation(
-                    turns: isExpanded ? 0 : 0.5,
+                    turns: isExpanded ? 0.5 : 0,
                     duration: const Duration(milliseconds: 300),
                     child: const Icon(CupertinoIcons.chevron_down),
                   ),
@@ -70,7 +70,13 @@ class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: InkWell(
-                            onTap: () => widget.onCategorySelected(categories[i].id ?? ''),
+                            onTap: () {
+                              widget.onCategorySelected(categories[i].id ?? '');
+
+                              initialText = categories[i].name ?? '';
+                              isExpanded = false;
+                              setState(() {});
+                            },
                             child: Text(categories[i].name ?? ''),
                           ),
                         ),

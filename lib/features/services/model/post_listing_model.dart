@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tivi_tea/features/services/model/workspace_room_model.dart';
 
-part 'post_working_space_model.g.dart';
+part 'post_listing_model.g.dart';
 
 @JsonSerializable()
-class PostWorkingSpaceModel {
+class PostListingModel {
   @JsonKey(name: 'listing_type')
   final String? listingType;
 
@@ -23,6 +23,9 @@ class PostWorkingSpaceModel {
   @JsonKey(name: 'images')
   final List<String>? images;
 
+  @JsonKey(name: 'amount')
+  final num? amount;
+
   @JsonKey(name: 'amenities')
   final List<String>? amenities;
 
@@ -35,21 +38,22 @@ class PostWorkingSpaceModel {
   @JsonKey(name: 'foot_soldier')
   final String? footSoldier;
 
-  PostWorkingSpaceModel({
+  PostListingModel({
     this.listingType,
     this.name,
     this.description,
     this.address,
     this.categoryId,
     this.images,
+    this.amount,
     this.amenities,
     this.pricingOption,
     this.room,
     this.footSoldier,
   });
 
-  factory PostWorkingSpaceModel.fromJson(Map<String, dynamic> json) =>
-      _$PostWorkingSpaceModelFromJson(json);
+  factory PostListingModel.fromJson(Map<String, dynamic> json) =>
+      _$PostListingModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PostWorkingSpaceModelToJson(this);
+  Map<String, dynamic> toJson() => _$PostListingModelToJson(this);
 }

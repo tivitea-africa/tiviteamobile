@@ -5,6 +5,7 @@ class PartnerServicesState {
   PartnerServicesState({
     required this.listingLoadState,
     required this.postLoadState,
+    required this.postWorkToolLoadState,
     required this.cloudinaryUploadState,
     required this.listing,
   });
@@ -12,18 +13,21 @@ class PartnerServicesState {
     return PartnerServicesState(
       listingLoadState: LoadState.loading,
       postLoadState: LoadState.idle,
+      postWorkToolLoadState: LoadState.idle,
       cloudinaryUploadState: LoadState.idle,
       listing: [],
     );
   }
   final LoadState listingLoadState;
   final LoadState postLoadState;
+  final LoadState postWorkToolLoadState;
   final LoadState cloudinaryUploadState;
   final List<ListingResponseModel> listing;
 
   PartnerServicesState copyWith({
     LoadState? listingLoadState,
     LoadState? postLoadState,
+    LoadState? postWorkToolLoadState,
     LoadState? cloudinaryUploadState,
     List<ListingResponseModel>? listing,
   }) {
@@ -31,6 +35,7 @@ class PartnerServicesState {
       listingLoadState: listingLoadState ?? this.listingLoadState,
       cloudinaryUploadState: cloudinaryUploadState ?? this.cloudinaryUploadState,
       postLoadState: postLoadState ?? this.postLoadState,
+      postWorkToolLoadState: postWorkToolLoadState ?? this.postWorkToolLoadState,
       listing: listing ?? this.listing,
     );
   }

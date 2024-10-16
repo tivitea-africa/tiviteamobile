@@ -11,16 +11,19 @@ import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
+import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
-import 'package:tivi_tea/features/services/model/post_working_space_model.dart';
+import 'package:tivi_tea/features/services/model/post_listing_model.dart';
+import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/features/services/view/widgets/add_room_section.dart';
 import 'package:tivi_tea/features/services/view/widgets/custom_dropdown.dart';
 import 'package:tivi_tea/features/services/view/widgets/selected_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/workspace_room_notifier.dart';
+import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class CreateNewListingSecondView extends StatefulWidget {
@@ -43,7 +46,7 @@ class _CreateNewListingSecondViewState
   TextEditingController shortDescription = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController pickUpLocation = TextEditingController();
-  //TextEditingController pricingType = TextEditingController();
+  TextEditingController amount = TextEditingController();
   String pricingType = PricingType.fixed.name;
 
   @override
@@ -52,7 +55,7 @@ class _CreateNewListingSecondViewState
     shortDescription.dispose();
     address.dispose();
     pickUpLocation.dispose();
-    //pricingType.dispose();
+    amount.dispose();
     super.dispose();
   }
 
@@ -105,10 +108,27 @@ class _CreateNewListingSecondViewState
                   ),
                 ),
                 20.verticalSpace,
-                AppTextField(hintText: context.l10n.nameOfWorkTool),
-                AppTextField(hintText: context.l10n.shortDescription),
-                AppTextField(hintText: context.l10n.pickUpLocation),
-                AppTextField(hintText: context.l10n.rentPrice),
+                AppTextField(
+                  controller: nameController,
+                  hintText: context.l10n.nameOfWorkTool,
+                ),
+                AppTextField(
+                  controller: shortDescription,
+                  hintText: context.l10n.shortDescription,
+                ),
+                AppTextField(
+                  controller: pickUpLocation,
+                  hintText: context.l10n.pickUpLocation,
+                  suffixIcon: AppSvgWidget(
+                    path: Assets.svgs.mapMarker,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                AppTextField(
+                  controller: amount,
+                  hintText: context.l10n.rentPrice,
+                  keyboardType: TextInputType.number,
+                ),
                 20.verticalSpace,
               ],
               if (widget.listingType == CreateListingType.workSpace) ...[
@@ -116,8 +136,7 @@ class _CreateNewListingSecondViewState
                 const AddRoomSection(),
                 20.verticalSpace,
               ],
-              20.verticalSpace,
-              const SelectedImagesView(),
+              SelectedImagesView(listingType: widget.listingType),
               70.verticalSpace,
               Consumer(
                 builder: (context, ref, _) {
@@ -126,18 +145,27 @@ class _CreateNewListingSecondViewState
                       (value) => value.postLoadState,
                     ),
                   );
+                  final postWorkToolLoadState = ref.watch(
+                    partnerServicesNotiferProvider.select(
+                      (value) => value.postWorkToolLoadState,
+                    ),
+                  );
                   final cloudinaryLoadState = ref.watch(
                     partnerServicesNotiferProvider.select(
                       (value) => value.cloudinaryUploadState,
                     ),
                   );
                   final isLoading = loadState == LoadState.loading ||
-                      cloudinaryLoadState == LoadState.loading;
+                      cloudinaryLoadState == LoadState.loading ||
+                      postWorkToolLoadState == LoadState.loading;
                   return Center(
                     child: AppButton(
                       isLoading: isLoading,
                       buttonText: context.l10n.saveAndPublish,
-                      onPressed: () => _submit(ref),
+                      onPressed: () =>
+                          widget.listingType == CreateListingType.workSpace
+                              ? _submit(ref)
+                              : _submitWorkTool(ref),
                     ),
                   );
                 },
@@ -170,7 +198,7 @@ class _CreateNewListingSecondViewState
         .toList();
     final images = await _uploadImages(ref);
 
-    final data = PostWorkingSpaceModel(
+    final data = PostListingModel(
       name: nameController.text,
       description: shortDescription.text,
       address: address.text,
@@ -187,6 +215,30 @@ class _CreateNewListingSecondViewState
       data,
       onSuccess: () {
         ref.read(workspaceRoomNotifierProvider.notifier).clearRooms();
+        ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
+        context.go(AppRoutes.myListingView);
+      },
+    );
+  }
+
+  void _submitWorkTool(WidgetRef ref) async {
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    final images = await _uploadImages(ref);
+
+    final data = WorkToolListing(
+      name: nameController.text,
+      description: shortDescription.text,
+      address: address.text,
+      categoryId: widget.categoryId,
+      images: images,
+      listingType: widget.listingType.requestBodyName,
+      footSoldier: "False",
+      amount: num.tryParse(amount.text),
+    );
+
+    notifier.postToolOrOtherListing(
+      data,
+      onSuccess: () {
         ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
         context.go(AppRoutes.myListingView);
       },

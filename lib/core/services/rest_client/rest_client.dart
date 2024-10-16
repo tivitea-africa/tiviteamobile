@@ -10,7 +10,8 @@ import 'package:tivi_tea/features/login/model/general/login_response_object.dart
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
-import 'package:tivi_tea/features/services/model/post_working_space_model.dart';
+import 'package:tivi_tea/features/services/model/post_listing_model.dart';
+import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 
 part 'rest_client.g.dart';
 
@@ -40,7 +41,12 @@ abstract class RestClient {
       getListing();
 
   @POST('/listings/')
-  Future<BaseResponse> postWorkSpace(@Body() PostWorkingSpaceModel data);
+  Future<BaseResponse> postWorkSpace(@Body() PostListingModel data);
+
+  ///This is the same endpoint as [postWorkSpace] above.
+  ///However we'll call them separetly in case the endpoints are different in the future.
+  @POST('/listings/')
+  Future<BaseResponse> postToolOrOtherListing(@Body() WorkToolListing data);
 
   @GET('/listings/partner/listings')
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>

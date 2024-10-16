@@ -7,10 +7,12 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class SelectedImagesView extends ConsumerStatefulWidget {
-  const SelectedImagesView({super.key});
+  final CreateListingType listingType;
+  const SelectedImagesView({super.key, required this.listingType});
 
   @override
   ConsumerState<SelectedImagesView> createState() => _SelectedImagesViewState();
@@ -23,6 +25,18 @@ class _SelectedImagesViewState extends ConsumerState<SelectedImagesView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          context.l10n.uploadImagesOf(
+            widget.listingType == CreateListingType.workSpace
+                ? 'Space'
+                : 'Tool',
+          ),
+          style: context.theme.textTheme.displayLarge?.copyWith(
+            color: context.theme.primaryColor,
+            fontSize: 20.sp,
+          ),
+        ),
+        20.verticalSpace,
         selectedImages.isEmpty
             ? const Center(child: Text('No images selected.'))
             : GridView.builder(
@@ -53,7 +67,8 @@ class _SelectedImagesViewState extends ConsumerState<SelectedImagesView> {
                         top: 8,
                         left: 8,
                         child: _DeleteIcon(
-                          deleteImage: () => _deleteImage(selectedImages[index].path),
+                          deleteImage: () =>
+                              _deleteImage(selectedImages[index].path),
                         ),
                       ),
                     ],

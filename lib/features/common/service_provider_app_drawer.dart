@@ -55,6 +55,8 @@ class ServiceProviderAppDrawer extends StatelessWidget {
           DrawerListTile(
             icon: Assets.svgs.listingDrawerIcon,
             label: context.l10n.myListing,
+            isSelected: routePath == AppRoutes.myListingView,
+            onTap: () => context.go(AppRoutes.myListingView),
           ),
           DrawerListTile(
             icon: Assets.svgs.historyDrawerIcon,

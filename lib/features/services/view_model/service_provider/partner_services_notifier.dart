@@ -5,7 +5,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/services/third_party_services/cloudinary_service.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/features/services/model/post_working_space_model.dart';
+import 'package:tivi_tea/features/services/model/post_listing_model.dart';
+import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_state.dart';
 import 'package:tivi_tea/repositories/services/service_provider/service_provider_services_repo.dart';
 
@@ -48,7 +49,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
   }
 
   void postWorkSpace(
-    PostWorkingSpaceModel model, {
+    PostListingModel model, {
     required VoidCallback onSuccess,
   }) async {
     state = state.copyWith(postLoadState: LoadState.loading);
@@ -61,6 +62,23 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       onSuccess();
     } catch (e) {
       state = state.copyWith(postLoadState: LoadState.error);
+    }
+  }
+
+  void postToolOrOtherListing(
+    WorkToolListing model, {
+    required VoidCallback onSuccess,
+  }) async {
+    state = state.copyWith(postWorkToolLoadState: LoadState.loading);
+    try {
+      final response = await _repo.postToolOrOtherListing(model);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? '';
+      }
+      state = state.copyWith(postWorkToolLoadState: LoadState.success);
+      onSuccess();
+    } catch (e) {
+      state = state.copyWith(postWorkToolLoadState: LoadState.error);
     }
   }
 

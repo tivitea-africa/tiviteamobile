@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_working_space_model.dart';
+part of 'post_listing_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostWorkingSpaceModel _$PostWorkingSpaceModelFromJson(
-        Map<String, dynamic> json) =>
-    PostWorkingSpaceModel(
+PostListingModel _$PostListingModelFromJson(Map<String, dynamic> json) =>
+    PostListingModel(
       listingType: json['listing_type'] as String?,
       name: json['name'] as String?,
       description: json['description'] as String?,
@@ -16,6 +15,7 @@ PostWorkingSpaceModel _$PostWorkingSpaceModelFromJson(
       categoryId: json['category_id'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      amount: json['amount'] as num?,
       amenities: (json['amenities'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -26,8 +26,7 @@ PostWorkingSpaceModel _$PostWorkingSpaceModelFromJson(
       footSoldier: json['foot_soldier'] as String?,
     );
 
-Map<String, dynamic> _$PostWorkingSpaceModelToJson(
-        PostWorkingSpaceModel instance) =>
+Map<String, dynamic> _$PostListingModelToJson(PostListingModel instance) =>
     <String, dynamic>{
       'listing_type': instance.listingType,
       'name': instance.name,
@@ -35,6 +34,7 @@ Map<String, dynamic> _$PostWorkingSpaceModelToJson(
       'address': instance.address,
       'category_id': instance.categoryId,
       'images': instance.images,
+      'amount': instance.amount,
       'amenities': instance.amenities,
       'pricing_option': instance.pricingOption,
       'room': instance.room,
