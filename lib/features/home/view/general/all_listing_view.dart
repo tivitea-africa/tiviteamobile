@@ -56,6 +56,20 @@ class CategoryList extends ConsumerStatefulWidget {
 }
 
 class _CategoryListState extends ConsumerState<CategoryList> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final categories = ref.watch(
@@ -65,9 +79,10 @@ class _CategoryListState extends ConsumerState<CategoryList> {
       homeNotiferProvider.select((value) => value.selectedCategoryId),
     );
     return Container(
-      height: 25.h,
+      height: 30.h,
       margin: EdgeInsets.symmetric(vertical: 10.h),
       child: ListView.separated(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (ctx, i) => 10.horizontalSpace,

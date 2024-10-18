@@ -8,6 +8,15 @@ extension ListingTypeExt on CreateListingType {
       };
 }
 
+extension ListingTypeExt2 on String {
+  CreateListingType get enumType => switch (this) {
+        'Co-working space' => CreateListingType.workSpace,
+        'Work tool' => CreateListingType.workTool,
+        'Other listing' => CreateListingType.otherListing,
+        _ => CreateListingType.workSpace,
+      };
+}
+
 enum PricingType { fixed, hourly }
 
 enum PartnerListingStatus { published, draft }

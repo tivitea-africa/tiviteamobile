@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/listing_widget.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class BookWorkSpaceView extends StatefulWidget {
+class BookWorkSpaceOrListingView extends StatefulWidget {
   final ListingResponseModel listing;
-  const BookWorkSpaceView({super.key, required this.listing});
+  const BookWorkSpaceOrListingView({super.key, required this.listing});
 
   @override
-  State<BookWorkSpaceView> createState() => _BookWorkSpaceViewState();
+  State<BookWorkSpaceOrListingView> createState() =>
+      _BookWorkSpaceOrListingViewState();
 }
 
-class _BookWorkSpaceViewState extends State<BookWorkSpaceView> {
+class _BookWorkSpaceOrListingViewState
+    extends State<BookWorkSpaceOrListingView> {
   final TextEditingController _dateFromController = TextEditingController();
   final TextEditingController _dateToController = TextEditingController();
   late TextEditingController _numberOfPeople;
@@ -43,6 +47,8 @@ class _BookWorkSpaceViewState extends State<BookWorkSpaceView> {
 
   @override
   Widget build(BuildContext context) {
+    final workSpace =
+        widget.listing.listingType?.enumType == CreateListingType.workSpace;
     return AppScaffold(
       appbar: CustomAppBar(
         showHamburgerMenu: true,
@@ -61,7 +67,9 @@ class _BookWorkSpaceViewState extends State<BookWorkSpaceView> {
                 children: [
                   AppTextField(
                     hintText: '--/--/----',
-                    label: context.l10n.dateFrom,
+                    label: workSpace
+                        ? context.l10n.dateFrom
+                        : context.l10n.pickUpDate,
                     controller: _dateFromController,
                     showCursor: false,
                     suffixIcon: AppSvgWidget(
@@ -72,7 +80,9 @@ class _BookWorkSpaceViewState extends State<BookWorkSpaceView> {
                   ),
                   AppTextField(
                     hintText: '--/--/----',
-                    label: context.l10n.dateTo,
+                    label: workSpace
+                        ? context.l10n.dateTo
+                        : context.l10n.returnDate,
                     controller: _dateToController,
                     showCursor: false,
                     suffixIcon: AppSvgWidget(
@@ -82,19 +92,23 @@ class _BookWorkSpaceViewState extends State<BookWorkSpaceView> {
                     readOnly: true,
                     onTap: _selectDateTo,
                   ),
-                  AppTextField(
-                    label: context.l10n.numberOfPeople,
-                    controller: _numberOfPeople,
-                    suffixIcon: AppSvgWidget(
-                      path: Assets.svgs.userGroup,
-                      fit: BoxFit.scaleDown,
+                  if (workSpace)
+                    AppTextField(
+                      label: context.l10n.numberOfPeople,
+                      controller: _numberOfPeople,
+                      suffixIcon: AppSvgWidget(
+                        path: Assets.svgs.userGroup,
+                        fit: BoxFit.scaleDown,
+                      ),
+                      keyboardType: TextInputType.number,
                     ),
-                    keyboardType: TextInputType.number,
-                  ),
                   50.verticalSpace,
                   AppButton(
                     buttonText: context.l10n.next,
-                    onPressed: () {},
+                    onPressed: () => context.push(
+                      '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
+                      extra: widget.listing,
+                    ),
                   ),
                 ],
               ),

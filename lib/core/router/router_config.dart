@@ -74,6 +74,7 @@ final GoRouter router = GoRouter(
               routes: [
                 ServicesRouter.listingDetails,
                 ServicesRouter.bookWorkspaceView,
+                ServicesRouter.bookingSummaryView,
               ]
             ),
           ],

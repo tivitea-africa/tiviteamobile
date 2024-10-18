@@ -287,7 +287,7 @@
     "@logIntoAccount":{
         "description": "Log into Account text"
     },
-    "dontHaveAccount":"Don't have an account? ",
+    "dontHaveAccount":"Don''t have an account? ",
     "@dontHaveAccount":{
         "description": "Don't have an account text"
     },
@@ -692,5 +692,29 @@
     "changePassword":"Change Password",
     "@changePassword":{
         "description": "Change Password text"
+    },
+    "cautionFee":"Caution Fee (Refundable)",
+    "@cautionFee":{
+        "description": "Caution Fee text"
+    },
+    "total":"Total",
+    "@total":{
+        "description": "Total text"
+    },
+    "bargainPrice":"Bargain Price",
+    "@bargainPrice":{
+        "description": "Bargain Price text"
+    },
+    "rentNow":"Rent now",
+    "@rentNow":{
+        "description": "Rent now text"
+    },
+    "pickUpDate":"Pick up Date",
+    "@pickUpDate":{
+        "description": "Pick up Date text"
+    },
+    "returnDate":"Return Date",
+    "@returnDate":{
+        "description": "Return Date text"
     }
 }
