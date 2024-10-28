@@ -716,5 +716,85 @@
     "returnDate":"Return Date",
     "@returnDate":{
         "description": "Return Date text"
+    },
+    "businessVerification":"Business Verification",
+    "@businessVerification":{
+        "description": "Business Verification text"
+    },
+    "tiviteaRequires":"tiviTea requires a valid Government-issued document in order to verify the authenticity of your business.pt here!",
+    "@tiviteaRequires":{
+        "description": "Business Verification subtitle text"
+    },
+    "documentType":"Document Type",
+    "@documentType":{
+        "description": "Document Type text"
+    },
+    "registrationNumber":"Registration Number",
+    "@registrationNumber":{
+        "description": "Registration Number text"
+    },
+    "enterRegistrationNumber":"Enter Registration Number e.g (RC1234...)",
+    "@enterRegistrationNumber":{
+        "description": "Registration Number text"
+    },
+    "businessRegistrationDocument":"Business Registration Document",
+    "@businessRegistrationDocument":{
+        "description": "Business Registration text"
+    },
+    "uploadScanned":"Upload scanned copy of your business registration document in JPG, PNG, or PDF",
+    "@uploadScanned":{
+        "description": "Upload Scanned text"
+    },
+    "chooseAFile":"Choose a File",
+    "@chooseAFile":{
+        "description": "Choose a file text"
+    },
+    "takeAPicture":"Take a Picture",
+    "@takeAPicture":{
+        "description": "Take a Picture text"
+    },
+    "gallery":"Gallery",
+    "@gallery":{
+        "description": "Gallery text"
+    },
+    "uploadDocument":"Upload Document",
+    "@uploadDocument":{
+        "description": "Upload Document text"
+    },
+    "utilityBillDocument":"Utility Bill Document",
+    "@utilityBillDocument":{
+        "description": "Utility Bill Document text"
+    },
+    "proofOfBusinessAddress":"Utility Bill Document",
+    "@proofOfBusinessAddress":{
+        "description": "Utility Bill Document text"
+    },
+    "confirmAllInfoProvided":"I confirm that all information provided a correct and legitimate.",
+    "@confirmAllInfoProvided":{
+        "description": "Confirm Info text"
+    },
+    "completeKYC":"Complete Your KYC Verification",
+    "@completeKYC":{
+        "description": "Complete KYC text"
+    },
+    "ensureSecureExperience":"To ensure a secure experience, please complete your KYC verification. This helps us confirm your identity and protect your acccount!",
+    "@ensureSecureExperience":{
+        "description": "Ensure secure experience text"
+    },
+    "startKYCProcess":"Start KYC Process",
+    "@startKYCProcess":{
+        "description": "Start KYC Process text"
+    },
+    "needHelp":"Need Help?",
+    "@needHelp":{
+        "description": "Need Help text"
+    },
+    "contactSupport":"Contact Support",
+    "@contactSupport":{
+        "description": "Contact Support text"
+    },
+    "verificationSuccessful":"Verification Successful!",
+    "@verificationSuccessful":{
+        "description": "Verification Successful text"
     }
 }

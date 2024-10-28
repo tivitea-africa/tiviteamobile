@@ -200,6 +200,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/chevron-left.svg
   String get chevronLeft => 'assets/svgs/chevron-left.svg';
 
+  /// File path: assets/svgs/cloud-upload.svg
+  String get cloudUpload => 'assets/svgs/cloud-upload.svg';
+
   /// File path: assets/svgs/dashboard_drawer_icon.svg
   String get dashboardDrawerIcon => 'assets/svgs/dashboard_drawer_icon.svg';
 
@@ -217,6 +220,9 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/green-check.svg
   String get greenCheck => 'assets/svgs/green-check.svg';
+
+  /// File path: assets/svgs/green_box.svg
+  String get greenBox => 'assets/svgs/green_box.svg';
 
   /// File path: assets/svgs/hamburger.svg
   String get hamburger => 'assets/svgs/hamburger.svg';
@@ -333,12 +339,14 @@ class $AssetsSvgsGen {
         calendar,
         callOutgoing,
         chevronLeft,
+        cloudUpload,
         dashboardDrawerIcon,
         envelope,
         eye,
         eyeSlash,
         filterIcon,
         greenCheck,
+        greenBox,
         hamburger,
         headphonesDrawerIcon,
         historyDrawerIcon,
