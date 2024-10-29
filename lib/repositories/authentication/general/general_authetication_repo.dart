@@ -25,6 +25,11 @@ final class GeneralAuthenticationRepo {
       userRepository.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
 
       userRepository.saveUser(userLoginData?.user);
+      userRepository.saveUser(
+        userLoginData?.user?.copyWith(
+          kycIsVerified: userLoginData.kycIsVerified,
+        ),
+      );
 
       return result;
     } on DioException catch (e) {

@@ -18,7 +18,7 @@ import 'package:tivi_tea/features/registration/view/pages/create_service_provide
 import 'package:tivi_tea/features/registration/view/pages/create_service_provider_account_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/onboarding_view.dart';
 import 'package:tivi_tea/features/services/view/pages/my_listing_view.dart';
-import 'package:tivi_tea/screens/services_section/service_screen.dart';
+import 'package:tivi_tea/features/services/view/pages/services.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -69,12 +69,14 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: AppRoutes.servicesView,
               pageBuilder: (context, state) => const NoTransitionPage(
-                child: ServiceScreen(),
+                child: ServicesView(),
               ),
               routes: [
                 ServicesRouter.listingDetails,
                 ServicesRouter.bookWorkspaceView,
                 ServicesRouter.bookingSummaryView,
+                ServicesRouter.partnerKYCFirstView,
+                ServicesRouter.startKYCProcessView,
               ]
             ),
           ],

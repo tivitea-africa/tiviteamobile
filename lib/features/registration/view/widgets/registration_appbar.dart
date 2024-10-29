@@ -76,7 +76,7 @@ class RegistrationAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 Text(
                   headerSectionSubtitle ?? context.l10n.newTo,
                   style: context.theme.textTheme.displaySmall
-                      ?.copyWith(color: Colors.white),
+                      ?.copyWith(color: Colors.white, fontSize: 12.sp),
                 )
               ],
             ),

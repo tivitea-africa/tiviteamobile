@@ -22,6 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       isVerified: json['is_verified'] as bool?,
       isStaff: json['is_staff'] as bool?,
       isActive: json['is_active'] as bool?,
+      kycIsVerified: json['kyc_is_verified'] as bool?,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -45,6 +46,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'is_verified': instance.isVerified,
       'is_staff': instance.isStaff,
       'is_active': instance.isActive,
+      'kyc_is_verified': instance.kycIsVerified,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'profile_picture': instance.profilePicture,

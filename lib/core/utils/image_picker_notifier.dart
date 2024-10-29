@@ -9,8 +9,14 @@ class ImagePickerNotifier extends _$ImagePickerNotifier {
   @override
   List<XFile> build() => [];
 
-  void selectImages() async {
-    final results = await ImagePickerUtil.pickImages();
+  Future<XFile?> selectSingleImage({ImageSource source = ImageSource.gallery}) async {
+    final result = await ImagePickerUtil.pickSingleImage(source);
+    if (result == null) return null;
+    return result;
+  }
+
+  void selectImages({ImageSource source = ImageSource.gallery}) async {
+    final results = await ImagePickerUtil.pickImages(source);
     state = results;
   }
 

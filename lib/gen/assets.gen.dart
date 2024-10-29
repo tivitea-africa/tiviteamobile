@@ -179,6 +179,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/activities_drawer_icon.svg
   String get activitiesDrawerIcon => 'assets/svgs/activities_drawer_icon.svg';
 
+  /// File path: assets/svgs/add_photo.svg
+  String get addPhoto => 'assets/svgs/add_photo.svg';
+
   /// File path: assets/svgs/arrow-up-split.svg
   String get arrowUpSplit => 'assets/svgs/arrow-up-split.svg';
 
@@ -197,6 +200,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/call-outgoing.svg
   String get callOutgoing => 'assets/svgs/call-outgoing.svg';
 
+  /// File path: assets/svgs/camera.svg
+  String get camera => 'assets/svgs/camera.svg';
+
   /// File path: assets/svgs/chevron-left.svg
   String get chevronLeft => 'assets/svgs/chevron-left.svg';
 
@@ -205,6 +211,9 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/dashboard_drawer_icon.svg
   String get dashboardDrawerIcon => 'assets/svgs/dashboard_drawer_icon.svg';
+
+  /// File path: assets/svgs/doc.svg
+  String get doc => 'assets/svgs/doc.svg';
 
   /// File path: assets/svgs/envelope.svg
   String get envelope => 'assets/svgs/envelope.svg';
@@ -332,15 +341,18 @@ class $AssetsSvgsGen {
   /// List of all assets
   List<String> get values => [
         activitiesDrawerIcon,
+        addPhoto,
         arrowUpSplit,
         backButton,
         box,
         brandBooking,
         calendar,
         callOutgoing,
+        camera,
         chevronLeft,
         cloudUpload,
         dashboardDrawerIcon,
+        doc,
         envelope,
         eye,
         eyeSlash,

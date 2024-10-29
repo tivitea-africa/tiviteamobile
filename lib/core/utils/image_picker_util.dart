@@ -15,10 +15,22 @@ class ImagePickerUtil {
       await openAppSettings();
       return false;
     }
-    return false; 
+    return false;
   }
 
-  static Future<List<XFile>> pickImages() async {
+  static Future<XFile?> pickSingleImage(ImageSource imageSource) async {
+    bool permissionGranted = await _requestPermission();
+
+    if (!permissionGranted) {
+      throw Exception('Permission not granted to access media.');
+    }
+    final ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: imageSource);
+    
+    return image;
+  }
+
+  static Future<List<XFile>> pickImages(ImageSource imageSource) async {
     bool permissionGranted = await _requestPermission();
 
     if (!permissionGranted) {
@@ -26,6 +38,11 @@ class ImagePickerUtil {
       throw Exception('Permission not granted to access media.');
     }
     final ImagePicker picker = ImagePicker();
+
+    if (imageSource == ImageSource.camera) {
+      XFile? image = await picker.pickImage(source: imageSource);
+      return image == null ? [] : [image];
+    }
     List<XFile> images = await picker.pickMultiImage();
     return images;
   }

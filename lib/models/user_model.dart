@@ -25,6 +25,8 @@ class User {
   final bool? isStaff;
   @JsonKey(name: 'is_active')
   final bool? isActive;
+  @JsonKey(name: 'kyc_is_verified', includeFromJson: true)
+  final bool? kycIsVerified;
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @JsonKey(name: 'updated_at')
@@ -47,6 +49,7 @@ class User {
     this.isVerified,
     this.isStaff,
     this.isActive,
+    this.kycIsVerified,
     this.createdAt,
     this.updatedAt,
     this.profilePicture,
@@ -70,6 +73,7 @@ class User {
     bool? isVerified,
     bool? isStaff,
     bool? isActive,
+    bool? kycIsVerified,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? profilePicture,
@@ -88,6 +92,7 @@ class User {
       isVerified: isVerified ?? this.isVerified,
       isStaff: isStaff ?? this.isStaff,
       isActive: isActive ?? this.isActive,
+      kycIsVerified: kycIsVerified ?? this.kycIsVerified,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       profilePicture: profilePicture ?? this.profilePicture,

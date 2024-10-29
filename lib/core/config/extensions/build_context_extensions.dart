@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tivi_tea/features/common/app_bottom_sheet.dart';
 import 'package:tivi_tea/features/common/app_dialog.dart';
 
 enum SnackbarState { error, success }
@@ -13,38 +14,26 @@ extension BuildContextExt on BuildContext {
 
   bool get isSmallScreen => width < 400;
 
-  // Future<T?> showBottomSheet<T>({
-  //   required Widget child,
-  //   Widget? widgetUnderButton,
-  //   bool? showButton,
-  //   bool? showTermsAndConditions,
-  //   VoidCallback? onButtonPressed,
-
-  //   ///when you call context.showBottomSheet
-  //   ///the child widget should be AppBottomSheet() in your view.
-  //   /// [AppBottomSheet] is a bottomsheet widget built
-  //   /// with flutter widgets.
-  //   /// ### Params:
-  //   /// * [title] - An optional title of the view.
-  //   /// * [width] - Optional preferred width of the view
-  //   /// * [height] - Optional preferred height of the view
-  //   /// * [content] - required body for the sheet where all your custom views
-  //   /// goes in.
-  //   ///
-  // }) =>
-  //     showModalBottomSheet(
-  //       isScrollControlled: true,
-  //       context: this,
-  //       builder: (context) {
-  //         return LuraBottomSheet(
-  //           content: child,
-  //           widgetUnderButton: widgetUnderButton,
-  //           showButton: showButton,
-  //           showTermsAndConditions: showTermsAndConditions,
-  //           onButtonPressed: onButtonPressed,
-  //         );
-  //       },
-  //     );
+  Future<T?> showBottomSheet<T>({
+    required Widget child,
+    required String title,
+    Widget? widgetUnderButton,
+    bool? showButton,
+    bool? showTermsAndConditions,
+    VoidCallback? onButtonPressed,
+  }) =>
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: this,
+        builder: (context) {
+          return AppBottomSheet(
+            content: child,
+            title: title,
+            showButton: showButton,
+            onButtonPressed: onButtonPressed,
+          );
+        },
+      );
 
   Future<T?> showCustomDialog<T>({
     required Widget child,

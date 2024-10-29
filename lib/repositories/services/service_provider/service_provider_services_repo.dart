@@ -4,6 +4,7 @@ import 'package:tivi_tea/core/response/base_response.dart';
 import 'package:tivi_tea/core/response/generic_paginated_response.dart';
 import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 
@@ -32,6 +33,14 @@ final class ServiceProviderServicesRepo {
   Future<BaseResponse> postToolOrOtherListing(WorkToolListing model) async {
     try {
       return await restClient.postToolOrOtherListing(model);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
+  Future<BaseResponse> submitKyc(PartnerKycRequestBody data) async {
+    try {
+      return await restClient.submitKyc(data);
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_first_view.dart';
+import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_second_view.dart';
 import 'package:tivi_tea/features/services/view/pages/book_workspace_view.dart';
 import 'package:tivi_tea/features/services/view/pages/booking_summary_view.dart';
 import 'package:tivi_tea/features/services/view/pages/listing_detail_view.dart';
+import 'package:tivi_tea/features/services/view/pages/start_kyc_process_page.dart';
 
 class ServicesRouter {
   static final listingDetails = GoRoute(
@@ -30,9 +33,22 @@ class ServicesRouter {
     },
   );
   static final partnerKYCFirstView = GoRoute(
-    path: AppRoutes.bookingSummaryView,
+    path: AppRoutes.partnerKYCFirstView,
     builder: (BuildContext context, GoRouterState state) {
       return const PartnerKYCFirstView();
+    },
+  );
+    static final partnerKYCSecondView = GoRoute(
+    path: AppRoutes.partnerKYCSecondView,
+    builder: (BuildContext context, GoRouterState state) {
+      final data = state.extra as KYCSecondViewParams;
+      return PartnerKYCSecondView(params: data);
+    },
+  );
+  static final startKYCProcessView = GoRoute(
+    path: AppRoutes.startKYCProcessView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const StartKYCProcessView();
     },
   );
 }

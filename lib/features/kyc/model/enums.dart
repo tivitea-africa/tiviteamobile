@@ -2,7 +2,7 @@ enum KYCDocumentType { registrationDocument, businessCertificate }
 
 extension KYCDocumentTypeExt on KYCDocumentType {
   static List<String> get stringValues =>
-      KYCDocumentType.values.map((value) => value.name).toList();
+      KYCDocumentType.values.map((value) => value.getDisplayName()).toList();
 
   String getDisplayName() {
     switch (this) {
