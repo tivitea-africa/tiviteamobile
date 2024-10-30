@@ -98,7 +98,7 @@ class _PartnerKYCFirstViewState extends State<PartnerKYCFirstView> {
     final data = KYCSecondViewParams(
       documentType: documentType,
       registrationNumber: registrationNumberController.text,
-      imagePath: selectedImage?.path ?? '',
+      image: selectedImage,
     );
     context.go(
       '${AppRoutes.servicesView}/${AppRoutes.partnerKYCSecondView}',

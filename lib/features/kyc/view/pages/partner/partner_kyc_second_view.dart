@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_checkbox.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
@@ -80,15 +83,21 @@ class _PartnerKYCSecondViewState extends State<PartnerKYCSecondView> {
           Row(
             children: [
               AppCheckbox(onChanged: (value) {}),
-              Text(context.l10n.confirmAllInfoProvided)
+              10.horizontalSpace,
+              Flexible(child: Text(context.l10n.confirmAllInfoProvided))
             ],
           ),
+          50.verticalSpace,
           Consumer(
             builder: (context, ref, _) {
               final loadState =
                   ref.watch(partnerKycNotifierProvider).kycLoadState;
+              final imageUploadState = ref
+                  .watch(partnerServicesNotiferProvider)
+                  .cloudinaryUploadState;
               return AppButton(
-                isLoading: loadState == LoadState.loading,
+                isLoading: loadState == LoadState.loading ||
+                    imageUploadState == LoadState.loading,
                 onPressed: () => _submit(ref),
               );
             },
@@ -100,26 +109,30 @@ class _PartnerKYCSecondViewState extends State<PartnerKYCSecondView> {
 
   void _submit(WidgetRef ref) async {
     final notifier = ref.read(partnerKycNotifierProvider.notifier);
-    final image = await _uploadImages(ref);
+    final businessDocImageUrl = await _uploadImages(ref, widget.params.image);
+    final image = await _uploadImages(ref, selectedUtilityBillImage);
+
+    debugLog("IMage::: $businessDocImageUrl");
 
     final data = PartnerKycRequestBody(
       documentType: widget.params.documentType,
       registrationNumber: widget.params.registrationNumber,
-      businessDocumentImage: widget.params.imagePath,
+      businessDocumentImage: businessDocImageUrl.first,
+      utilityBill: utilityBillNumberController.text,
       utilityBillImage: image.first,
     );
 
     notifier.submitKYC(
       data,
-      onSuccess: () {},
+      onSuccess: () => context.go(AppRoutes.servicesView),
       onError: (error) => context.showError(error),
     );
   }
 
-  Future<List<String>> _uploadImages(WidgetRef ref) async {
+  Future<List<String>> _uploadImages(WidgetRef ref, XFile? file) async {
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
-    if (selectedUtilityBillImage == null) return [];
-    final imageUrls = await notifier.uploadImages([selectedUtilityBillImage!]);
+    if (file == null) return [];
+    final imageUrls = await notifier.uploadImages([file]);
 
     return imageUrls;
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
+import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_first_view.dart';
@@ -28,8 +29,8 @@ class ServicesRouter {
   static final bookingSummaryView = GoRoute(
     path: AppRoutes.bookingSummaryView,
     builder: (BuildContext context, GoRouterState state) {
-      final data = state.extra as ListingResponseModel;
-      return BookingSummaryView(listing: data);
+      final data = state.extra as BookingSummaryParams;
+      return BookingSummaryView(params: data);
     },
   );
   static final partnerKYCFirstView = GoRoute(

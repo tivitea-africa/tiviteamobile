@@ -1,3 +1,4 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'partner_kyc_request_body.g.dart';
@@ -5,12 +6,12 @@ part 'partner_kyc_request_body.g.dart';
 class KYCSecondViewParams {
   final String documentType;
   final String registrationNumber;
-  final String imagePath;
+  final XFile? image;
 
   KYCSecondViewParams({
     required this.documentType,
     required this.registrationNumber,
-    required this.imagePath,
+    required this.image,
   });
 }
 

@@ -24,11 +24,13 @@ class PartnerKycNotifier extends _$PartnerKycNotifier {
     required VoidCallback onSuccess,
     required Function(String) onError,
   }) async {
+    state = state.copyWith(kycLoadState: LoadState.loading);
     try {
       final response = await _repo.submitKyc(data);
       if (!response.isSuccess()) {
         throw response.error?.message ?? '';
       }
+      onSuccess();
       state = state.copyWith(kycLoadState: LoadState.success);
     } catch (e) {
       state = state.copyWith(kycLoadState: LoadState.error);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
@@ -12,13 +13,17 @@ import 'package:tivi_tea/features/home/model/general/listing_response_model.dart
 import 'package:tivi_tea/features/services/view/widgets/book_now_widget.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
+import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
-class ListingDetailView extends StatelessWidget {
+class ListingDetailView extends ConsumerWidget {
   final ListingResponseModel listing;
   const ListingDetailView({super.key, required this.listing});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(currentUserProvider);
+    final userIsServiceProvider = user.entityType == EntityType.partner;
     return AppScaffold(
       appbar: CustomAppBar(
         showHamburgerMenu: true,
@@ -43,8 +48,8 @@ class ListingDetailView extends StatelessWidget {
               email: listing.partner?.user?.email ?? '',
             ),
             30.verticalSpace,
-            BookNowContainer(listing: listing),
-            30.verticalSpace,
+            if (!userIsServiceProvider) BookNowContainer(listing: listing),
+            if (!userIsServiceProvider) 30.verticalSpace,
           ],
         ),
       ),

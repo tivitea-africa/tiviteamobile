@@ -76,6 +76,7 @@ final GoRouter router = GoRouter(
                 ServicesRouter.bookWorkspaceView,
                 ServicesRouter.bookingSummaryView,
                 ServicesRouter.partnerKYCFirstView,
+                ServicesRouter.partnerKYCSecondView,
                 ServicesRouter.startKYCProcessView,
               ]
             ),

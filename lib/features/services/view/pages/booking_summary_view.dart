@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/config/extensions/date_extensions.dart';
+import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
-import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
 import 'package:tivi_tea/features/services/view/widgets/listing_widget.dart';
+import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class BookingSummaryView extends StatefulWidget {
-  final ListingResponseModel listing;
-  const BookingSummaryView({super.key, required this.listing});
+  final BookingSummaryParams params;
+  const BookingSummaryView({super.key, required this.params});
 
   @override
   State<BookingSummaryView> createState() => _BookingSummaryViewState();
@@ -30,7 +34,7 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
       body: Column(
         children: [
           30.verticalSpace,
-          WorkSpaceWidget(listing: widget.listing),
+          WorkSpaceWidget(listing: widget.params.listing),
           50.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -39,16 +43,32 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
               children: [
                 Flexible(
                   child: DottedWidget(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 12.h,
+                      horizontal: 10.w,
+                    ),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(
                         children: [
-                          Text(context.l10n.pickUpDate),
-                          Text(context.l10n.pickUpDate),
+                          Text(
+                            context.l10n.pickUpDate,
+                            style: context.theme.textTheme.titleLarge?.copyWith(
+                              fontSize: 13.sp,
+                              color: const Color(0xFF737380),
+                            ),
+                          ),
+                          10.verticalSpace,
+                          Text(
+                            widget.params.selectedDateFrom.toMonthDate,
+                            textAlign: TextAlign.center,
+                            style:
+                                context.theme.textTheme.displaySmall?.copyWith(
+                              fontSize: 12.sp,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -65,8 +85,8 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
                 Flexible(
                   child: DottedWidget(
                     padding: EdgeInsets.symmetric(
-                      vertical: 10.h,
-                      horizontal: 20.w,
+                      vertical: 12.h,
+                      horizontal: 10.w,
                     ),
                     child: Container(
                       decoration: BoxDecoration(
@@ -74,8 +94,22 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
                       ),
                       child: Column(
                         children: [
-                          Text(context.l10n.pickUpDate),
-                          Text(context.l10n.pickUpDate),
+                          Text(
+                            context.l10n.returnDate,
+                            style: context.theme.textTheme.titleLarge?.copyWith(
+                              fontSize: 13.sp,
+                              color: const Color(0xFF737380),
+                            ),
+                          ),
+                          10.verticalSpace,
+                          Text(
+                            widget.params.selectedDateTo.toMonthDate,
+                            textAlign: TextAlign.center,
+                            style:
+                                context.theme.textTheme.displaySmall?.copyWith(
+                              fontSize: 12.sp,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -89,8 +123,42 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
             padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: DottedWidget(
               child: SizedBox(
-                height: 50.h,
                 width: context.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      AppSvgWidget(
+                        path: Assets.svgs.location,
+                        fit: BoxFit.cover,
+                        width: 20,
+                        height: 20,
+                      ),
+                      10.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            context.l10n.pickUpLocation,
+                            style: context.theme.textTheme.titleLarge?.copyWith(
+                              fontSize: 13.sp,
+                              color: const Color(0xFF737380),
+                            ),
+                          ),
+                          5.verticalSpace,
+                          Text(
+                            widget.params.listing.address ?? '',
+                            textAlign: TextAlign.center,
+                            style: context.theme.textTheme.displaySmall?.copyWith(
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
+import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
+import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/listing_widget.dart';
@@ -29,6 +32,10 @@ class _BookWorkSpaceOrListingViewState
   final TextEditingController _dateToController = TextEditingController();
   late TextEditingController _numberOfPeople;
 
+  DateTime? _selectedDateFrom;
+  DateTime? _selectedDateTo;
+  bool canProceed = false;
+
   final DateFormat _dateFormatter = DateFormat('dd/MM/yyyy');
 
   @override
@@ -49,6 +56,8 @@ class _BookWorkSpaceOrListingViewState
   Widget build(BuildContext context) {
     final workSpace =
         widget.listing.listingType?.enumType == CreateListingType.workSpace;
+    final bothDatesAreSelected =
+        (_selectedDateFrom != null) && (_selectedDateTo != null);
     return AppScaffold(
       appbar: CustomAppBar(
         showHamburgerMenu: true,
@@ -92,6 +101,13 @@ class _BookWorkSpaceOrListingViewState
                     readOnly: true,
                     onTap: _selectDateTo,
                   ),
+                  if (bothDatesAreSelected && (canProceed == false))
+                    Text(
+                      'Pick up date cannot be after Return date',
+                      style: context.theme.textTheme.displaySmall?.copyWith(
+                        color: AppColors.danger,
+                      ),
+                    ),
                   if (workSpace)
                     AppTextField(
                       label: context.l10n.numberOfPeople,
@@ -104,10 +120,15 @@ class _BookWorkSpaceOrListingViewState
                     ),
                   50.verticalSpace,
                   AppButton(
+                    isEnabled: (bothDatesAreSelected && canProceed),
                     buttonText: context.l10n.next,
                     onPressed: () => context.push(
                       '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
-                      extra: widget.listing,
+                      extra: BookingSummaryParams(
+                        selectedDateFrom: _selectedDateFrom!,
+                        selectedDateTo: _selectedDateTo!,
+                        listing: widget.listing,
+                      ),
                     ),
                   ),
                 ],
@@ -123,12 +144,14 @@ class _BookWorkSpaceOrListingViewState
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
     if (picked != null) {
+      _selectedDateFrom = picked;
       _dateFromController.text = _dateFormatter.format(picked);
+      _validateDates();
       setState(() {});
     }
   }
@@ -137,13 +160,24 @@ class _BookWorkSpaceOrListingViewState
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
     if (picked != null) {
+      _selectedDateTo = picked;
       _dateToController.text = _dateFormatter.format(picked);
+      _validateDates();
       setState(() {});
+    }
+  }
+
+  void _validateDates() {
+    if (_selectedDateFrom != null && _selectedDateTo != null) {
+      canProceed = _selectedDateFrom!.isBefore(_selectedDateTo!) ||
+          _selectedDateFrom!.isAtSameMomentAs(_selectedDateTo!);
+    } else {
+      canProceed = false;
     }
   }
 }
