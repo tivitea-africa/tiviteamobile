@@ -12,8 +12,10 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
+import 'package:tivi_tea/features/services/view/pages/start_kyc_process_page.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class MyListingView extends ConsumerStatefulWidget {
   const MyListingView({super.key});
@@ -34,6 +36,10 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
   Widget build(BuildContext context) {
     const createListingPath =
         '${AppRoutes.myListingView}/${AppRoutes.createListingView}';
+    final user = ref.watch(currentUserProvider);
+    if (user.kycIsVerified == false) {
+      return const StartKYCProcessView();
+    }
     return AppScaffold(
       appbar: CustomAppBar(
         title: context.l10n.myListing,
@@ -160,7 +166,8 @@ class PsrtnerListingTile extends StatelessWidget {
                   ),
                   10.horizontalSpace,
                   Container(
-                    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: listing.status?.toLowerCase() ==

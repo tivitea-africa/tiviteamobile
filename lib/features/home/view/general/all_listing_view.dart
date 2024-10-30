@@ -1,3 +1,4 @@
+import 'package:adaptive_scrollbar/adaptive_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,32 +80,42 @@ class _CategoryListState extends ConsumerState<CategoryList> {
       homeNotiferProvider.select((value) => value.selectedCategoryId),
     );
     return Container(
-      height: 30.h,
-      margin: EdgeInsets.symmetric(vertical: 10.h),
-      child: ListView.separated(
+      height: 40.h,
+      margin: EdgeInsets.only(top: 10.h, bottom: 20.h),
+      child: AdaptiveScrollbar(
+        width: 8,
+        sliderHeight: 80,
         controller: _scrollController,
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        separatorBuilder: (ctx, i) => 10.horizontalSpace,
-        itemBuilder: (ctx, i) {
-          final category = categories[i];
-          final bool isSelected = selectedCategory == category.id;
-          return GestureDetector(
-            onTap: () => _selectCategory(category),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 5.h,
-              ),
-              child: Text(
-                category.name ?? '',
-                style: context.theme.textTheme.labelMedium?.copyWith(
-                  color: isSelected ? Colors.white : const Color(0xFF737380),
+        position: ScrollbarPosition.bottom,
+        underColor: const Color(0xFFC4C4CC),
+        sliderDefaultColor: context.theme.primaryColor,
+        underSpacing: EdgeInsets.only(top: 18.w, right: 20.h),
+        sliderSpacing: EdgeInsets.zero,
+        child: ListView.separated(
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          separatorBuilder: (ctx, i) => 10.horizontalSpace,
+          itemBuilder: (ctx, i) {
+            final category = categories[i];
+            final bool isSelected = selectedCategory == category.id;
+            return GestureDetector(
+              onTap: () => _selectCategory(category),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                  vertical: 5.h,
+                ),
+                child: Text(
+                  category.name ?? '',
+                  style: context.theme.textTheme.labelMedium?.copyWith(
+                    color: isSelected ? Colors.black : const Color(0xFF737380),
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
