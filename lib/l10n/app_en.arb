@@ -800,5 +800,37 @@
     "verificationSuccessful":"Verification Successful!",
     "@verificationSuccessful":{
         "description": "Verification Successful text"
+    },
+    "proofOfIdentity":"Proof of Identity",
+    "@proofOfIdentity":{
+        "description": "Proof of Identity text"
+    },
+    "provideCorrectInfo":"Provide correct information to help us verify your account",
+    "@provideCorrectInfo":{
+        "description": "Provide correct information text"
+    },
+    "ninNumber":"NIN Number",
+    "@ninNumber":{
+        "description": "NIN Number text"
+    },
+    "enterNinNumber":"Enter NIN Number",
+    "@enterNinNumber":{
+        "description": "Enter NIN Number text"
+    },
+    "uploadFront":"Upload Front side of ID Card",
+    "@uploadFront":{
+        "description": "Upload Front text"
+    },
+    "uploadBack":"Upload Back side of ID Card",
+    "@uploadBack":{
+        "description": "Upload back text"
+    },
+    "uploadFrontDesc":"Upload the front side of your support document in JPG, PNG, or PDF",
+    "@uploadFrontDesc":{
+        "description": "Upload back text"
+    },
+    "uploadBackDesc":"Upload the back side of your support document in JPG, PNG, or PDF",
+    "@uploadBackDesc":{
+        "description": "Upload back text"
     }
 }

@@ -4,6 +4,7 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
+import 'package:tivi_tea/features/kyc/view/pages/client/client_kyc_view.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_first_view.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_second_view.dart';
 import 'package:tivi_tea/features/services/view/pages/book_workspace_view.dart';
@@ -39,7 +40,7 @@ class ServicesRouter {
       return const PartnerKYCFirstView();
     },
   );
-    static final partnerKYCSecondView = GoRoute(
+  static final partnerKYCSecondView = GoRoute(
     path: AppRoutes.partnerKYCSecondView,
     builder: (BuildContext context, GoRouterState state) {
       final data = state.extra as KYCSecondViewParams;
@@ -50,6 +51,12 @@ class ServicesRouter {
     path: AppRoutes.startKYCProcessView,
     builder: (BuildContext context, GoRouterState state) {
       return const StartKYCProcessView();
+    },
+  );
+  static final clientKYCView = GoRoute(
+    path: AppRoutes.clientKYCView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const ClientKYCView();
     },
   );
 }

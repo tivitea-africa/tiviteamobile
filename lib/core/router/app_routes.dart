@@ -22,5 +22,6 @@ class AppRoutes {
   static const String bookingSummaryView = 'bookingSummaryView';
   static const String partnerKYCFirstView = 'partnerKYCFirstView';
   static const String partnerKYCSecondView = 'partnerKYCSecondView';
+  static const String clientKYCView = 'clientKYCView';
   static const String startKYCProcessView = 'startKYCProcessView';
 }

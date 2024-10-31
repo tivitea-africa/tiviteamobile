@@ -13,3 +13,6 @@ extension KYCDocumentTypeExt on KYCDocumentType {
     }
   }
 }
+
+
+enum ChooseFileType { takePhoto, selectFromGallery, selectFromFiles }
