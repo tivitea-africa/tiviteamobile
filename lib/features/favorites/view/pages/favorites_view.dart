@@ -6,50 +6,63 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
+import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/favorites/model/favorite_listing_model.dart';
 import 'package:tivi_tea/features/favorites/view_model/favorite_listing_notifier.dart';
-import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
-import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class SecondaryListingView extends ConsumerWidget {
-  const SecondaryListingView({super.key});
+class FavoritesListingView extends ConsumerWidget {
+  const FavoritesListingView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listings = ref.watch(
-      servicesNotiferProvider.select((value) => value.listing),
+    final favorites = ref.watch(
+      favoriteListingNotifierProvider.select((value) => value.favorites),
     );
-    return Expanded(
-      child: ListView.separated(
-        itemCount: listings.length,
-        separatorBuilder: (ctx, i) => 10.verticalSpace,
-        itemBuilder: (ctx, i) => SecondaryListingWidget(listing: listings[i]),
+    return AppScaffold(
+      appbar: CustomAppBar(
+        title: context.l10n.myFavorites,
+        showHamburgerMenu: true,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          20.verticalSpace,
+          if (favorites.isEmpty)
+            const Center(child: Text('No Favorites added'))
+          else
+            Expanded(
+              child: ListView.separated(
+                itemCount: favorites.length,
+                separatorBuilder: (ctx, i) => 10.verticalSpace,
+                itemBuilder: (ctx, i) =>
+                    _SecondaryListingWidget(favoriteListing: favorites[i]),
+              ),
+            ),
+        ],
       ),
     );
   }
 }
 
-class SecondaryListingWidget extends StatelessWidget {
-  final ListingResponseModel listing;
-  const SecondaryListingWidget({
-    super.key,
-    required this.listing,
+class _SecondaryListingWidget extends StatelessWidget {
+  final FavoriteListingModel favoriteListing;
+  const _SecondaryListingWidget({
+    required this.favoriteListing,
   });
 
   final double containerHeight = 145;
 
   @override
   Widget build(BuildContext context) {
-    final int remainingImageCount = (listing.images?.length ?? 0) - 1;
-    final bool moreThanOneImage = (listing.images?.length ?? 0) > 1;
     return InkWell(
       onTap: () => context.go(
         '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
-        extra: listing.id,
+        extra: favoriteListing.id,
       ),
       child: Container(
         width: context.width,
@@ -70,38 +83,19 @@ class SecondaryListingWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   AppImageWidget(
-                    imagePath: listing.images?.first ?? '',
+                    imagePath: favoriteListing.images?.first ?? '',
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8.sp),
                       bottomLeft: Radius.circular(8.sp),
                     ),
                   ),
-                  if (moreThanOneImage)
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Container(
-                        padding: const EdgeInsets.all(7),
-                        margin: EdgeInsets.all(10.sp),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: context.theme.primaryColor,
-                        ),
-                        child: Text(
-                          '${remainingImageCount.toString()}+',
-                          style: context.theme.textTheme.displaySmall?.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
                   Consumer(
                     builder: (contex, ref, _) {
                       final state = ref.watch(favoriteListingNotifierProvider);
 
                       //Would not be very performant as data size increases
-                      final isFavorite = state.favorites.any(
-                        (fav) => fav.id == listing.id,
-                      );
+                      final isFavorite = state.favorites
+                          .any((fav) => fav.id == favoriteListing.id);
                       return Align(
                         alignment: Alignment.topRight,
                         child: InkWell(
@@ -127,7 +121,7 @@ class SecondaryListingWidget extends StatelessWidget {
                 ],
               ),
             ),
-            _ImageDetails(listing: listing)
+            Flexible(child: _ImageDetails(favoriteListing: favoriteListing))
           ],
         ),
       ),
@@ -139,17 +133,13 @@ class SecondaryListingWidget extends StatelessWidget {
       favoriteListingNotifierProvider.notifier,
     );
 
-    final data = FavoriteListingModel.fromListingModel(listing);
-
-    notifier.toggleFavoriteStatus(data, onSuccess: () {
-      ref.read(servicesNotiferProvider.notifier).getListing();
-    });
+    notifier.toggleFavoriteStatus(favoriteListing);
   }
 }
 
 class _ImageDetails extends StatelessWidget {
-  final ListingResponseModel listing;
-  const _ImageDetails({required this.listing});
+  final FavoriteListingModel favoriteListing;
+  const _ImageDetails({required this.favoriteListing});
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +150,7 @@ class _ImageDetails extends StatelessWidget {
         //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            listing.name ?? '',
+            favoriteListing.name ?? '',
             style: context.theme.textTheme.titleLarge?.copyWith(
               fontSize: 16.sp,
               color: context.theme.primaryColor,
@@ -169,55 +159,33 @@ class _ImageDetails extends StatelessWidget {
           5.verticalSpace,
           Row(
             children: [
-              AppSvgWidget(path: Assets.svgs.location),
-              5.horizontalSpace,
-              Text(
-                listing.address ?? '',
-                style: context.theme.textTheme.labelMedium?.copyWith(
-                  fontSize: 9.8.sp,
-                  color: const Color(0xFF737380),
+              Flexible(
+                // width: ,
+                child: Text(
+                  favoriteListing.description ?? '',
+                  style: context.theme.textTheme.labelMedium?.copyWith(
+                    fontSize: 9.8.sp,
+                    color: const Color(0xFF737380),
+                  ),
                 ),
               ),
             ],
           ),
           const Spacer(),
           SizedBox(
-            width: 196,
+            width: context.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(
-                      '${context.l10n.listedBy}:',
-                      style: context.theme.textTheme.bodySmall?.copyWith(
-                        fontSize: 9.8.sp,
-                        color: context.theme.primaryColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    5.verticalSpace,
-                    Row(
-                      children: [
-                        Text(
-                          '${listing.partner?.user?.firstName ?? ''} ${listing.partner?.user?.lastName ?? ''}',
-                          style: context.theme.textTheme.displaySmall?.copyWith(
-                            fontSize: 9.8.sp,
-                            color: const Color(0xFF77797D),
-                          ),
-                        ),
-                        if (listing.partner?.user?.isVerified ?? false)
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: AppSvgWidget(path: Assets.svgs.verified),
-                          )
-                      ],
-                    ),
+                    AppSvgWidget(path: Assets.svgs.star),
+                    5.horizontalSpace,
+                    Text("${favoriteListing.rating ?? 0}")
                   ],
                 ),
                 const Spacer(),
-                listing.amount.getCurrencyText(
+                favoriteListing.amount.getCurrencyText(
                   style: context.theme.textTheme.displaySmall?.copyWith(
                     fontWeight: FontWeight.w700,
                     color: context.theme.primaryColor,

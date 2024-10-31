@@ -57,7 +57,7 @@ class __ListingWidgetState extends State<_ListingWidget> {
     return GestureDetector(
       onTap: () => context.go(
         '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
-        extra: widget.listing,
+        extra: widget.listing.id,
       ),
       child: Container(
         width: context.width / 1.5,

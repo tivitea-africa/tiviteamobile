@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,8 @@ import 'package:tivi_tea/features/common/app_drawer.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
+import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -71,13 +74,19 @@ class Navbar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            NavigationDestination(
-              label: context.l10n.myListing,
-              icon: AppSvgWidget(path: Assets.svgs.historyNavBarIcon),
-              selectedIcon: AppSvgWidget(
-                path: Assets.svgs.historyNavBarIcon,
-                color: Colors.white,
-              ),
+            Consumer(
+              builder: (context, ref, _) {
+                final user = ref.watch(currentUserProvider);
+                final isClient = user.entityType == EntityType.client;
+                return NavigationDestination(
+                  label: isClient ? context.l10n.myFavorites : context.l10n.myListing,
+                  icon: AppSvgWidget(path: Assets.svgs.historyNavBarIcon),
+                  selectedIcon: AppSvgWidget(
+                    path: Assets.svgs.historyNavBarIcon,
+                    color: Colors.white,
+                  ),
+                );
+              }
             ),
             NavigationDestination(
               label: context.l10n.profile,

@@ -355,6 +355,10 @@
     "@myListing":{
         "description": "My Listing text"
     },
+    "myFavorites":"My Favorites",
+    "@myFavorites":{
+        "description": "My Favorites text"
+    },
     "bookingHistory":"Booking History",
     "@bookingHistory":{
         "description": "Booking History text"

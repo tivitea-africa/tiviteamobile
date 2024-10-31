@@ -7,4 +7,5 @@ class HiveKeys {
   static const String fcmToken = 'fcmToken';
   static const String rememberMe = 'rememberMe';
   static const String refreshToken = 'refreshToken';
+  static const String favoriteListing = 'favoriteListing';
 }

@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/services/view_model/services_state.dart';
 import 'package:tivi_tea/repositories/services/general/general_services_repo.dart';
 
@@ -44,6 +45,19 @@ class ServicesNotifer extends _$ServicesNotifer {
       );
     } catch (e) {
       state = state.copyWith(loadState: LoadState.error);
+    }
+  }
+
+  Future<ListingResponseModel?> getListingbyId(String listingId) async {
+    try {
+      final response = await _repo.getListingById(listingId);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? '';
+      }
+      return response.data;
+    } catch (e) {
+      state = state.copyWith(loadState: LoadState.error);
+      return null;
     }
   }
 

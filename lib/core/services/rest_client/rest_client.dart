@@ -2,7 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
 import 'package:tivi_tea/core/response/generic_paginated_response.dart';
+import 'package:tivi_tea/features/favorites/model/favorite_listing_model.dart';
+import 'package:tivi_tea/features/favorites/model/favorite_listing_request_body.dart';
 import 'package:tivi_tea/features/home/model/client/category_response_model.dart';
+import 'package:tivi_tea/features/home/model/client/client_dashboard_model.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/home/model/service_provider/service_provider_dashboard_model.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
@@ -43,6 +46,10 @@ abstract class RestClient {
 
   @POST('/listings/')
   Future<BaseResponse> postWorkSpace(@Body() PostListingModel data);
+  @GET('/listings/{listingId}')
+  Future<BaseResponse<ListingResponseModel>> getListingId(
+    @Path('listingId') String listingId,
+  );
 
   ///This is the same endpoint as [postWorkSpace] above.
   ///However we'll call them separetly in case the endpoints are different in the future.
@@ -62,4 +69,11 @@ abstract class RestClient {
   @GET('/dashboard/partner')
   Future<BaseResponse<ServiceProviderDashboardModel>>
       getServiceProviderDashboard();
+  @GET('/dashboard/client')
+  Future<BaseResponse<ClientDashboardModel>> getClientDashboard();
+  @POST('/dashboard/client/listing/favorite')
+  Future<BaseResponse> favoriteListing(@Body() FavoriteListingRequestBody data);
+  @GET('/dashboard/client/listing/favorite')
+  Future<BaseResponse<GenericPaginatedResponse<FavoriteListingModel>>>
+      getFavoriteListings(@Query('page') int page);
 }

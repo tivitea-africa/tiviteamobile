@@ -30,4 +30,12 @@ final class GeneralServicesRepo {
       return AppException.handleError(e);
     }
   }
+
+  Future<BaseResponse<ListingResponseModel>> getListingById(String listingId) async {
+    try {
+      return await restClient.getListingId(listingId);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
 }

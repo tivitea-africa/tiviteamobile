@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
-import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
@@ -11,44 +10,71 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/services/view/widgets/book_now_widget.dart';
+import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
-class ListingDetailView extends ConsumerWidget {
-  final ListingResponseModel listing;
-  const ListingDetailView({super.key, required this.listing});
+class ListingDetailView extends ConsumerStatefulWidget {
+  final String listingId;
+  const ListingDetailView({super.key, required this.listingId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ListingDetailView> createState() => _ListingDetailViewState();
+}
+
+class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
+  ListingResponseModel? listing;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    isLoading = true;
+    setState(() {});
+
+    final notifier = ref.read(servicesNotiferProvider.notifier);
+    listing = await notifier.getListingbyId(widget.listingId);
+
+    isLoading = false;
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final user = ref.read(currentUserProvider);
     final userIsServiceProvider = user.entityType == EntityType.partner;
+    if (listing == null || isLoading == true) {
+      return const Center(child: CupertinoActivityIndicator());
+    }
     return AppScaffold(
       appbar: CustomAppBar(
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
-        onHomeBackButtonTap: () => context.go(
-          '${AppRoutes.homeView}${AppRoutes.allListingsView}',
-        ),
+        onHomeBackButtonTap: () => context.pop(),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListingImagesView(images: listing.images ?? []),
-            ListingDetailDescription(listing: listing),
+            ListingImagesView(images: listing?.images ?? []),
+            ListingDetailDescription(listing: listing!),
             20.verticalSpace,
-            AmenitiesRow(amenties: listing.amenities ?? []),
+            AmenitiesRow(amenties: listing?.amenities ?? []),
             30.verticalSpace,
-            LocationSection(location: listing.address ?? ''),
+            LocationSection(location: listing?.address ?? ''),
             30.verticalSpace,
             ContactSection(
-              phone: listing.partner?.user?.phoneNumber ?? '',
-              email: listing.partner?.user?.email ?? '',
+              phone: listing?.partner?.user?.phoneNumber ?? '',
+              email: listing?.partner?.user?.email ?? '',
             ),
             30.verticalSpace,
-            if (!userIsServiceProvider) BookNowContainer(listing: listing),
+            if (!userIsServiceProvider) BookNowContainer(listing: listing!),
             if (!userIsServiceProvider) 30.verticalSpace,
           ],
         ),

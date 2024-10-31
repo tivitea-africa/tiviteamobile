@@ -9,12 +9,13 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
+import 'package:tivi_tea/features/favorites/view/pages/favorites_view.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
-import 'package:tivi_tea/features/services/view/pages/start_kyc_process_page.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class MyListingView extends ConsumerStatefulWidget {
@@ -37,8 +38,11 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
     const createListingPath =
         '${AppRoutes.myListingView}/${AppRoutes.createListingView}';
     final user = ref.watch(currentUserProvider);
-    if (user.kycIsVerified == false) {
-      return const StartKYCProcessView();
+    // if (user.kycIsVerified == false) {
+    //   return const StartKYCProcessView();
+    // }
+    if (user.entityType == EntityType.client) {
+      return const FavoritesListingView();
     }
     return AppScaffold(
       appbar: CustomAppBar(

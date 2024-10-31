@@ -323,6 +323,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/soldiers_drawer_icon.svg
   String get soldiersDrawerIcon => 'assets/svgs/soldiers_drawer_icon.svg';
 
+  /// File path: assets/svgs/star.svg
+  String get star => 'assets/svgs/star.svg';
+
   /// File path: assets/svgs/suitcase.svg
   String get suitcase => 'assets/svgs/suitcase.svg';
 
@@ -389,6 +392,7 @@ class $AssetsSvgsGen {
         servicesNavBarIcon,
         settingsDrawerIcon,
         soldiersDrawerIcon,
+        star,
         suitcase,
         taxi,
         userGroup,

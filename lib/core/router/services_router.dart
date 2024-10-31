@@ -15,8 +15,8 @@ class ServicesRouter {
   static final listingDetails = GoRoute(
     path: AppRoutes.listingDetailsView,
     builder: (BuildContext context, GoRouterState state) {
-      final data = state.extra as ListingResponseModel;
-      return ListingDetailView(listing: data);
+      final listingId = state.extra as String;
+      return ListingDetailView(listingId: listingId);
     },
   );
   static final bookWorkspaceView = GoRoute(

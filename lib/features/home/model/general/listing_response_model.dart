@@ -60,6 +60,50 @@ class ListingResponseModel {
       _$ListingResponseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ListingResponseModelToJson(this);
+
+  ListingResponseModel copyWith({
+    String? id,
+    CategoryResponseModel? category,
+    List<String>? amenities,
+    List<Room>? rooms,
+    Partner? partner,
+    DateTime? dateCreated,
+    DateTime? lastUpdated,
+    Map<String, dynamic>? meta,
+    String? name,
+    String? description,
+    String? address,
+    List<String>? images,
+    String? listingType,
+    num? amount,
+    String? status,
+    String? pricingOption,
+    bool? footSoldier,
+    num? cautionaryFee,
+    bool? isFavorites,
+  }) {
+    return ListingResponseModel(
+      id: id ?? this.id,
+      category: category ?? this.category,
+      amenities: amenities ?? this.amenities,
+      rooms: rooms ?? this.rooms,
+      partner: partner ?? this.partner,
+      dateCreated: dateCreated ?? this.dateCreated,
+      lastUpdated: lastUpdated ?? this.lastUpdated,
+      meta: meta ?? this.meta,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      address: address ?? this.address,
+      images: images ?? this.images,
+      listingType: listingType ?? this.listingType,
+      amount: amount ?? this.amount,
+      status: status ?? this.status,
+      pricingOption: pricingOption ?? this.pricingOption,
+      footSoldier: footSoldier ?? this.footSoldier,
+      cautionaryFee: cautionaryFee ?? this.cautionaryFee,
+      isFavorites: isFavorites ?? this.isFavorites,
+    );
+  }
 }
 
 @JsonSerializable()
