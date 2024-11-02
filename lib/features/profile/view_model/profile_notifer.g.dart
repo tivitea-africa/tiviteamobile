@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'partner_kyc_notifier.dart';
+part of 'profile_notifer.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$partnerKycNotifierHash() =>
-    r'78c8de912c8e4a85a7e3522058cb998c1103f143';
+String _$profileNotiferHash() => r'd6d41f12335b0999a959c858be7749c9d6f9259b';
 
-/// See also [PartnerKycNotifier].
-@ProviderFor(PartnerKycNotifier)
-final partnerKycNotifierProvider =
-    AutoDisposeNotifierProvider<PartnerKycNotifier, PartnerKYCState>.internal(
-  PartnerKycNotifier.new,
-  name: r'partnerKycNotifierProvider',
+/// See also [ProfileNotifer].
+@ProviderFor(ProfileNotifer)
+final profileNotiferProvider =
+    AutoDisposeNotifierProvider<ProfileNotifer, ProfileNotifierState>.internal(
+  ProfileNotifer.new,
+  name: r'profileNotiferProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$partnerKycNotifierHash,
+      : _$profileNotiferHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PartnerKycNotifier = AutoDisposeNotifier<PartnerKYCState>;
+typedef _$ProfileNotifer = AutoDisposeNotifier<ProfileNotifierState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

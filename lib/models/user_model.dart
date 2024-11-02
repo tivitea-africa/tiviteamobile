@@ -101,3 +101,19 @@ class User {
     );
   }
 }
+
+@JsonSerializable()
+class GetUserProfileResponse {
+  final String? id;
+  final User? user;
+
+  GetUserProfileResponse({
+    this.id,
+    this.user,
+  });
+
+  factory GetUserProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetUserProfileResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetUserProfileResponseToJson(this);
+}

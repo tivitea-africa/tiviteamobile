@@ -8,6 +8,7 @@ import 'package:tivi_tea/features/home/model/client/category_response_model.dart
 import 'package:tivi_tea/features/home/model/client/client_dashboard_model.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/home/model/service_provider/service_provider_dashboard_model.dart';
+import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
@@ -16,6 +17,7 @@ import 'package:tivi_tea/features/registration/model/service_provider/service_pr
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
+import 'package:tivi_tea/models/user_model.dart';
 
 part 'rest_client.g.dart';
 
@@ -38,6 +40,10 @@ abstract class RestClient {
   );
   @POST('/authentication/reset-password')
   Future<BaseResponse> forgotPassword(@Body() ForgotPasswordRequestObject data);
+  @POST('/authentication/partner/submit-kyc')
+  Future<BaseResponse> submitKyc(@Body() PartnerKycRequestBody data);
+  @POST('/authentication/client/submit-kyc')
+  Future<BaseResponse> submitClientKyc(@Body() ClientKYCRequestBody data);
 
   //<====================> Service <====================>
   @GET('/listings/')
@@ -62,8 +68,6 @@ abstract class RestClient {
   @GET('/listings/categories')
   Future<BaseResponse<GenericPaginatedResponse<CategoryResponseModel>>>
       getCategories();
-  @POST('/authentication/partner/submit-kyc')
-  Future<BaseResponse> submitKyc(@Body() PartnerKycRequestBody data);
 
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')
@@ -71,6 +75,8 @@ abstract class RestClient {
       getServiceProviderDashboard();
   @GET('/dashboard/client')
   Future<BaseResponse<ClientDashboardModel>> getClientDashboard();
+  @GET('/dashboard/user/profile')
+  Future<BaseResponse<GetUserProfileResponse>> getUserProfile();
   @POST('/dashboard/client/listing/favorite')
   Future<BaseResponse> favoriteListing(@Body() FavoriteListingRequestBody data);
   @GET('/dashboard/client/listing/favorite')

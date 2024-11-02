@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
@@ -13,7 +14,7 @@ class BottomSheetWidget extends ConsumerWidget {
   final ChooseFileType chooseFileType;
   final Function(XFile) onImageSelected;
   const BottomSheetWidget({
-    super.key, 
+    super.key,
     required this.chooseFileType,
     required this.onImageSelected,
   });
@@ -21,7 +22,7 @@ class BottomSheetWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () => _onTap(chooseFileType, ref),
+      onTap: () => _onTap(chooseFileType, ref, context),
       child: DottedWidget(
         radius: 8.sp,
         child: Container(
@@ -54,7 +55,11 @@ class BottomSheetWidget extends ConsumerWidget {
     );
   }
 
-  void _onTap(ChooseFileType fileType, WidgetRef ref) async {
+  void _onTap(
+    ChooseFileType fileType,
+    WidgetRef ref,
+    BuildContext context,
+  ) async {
     final notifier = ref.read(imagePickerNotifierProvider.notifier);
     switch (fileType) {
       case ChooseFileType.takePhoto:
@@ -69,6 +74,10 @@ class BottomSheetWidget extends ConsumerWidget {
         final image = await notifier.selectSingleImage();
         if (image == null) return;
         onImageSelected(image);
+    }
+
+    if (context.mounted) {
+      context.pop();
     }
   }
 }

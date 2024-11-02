@@ -13,7 +13,7 @@ final class ClientDashBoardRepo {
   ClientDashBoardRepo({required this.restClient});
 
   Future<BaseResponse<ClientDashboardModel>>
-      getServiceProviderDashboard() async {
+      getClientDashboard() async {
     try {
       return await restClient.getClientDashboard();
     } on DioException catch (e) {

@@ -58,3 +58,19 @@ const _$EntityTypeEnumMap = {
   EntityType.partner: 'partner',
   EntityType.client: 'client',
 };
+
+GetUserProfileResponse _$GetUserProfileResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetUserProfileResponse(
+      id: json['id'] as String?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetUserProfileResponseToJson(
+        GetUserProfileResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'user': instance.user,
+    };

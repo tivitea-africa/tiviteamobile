@@ -2,14 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
+import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/view_model/partner/partner_kyc_state.dart';
 import 'package:tivi_tea/repositories/authentication/general/general_authetication_repo.dart';
 
-part 'partner_kyc_notifier.g.dart';
+part 'client_kyc_notifier.g.dart';
 
 @riverpod
-class PartnerKycNotifier extends _$PartnerKycNotifier {
+class ClientKycNotifier extends _$ClientKycNotifier {
   late final GeneralAuthenticationRepo _repo;
 
   @override
@@ -19,14 +19,14 @@ class PartnerKycNotifier extends _$PartnerKycNotifier {
     return PartnerKYCState.initial();
   }
 
-  void submitKYC(
-    PartnerKycRequestBody data, {
+  void submitClientKYC(
+    ClientKYCRequestBody data, {
     required VoidCallback onSuccess,
     required Function(String) onError,
   }) async {
     state = state.copyWith(kycLoadState: LoadState.loading);
     try {
-      final response = await _repo.submitKyc(data);
+      final response = await _repo.submitClientKyc(data);
       if (!response.isSuccess()) {
         throw response.error?.message ?? '';
       }

@@ -14,6 +14,7 @@ import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/view/widgets/choose_file_container.dart';
 import 'package:tivi_tea/features/kyc/view_model/partner/partner_kyc_notifier.dart';
+import 'package:tivi_tea/features/profile/view_model/profile_notifer.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
@@ -124,7 +125,10 @@ class _PartnerKYCSecondViewState extends State<PartnerKYCSecondView> {
 
     notifier.submitKYC(
       data,
-      onSuccess: () => context.go(AppRoutes.servicesView),
+      onSuccess: () {
+        ref.read(profileNotiferProvider.notifier).getUserProfile();
+        context.go(AppRoutes.servicesView);
+      },
       onError: (error) => context.showError(error),
     );
   }
