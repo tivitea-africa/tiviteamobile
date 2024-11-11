@@ -111,90 +111,96 @@ class PsrtnerListingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70.h,
-      width: context.width,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 35.w,
-            height: 35.w,
-            decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: AppImageWidget(
-              imagePath: listing.images?.first ?? '',
-              borderRadius: BorderRadius.circular(70),
+    return InkWell(
+      // onTap: () => context.push(
+      //   '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
+      //   extra: listing.id,
+      // ),
+      child: Container(
+        height: 70.h,
+        width: context.width,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 35.w,
+              height: 35.w,
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: AppImageWidget(
+                imagePath: listing.images?.first ?? '',
+                borderRadius: BorderRadius.circular(70),
+              ),
             ),
-          ),
-          5.horizontalSpace,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                listing.name ?? '',
-                style: context.theme.textTheme.bodyLarge?.copyWith(
-                  fontSize: 14.sp,
-                ),
-              ),
-              Text(
-                listing.listingType ?? '',
-                style: context.theme.textTheme.displaySmall?.copyWith(
-                  fontSize: 10.sp,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                listing.rooms?.length.toString() ?? '',
-                style: context.theme.textTheme.titleMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    listing.dateCreated.toDateMonthYear2,
-                    style: context.theme.textTheme.displaySmall?.copyWith(
-                      fontSize: 9.sp,
-                    ),
+            5.horizontalSpace,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  listing.name ?? '',
+                  style: context.theme.textTheme.bodyLarge?.copyWith(
+                    fontSize: 14.sp,
                   ),
-                  10.horizontalSpace,
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: listing.status?.toLowerCase() ==
-                              PartnerListingStatus.published.name
-                          ? const Color(0xFF006400).withOpacity(0.2)
-                          : const Color(0xFFF9C846),
-                    ),
-                    child: Text(
-                      listing.status ?? '',
-                      style: context.theme.textTheme.titleMedium?.copyWith(
-                        fontSize: 10.sp,
-                        color: listing.status?.toLowerCase() ==
-                                PartnerListingStatus.published.name
-                            ? const Color(0xFF006400)
-                            : Colors.black,
+                ),
+                Text(
+                  listing.listingType ?? '',
+                  style: context.theme.textTheme.displaySmall?.copyWith(
+                    fontSize: 10.sp,
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  listing.rooms?.length.toString() ?? '',
+                  style: context.theme.textTheme.titleMedium?.copyWith(
+                    fontSize: 14.sp,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      listing.dateCreated.toDateMonthYear2,
+                      style: context.theme.textTheme.displaySmall?.copyWith(
+                        fontSize: 9.sp,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                    10.horizontalSpace,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2, horizontal: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: listing.status?.toLowerCase() ==
+                                PartnerListingStatus.published.name
+                            ? const Color(0xFF006400).withOpacity(0.2)
+                            : const Color(0xFFF9C846),
+                      ),
+                      child: Text(
+                        listing.status ?? '',
+                        style: context.theme.textTheme.titleMedium?.copyWith(
+                          fontSize: 10.sp,
+                          color: listing.status?.toLowerCase() ==
+                                  PartnerListingStatus.published.name
+                              ? const Color(0xFF006400)
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
