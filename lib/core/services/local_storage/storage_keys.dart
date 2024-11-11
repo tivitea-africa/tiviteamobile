@@ -8,4 +8,5 @@ class HiveKeys {
   static const String rememberMe = 'rememberMe';
   static const String refreshToken = 'refreshToken';
   static const String favoriteListing = 'favoriteListing';
+  static const String kycVerificationStatus = 'kycVerificationStatus';
 }

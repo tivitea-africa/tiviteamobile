@@ -785,6 +785,14 @@
     "@ensureSecureExperience":{
         "description": "Ensure secure experience text"
     },
+    "toContinueBooking":"Please complete your KYC verification to continue with booking.",
+    "@toContinueBooking":{
+        "description": "KYC Verification booking text"
+    },
+    "toContinueListing":"Please complete your KYC verification to continue with listing.",
+    "@toContinueListing":{
+        "description": "KYC Verification listing text"
+    },
     "startKYCProcess":"Start KYC Process",
     "@startKYCProcess":{
         "description": "Start KYC Process text"

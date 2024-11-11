@@ -6,20 +6,21 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
+import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
-import 'package:tivi_tea/models/enums/enums.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
-class StartKYCProcessView extends ConsumerWidget {
-  const StartKYCProcessView({super.key});
+class DocumentSubmitted extends ConsumerWidget {
+  const DocumentSubmitted({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userEntityType =
-        ref.watch(currentUserProvider).entityType ?? EntityType.partner;
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+    return RegistrationScaffold(
+      appbar: RegistrationAppBar(
+        headerSectionTitle: context.l10n.proofOfIdentity,
+        headerSectionSubtitle: context.l10n.provideInfo,
+      ),
       body: Center(
         child: IntrinsicHeight(
           child: Container(
@@ -29,24 +30,23 @@ class StartKYCProcessView extends ConsumerWidget {
             child: Column(
               children: [
                 20.verticalSpace,
-                AppSvgWidget(path: Assets.svgs.greenBox),
+                AppSvgWidget(path: Assets.svgs.greenCheck),
                 20.verticalSpace,
                 Text(
-                  context.l10n.completeKYC,
+                  context.l10n.documentSubmitted,
                   style: context.theme.textTheme.titleLarge?.copyWith(
                     fontSize: 20.sp,
                   ),
                 ),
                 20.verticalSpace,
                 Text(
-                  context.l10n.ensureSecureExperience,
+                  context.l10n.afterTwoBusinessDays,
                   textAlign: TextAlign.center,
                 ),
                 80.verticalSpace,
                 AppButton(
-                  buttonText: context.l10n.startKYCProcess,
-                  onPressed: () =>
-                      _navigateToStartKYCView(context, userEntityType),
+                  buttonText: context.l10n.goToDashboard,
+                  onPressed: () => context.go(AppRoutes.homeView),
                 ),
               ],
             ),
@@ -54,22 +54,5 @@ class StartKYCProcessView extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  void _navigateToStartKYCView(
-    BuildContext context,
-    EntityType userEntityType,
-  ) {
-    switch (userEntityType) {
-      case EntityType.client:
-        context.go(
-          '${AppRoutes.servicesView}/${AppRoutes.clientKYCView}',
-        );
-        break;
-      default:
-        context.go(
-          '${AppRoutes.servicesView}/${AppRoutes.partnerKYCFirstView}',
-        );
-    }
   }
 }

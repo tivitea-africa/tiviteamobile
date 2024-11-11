@@ -6,13 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
-import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_checkbox.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/enums.dart';
+import 'package:tivi_tea/features/kyc/view/pages/submit_document_view.dart';
 import 'package:tivi_tea/features/kyc/view/widgets/bottom_sheet_widget.dart';
 import 'package:tivi_tea/features/kyc/view_model/client/client_kyc_notifier.dart';
 import 'package:tivi_tea/features/profile/view_model/profile_notifer.dart';
@@ -23,20 +23,21 @@ import 'package:tivi_tea/features/services/view_model/service_provider/partner_s
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class ClientKYCView extends StatefulWidget {
+class ClientKYCView extends ConsumerStatefulWidget {
   const ClientKYCView({super.key});
 
   @override
-  State<ClientKYCView> createState() => _ClientKYCViewState();
+  ConsumerState<ClientKYCView> createState() => _ClientKYCViewState();
 }
 
-class _ClientKYCViewState extends State<ClientKYCView> {
+class _ClientKYCViewState extends ConsumerState<ClientKYCView> {
   TextEditingController documentIdController = TextEditingController();
   XFile? selectedFrontImage;
   XFile? selectedBackImage;
 
   String documentType = '';
   bool docIdIsPopulated = false;
+  bool showSubmitDocument = false;
 
   @override
   void initState() {
@@ -54,99 +55,105 @@ class _ClientKYCViewState extends State<ClientKYCView> {
         headerSectionTitle: context.l10n.proofOfIdentity,
         headerSectionSubtitle: context.l10n.provideInfo,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomDropdown(
-              label: context.l10n.documentType,
-              onOptionSelected: (value) {
-                documentType = value;
-                setState(() {});
-              },
-              items: ClientKYCDocumentTypeExt.stringValues,
-            ),
-            20.verticalSpace,
-            AppTextField(
-              controller: documentIdController,
-              label: context.l10n.ninNumber,
-              hintText: context.l10n.enterNinNumber,
-            ),
-            Text(
-              context.l10n.uploadFront,
-              style: context.theme.textTheme.labelMedium,
-            ),
-            Text(
-              context.l10n.uploadFrontDesc,
-              style: context.theme.textTheme.displaySmall?.copyWith(
-                fontSize: 12.h,
-                color: const Color(0xFF5C5C66),
+      body: showSubmitDocument
+          ? SubmitDocumentView(
+              submitDocs: () => _submitKYC(ref),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomDropdown(
+                    label: context.l10n.documentType,
+                    onOptionSelected: (value) {
+                      documentType = value;
+                      setState(() {});
+                    },
+                    items: ClientKYCDocumentTypeExt.stringValues,
+                  ),
+                  20.verticalSpace,
+                  AppTextField(
+                    controller: documentIdController,
+                    label: context.l10n.ninNumber,
+                    hintText: context.l10n.enterNinNumber,
+                  ),
+                  Text(
+                    context.l10n.uploadFront,
+                    style: context.theme.textTheme.labelMedium,
+                  ),
+                  Text(
+                    context.l10n.uploadFrontDesc,
+                    style: context.theme.textTheme.displaySmall?.copyWith(
+                      fontSize: 12.h,
+                      color: const Color(0xFF5C5C66),
+                    ),
+                  ),
+                  20.verticalSpace,
+                  _ChooseFileContainer(
+                    onImageSelected: (file) {
+                      selectedFrontImage = file;
+                      setState(() {});
+                    },
+                    selectedImage: selectedFrontImage,
+                    removeSelectedImage: () {
+                      selectedFrontImage = null;
+                      setState(() {});
+                    },
+                  ),
+                  20.verticalSpace,
+                  Text(
+                    context.l10n.uploadBack,
+                    style: context.theme.textTheme.labelMedium,
+                  ),
+                  Text(
+                    context.l10n.uploadBackDesc,
+                    style: context.theme.textTheme.displaySmall?.copyWith(
+                      fontSize: 12.h,
+                      color: const Color(0xFF5C5C66),
+                    ),
+                  ),
+                  20.verticalSpace,
+                  _ChooseFileContainer(
+                    onImageSelected: (file) {
+                      selectedBackImage = file;
+                      setState(() {});
+                    },
+                    selectedImage: selectedBackImage,
+                    removeSelectedImage: () {
+                      selectedBackImage = null;
+                      setState(() {});
+                    },
+                  ),
+                  20.verticalSpace,
+                  Row(
+                    children: [
+                      AppCheckbox(onChanged: (value) {}),
+                      10.horizontalSpace,
+                      Flexible(child: Text(context.l10n.confirmAllInfoProvided))
+                    ],
+                  ),
+                  50.verticalSpace,
+                  Consumer(
+                    builder: (context, ref, _) {
+                      final isEnabled = documentType.isNotEmpty &&
+                          docIdIsPopulated &&
+                          (selectedFrontImage != null) &&
+                          (selectedBackImage != null);
+                      return AppButton(
+                        isEnabled: isEnabled,
+                        onPressed: _showSubmitDocument,
+                      );
+                    },
+                  )
+                ],
               ),
             ),
-            20.verticalSpace,
-            _ChooseFileContainer(
-              onImageSelected: (file) {
-                selectedFrontImage = file;
-                setState(() {});
-              },
-              selectedImage: selectedFrontImage,
-              removeSelectedImage: () {
-                selectedFrontImage = null;
-                setState(() {});
-              },
-            ),
-            20.verticalSpace,
-            Text(
-              context.l10n.uploadBack,
-              style: context.theme.textTheme.labelMedium,
-            ),
-            Text(
-              context.l10n.uploadBackDesc,
-              style: context.theme.textTheme.displaySmall?.copyWith(
-                fontSize: 12.h,
-                color: const Color(0xFF5C5C66),
-              ),
-            ),
-            20.verticalSpace,
-            _ChooseFileContainer(
-              onImageSelected: (file) {
-                selectedBackImage = file;
-                setState(() {});
-              },
-              selectedImage: selectedBackImage,
-              removeSelectedImage: () {
-                selectedBackImage = null;
-                setState(() {});
-              },
-            ),
-            20.verticalSpace,
-            Row(
-              children: [
-                AppCheckbox(onChanged: (value) {}),
-                10.horizontalSpace,
-                Flexible(child: Text(context.l10n.confirmAllInfoProvided))
-              ],
-            ),
-            50.verticalSpace,
-            Consumer(builder: (context, ref, _) {
-              final loadState = ref.watch(clientKycNotifierProvider.select(
-                (value) => value.kycLoadState,
-              ));
-              final isEnabled = documentType.isNotEmpty &&
-                  docIdIsPopulated &&
-                  (selectedFrontImage != null) &&
-                  (selectedBackImage != null);
-              final isloading = loadState == LoadState.loading;
-              return AppButton(
-                isLoading: isloading,
-                isEnabled: isEnabled,
-                onPressed: () => _submitKYC(ref),
-              );
-            })
-          ],
-        ),
-      ),
     );
+  }
+
+  void _showSubmitDocument() {
+    showSubmitDocument = true;
+    setState(() {});
   }
 
   void _submitKYC(WidgetRef ref) async {

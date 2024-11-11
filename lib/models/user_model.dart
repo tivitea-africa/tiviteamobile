@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
+import 'package:tivi_tea/repositories/enums.dart';
 
 part 'user_model.g.dart';
 
@@ -36,6 +37,8 @@ class User {
   final List<dynamic>? groups;
   @JsonKey(name: 'user_permissions')
   final List<dynamic>? userPermissions;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final KYCVerificationStatus? kycVerificationStatus;
 
   User({
     this.id,
@@ -55,6 +58,7 @@ class User {
     this.profilePicture,
     this.groups = const [],
     this.userPermissions = const [],
+    this.kycVerificationStatus,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -79,6 +83,7 @@ class User {
     String? profilePicture,
     List<String>? groups,
     List<String>? userPermissions,
+    KYCVerificationStatus? kycVerificationStatus,
   }) {
     return User(
       id: id ?? this.id,
@@ -98,6 +103,7 @@ class User {
       profilePicture: profilePicture ?? this.profilePicture,
       groups: groups ?? this.groups,
       userPermissions: userPermissions ?? this.userPermissions,
+      kycVerificationStatus: kycVerificationStatus ?? this.kycVerificationStatus,
     );
   }
 }

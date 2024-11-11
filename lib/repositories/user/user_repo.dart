@@ -12,4 +12,6 @@ abstract interface class UserRepository {
   CurrentState getCurrentState();
   bool? getRememberMe();
   void saveRememberMe(bool val);
+  void saveKYCVerificationStatus(KYCVerificationStatus status);
+  KYCVerificationStatus getKYCVerificationStatus();
 }

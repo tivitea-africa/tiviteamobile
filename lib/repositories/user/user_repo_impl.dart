@@ -77,6 +77,24 @@ class UserRepoImpl implements UserRepository {
     }
     await _storage.put(HiveKeys.user, json.encode(user));
   }
+
+  @override
+  void saveKYCVerificationStatus(KYCVerificationStatus val) async {
+    await _storage.put(HiveKeys.kycVerificationStatus, val.name);
+  }
+
+  @override
+  KYCVerificationStatus getKYCVerificationStatus() {
+    switch (_storage.get(HiveKeys.kycVerificationStatus) ??
+        CurrentState.initial.name) {
+      case 'documentsSubmitted':
+        return KYCVerificationStatus.documentsSubmitted;
+      case 'documentsVerified':
+        return KYCVerificationStatus.documentsVerified;
+      default:
+        return KYCVerificationStatus.documentsSubmitted;
+    }
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>(

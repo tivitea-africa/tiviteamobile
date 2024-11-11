@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
@@ -9,7 +10,9 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
+import 'package:tivi_tea/features/services/view/widgets/kyc_dialog.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class BookNowContainer extends StatelessWidget {
   final ListingResponseModel listing;
@@ -134,15 +137,28 @@ class BookNowContainer extends StatelessWidget {
             ),
           ],
           20.verticalSpace,
-          AppButton(
-            buttonText: context.l10n.bookNow,
-            onPressed: () => context.push(
-              '${AppRoutes.servicesView}/${AppRoutes.bookListingView}',
-              extra: listing,
-            ),
+          Consumer(
+            builder: (context, ref, _) {
+              return AppButton(
+                buttonText: context.l10n.bookNow,
+                onPressed: () => _navigateToNextView(context, ref)
+              );
+            }
           ),
         ],
       ),
     );
+  }
+
+  void _navigateToNextView(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(currentUserProvider);
+    if (user.kycIsVerified != true) {
+      context.showCustomDialog(child: const KYCDialog());
+    } else {
+      context.push(
+        '${AppRoutes.servicesView}/${AppRoutes.bookListingView}',
+        extra: listing,
+      );
+    }
   }
 }

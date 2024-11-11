@@ -6,6 +6,7 @@ import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
+import 'package:tivi_tea/repositories/enums.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 
 final class GeneralAuthenticationRepo {
@@ -33,6 +34,14 @@ final class GeneralAuthenticationRepo {
         ),
       );
 
+      if (userLoginData?.kycIsVerified == true) {
+        userRepository?.saveUser(
+          userLoginData?.user?.copyWith(
+            kycVerificationStatus: KYCVerificationStatus.documentsVerified,
+          ),
+        );
+      }
+
       return result;
     } on DioException catch (e) {
       return AppException.handleError(e);
@@ -49,7 +58,15 @@ final class GeneralAuthenticationRepo {
 
   Future<BaseResponse> submitKyc(PartnerKycRequestBody data) async {
     try {
-      return await restClient.submitKyc(data);
+      final result = await restClient.submitKyc(data);
+      final user = userRepository?.getUser();
+      await userRepository?.saveUser(
+        user?.copyWith(
+          kycVerificationStatus: KYCVerificationStatus.documentsSubmitted,
+        ),
+      );
+
+      return result;
     } on DioException catch (e) {
       return AppException.handleError(e);
     }
@@ -57,7 +74,14 @@ final class GeneralAuthenticationRepo {
 
   Future<BaseResponse> submitClientKyc(ClientKYCRequestBody data) async {
     try {
-      return await restClient.submitClientKyc(data);
+      final result = await restClient.submitClientKyc(data);
+      final user = userRepository?.getUser();
+      final userWithUpdatedKYCVerificationStatus = user?.copyWith(
+        kycVerificationStatus: KYCVerificationStatus.documentsSubmitted,
+      );
+      await userRepository?.saveUser(userWithUpdatedKYCVerificationStatus);
+
+      return result;
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

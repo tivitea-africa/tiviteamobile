@@ -12,6 +12,7 @@ import 'package:tivi_tea/features/common/app_checkbox.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
+import 'package:tivi_tea/features/kyc/view/pages/submit_document_view.dart';
 import 'package:tivi_tea/features/kyc/view/widgets/choose_file_container.dart';
 import 'package:tivi_tea/features/kyc/view_model/partner/partner_kyc_notifier.dart';
 import 'package:tivi_tea/features/profile/view_model/profile_notifer.dart';
@@ -21,18 +22,21 @@ import 'package:tivi_tea/features/services/view_model/service_provider/partner_s
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class PartnerKYCSecondView extends StatefulWidget {
+class PartnerKYCSecondView extends ConsumerStatefulWidget {
   final KYCSecondViewParams params;
   const PartnerKYCSecondView({super.key, required this.params});
 
   @override
-  State<PartnerKYCSecondView> createState() => _PartnerKYCSecondViewState();
+  ConsumerState<PartnerKYCSecondView> createState() =>
+      _PartnerKYCSecondViewState();
 }
 
-class _PartnerKYCSecondViewState extends State<PartnerKYCSecondView> {
+class _PartnerKYCSecondViewState extends ConsumerState<PartnerKYCSecondView> {
   TextEditingController utilityBillNumberController = TextEditingController();
   XFile? selectedUtilityBillImage;
   String documentType = '';
+
+  bool showSubmitDocument = false;
   @override
   Widget build(BuildContext context) {
     return RegistrationScaffold(
@@ -40,72 +44,84 @@ class _PartnerKYCSecondViewState extends State<PartnerKYCSecondView> {
         headerSectionTitle: context.l10n.businessVerification,
         headerSectionSubtitle: context.l10n.tiviteaRequires,
       ),
-      body: Column(
-        children: [
-          AppTextField(
-            controller: utilityBillNumberController,
-            label: context.l10n.proofOfBusinessAddress,
-            hintText: context.l10n.utilityBillDocument,
-          ),
-          ChooseFileContainer(
-            onImageSelected: (file) {
-              selectedUtilityBillImage = file;
-              setState(() {});
-            },
-          ),
-          20.verticalSpace,
-          if (selectedUtilityBillImage == null)
-            const SizedBox.shrink()
-          else
-            Container(
-              width: context.width,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.sp),
-                border: Border.all(color: const Color(0xFFEBEBEB)),
-              ),
-              child: Row(
+      body: showSubmitDocument
+          ? SubmitDocumentView(
+              submitDocs: () => _submit(ref),
+            )
+          : SingleChildScrollView(
+              child: Column(
                 children: [
-                  AppSvgWidget(path: Assets.svgs.doc),
-                  10.horizontalSpace,
-                  Text(selectedUtilityBillImage?.path.split('-').last ?? ''),
-                  10.horizontalSpace,
-                  InkWell(
-                    onTap: () {
-                      selectedUtilityBillImage = null;
+                  AppTextField(
+                    controller: utilityBillNumberController,
+                    label: context.l10n.proofOfBusinessAddress,
+                    hintText: context.l10n.utilityBillDocument,
+                  ),
+                  ChooseFileContainer(
+                    onImageSelected: (file) {
+                      selectedUtilityBillImage = file;
                       setState(() {});
                     },
-                    child: const Icon(Icons.close, color: Colors.red),
-                  )
+                  ),
+                  20.verticalSpace,
+                  if (selectedUtilityBillImage == null)
+                    const SizedBox.shrink()
+                  else
+                    Container(
+                      width: context.width,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.sp),
+                        border: Border.all(color: const Color(0xFFEBEBEB)),
+                      ),
+                      child: Row(
+                        children: [
+                          AppSvgWidget(path: Assets.svgs.doc),
+                          10.horizontalSpace,
+                          Text(selectedUtilityBillImage?.path.split('-').last ??
+                              ''),
+                          10.horizontalSpace,
+                          InkWell(
+                            onTap: () {
+                              selectedUtilityBillImage = null;
+                              setState(() {});
+                            },
+                            child: const Icon(Icons.close, color: Colors.red),
+                          )
+                        ],
+                      ),
+                    ),
+                  20.verticalSpace,
+                  Row(
+                    children: [
+                      AppCheckbox(onChanged: (value) {}),
+                      10.horizontalSpace,
+                      Flexible(child: Text(context.l10n.confirmAllInfoProvided))
+                    ],
+                  ),
+                  50.verticalSpace,
+                  Consumer(
+                    builder: (context, ref, _) {
+                      final loadState =
+                          ref.watch(partnerKycNotifierProvider).kycLoadState;
+                      final imageUploadState = ref
+                          .watch(partnerServicesNotiferProvider)
+                          .cloudinaryUploadState;
+                      return AppButton(
+                        isLoading: loadState == LoadState.loading ||
+                            imageUploadState == LoadState.loading,
+                        onPressed: _showSubmitDocument,
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
-          20.verticalSpace,
-          Row(
-            children: [
-              AppCheckbox(onChanged: (value) {}),
-              10.horizontalSpace,
-              Flexible(child: Text(context.l10n.confirmAllInfoProvided))
-            ],
-          ),
-          50.verticalSpace,
-          Consumer(
-            builder: (context, ref, _) {
-              final loadState =
-                  ref.watch(partnerKycNotifierProvider).kycLoadState;
-              final imageUploadState = ref
-                  .watch(partnerServicesNotiferProvider)
-                  .cloudinaryUploadState;
-              return AppButton(
-                isLoading: loadState == LoadState.loading ||
-                    imageUploadState == LoadState.loading,
-                onPressed: () => _submit(ref),
-              );
-            },
-          ),
-        ],
-      ),
     );
+  }
+
+  void _showSubmitDocument() {
+    showSubmitDocument = true;
+    setState(() {});
   }
 
   void _submit(WidgetRef ref) async {
