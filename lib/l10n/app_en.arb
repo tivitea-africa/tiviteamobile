@@ -832,5 +832,29 @@
     "uploadBackDesc":"Upload the back side of your support document in JPG, PNG, or PDF",
     "@uploadBackDesc":{
         "description": "Upload back text"
+    },
+    "accountVerification":"Account Verification",
+    "@accountVerification":{
+        "description": "Account Verification text"
+    },
+    "twoBusinessDays":"Please know that account verification may take up to 2 business days. You will be notified about the status of your verification.",
+    "@twoBusinessDays":{
+        "description": "Account Verification description text"
+    },
+    "submitDocuments":"Submit Documents",
+    "@submitDocuments":{
+        "description": "Submit Documents text"
+    },
+    "documentSubmitted":"Documents submitted for verification!",
+    "@documentSubmitted":{
+        "description": "Documents submitted text"
+    },
+    "afterTwoBusinessDays":"We will notify you about your verification status after 2 business days. ",
+    "@afterTwoBusinessDays":{
+        "description": "Documents submitted description text"
+    },
+    "goToDashboard":"Go to Dashboard",
+    "@goToDashboard":{
+        "description": "Go to Dashboard text"
     }
 }

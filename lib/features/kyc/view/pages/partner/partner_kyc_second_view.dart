@@ -113,7 +113,7 @@ class _PartnerKYCSecondViewState extends State<PartnerKYCSecondView> {
     final businessDocImageUrl = await _uploadImages(ref, widget.params.image);
     final image = await _uploadImages(ref, selectedUtilityBillImage);
 
-    debugLog("IMage::: $businessDocImageUrl");
+    debugLog("Image::: $businessDocImageUrl");
 
     final data = PartnerKycRequestBody(
       documentType: widget.params.documentType,

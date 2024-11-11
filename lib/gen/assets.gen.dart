@@ -203,6 +203,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/camera.svg
   String get camera => 'assets/svgs/camera.svg';
 
+  /// File path: assets/svgs/check-circle.svg
+  String get checkCircle => 'assets/svgs/check-circle.svg';
+
   /// File path: assets/svgs/chevron-left.svg
   String get chevronLeft => 'assets/svgs/chevron-left.svg';
 
@@ -275,6 +278,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/payment_drawer_icon.svg
   String get paymentDrawerIcon => 'assets/svgs/payment_drawer_icon.svg';
 
+  /// File path: assets/svgs/pending_verification.svg
+  String get pendingVerification => 'assets/svgs/pending_verification.svg';
+
   /// File path: assets/svgs/profile-add.svg
   String get profileAdd => 'assets/svgs/profile-add.svg';
 
@@ -326,6 +332,10 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/star.svg
   String get star => 'assets/svgs/star.svg';
 
+  /// File path: assets/svgs/successful_verification.svg
+  String get successfulVerification =>
+      'assets/svgs/successful_verification.svg';
+
   /// File path: assets/svgs/suitcase.svg
   String get suitcase => 'assets/svgs/suitcase.svg';
 
@@ -352,6 +362,7 @@ class $AssetsSvgsGen {
         calendar,
         callOutgoing,
         camera,
+        checkCircle,
         chevronLeft,
         cloudUpload,
         dashboardDrawerIcon,
@@ -376,6 +387,7 @@ class $AssetsSvgsGen {
         messagesDrawerIcon,
         notificationIcon,
         paymentDrawerIcon,
+        pendingVerification,
         profileAdd,
         profileCamera,
         profileCoworking,
@@ -393,6 +405,7 @@ class $AssetsSvgsGen {
         settingsDrawerIcon,
         soldiersDrawerIcon,
         star,
+        successfulVerification,
         suitcase,
         taxi,
         userGroup,
