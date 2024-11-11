@@ -26,6 +26,7 @@ class BookingNotifer extends _$BookingNotifer {
     required VoidCallback onSuccess,
     required void Function(String) onError,
   }) async {
+    state = state.copyWith(loadState: LoadState.loading);
     try {
       final response = await _repo.bookWorkspace(listingId, data);
       if (!response.isSuccess()) {
@@ -45,6 +46,7 @@ class BookingNotifer extends _$BookingNotifer {
     required VoidCallback onSuccess,
     required void Function(String) onError,
   }) async {
+    state = state.copyWith(loadState: LoadState.loading);
     try {
       final response = await _repo.bookWorktool(listingId, data);
       if (!response.isSuccess()) {

@@ -14,4 +14,30 @@ class BookingSummaryParams {
     this.numOfPeople = 0,
     this.roomId,
   });
+
+  BookingSummaryParams copyWith({
+    DateTime? selectedDateFrom,
+    DateTime? selectedDateTo,
+    ListingResponseModel? listing,
+    String? roomId,
+    int? numOfPeople,
+  }) {
+    return BookingSummaryParams(
+      selectedDateFrom: selectedDateFrom ?? this.selectedDateFrom,
+      selectedDateTo: selectedDateTo ?? this.selectedDateTo,
+      listing: listing ?? this.listing,
+      roomId: roomId ?? this.roomId,
+      numOfPeople: numOfPeople ?? this.numOfPeople,
+    );
+  }
+}
+
+class ChooseRoomViewParams {
+  final BookingSummaryParams bookingSummaryParams;
+  final List<Room> rooms;
+
+  const ChooseRoomViewParams({
+    required this.bookingSummaryParams,
+    required this.rooms,
+  });
 }

@@ -122,15 +122,7 @@ class _BookWorkSpaceOrListingViewState
                   AppButton(
                     isEnabled: (bothDatesAreSelected && canProceed),
                     buttonText: context.l10n.next,
-                    onPressed: () => context.push(
-                      '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
-                      extra: BookingSummaryParams(
-                        selectedDateFrom: _selectedDateFrom!,
-                        selectedDateTo: _selectedDateTo!,
-                        listing: widget.listing,
-                        
-                      ),
-                    ),
+                    onPressed: _navigate
                   ),
                 ],
               ),
@@ -139,6 +131,36 @@ class _BookWorkSpaceOrListingViewState
         ],
       ),
     );
+  }
+
+  void _navigate() {
+    final bool isWorkSpace =
+        widget.listing.listingType?.enumType == CreateListingType.workSpace;
+    if (isWorkSpace) {
+      final data = BookingSummaryParams(
+        selectedDateFrom: _selectedDateFrom!,
+        selectedDateTo: _selectedDateTo!,
+        listing: widget.listing,
+        numOfPeople: int.parse(_numberOfPeople.text),
+      );
+      context.push(
+        '${AppRoutes.servicesView}/${AppRoutes.chooseRoomView}',
+        extra: ChooseRoomViewParams(
+          bookingSummaryParams: data,
+          rooms: widget.listing.rooms ?? [],
+        ),
+      );
+    } else {
+      context.push(
+        '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
+        extra: BookingSummaryParams(
+          selectedDateFrom: _selectedDateFrom!,
+          selectedDateTo: _selectedDateTo!,
+          listing: widget.listing,
+          numOfPeople: int.parse(_numberOfPeople.text),
+        ),
+      );
+    }
   }
 
   void _selectDateFrom() async {

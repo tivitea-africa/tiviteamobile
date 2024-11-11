@@ -892,5 +892,9 @@
     "newPassword":"New Password",
     "@newPassword":{
         "description": "New Password text"
+    },
+    "chooseRoom":"Choose Room",
+    "@chooseRoom":{
+        "description": "Choose Room text"
     }
 }

@@ -9,6 +9,7 @@ import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_first_view.
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_second_view.dart';
 import 'package:tivi_tea/features/services/view/pages/book_workspace_view.dart';
 import 'package:tivi_tea/features/services/view/pages/booking_summary_view.dart';
+import 'package:tivi_tea/features/services/view/pages/choose_room_view.dart';
 import 'package:tivi_tea/features/services/view/pages/listing_detail_view.dart';
 import 'package:tivi_tea/features/services/view/pages/start_kyc_process_page.dart';
 
@@ -57,6 +58,13 @@ class ServicesRouter {
     path: AppRoutes.clientKYCView,
     builder: (BuildContext context, GoRouterState state) {
       return const ClientKYCView();
+    },
+  );
+  static final chooseRoomView = GoRoute(
+    path: AppRoutes.chooseRoomView,
+    builder: (BuildContext context, GoRouterState state) {
+      final params = state.extra as ChooseRoomViewParams;
+      return ChooseRoomView(params: params);
     },
   );
 }

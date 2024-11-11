@@ -11,7 +11,7 @@ class AppImageWidget extends StatelessWidget {
 
   final String imagePath;
   final BoxFit? fit;
-  final BorderRadiusGeometry? borderRadius; 
+  final BorderRadiusGeometry? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,12 @@ class AppImageWidget extends StatelessWidget {
 class _NoImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Text('No Image data available');
+    return const Center(
+      child: Text(
+        'No Image data available',
+        textAlign: TextAlign.center,
+      ),
+    );
 
     ///TODO: Add to [l10n]
   }

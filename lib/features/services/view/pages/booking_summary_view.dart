@@ -203,8 +203,8 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
       notifier.bookWorkSpace(
         listingId: widget.params.listing.id ?? '',
         data: data,
-        onSuccess: () {},
-        onError: (message) {},
+        onSuccess: () => context.showSuccess('Success'),
+        onError: (message) => context.showError(message),
       );
     } else {
       final data = BookWorkToolModel(
@@ -214,8 +214,8 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
       notifier.bookWorktool(
         listingId: widget.params.listing.id ?? '',
         data: data,
-        onSuccess: () {},
-        onError: (message) {},
+        onSuccess: () => context.showSuccess('Success'),
+        onError: (message) => context.showError(message),
       );
     }
   }

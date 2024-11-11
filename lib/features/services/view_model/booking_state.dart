@@ -6,7 +6,7 @@ class BookingState {
   });
   factory BookingState.initial() {
     return BookingState(
-      loadState: LoadState.loading,
+      loadState: LoadState.idle,
     );
   }
   final LoadState loadState;

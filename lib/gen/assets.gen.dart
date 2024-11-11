@@ -182,6 +182,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/add_photo.svg
   String get addPhoto => 'assets/svgs/add_photo.svg';
 
+  /// File path: assets/svgs/arrow-right.svg
+  String get arrowRight => 'assets/svgs/arrow-right.svg';
+
   /// File path: assets/svgs/arrow-up-split.svg
   String get arrowUpSplit => 'assets/svgs/arrow-up-split.svg';
 
@@ -358,6 +361,7 @@ class $AssetsSvgsGen {
   List<String> get values => [
         activitiesDrawerIcon,
         addPhoto,
+        arrowRight,
         arrowUpSplit,
         backButton,
         box,
