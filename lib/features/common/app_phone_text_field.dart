@@ -10,14 +10,20 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 class AppPhoneTextField extends StatelessWidget {
   final String? label;
   final String? hintText;
-  final void Function(String)? onChanged;
+  final void Function(PhoneNumber)? onChanged;
   final String? Function(PhoneNumber?)? validateFunction;
+  final String? initialValue;
+  final String? initialCountryCode;
+  final bool readOnly;
   const AppPhoneTextField({
     super.key,
     this.label,
     this.hintText,
     this.onChanged,
     this.validateFunction,
+    this.initialValue,
+    this.initialCountryCode,
+    this.readOnly = false,
   });
 
   @override
@@ -32,6 +38,9 @@ class AppPhoneTextField extends StatelessWidget {
           ),
         if (label != null) SizedBox(height: 10.h),
         IntlPhoneField(
+          initialValue: initialValue,
+          initialCountryCode: 'NG',
+          readOnly: readOnly,
           showCountryFlag: true,
           validator: validateFunction,
           dropdownIconPosition: IconPosition.trailing,
@@ -52,7 +61,7 @@ class AppPhoneTextField extends StatelessWidget {
               ),
             ),
           ),
-          onChanged: (value) {},
+          onChanged: onChanged,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.transparent,

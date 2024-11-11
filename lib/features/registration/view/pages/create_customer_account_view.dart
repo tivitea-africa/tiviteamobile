@@ -108,7 +108,7 @@ class _CreateCustomerAccountState extends State<CreateCustomerAccount> {
                 label: context.l10n.phoneNumber,
                 hintText: context.l10n.phoneNumberHintText,
                 onChanged: (phone) {
-                  phoneNumber = phone;
+                  phoneNumber = phone.completeNumber;
                   setState(() {});
                 },
                 //validateFunction: Validators.name(),

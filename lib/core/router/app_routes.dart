@@ -10,6 +10,7 @@ class AppRoutes {
   static const String createServiceProviderAccount = '/createServiceProviderAccount';
   static const String createServiceProviderAccountSecondView = '/createServiceProviderAccountSecondView';
   static const String serviceProviderDashboard = 'serviceProviderDashboard';
+  static const String clientDashboard = 'clientDashboard';
   static const String servicesView = '/servicesView';
   static const String historyView = '/historyView';
   static const String profile = '/profile';
@@ -24,4 +25,5 @@ class AppRoutes {
   static const String partnerKYCSecondView = 'partnerKYCSecondView';
   static const String clientKYCView = 'clientKYCView';
   static const String startKYCProcessView = 'startKYCProcessView';
+  static const String editProfileView = 'editProfileView';
 }

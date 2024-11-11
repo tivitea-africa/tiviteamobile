@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/router/home_router.dart';
 import 'package:tivi_tea/core/router/my_listings_router.dart';
+import 'package:tivi_tea/core/router/profile_router.dart';
 import 'package:tivi_tea/core/router/services_router.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/home/view/general_widget.dart';
@@ -58,6 +59,7 @@ final GoRouter router = GoRouter(
               },
               routes: [
                 HomeRouter.serviceProviderDashboard,
+                HomeRouter.clientDashboard,
                 HomeRouter.allListingsView,
               ],
             ),
@@ -106,6 +108,9 @@ final GoRouter router = GoRouter(
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: ProfileView(),
               ),
+              routes: [
+                ProfileRouter.editProfile,
+              ]
             ),
           ],
         ),

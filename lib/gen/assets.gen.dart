@@ -260,6 +260,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/location.svg
   String get location => 'assets/svgs/location.svg';
 
+  /// File path: assets/svgs/lock.svg
+  String get lock => 'assets/svgs/lock.svg';
+
   /// File path: assets/svgs/logout.svg
   String get logout => 'assets/svgs/logout.svg';
 
@@ -381,6 +384,7 @@ class $AssetsSvgsGen {
         lightning,
         listingDrawerIcon,
         location,
+        lock,
         logout,
         mail,
         mapMarker,

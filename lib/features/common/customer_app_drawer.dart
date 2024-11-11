@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/common/app_drawer_list_tile.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -9,6 +11,8 @@ class CustomerAppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final routePath = GoRouterState.of(context).matchedLocation;
+    const dashboard = '${AppRoutes.homeView}${AppRoutes.clientDashboard}';
     return Drawer(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -32,15 +36,26 @@ class CustomerAppDrawer extends StatelessWidget {
           DrawerListTile(
             icon: Assets.svgs.dashboardDrawerIcon,
             label: context.l10n.dashboard,
-            isSelected: true,
+            isSelected: routePath == dashboard,
+            onTap: () {
+              if (routePath == dashboard) {
+                context.go(AppRoutes.homeView);
+                return;
+              }
+              context.go(dashboard);
+            },
           ),
           DrawerListTile(
             icon: Assets.svgs.profileDrawerIcon,
             label: context.l10n.myProfile,
+            isSelected: routePath == AppRoutes.profile,
+            onTap: () => context.go(AppRoutes.profile),
           ),
           DrawerListTile(
             icon: Assets.svgs.listingDrawerIcon,
-            label: context.l10n.myListing,
+            label: context.l10n.myFavorites,
+            isSelected: routePath == AppRoutes.myListingView,
+            onTap: () => context.go(AppRoutes.myListingView),
           ),
           DrawerListTile(
             icon: Assets.svgs.historyDrawerIcon,
@@ -87,6 +102,7 @@ class CustomerAppDrawer extends StatelessWidget {
                   icon: Assets.svgs.logout,
                   label: context.l10n.logOut,
                   logOutButton: true,
+                  onTap: () => context.pushReplacement(AppRoutes.loginView),
                 ),
               ],
             ),

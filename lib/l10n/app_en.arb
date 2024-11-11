@@ -524,6 +524,10 @@
     "@totalReceived":{
         "description": "Total Received text"
     },
+    "totalActivities":"Total Activities",
+    "@totalActivities":{
+        "description": "Total Activities text"
+    },
     "bookingSummary":"Booking Summary",
     "@bookingSummary":{
         "description": "Booking Summary text"
@@ -531,6 +535,10 @@
     "incomingBookings":"Incoming Bookings",
     "@incomingBookings":{
         "description": "Incoming Bookings text"
+    },
+    "upcomingBookings":"Upcoming Bookings",
+    "@upcomingBookings":{
+        "description": "Upcoming Bookings text"
     },
     "ongoingBookings":"Ongoing Bookings",
     "@ongoingBookings":{
@@ -615,6 +623,10 @@
     "addMore":"Add More",
     "@addMore":{
         "description": "Add More text"
+    },
+    "addCard":"Add Card",
+    "@addCard":{
+        "description": "Add Card text"
     },
     "uploadImagesOf": "Upload images of {tool}",
     "@uploadImagesOf": {
@@ -864,5 +876,13 @@
     "goToDashboard":"Go to Dashboard",
     "@goToDashboard":{
         "description": "Go to Dashboard text"
+    },
+    "editProfile":"Edit Profile",
+    "@editProfile":{
+        "description": "Edit Profile text"
+    },
+    "updateProfile":"Update Profile",
+    "@updateProfile":{
+        "description": "Update Profile text"
     }
 }

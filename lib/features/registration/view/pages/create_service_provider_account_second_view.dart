@@ -106,7 +106,7 @@ class _CreateServiceProviderAccountSecondViewState
                   return phone?.completeNumber;
                 },
                 onChanged: (phone) {
-                  alternativePhoneNumber = phone;
+                  alternativePhoneNumber = phone.completeNumber;
                   setState(() {});
                 },
               ),

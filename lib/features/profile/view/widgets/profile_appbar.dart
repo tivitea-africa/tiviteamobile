@@ -23,7 +23,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
           child: Column(
             children: [
               const CircleAvatar(radius: 50),
-              5.horizontalSpace,
+              10.verticalSpace,
               Text(
                 '${user.firstName} ${user.lastName}',
                 style: context.theme.textTheme.titleLarge?.copyWith(

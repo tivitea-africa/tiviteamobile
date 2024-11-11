@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/profile/view/mixins/profile_item_mixin.dart';
 import 'package:tivi_tea/features/profile/view/widgets/profile_appbar.dart';
+import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class ProfileView extends ConsumerWidget with ProfileItemMixin {
   const ProfileView({super.key});
@@ -52,6 +56,13 @@ class ProfileView extends ConsumerWidget with ProfileItemMixin {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.w) + EdgeInsets.only(bottom: 20.h),
+            child: AppButton(
+              buttonText: context.l10n.editProfile,
+              onPressed: () => context.push('${AppRoutes.profile}/${AppRoutes.editProfileView}'),
+            ),
+          )
         ],
       ),
     );

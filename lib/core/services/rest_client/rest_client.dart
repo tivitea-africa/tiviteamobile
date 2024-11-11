@@ -12,6 +12,7 @@ import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
+import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
@@ -77,6 +78,8 @@ abstract class RestClient {
   Future<BaseResponse<ClientDashboardModel>> getClientDashboard();
   @GET('/dashboard/user/profile')
   Future<BaseResponse<GetUserProfileResponse>> getUserProfile();
+  @POST('/dashboard/edit-profile')
+  Future<BaseResponse<User>> updateUserProfile(@Body() EditProfileModel data);
   @POST('/dashboard/client/listing/favorite')
   Future<BaseResponse> favoriteListing(@Body() FavoriteListingRequestBody data);
   @GET('/dashboard/client/listing/favorite')

@@ -109,7 +109,7 @@ class _CreateServiceProviderAccountState
                 //   return phone?.completeNumber;
                 // },
                 onChanged: (phone) {
-                  phoneNumber = phone;
+                  phoneNumber = phone.completeNumber;
                   setState(() {});
                 },
               ),
