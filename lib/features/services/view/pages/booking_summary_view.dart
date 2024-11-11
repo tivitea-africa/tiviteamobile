@@ -1,16 +1,22 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/date_extensions.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
+import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
+import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/listing_widget.dart';
+import 'package:tivi_tea/features/services/view_model/booking_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
@@ -150,7 +156,8 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
                           Text(
                             widget.params.listing.address ?? '',
                             textAlign: TextAlign.center,
-                            style: context.theme.textTheme.displaySmall?.copyWith(
+                            style:
+                                context.theme.textTheme.displaySmall?.copyWith(
                               fontSize: 12.sp,
                             ),
                           ),
@@ -165,16 +172,52 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
           50.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w),
-            child: AppButton(buttonText: context.l10n.payNow, onPressed: () {}
-                //  context.push(
-                //   '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
-                //   extra: widget.listing,
-                // ),
-                ),
+            child: Consumer(
+              builder: (context, ref, _) {
+                final loadState = ref.watch(bookingNotiferProvider.select(
+                  (value) => value.loadState,
+                ));
+                return AppButton(
+                  isLoading: loadState == LoadState.loading,
+                  buttonText: context.l10n.continue_,
+                  onPressed: () => _submit(ref),
+                );
+              },
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void _submit(WidgetRef ref) async {
+    final notifier = ref.watch(bookingNotiferProvider.notifier);
+    if (widget.params.listing.listingType?.enumType ==
+        CreateListingType.workSpace) {
+      final data = BookWorkSpaceModel(
+        pickUpDate: widget.params.selectedDateFrom,
+        returnDate: widget.params.selectedDateTo,
+        numOfPeople: widget.params.numOfPeople,
+        subListingId: widget.params.roomId,
+      );
+      notifier.bookWorkSpace(
+        listingId: widget.params.listing.id ?? '',
+        data: data,
+        onSuccess: () {},
+        onError: (message) {},
+      );
+    } else {
+      final data = BookWorkToolModel(
+        pickUpDate: widget.params.selectedDateFrom,
+        returnDate: widget.params.selectedDateTo,
+      );
+      notifier.bookWorktool(
+        listingId: widget.params.listing.id ?? '',
+        data: data,
+        onSuccess: () {},
+        onError: (message) {},
+      );
+    }
   }
 }
 

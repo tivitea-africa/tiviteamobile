@@ -29,15 +29,16 @@ final class GeneralAuthenticationRepo {
       userRepository?.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
 
       userRepository?.saveUser(userLoginData?.user);
+
+      final user = userRepository?.getUser();
       userRepository?.saveUser(
-        userLoginData?.user?.copyWith(
-          kycIsVerified: userLoginData.kycIsVerified,
-        ),
+        user?.copyWith(kycIsVerified: userLoginData?.kycIsVerified),
       );
 
       if (userLoginData?.kycIsVerified == true) {
+        final user = userRepository?.getUser();
         userRepository?.saveUser(
-          userLoginData?.user?.copyWith(
+          user?.copyWith(
             kycVerificationStatus: KYCVerificationStatus.documentsVerified,
           ),
         );

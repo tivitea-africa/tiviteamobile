@@ -17,6 +17,9 @@ import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
+import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
+import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
+import 'package:tivi_tea/features/services/model/book_workspace_response.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/models/user_model.dart';
@@ -72,6 +75,19 @@ abstract class RestClient {
   @GET('/listings/categories')
   Future<BaseResponse<GenericPaginatedResponse<CategoryResponseModel>>>
       getCategories();
+
+  //<====================> Bookings <====================>
+  @POST('/bookings/client/{listingId}')
+  Future<BaseResponse<BookWorkSpaceResponse>> bookWorkspace(
+    @Path() String listingId,
+    @Body() BookWorkSpaceModel data,
+  );
+
+  @POST('/bookings/client/{listingId}')
+  Future<BaseResponse<BookWorkSpaceResponse>> bookWorktool(
+    @Path() String listingId,
+    @Body() BookWorkToolModel data,
+  );
 
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')
