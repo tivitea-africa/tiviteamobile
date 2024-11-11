@@ -12,6 +12,7 @@ import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
+import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
@@ -41,6 +42,8 @@ abstract class RestClient {
   );
   @POST('/authentication/reset-password')
   Future<BaseResponse> forgotPassword(@Body() ForgotPasswordRequestObject data);
+  @PUT('/authentication/change-password')
+  Future<BaseResponse> changePassword(@Body() ChangePasswordModel data);
   @POST('/authentication/partner/submit-kyc')
   Future<BaseResponse> submitKyc(@Body() PartnerKycRequestBody data);
   @POST('/authentication/client/submit-kyc')

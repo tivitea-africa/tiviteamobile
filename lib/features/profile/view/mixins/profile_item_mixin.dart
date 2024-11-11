@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/profile/model/profile_item_model.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -30,7 +32,9 @@ mixin ProfileItemMixin {
       ProfileItemModel(
         label: context.l10n.changePassword,
         icon: Assets.svgs.profilePassword,
-        onTap: () {},
+        onTap: () => context.push(
+          '${AppRoutes.profile}/${AppRoutes.changePasswordView}',
+        ),
       ),
     ];
   }

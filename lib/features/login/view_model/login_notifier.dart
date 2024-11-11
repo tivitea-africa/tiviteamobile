@@ -5,6 +5,7 @@ import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/view_model/login_state.dart';
+import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/repositories/authentication/general/general_authetication_repo.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
@@ -62,6 +63,25 @@ class LoginNotifier extends _$LoginNotifier {
       if (onSuccess != null) onSuccess();
     } catch (e) {
       state = state.copyWith(forgotPasswordLoadState: LoadState.error);
+      if (onError != null) onError(e.toString());
+    }
+  }
+
+  void changePassword(
+    ChangePasswordModel data, {
+    VoidCallback? onSuccess,
+    void Function(String)? onError,
+  }) async {
+    state = state.copyWith(changePasswordLoadState: LoadState.loading);
+    try {
+      final response = await _repo.changePassword(data);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? '';
+      }
+      state = state.copyWith(changePasswordLoadState: LoadState.success);
+      if (onSuccess != null) onSuccess();
+    } catch (e) {
+      state = state.copyWith(changePasswordLoadState: LoadState.error);
       if (onError != null) onError(e.toString());
     }
   }

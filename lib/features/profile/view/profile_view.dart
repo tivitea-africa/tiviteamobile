@@ -40,18 +40,21 @@ class ProfileView extends ConsumerWidget with ProfileItemMixin {
                     bottom: BorderSide(color: Color(0xFF969BA0)),
                   ),
                 ),
-                child: Row(
-                  children: [
-                    AppSvgWidget(path: profileItems[i].icon),
-                    10.horizontalSpace,
-                    Text(
-                      profileItems[i].label,
-                      style: context.theme.textTheme.displayLarge?.copyWith(
-                        fontSize: 16.sp,
-                        color: const Color(0xFF5C5C66),
+                child: GestureDetector(
+                  onTap: profileItems[i].onTap,
+                  child: Row(
+                    children: [
+                      AppSvgWidget(path: profileItems[i].icon),
+                      10.horizontalSpace,
+                      Text(
+                        profileItems[i].label,
+                        style: context.theme.textTheme.displayLarge?.copyWith(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF5C5C66),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

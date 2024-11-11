@@ -6,6 +6,7 @@ import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
+import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/repositories/enums.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 
@@ -51,6 +52,14 @@ final class GeneralAuthenticationRepo {
   Future<BaseResponse> forgotPassword(ForgotPasswordRequestObject data) async {
     try {
       return await restClient.forgotPassword(data);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
+  Future<BaseResponse> changePassword(ChangePasswordModel data) async {
+    try {
+      return await restClient.changePassword(data);
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

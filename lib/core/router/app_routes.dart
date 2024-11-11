@@ -26,4 +26,5 @@ class AppRoutes {
   static const String clientKYCView = 'clientKYCView';
   static const String startKYCProcessView = 'startKYCProcessView';
   static const String editProfileView = 'editProfileView';
+  static const String changePasswordView = 'changePasswordView';
 }

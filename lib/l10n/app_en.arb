@@ -884,5 +884,13 @@
     "updateProfile":"Update Profile",
     "@updateProfile":{
         "description": "Update Profile text"
+    },
+    "oldPassword":"Old Password",
+    "@oldPassword":{
+        "description": "Old Password text"
+    },
+    "newPassword":"New Password",
+    "@newPassword":{
+        "description": "New Password text"
     }
 }
