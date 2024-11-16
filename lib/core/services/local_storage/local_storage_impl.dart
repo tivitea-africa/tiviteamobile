@@ -5,13 +5,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tivi_tea/core/services/local_storage/local_storage.dart';
 import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 
 class LocalStorageImpl implements LocalStorage {
   LocalStorageImpl(this.box);
   final Box box;
   @override
   Future<void> put(dynamic key, dynamic value) async {
-    return box.put(key, value);
+    return await box.put(key, value);
   }
 
   @override
@@ -30,18 +31,20 @@ class LocalStorageImpl implements LocalStorage {
   }
 
   @override
-  Future<int> clear() {
-    return box.clear();
+  Future<void> clear() async {
+    await box.clear();
+    await Hive.initFlutter();
+    debugLog("Box length => ${box.length}");
   }
 
   @override
-  Future<void> delete(dynamic value) {
-    return box.delete(value);
+  Future<void> delete(dynamic value) async {
+    return await box.delete(value);
   }
 
   @override
   Future<void> putAll(Map<String, dynamic> entries) async {
-    return box.putAll(entries);
+    return await box.putAll(entries);
   }
 }
 

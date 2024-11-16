@@ -13,12 +13,10 @@ import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
-import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/features/services/view/widgets/add_room_section.dart';
-import 'package:tivi_tea/features/services/view/widgets/custom_dropdown.dart';
 import 'package:tivi_tea/features/services/view/widgets/selected_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
@@ -90,15 +88,7 @@ class _CreateNewListingSecondViewState
                   controller: address,
                   hintText: context.l10n.addressOfSpace,
                 ),
-                CustomDropdown(
-                  onOptionSelected: (value) {
-                    pricingType = value;
-                    setState(() {});
-                  },
-                  items: PricingTypeExt.stringValues,
-                ),
-                20.verticalSpace,
-                const SpaceAmenitiesSection(),
+                SelectedImagesView(listingType: widget.listingType),
               ] else ...[
                 Text(
                   context.l10n.workToolDetails,
@@ -132,11 +122,12 @@ class _CreateNewListingSecondViewState
                 20.verticalSpace,
               ],
               if (widget.listingType == CreateListingType.workSpace) ...[
-                20.verticalSpace,
+                50.verticalSpace,
                 const AddRoomSection(),
+              ] else ...[
                 20.verticalSpace,
+                SelectedImagesView(listingType: widget.listingType),
               ],
-              SelectedImagesView(listingType: widget.listingType),
               70.verticalSpace,
               Consumer(
                 builder: (context, ref, _) {
@@ -171,15 +162,17 @@ class _CreateNewListingSecondViewState
                 },
               ),
               10.verticalSpace,
-              Consumer(builder: (context, ref, _) {
-                return AppButton(
-                  buttonText: context.l10n.saveToDraft,
-                  backgroundColor: Colors.white,
-                  textColor: context.theme.primaryColor,
-                  borderColor: context.theme.primaryColor,
-                  onPressed: () {},
-                );
-              }),
+              Consumer(
+                builder: (context, ref, _) {
+                  return AppButton(
+                    buttonText: context.l10n.saveToDraft,
+                    backgroundColor: Colors.white,
+                    textColor: context.theme.primaryColor,
+                    borderColor: context.theme.primaryColor,
+                    onPressed: () {},
+                  );
+                },
+              ),
               20.verticalSpace,
             ],
           ),
@@ -268,40 +261,63 @@ class SpaceAmenitiesSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          context.l10n.spaceAmenities,
+          context.l10n.amenities,
           style: context.theme.textTheme.displayLarge?.copyWith(
             color: context.theme.primaryColor,
             fontSize: 20.sp,
           ),
         ),
         20.verticalSpace,
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
+        Column(
           children: List.generate(
-            amentities.length,
-            (index) {
-              return SizedBox(
-                width: 170.w,
-                child: _AmenityCheckbox(
-                  onChanged: () => amentitiesNotifier.toggleAmenity(
-                    amentities[index].label,
+            (amentities.length / 2).ceil(),
+            (rowIndex) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      child: _AmenityCheckbox(
+                        onChanged: () => amentitiesNotifier.toggleAmenity(
+                          amentities[rowIndex * 2].label,
+                        ),
+                        label: amentities[rowIndex * 2].label,
+                        isSelected: amentities[rowIndex * 2].isSelected,
+                      ),
+                    ),
                   ),
-                  label: amentities[index].label,
-                  isSelected: amentities[index].isSelected,
-                ),
+                  if (rowIndex * 2 + 1 < amentities.length)
+                    Expanded(
+                      child: SizedBox(
+                        child: _AmenityCheckbox(
+                          onChanged: () => amentitiesNotifier.toggleAmenity(
+                            amentities[rowIndex * 2 + 1].label,
+                          ),
+                          label: amentities[rowIndex * 2 + 1].label,
+                          isSelected: amentities[rowIndex * 2 + 1].isSelected,
+                        ),
+                      ),
+                    ),
+                ],
               );
             },
           ),
         ),
         20.verticalSpace,
-        IntrinsicWidth(
-          child: CreateListingButton(
-            text: context.l10n.addMore,
-            iconColor: Colors.black,
-            textColor: Colors.black,
-            backgroundColor: const Color(0xFFE8E8EB),
-            onTap: () => _addNewAmenity(context),
+        InkWell(
+          onTap: () => _addNewAmenity(context),
+          child: Row(
+            children: [
+              Icon(Icons.add_rounded, color: context.theme.primaryColor),
+              5.horizontalSpace,
+              Text(
+                context.l10n.amenities,
+                style: context.theme.textTheme.titleLarge?.copyWith(
+                  fontSize: 12.sp,
+                  color: context.theme.primaryColor,
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -372,7 +388,7 @@ class __AmenityCheckboxState extends State<_AmenityCheckbox> {
     return InkWell(
       onTap: widget.onChanged,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Row(
           children: [
             Container(
@@ -398,7 +414,7 @@ class __AmenityCheckboxState extends State<_AmenityCheckbox> {
               child: Text(
                 widget.label,
                 style: context.theme.textTheme.displayLarge?.copyWith(
-                  fontSize: 14.sp,
+                  fontSize: 12.sp,
                   color: const Color(0xFF737380),
                 ),
               ),

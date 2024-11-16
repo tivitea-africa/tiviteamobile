@@ -93,4 +93,14 @@ class LoginNotifier extends _$LoginNotifier {
   bool getRememberUserValue() {
     return _userRepo.getRememberMe() ?? false;
   }
+
+  void logout({required VoidCallback onDataCleared}) {
+    state = state.copyWith(logoutState: LoadState.loading);
+    try {
+      _repo.logout(onDataCleared: onDataCleared);
+      state = state.copyWith(logoutState: LoadState.success);
+    } catch (e) {
+      state = state.copyWith(logoutState: LoadState.error);
+    }
+  }
 }

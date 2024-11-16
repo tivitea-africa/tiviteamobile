@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/common/app_drawer_list_tile.dart';
+import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
@@ -99,11 +101,20 @@ class ServiceProviderAppDrawer extends StatelessWidget {
                   label: context.l10n.report,
                 ),
                 20.verticalSpace,
-                DrawerListTile(
-                  icon: Assets.svgs.logout,
-                  label: context.l10n.logOut,
-                  logOutButton: true,
-                  onTap: () => context.pushReplacement(AppRoutes.loginView),
+                Consumer(
+                  builder: (context, ref, _) {
+                    final notifier = ref.read(loginNotifierProvider.notifier);
+                    return DrawerListTile(
+                      icon: Assets.svgs.logout,
+                      label: context.l10n.logOut,
+                      logOutButton: true,
+                      onTap: () {
+                        notifier.logout(onDataCleared: () {
+                          context.pushReplacement(AppRoutes.loginView);
+                        });
+                      },
+                    );
+                  },
                 ),
               ],
             ),

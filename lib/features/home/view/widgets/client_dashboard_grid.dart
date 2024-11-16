@@ -63,7 +63,7 @@ class DashboardInfoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 100.h,
       width: width.h,
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.h),
       decoration: BoxDecoration(
@@ -84,10 +84,12 @@ class DashboardInfoContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: context.theme.textTheme.labelMedium?.copyWith(
-                  color: const Color(0xFF565656),
+              Flexible(
+                child: Text(
+                  title,
+                  style: context.theme.textTheme.labelMedium?.copyWith(
+                    color: const Color(0xFF565656),
+                  ),
                 ),
               ),
               Container(

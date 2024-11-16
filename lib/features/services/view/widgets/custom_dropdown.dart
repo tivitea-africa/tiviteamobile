@@ -88,7 +88,7 @@ class _CustomDropdownState extends ConsumerState<CustomDropdown> {
                                   isExpanded = false;
                                   setState(() {});
                                 },
-                                child: Text(widget.items[i]),
+                                child: Text(widget.items[i].capiTalizeFirst),
                               ),
                             ),
                         ],

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:tivi_tea/core/config/exceptions/app_exception.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
 import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
@@ -23,6 +25,7 @@ final class GeneralAuthenticationRepo {
     LoginRequestObject data,
   ) async {
     try {
+      //await userRepository?.clearLocalUserInfo();
       final result = await restClient.login(data);
       final userLoginData = result.data;
       userRepository?.saveToken(userLoginData?.tokens?.access ?? '');
@@ -94,6 +97,15 @@ final class GeneralAuthenticationRepo {
       return result;
     } on DioException catch (e) {
       return AppException.handleError(e);
+    }
+  }
+
+  void logout({required VoidCallback onDataCleared}) async {
+    try {
+      await userRepository?.clearLocalUserInfo();
+      onDataCleared();
+    } catch (e) {
+      debugLog(e.toString());
     }
   }
 }

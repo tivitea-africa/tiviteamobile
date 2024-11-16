@@ -896,5 +896,29 @@
     "chooseRoom":"Choose Room",
     "@chooseRoom":{
         "description": "Choose Room text"
+    },
+    "package":"Package",
+    "@package":{
+        "description": "Add Package text"
+    },
+    "addPackage":"Add Package",
+    "@addPackage":{
+        "description": "Add Package text"
+    },
+    "packageName":"Name of package",
+    "@packageName":{
+        "description": "Name of package text"
+    },
+    "packageShortDesc":"Package short description",
+    "@packageShortDesc":{
+        "description": "Package short desc text"
+    },
+    "price":"Price",
+    "@price":{
+        "description": "Price text"
+    },
+    "amenities":"Amenities",
+    "@amenities":{
+        "description": "Amenities text"
     }
 }

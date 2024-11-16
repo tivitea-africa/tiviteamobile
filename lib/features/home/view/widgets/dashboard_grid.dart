@@ -15,36 +15,33 @@ class DashboardGrid extends ConsumerWidget {
     final dashboardInfo = ref.watch(
       dashboardNotiferProvider.select((value) => value.model),
     );
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18.w),
-      child: Center(
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 12.w,
-          runSpacing: 15.h,
-          children: [
-            DashboardInfoContainer(
-              title: context.l10n.totalBooking,
-              value: dashboardInfo?.totalBookings ?? 0,
-              bookingContainerColor: const Color(0xFF2196F3),
-            ),
-            DashboardInfoContainer(
-              title: context.l10n.totalListing,
-              value: dashboardInfo?.totalListings ?? 0,
-              bookingContainerColor: const Color(0xFFFF5B5B),
-            ),
-            DashboardInfoContainer(
-              title: context.l10n.totalEarning,
-              value: dashboardInfo?.totalRevenue ?? 0,
-              bookingContainerColor: const Color(0xFF02952B),
-            ),
-            DashboardInfoContainer(
-              title: context.l10n.totalBooking,
-              value: dashboardInfo?.totalBookings ?? 0,
-              bookingContainerColor: const Color(0xFF2196F3),
-            ),
-          ],
-        ),
+    return Center(
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 12.w,
+        runSpacing: 15.h,
+        children: [
+          DashboardInfoContainer(
+            title: context.l10n.totalBooking,
+            value: dashboardInfo?.totalBookings ?? 0,
+            bookingContainerColor: const Color(0xFF2196F3),
+          ),
+          DashboardInfoContainer(
+            title: context.l10n.totalListing,
+            value: dashboardInfo?.totalListings ?? 0,
+            bookingContainerColor: const Color(0xFFFF5B5B),
+          ),
+          DashboardInfoContainer(
+            title: context.l10n.totalEarning,
+            value: dashboardInfo?.totalRevenue ?? 0,
+            bookingContainerColor: const Color(0xFF02952B),
+          ),
+          DashboardInfoContainer(
+            title: context.l10n.totalBooking,
+            value: dashboardInfo?.totalBookings ?? 0,
+            bookingContainerColor: const Color(0xFF2196F3),
+          ),
+        ],
       ),
     );
   }
@@ -64,7 +61,7 @@ class DashboardInfoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 100.h,
       width: 170.h, //context.width,
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.h),
       decoration: BoxDecoration(

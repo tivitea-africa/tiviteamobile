@@ -14,4 +14,6 @@ abstract interface class UserRepository {
   void saveRememberMe(bool val);
   void saveKYCVerificationStatus(KYCVerificationStatus status);
   KYCVerificationStatus getKYCVerificationStatus();
+
+  Future<void> clearLocalUserInfo();
 }

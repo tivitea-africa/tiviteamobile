@@ -92,7 +92,4 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       return [];
     }
   }
-
-  bool get isLoading => state.listingLoadState == LoadState.loading;
-  bool get isPostUploading => state.postLoadState == LoadState.loading;
 }

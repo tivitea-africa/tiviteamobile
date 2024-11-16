@@ -95,6 +95,11 @@ class UserRepoImpl implements UserRepository {
         return KYCVerificationStatus.documentsSubmitted;
     }
   }
+
+  @override
+  Future<void> clearLocalUserInfo() async {
+    await _storage.clear();
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>(

@@ -13,6 +13,9 @@ class WorkspaceRoomModel {
   @JsonKey(name: 'max_capacity')
   final int? maxCapacity;
 
+  @JsonKey(name: 'features')
+  final List<String>? features;
+
   @JsonKey(name: 'images')
   final List<String>? images;
 
@@ -23,6 +26,7 @@ class WorkspaceRoomModel {
     this.name,
     this.description,
     this.maxCapacity,
+    this.features,
     this.images,
     this.amount,
   });
@@ -35,6 +39,6 @@ class WorkspaceRoomModel {
   @override
   String toString() {
     return 'WorkspaceRoomModel{name: $name, description: $description, '
-        'maxCapacity: $maxCapacity, images: $images, amount: $amount}';
+        'maxCapacity: $maxCapacity, features: $features, images: $images, amount: $amount}';
   }
 }
