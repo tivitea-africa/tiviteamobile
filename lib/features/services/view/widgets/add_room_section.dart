@@ -187,6 +187,7 @@ class __RoomContainerState extends State<_RoomContainer> {
           AppTextField(
             controller: maxCapacityController,
             hintText: context.l10n.numberOfPeople,
+            keyboardType: TextInputType.number,
           ),
           CustomDropdown(
             onOptionSelected: (value) {

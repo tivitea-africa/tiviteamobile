@@ -11,6 +11,7 @@ import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
+import 'package:tivi_tea/features/common/app_success_content.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
@@ -201,7 +202,7 @@ class _CreateNewListingSecondViewState
       images: images,
       listingType: widget.listingType.requestBodyName,
       pricingOption: pricingType,
-      footSoldier: "False",
+      //footSoldier: "False",
     );
 
     notifier.postWorkSpace(
@@ -209,7 +210,8 @@ class _CreateNewListingSecondViewState
       onSuccess: () {
         ref.read(workspaceRoomNotifierProvider.notifier).clearRooms();
         ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
-        context.go(AppRoutes.myListingView);
+
+        _showSuccessDialog();
       },
     );
   }
@@ -233,8 +235,24 @@ class _CreateNewListingSecondViewState
       data,
       onSuccess: () {
         ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
-        context.go(AppRoutes.myListingView);
+        _showSuccessDialog();
       },
+    );
+  }
+
+  void _showSuccessDialog() {
+    context.showCustomDialog(
+      dismissible: false,
+      child: AppSuccessContent(
+        title: 'Success',
+        subtitle:
+            "Your post has been created and will be saved as 'Draft' until the admin approves it.",
+        buttonText: context.l10n.continue_,
+        onPressed: () {
+          context.pop();
+          context.go(AppRoutes.myListingView);
+        },
+      ),
     );
   }
 

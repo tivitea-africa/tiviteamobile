@@ -38,7 +38,11 @@ class _SelectedImagesViewState extends ConsumerState<SelectedImagesView> {
         ),
         20.verticalSpace,
         selectedImages.isEmpty
-            ? const Center(child: Text('No images selected.'))
+            ? const Center(
+                child: Padding(
+                padding: EdgeInsets.only(bottom: 15.0),
+                child: Text('No images selected.'),
+              ))
             : GridView.builder(
                 shrinkWrap: true,
                 itemCount: selectedImages.length,

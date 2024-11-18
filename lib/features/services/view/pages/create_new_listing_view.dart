@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
@@ -10,17 +11,25 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/other_category_dropdown.dart';
+import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class CreateNewListingView extends StatefulWidget {
+class CreateNewListingView extends ConsumerStatefulWidget {
   const CreateNewListingView({super.key});
 
   @override
-  State<CreateNewListingView> createState() => _CreateNewListingViewState();
+  ConsumerState<CreateNewListingView> createState() =>
+      _CreateNewListingViewState();
 }
 
-class _CreateNewListingViewState extends State<CreateNewListingView> {
+class _CreateNewListingViewState extends ConsumerState<CreateNewListingView> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(servicesNotiferProvider.notifier).getCategories();
+  }
+
   CreateListingType selectedListingType = CreateListingType.workSpace;
   String categoryId = '';
   @override

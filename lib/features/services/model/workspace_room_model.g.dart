@@ -11,6 +11,9 @@ WorkspaceRoomModel _$WorkspaceRoomModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       description: json['description'] as String?,
       maxCapacity: (json['max_capacity'] as num?)?.toInt(),
+      features: (json['features'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       amount: (json['amount'] as num?)?.toDouble(),
@@ -21,6 +24,7 @@ Map<String, dynamic> _$WorkspaceRoomModelToJson(WorkspaceRoomModel instance) =>
       'name': instance.name,
       'description': instance.description,
       'max_capacity': instance.maxCapacity,
+      'features': instance.features,
       'images': instance.images,
       'amount': instance.amount,
     };

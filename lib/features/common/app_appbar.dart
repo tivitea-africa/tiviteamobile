@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/customizable_row.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
+import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -35,6 +37,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(currentUserProvider);
     return Container(
       padding: padding ??
           EdgeInsets.only(
@@ -67,7 +70,22 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
             const Spacer(),
             AppSvgWidget(path: Assets.svgs.notificationIcon),
             10.horizontalSpace,
-            const CircleAvatar(),
+            user.profilePicture == null
+                ? const CircleAvatar()
+                : Container(
+                    width: 40.w,
+                    height: 40.h,
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: context.theme.colorScheme.onPrimaryContainer,
+                    ),
+                    child: AppImageWidget(
+                      borderRadius: BorderRadius.circular(50),
+                      imagePath: user.profilePicture ?? '',
+                    ),
+                  ),
           ] else ...[
             Expanded(
               child: CustomizableRow(
@@ -114,7 +132,23 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     children: [
                       AppSvgWidget(path: Assets.svgs.notificationIcon),
                       10.horizontalSpace,
-                      const CircleAvatar(),
+                      user.profilePicture == null
+                          ? const CircleAvatar()
+                          : Container(
+                              width: 40.w,
+                              height: 40.h,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: context
+                                    .theme.colorScheme.onPrimaryContainer,
+                              ),
+                              child: AppImageWidget(
+                                borderRadius: BorderRadius.circular(50),
+                                imagePath: user.profilePicture ?? '',
+                              ),
+                            ),
                     ],
                   )
                 ],

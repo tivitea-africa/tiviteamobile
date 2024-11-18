@@ -15,7 +15,6 @@ PostListingModel _$PostListingModelFromJson(Map<String, dynamic> json) =>
       categoryId: json['category_id'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      amount: json['amount'] as num?,
       amenities: (json['amenities'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -23,7 +22,6 @@ PostListingModel _$PostListingModelFromJson(Map<String, dynamic> json) =>
       room: (json['room'] as List<dynamic>?)
           ?.map((e) => WorkspaceRoomModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      footSoldier: json['foot_soldier'] as String?,
     );
 
 Map<String, dynamic> _$PostListingModelToJson(PostListingModel instance) =>
@@ -34,9 +32,7 @@ Map<String, dynamic> _$PostListingModelToJson(PostListingModel instance) =>
       'address': instance.address,
       'category_id': instance.categoryId,
       'images': instance.images,
-      'amount': instance.amount,
       'amenities': instance.amenities,
       'pricing_option': instance.pricingOption,
       'room': instance.room,
-      'foot_soldier': instance.footSoldier,
     };

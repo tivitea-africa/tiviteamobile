@@ -89,6 +89,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       state = state.copyWith(cloudinaryUploadState: LoadState.success);
       return results;
     } catch (e) {
+      state = state.copyWith(cloudinaryUploadState: LoadState.error);
       return [];
     }
   }

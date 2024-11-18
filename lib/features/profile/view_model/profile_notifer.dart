@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
@@ -47,6 +49,23 @@ class ProfileNotifer extends _$ProfileNotifer {
     } catch (e) {
       state = state.copyWith(editProfileLoadState: LoadState.error);
       onError(e.toString());
+    }
+  }
+
+  void uploadProfilePic(
+    File image, {
+    required VoidCallback onSuccess,
+    required VoidCallback onError,
+  }) async {
+    state = state.copyWith(profilePicLoadState: LoadState.loading);
+    try {
+      final result = await _repo.uploadProfilePic(image: image);
+      if (result.isSuccess() == false) throw result.message ?? '';
+      state = state.copyWith(profilePicLoadState: LoadState.success);
+      onSuccess();
+    } catch (e) {
+      state = state.copyWith(profilePicLoadState: LoadState.error);
+      onError();
     }
   }
 }

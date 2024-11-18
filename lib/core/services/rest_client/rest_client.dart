@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
@@ -104,4 +106,11 @@ abstract class RestClient {
   @GET('/dashboard/client/listing/favorite')
   Future<BaseResponse<GenericPaginatedResponse<FavoriteListingModel>>>
       getFavoriteListings(@Query('page') int page);
+
+  //<====================> Miscellaneous <====================>
+  @MultiPart()
+  @POST('/misc/upload/')
+  Future<UploadProfilePicResponse> uploadProfilePic({
+    @Part() required File image,
+  });
 }

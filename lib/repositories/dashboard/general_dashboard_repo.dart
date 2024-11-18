@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:tivi_tea/core/config/exceptions/app_exception.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
@@ -44,6 +46,22 @@ final class GeneralDashboardRepo {
       userRepository.saveUser(userLoginData);
 
       return result;
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
+  Future<BaseResponse<UploadProfilePicResponse>> uploadProfilePic({
+    required File image,
+  }) async {
+    try {
+      final result = await restClient.uploadProfilePic(image: image);
+      final user = userRepository.getUser();
+      final userWithProfilePic = user.copyWith(profilePicture: result.imageUrl);
+      
+      await userRepository.saveUser(userWithProfilePic);
+
+      return const BaseResponse(status: 'Success');
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

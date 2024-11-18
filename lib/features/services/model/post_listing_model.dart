@@ -23,8 +23,8 @@ class PostListingModel {
   @JsonKey(name: 'images')
   final List<String>? images;
 
-  @JsonKey(name: 'amount')
-  final num? amount;
+  // @JsonKey(name: 'amount')
+  // final num? amount;
 
   @JsonKey(name: 'amenities')
   final List<String>? amenities;
@@ -35,8 +35,8 @@ class PostListingModel {
   @JsonKey(name: 'room')
   final List<WorkspaceRoomModel>? room;
 
-  @JsonKey(name: 'foot_soldier')
-  final String? footSoldier;
+  // @JsonKey(name: 'foot_soldier')
+  // final String? footSoldier;
 
   PostListingModel({
     this.listingType,
@@ -45,11 +45,11 @@ class PostListingModel {
     this.address,
     this.categoryId,
     this.images,
-    this.amount,
+    //this.amount,
     this.amenities,
     this.pricingOption,
     this.room,
-    this.footSoldier,
+    //this.footSoldier,
   });
 
   factory PostListingModel.fromJson(Map<String, dynamic> json) =>

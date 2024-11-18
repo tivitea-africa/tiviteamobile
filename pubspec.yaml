@@ -35,6 +35,7 @@ dependencies:
   permission_handler: ^11.3.1
   cloudinary_public: ^0.23.1
   adaptive_scrollbar: ^2.1.2
+  device_info_plus: ^11.1.1
 
 # flutter_native_splash:
 #   android: true

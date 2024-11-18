@@ -74,3 +74,15 @@ Map<String, dynamic> _$GetUserProfileResponseToJson(
       'id': instance.id,
       'user': instance.user,
     };
+
+UploadProfilePicResponse _$UploadProfilePicResponseFromJson(
+        Map<String, dynamic> json) =>
+    UploadProfilePicResponse(
+      imageUrl: json['image_url'] as String?,
+    );
+
+Map<String, dynamic> _$UploadProfilePicResponseToJson(
+        UploadProfilePicResponse instance) =>
+    <String, dynamic>{
+      'image_url': instance.imageUrl,
+    };

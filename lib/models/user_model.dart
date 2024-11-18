@@ -103,7 +103,8 @@ class User {
       profilePicture: profilePicture ?? this.profilePicture,
       groups: groups ?? this.groups,
       userPermissions: userPermissions ?? this.userPermissions,
-      kycVerificationStatus: kycVerificationStatus ?? this.kycVerificationStatus,
+      kycVerificationStatus:
+          kycVerificationStatus ?? this.kycVerificationStatus,
     );
   }
 }
@@ -122,4 +123,17 @@ class GetUserProfileResponse {
       _$GetUserProfileResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetUserProfileResponseToJson(this);
+}
+
+@JsonSerializable()
+class UploadProfilePicResponse {
+  @JsonKey(name: 'image_url')
+  final String? imageUrl;
+
+  UploadProfilePicResponse({this.imageUrl});
+
+  factory UploadProfilePicResponse.fromJson(Map<String, dynamic> json) =>
+      _$UploadProfilePicResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UploadProfilePicResponseToJson(this);
 }
