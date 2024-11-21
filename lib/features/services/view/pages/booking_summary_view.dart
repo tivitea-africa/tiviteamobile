@@ -5,13 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/date_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
+import 'package:tivi_tea/features/common/app_success_content.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
+import 'package:tivi_tea/features/payment/view_model/client/client_payment_notifier.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
@@ -29,6 +33,8 @@ class BookingSummaryView extends StatefulWidget {
 }
 
 class _BookingSummaryViewState extends State<BookingSummaryView> {
+  bool isBookingCompleted = false;
+  String bookingId = "";
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -177,10 +183,23 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
                 final loadState = ref.watch(bookingNotiferProvider.select(
                   (value) => value.loadState,
                 ));
+                final paymentLoadState =
+                    ref.watch(clientPaymentNotifierProvider.select(
+                  (value) => value.createPaymentLoadState,
+                ));
                 return AppButton(
-                  isLoading: loadState == LoadState.loading,
-                  buttonText: context.l10n.continue_,
-                  onPressed: () => _submit(ref),
+                  isLoading: loadState == LoadState.loading ||
+                      paymentLoadState == LoadState.loading,
+                  buttonText: isBookingCompleted
+                      ? context.l10n.payNow
+                      : context.l10n.continue_,
+                  onPressed: () {
+                    if (isBookingCompleted == false) {
+                      _submit(ref);
+                    } else {
+                      _proceedToPayment(ref, bookingId: bookingId);
+                    }
+                  },
                 );
               },
             ),
@@ -191,33 +210,73 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
   }
 
   void _submit(WidgetRef ref) async {
-    final notifier = ref.watch(bookingNotiferProvider.notifier);
+    final notifier = ref.read(bookingNotiferProvider.notifier);
     if (widget.params.listing.listingType?.enumType ==
         CreateListingType.workSpace) {
       final data = BookWorkSpaceModel(
-        pickUpDate: widget.params.selectedDateFrom,
-        returnDate: widget.params.selectedDateTo,
+        pickUpDate: widget.params.selectedDateFrom.toAcceptedDateTimeFormat,
+        returnDate: widget.params.selectedDateTo.toAcceptedDateTimeFormat,
         numOfPeople: widget.params.numOfPeople,
         subListingId: widget.params.roomId,
       );
       notifier.bookWorkSpace(
         listingId: widget.params.listing.id ?? '',
         data: data,
-        onSuccess: () => context.showSuccess('Success'),
+        onSuccess: _onSuccess,
         onError: (message) => context.showError(message),
       );
     } else {
       final data = BookWorkToolModel(
-        pickUpDate: widget.params.selectedDateFrom,
-        returnDate: widget.params.selectedDateTo,
+        pickUpDate: widget.params.selectedDateFrom.toAcceptedDateTimeFormat,
+        returnDate: widget.params.selectedDateTo.toAcceptedDateTimeFormat,
       );
       notifier.bookWorktool(
         listingId: widget.params.listing.id ?? '',
         data: data,
-        onSuccess: () => context.showSuccess('Success'),
+        onSuccess: _onSuccess,
         onError: (message) => context.showError(message),
       );
     }
+  }
+
+  void _onSuccess(String bookingId_) {
+    context.showSuccess('Booking successful, proceed to payment');
+
+    isBookingCompleted = true;
+    bookingId = bookingId_;
+    setState(() {});
+  }
+
+  void _proceedToPayment(WidgetRef ref, {required String bookingId}) {
+    final paymentNotifier = ref.read(clientPaymentNotifierProvider.notifier);
+    paymentNotifier.createPayment(
+      bookingId,
+      onSuccess: (response) {
+        debugLog(response.authorizationUrl);
+        _showSuccessDialog();
+      },
+      onError: (message) => context.showError(message),
+    );
+  }
+
+  void _showSuccessDialog() {
+    context.showCustomDialog(
+      dismissible: false,
+      child: AppSuccessContent(
+        title: context.l10n.paymentSuccessful,
+        subtitle: context.l10n.paymentWasSuccessful,
+        buttonText: context.l10n.downloadEReceipt,
+        secondButtonText: context.l10n.backToHome,
+        onPressed: () {
+          context.pop();
+          context.go(AppRoutes.homeView);
+        },
+        onSecondButtonPressed: () {
+          context.pop();
+          context.go(AppRoutes.homeView);
+        },
+      ),
+    );
   }
 }
 

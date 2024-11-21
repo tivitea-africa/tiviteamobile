@@ -5,10 +5,10 @@ part 'book_workspace_model.g.dart';
 @JsonSerializable()
 class BookWorkSpaceModel {
   @JsonKey(name: 'pick_up_date')
-  final DateTime? pickUpDate;
+  final String? pickUpDate;
 
   @JsonKey(name: 'return_date')
-  final DateTime? returnDate;
+  final String? returnDate;
 
   @JsonKey(name: 'num_of_people')
   final int? numOfPeople;

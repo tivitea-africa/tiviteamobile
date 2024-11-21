@@ -9,13 +9,17 @@ class AppSuccessContent extends StatelessWidget {
   final String title;
   final String subtitle;
   final String buttonText;
+  final String? secondButtonText;
   final VoidCallback? onPressed;
+  final VoidCallback? onSecondButtonPressed;
   const AppSuccessContent({
     super.key,
     required this.title,
     required this.subtitle,
     required this.buttonText,
+    this.secondButtonText,
     this.onPressed,
+    this.onSecondButtonPressed,
   });
 
   @override
@@ -35,7 +39,14 @@ class AppSuccessContent extends StatelessWidget {
         AppButton(
           buttonText: buttonText,
           onPressed: onPressed,
-        )
+        ),
+        if (secondButtonText != null)
+          AppButton(
+            buttonText: secondButtonText,
+            onPressed: onSecondButtonPressed,
+            backgroundColor: Colors.transparent,
+            textColor: context.theme.primaryColor,
+          )
       ],
     );
   }

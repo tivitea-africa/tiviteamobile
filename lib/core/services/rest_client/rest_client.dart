@@ -14,6 +14,7 @@ import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
+import 'package:tivi_tea/features/payment/model/create_payment_response.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
@@ -112,5 +113,11 @@ abstract class RestClient {
   @POST('/misc/upload/')
   Future<UploadProfilePicResponse> uploadProfilePic({
     @Part() required File image,
+  });
+
+  //<====================> Payment <====================>
+  @POST('/payment/{bookingId}')
+  Future<BaseResponse<CreatePaymentResponse>> createPayment({
+    @Path('bookingId') required String bookingId,
   });
 }

@@ -920,5 +920,89 @@
     "amenities":"Amenities",
     "@amenities":{
         "description": "Amenities text"
+    },
+    "paymentSuccessful":"Payment Successful",
+    "@paymentSuccessful":{
+        "description": "Payment Successful text"
+    },
+    "paymentWasSuccessful":"Your Payment was Successful",
+    "@paymentWasSuccessful":{
+        "description": "Your Payment was Successful text"
+    },
+    "eReceipt":"E-Receipt",
+    "@eReceipt":{
+        "description": "E-Receipt text"
+    },
+    "downloadEReceipt":"Download E-Receipt",
+    "@downloadEReceipt":{
+        "description": "Download E-Receipt text"
+    },
+    "downloadEReceiptHere":"Download your E-Receipt here",
+    "@downloadEReceiptHere":{
+        "description": "Download E-Receipt here text"
+    },
+    "paymentReceipt":"Payment Receipt",
+    "@paymentReceipt":{
+        "description": "Payment Receipt text"
+    },
+    "backToHome":"Back to Home",
+    "@backToHome":{
+        "description": "Back to Home text"
+    },
+    "receivedFrom":"Received From",
+    "@receivedFrom":{
+        "description": "Received From text"
+    },
+    "date":"Date",
+    "@date":{
+        "description": "Date text"
+    },
+    "totalAmount":"Total Amount",
+    "@totalAmount":{
+        "description": "Total Amount text"
+    },
+    "item":"Item",
+    "@item":{
+        "description": "Item text"
+    },
+    "discount":"Discount",
+    "@discount":{
+        "description": "Discount text"
+    },
+    "cautionFeePayment":"Caution Fee",
+    "@cautionFeePayment":{
+        "description": "Caution Fee text"
+    },
+    "vat":"VAT(%5)",
+    "@vat":{
+        "description": "VAT text"
+    },
+    "goHome":"Go Home",
+    "@goHome":{
+        "description": "Go Home text"
+    },
+    "print":"Print",
+    "@print":{
+        "description": "Print text"
+    },
+    "share":"Share",
+    "@share":{
+        "description": "Share text"
+    },
+    "eTicket":"E-Ticket",
+    "@eTicket":{
+        "description": "E-Ticket text"
+    },
+    "hereIsETicker":"Here is your ticker",
+    "@hereIsETicker":{
+        "description": "Here is your ticker text"
+    },
+    "totalPayment":"Total Payment",
+    "@totalPayment":{
+        "description": "Total Payment text"
+    },
+    "save":"Save",
+    "@save":{
+        "description": "Save text"
     }
 }

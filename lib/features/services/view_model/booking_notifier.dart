@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
@@ -23,7 +22,7 @@ class BookingNotifer extends _$BookingNotifer {
   void bookWorkSpace({
     required String listingId,
     required BookWorkSpaceModel data,
-    required VoidCallback onSuccess,
+    required void Function(String bookingId) onSuccess,
     required void Function(String) onError,
   }) async {
     state = state.copyWith(loadState: LoadState.loading);
@@ -33,7 +32,9 @@ class BookingNotifer extends _$BookingNotifer {
         throw response.error?.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
-      onSuccess();
+      if (response.data != null) {
+        onSuccess(response.data?.id ?? '');
+      }
     } catch (e) {
       state = state.copyWith(loadState: LoadState.error);
       onError(e.toString());
@@ -43,7 +44,7 @@ class BookingNotifer extends _$BookingNotifer {
   void bookWorktool({
     required String listingId,
     required BookWorkToolModel data,
-    required VoidCallback onSuccess,
+    required Function(String bookingId) onSuccess,
     required void Function(String) onError,
   }) async {
     state = state.copyWith(loadState: LoadState.loading);
@@ -53,7 +54,9 @@ class BookingNotifer extends _$BookingNotifer {
         throw response.error?.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
-      onSuccess();
+      if (response.data != null) {
+        onSuccess(response.data?.id ?? '');
+      }
     } catch (e) {
       state = state.copyWith(loadState: LoadState.error);
       onError(e.toString());

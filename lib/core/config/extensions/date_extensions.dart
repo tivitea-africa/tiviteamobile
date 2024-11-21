@@ -14,7 +14,7 @@ extension ToDateTime on DateTime? {
 
   String get toDateMonthYear =>
       (this == null) ? '' : DateFormat('dd/MM/yy').format(this!.toLocal());
-      
+
   String get toDateMonthYear2 =>
       (this == null) ? '' : DateFormat('dd MMM yyyy').format(this!.toLocal());
 
@@ -31,6 +31,10 @@ extension ToDateTime on DateTime? {
       (this == null) ? '' : DateFormat('EEEE, MMMM d yyyy').format(this!);
 
   DateTime get splitDateOnly => DateTime.parse(toString().split(' ')[0]);
+
+  String get toAcceptedDateTimeFormat =>
+      DateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'")
+          .format(this == null ? DateTime.now() : this!);
 
   String get getHeaderDate => this!.day == DateTime.now().day
       ? 'Today'
