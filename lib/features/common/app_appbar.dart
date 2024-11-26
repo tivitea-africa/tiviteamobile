@@ -37,7 +37,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider);
+    final user = ref.read(userRepositoryProvider).getUser();
     return Container(
       padding: padding ??
           EdgeInsets.only(

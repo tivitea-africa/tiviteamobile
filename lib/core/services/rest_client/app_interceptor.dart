@@ -98,11 +98,11 @@ class DioInterceptor extends Interceptor {
       if (r.statusCode == 200) {
         userRepository.saveToken(r.data['access']);
         userRepository.saveRefreshToken(r.data['refresh']);
-        debugLog("Access Token gotten and saved");
+        debugLog("Access Token gotten and saved"); 
       }
       return handleError(handler, error, dio);
-    } on DioException catch (_) {
-      debugLog('refresh error===>> $_');
+    } on DioException catch (e) {
+      debugLog('refresh error===>> $e');
       //ref.read(profileNotifierProvider.notifier).logout();
       return;
     }

@@ -29,6 +29,7 @@ class ProfileNotifer extends _$ProfileNotifer {
     try {
       final result = await _repo.getUserProfile();
       if (result.isSuccess() == false) throw result.message ?? '';
+      ref.read(currentUserProvider);
       state = state.copyWith(profileLoadState: LoadState.success);
     } catch (e) {
       state = state.copyWith(profileLoadState: LoadState.error);

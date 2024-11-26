@@ -89,6 +89,7 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
                 Flexible(
                   child: DottedWidget(
                     padding: EdgeInsets.zero,
+                    dashPattern: const [4, 7],
                     child: SizedBox(
                       width: context.width,
                     ),
@@ -290,10 +291,12 @@ class DottedWidget extends StatelessWidget {
   final Widget child;
   final EdgeInsets padding;
   final double radius;
+  final List<double>? dashPattern;
   const DottedWidget({
     super.key,
     required this.child,
     this.radius = 15,
+    this.dashPattern,
     this.padding = const EdgeInsets.all(2),
   });
 
@@ -304,7 +307,7 @@ class DottedWidget extends StatelessWidget {
       radius: Radius.circular(radius),
       padding: padding,
       color: const Color(0xFF9D9DAA).withOpacity(0.5),
-      dashPattern: const [5, 2],
+      dashPattern: dashPattern ?? const [5, 2],
       child: child,
     );
   }

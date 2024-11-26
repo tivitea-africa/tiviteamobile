@@ -30,6 +30,7 @@ final class GeneralDashboardRepo {
       userRepository.saveUser(
         userLoginData?.copyWith(
           kycIsVerified: userLoginData.kycIsVerified,
+          profilePicture: userLoginData.profilePicture,
         ),
       );
       return result;
