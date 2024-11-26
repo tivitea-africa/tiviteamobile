@@ -34,7 +34,7 @@ class CustomerRegistrationNotifier extends _$CustomerRegistrationNotifier {
     try {
       final response = await _repo.signUpAsCustomer(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
       if (onSuccess != null) onSuccess(response.message ?? '');

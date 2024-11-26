@@ -253,7 +253,7 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
       bookingId,
       onSuccess: (response) {
         debugLog(response.authorizationUrl);
-        _showSuccessDialog();
+        _navigateToPaymentView(response.authorizationUrl ?? '');
       },
       onError: (message) => context.showError(message),
     );
@@ -269,7 +269,7 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
         secondButtonText: context.l10n.backToHome,
         onPressed: () {
           context.pop();
-          context.go(AppRoutes.homeView);
+          context.go(AppRoutes.eReceiptView);
         },
         onSecondButtonPressed: () {
           context.pop();
@@ -277,6 +277,12 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
         },
       ),
     );
+  }
+
+  void _navigateToPaymentView(String paymentUrl) {
+    context.push(AppRoutes.paymentWebview, extra: paymentUrl).then(
+          (value) => _showSuccessDialog(),
+        );
   }
 }
 

@@ -28,7 +28,7 @@ class ClientKycNotifier extends _$ClientKycNotifier {
     try {
       final response = await _repo.submitClientKyc(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       onSuccess();
       state = state.copyWith(kycLoadState: LoadState.success);

@@ -29,7 +29,7 @@ class BookingNotifer extends _$BookingNotifer {
     try {
       final response = await _repo.bookWorkspace(listingId, data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
       if (response.data != null) {
@@ -51,7 +51,7 @@ class BookingNotifer extends _$BookingNotifer {
     try {
       final response = await _repo.bookWorktool(listingId, data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
       if (response.data != null) {

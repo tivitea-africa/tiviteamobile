@@ -28,4 +28,6 @@ class AppRoutes {
   static const String editProfileView = 'editProfileView';
   static const String changePasswordView = 'changePasswordView';
   static const String chooseRoomView = 'chooseRoomView';
+  static const String paymentWebview = '/paymentWebview';
+  static const String eReceiptView = 'eReceiptView';
 }

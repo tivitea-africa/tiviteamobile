@@ -22,7 +22,7 @@ class ServicesNotifer extends _$ServicesNotifer {
     try {
       final response = await _repo.getCategories();
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(
         loadState: LoadState.success,
@@ -37,7 +37,7 @@ class ServicesNotifer extends _$ServicesNotifer {
     try {
       final response = await _repo.getListing();
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(
         loadState: LoadState.success,
@@ -52,7 +52,7 @@ class ServicesNotifer extends _$ServicesNotifer {
     try {
       final response = await _repo.getListingById(listingId);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       return response.data;
     } catch (e) {

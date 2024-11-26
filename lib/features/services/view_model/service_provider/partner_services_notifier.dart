@@ -37,7 +37,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     try {
       final response = await _repo.getPartnerListing();
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(
         listingLoadState: LoadState.success,
@@ -56,7 +56,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     try {
       final response = await _repo.postWorkSpace(model);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(postLoadState: LoadState.success);
       onSuccess();
@@ -73,7 +73,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     try {
       final response = await _repo.postToolOrOtherListing(model);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(postWorkToolLoadState: LoadState.success);
       onSuccess();

@@ -57,7 +57,7 @@ class LoginNotifier extends _$LoginNotifier {
     try {
       final response = await _repo.forgotPassword(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(forgotPasswordLoadState: LoadState.success);
       if (onSuccess != null) onSuccess();
@@ -76,7 +76,7 @@ class LoginNotifier extends _$LoginNotifier {
     try {
       final response = await _repo.changePassword(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(changePasswordLoadState: LoadState.success);
       if (onSuccess != null) onSuccess();

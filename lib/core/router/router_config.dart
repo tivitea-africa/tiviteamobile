@@ -12,6 +12,7 @@ import 'package:tivi_tea/features/login/view/pages/forgot_password.dart';
 import 'package:tivi_tea/features/login/view/pages/login_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/select_user_type_view.dart';
 import 'package:tivi_tea/features/onboarding/view/pages/splash_screen.dart';
+import 'package:tivi_tea/features/payment/view/payment_webview.dart';
 import 'package:tivi_tea/features/profile/view/profile_view.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/view/pages/create_customer_account_view.dart';
@@ -69,51 +70,49 @@ final GoRouter router = GoRouter(
           navigatorKey: _shellNavigatorServicesKey,
           routes: [
             GoRoute(
-              path: AppRoutes.servicesView,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: ServicesView(),
-              ),
-              routes: [
-                ServicesRouter.listingDetails,
-                ServicesRouter.bookWorkspaceView,
-                ServicesRouter.bookingSummaryView,
-                ServicesRouter.partnerKYCFirstView,
-                ServicesRouter.partnerKYCSecondView,
-                ServicesRouter.startKYCProcessView,
-                ServicesRouter.clientKYCView,
-                ServicesRouter.chooseRoomView,
-              ]
-            ),
+                path: AppRoutes.servicesView,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                      child: ServicesView(),
+                    ),
+                routes: [
+                  ServicesRouter.listingDetails,
+                  ServicesRouter.bookWorkspaceView,
+                  ServicesRouter.bookingSummaryView,
+                  ServicesRouter.partnerKYCFirstView,
+                  ServicesRouter.partnerKYCSecondView,
+                  ServicesRouter.startKYCProcessView,
+                  ServicesRouter.clientKYCView,
+                  ServicesRouter.chooseRoomView,
+                  ServicesRouter.eReceiptView,
+                ]),
           ],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatorHistoryKey,
           routes: [
             GoRoute(
-              path: AppRoutes.myListingView,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: MyListingView(),
-              ),
-              routes: [
-                MyListingsRouter.createListingView,
-                MyListingsRouter.createListingSecondView,
-              ]
-            ),
+                path: AppRoutes.myListingView,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                      child: MyListingView(),
+                    ),
+                routes: [
+                  MyListingsRouter.createListingView,
+                  MyListingsRouter.createListingSecondView,
+                ]),
           ],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatoProfileKey,
           routes: [
             GoRoute(
-              path: AppRoutes.profile,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: ProfileView(),
-              ),
-              routes: [
-                ProfileRouter.editProfile,
-                ProfileRouter.changePassword,
-              ]
-            ),
+                path: AppRoutes.profile,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                      child: ProfileView(),
+                    ),
+                routes: [
+                  ProfileRouter.editProfile,
+                  ProfileRouter.changePassword,
+                ]),
           ],
         ),
       ],
@@ -165,6 +164,13 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         final data = state.extra as ServiceProviderSignUpRequestBody;
         return CreateServiceProviderAccountSecondView(data: data);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.paymentWebview,
+      builder: (BuildContext context, GoRouterState state) {
+        final params = state.extra as String;
+        return PaymentWebview(paystackUrl: params);
       },
     ),
     // GoRoute(

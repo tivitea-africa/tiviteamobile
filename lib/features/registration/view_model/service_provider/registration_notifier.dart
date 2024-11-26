@@ -35,7 +35,7 @@ class RegistrationNotifier extends _$RegistrationNotifier {
     try {
       final response = await _repo.signUpAsServiceProvider(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? '';
+        throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
       if (onSuccess != null) onSuccess();

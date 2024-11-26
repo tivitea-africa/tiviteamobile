@@ -64,8 +64,8 @@ class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
           children: [
             ListingImagesView(images: listing?.images ?? []),
             ListingDetailDescription(listing: listing!),
-            20.verticalSpace,
-            AmenitiesRow(amenties: listing?.amenities ?? []),
+            if (listing?.amenities?.isNotEmpty == true)
+              AmenitiesRow(amenties: listing?.amenities ?? []),
             30.verticalSpace,
             LocationSection(location: listing?.address ?? ''),
             30.verticalSpace,
@@ -116,13 +116,6 @@ class ListingDetailDescription extends StatelessWidget {
               color: const Color(0xFF737380),
             ),
           ),
-          30.verticalSpace,
-          Text(
-            context.l10n.facilities,
-            style: context.theme.textTheme.displayLarge?.copyWith(
-              fontSize: 16.sp,
-            ),
-          ),
         ],
       ),
     );
@@ -139,28 +132,37 @@ class AmenitiesRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18.w) +
-          EdgeInsets.only(
-            top: 10.h,
-          ),
-      child: Row(
+      padding:
+          EdgeInsets.symmetric(horizontal: 18.w) + EdgeInsets.only(top: 30.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // AppSvgWidget(path: icon),
-          // 10.horizontalSpace,
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: amenties.length,
-              separatorBuilder: (ctx, i) => 10.verticalSpace,
-              itemBuilder: (ctx, i) => Text(
-                amenties[i],
-                style: context.theme.textTheme.displaySmall?.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFF737380),
+          Text(
+            context.l10n.facilities,
+            style: context.theme.textTheme.displayLarge?.copyWith(
+              fontSize: 16.sp,
+            ),
+          ),
+          Row(
+            children: [
+              // AppSvgWidget(path: icon),
+              // 10.horizontalSpace,
+              Expanded(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: amenties.length,
+                  separatorBuilder: (ctx, i) => 10.verticalSpace,
+                  itemBuilder: (ctx, i) => Text(
+                    amenties[i],
+                    style: context.theme.textTheme.displaySmall?.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF737380),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
