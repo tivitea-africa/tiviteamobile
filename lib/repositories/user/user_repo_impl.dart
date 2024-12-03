@@ -106,7 +106,7 @@ final userRepositoryProvider = Provider<UserRepository>(
   (ref) => UserRepoImpl(ref.read(localDB)),
 );
 
-final currentUserProvider = StateProvider<User>((ref) {
-  final user = ref.read(userRepositoryProvider).getUser();
-  return user;
-});
+// final currentUserProvider = StateProvider<User>((ref) {
+//   final user = ref.read(userRepositoryProvider).getUser();
+//   return user;
+// });

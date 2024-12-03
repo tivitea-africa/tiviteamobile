@@ -19,7 +19,7 @@ class AllListingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       appbar: CustomAppBar(
-        title: context.l10n.listings,
+        title: context.l10n.services,
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).padding.top,
           right: 10.w,

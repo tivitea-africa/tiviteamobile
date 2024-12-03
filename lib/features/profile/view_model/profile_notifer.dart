@@ -29,7 +29,7 @@ class ProfileNotifer extends _$ProfileNotifer {
     try {
       final result = await _repo.getUserProfile();
       if (result.isSuccess() == false) throw result.message ?? '';
-      ref.read(currentUserProvider);
+      //ref.read(currentUserProvider);
       state = state.copyWith(profileLoadState: LoadState.success);
     } catch (e) {
       state = state.copyWith(profileLoadState: LoadState.error);
@@ -38,7 +38,7 @@ class ProfileNotifer extends _$ProfileNotifer {
 
   void updateProfile(
     EditProfileModel data, {
-    required VoidCallback onSucess,
+    required VoidCallback onSuccess,
     required Function(String) onError,
   }) async {
     state = state.copyWith(editProfileLoadState: LoadState.loading);
@@ -46,7 +46,7 @@ class ProfileNotifer extends _$ProfileNotifer {
       final result = await _repo.updateUserProfile(data);
       if (result.isSuccess() == false) throw result.message ?? '';
       state = state.copyWith(editProfileLoadState: LoadState.success);
-      onSucess();
+      onSuccess();
     } catch (e) {
       state = state.copyWith(editProfileLoadState: LoadState.error);
       onError(e.toString());

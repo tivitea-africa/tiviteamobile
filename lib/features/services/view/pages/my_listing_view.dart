@@ -12,11 +12,11 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/favorites/view/pages/favorites_view.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class MyListingView extends ConsumerStatefulWidget {
   const MyListingView({super.key});
@@ -37,7 +37,7 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
   Widget build(BuildContext context) {
     const createListingPath =
         '${AppRoutes.myListingView}/${AppRoutes.createListingView}';
-    final user = ref.watch(currentUserProvider);
+    final user = ref.watch(userNotifierProvider);
     // if (user.kycIsVerified == false) {
     //   return const StartKYCProcessView();
     // }

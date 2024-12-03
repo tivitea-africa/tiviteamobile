@@ -6,7 +6,7 @@ part of 'client_kyc_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$clientKycNotifierHash() => r'366785ef8215a083a47731cdd12b41e9f5a4e7c3';
+String _$clientKycNotifierHash() => r'03676b7750bab58ea4de049e4220b49575f84a2a';
 
 /// See also [ClientKycNotifier].
 @ProviderFor(ClientKycNotifier)

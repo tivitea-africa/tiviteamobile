@@ -9,12 +9,12 @@ import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/features/services/view/widgets/book_now_widget.dart';
 import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class ListingDetailView extends ConsumerStatefulWidget {
   final String listingId;
@@ -47,7 +47,7 @@ class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.read(currentUserProvider);
+    final user = ref.read(userNotifierProvider);
     final userIsServiceProvider = user.entityType == EntityType.partner;
     if (listing == null || isLoading == true) {
       return const Center(child: CupertinoActivityIndicator());

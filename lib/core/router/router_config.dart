@@ -61,7 +61,6 @@ final GoRouter router = GoRouter(
               routes: [
                 HomeRouter.serviceProviderDashboard,
                 HomeRouter.clientDashboard,
-                HomeRouter.allListingsView,
               ],
             ),
           ],
@@ -70,21 +69,23 @@ final GoRouter router = GoRouter(
           navigatorKey: _shellNavigatorServicesKey,
           routes: [
             GoRoute(
-                path: AppRoutes.servicesView,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                      child: ServicesView(),
-                    ),
-                routes: [
-                  ServicesRouter.listingDetails,
-                  ServicesRouter.bookWorkspaceView,
-                  ServicesRouter.bookingSummaryView,
-                  ServicesRouter.partnerKYCFirstView,
-                  ServicesRouter.partnerKYCSecondView,
-                  ServicesRouter.startKYCProcessView,
-                  ServicesRouter.clientKYCView,
-                  ServicesRouter.chooseRoomView,
-                  ServicesRouter.eReceiptView,
-                ]),
+              path: AppRoutes.servicesView,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: ServicesView(),
+              ),
+              routes: [
+                ServicesRouter.allListingsView,
+                ServicesRouter.listingDetails,
+                ServicesRouter.bookWorkspaceView,
+                ServicesRouter.bookingSummaryView,
+                ServicesRouter.partnerKYCFirstView,
+                ServicesRouter.partnerKYCSecondView,
+                ServicesRouter.startKYCProcessView,
+                ServicesRouter.clientKYCView,
+                ServicesRouter.chooseRoomView,
+                ServicesRouter.eReceiptView,
+              ],
+            ),
           ],
         ),
         StatefulShellBranch(
@@ -173,11 +174,5 @@ final GoRouter router = GoRouter(
         return PaymentWebview(paystackUrl: params);
       },
     ),
-    // GoRoute(
-    //   path: AppRoutes.homeView,
-    //   builder: (BuildContext context, GoRouterState state) {
-    //     return const NaviBar();
-    //   },
-    // ),
   ],
 );

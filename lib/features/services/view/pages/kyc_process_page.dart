@@ -6,10 +6,10 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class KYCStatusView extends ConsumerWidget {
   const KYCStatusView({super.key});
@@ -17,7 +17,7 @@ class KYCStatusView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userEntityType =
-        ref.watch(currentUserProvider).entityType ?? EntityType.partner;
+        ref.watch(userNotifierProvider).entityType ?? EntityType.partner;
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: Center(

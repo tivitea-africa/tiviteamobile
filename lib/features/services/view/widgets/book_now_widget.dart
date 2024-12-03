@@ -9,10 +9,10 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/kyc_dialog.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class BookNowContainer extends StatelessWidget {
   final ListingResponseModel listing;
@@ -151,7 +151,7 @@ class BookNowContainer extends StatelessWidget {
   }
 
   void _navigateToNextView(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider);
+    final user = ref.watch(userNotifierProvider);
     if (user.kycIsVerified != true) {
       context.showCustomDialog(child: const KYCDialog());
     } else {

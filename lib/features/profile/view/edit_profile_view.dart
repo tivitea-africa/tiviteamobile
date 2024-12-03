@@ -15,9 +15,9 @@ import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/profile/view_model/profile_notifer.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class EditProfileView extends ConsumerStatefulWidget {
   const EditProfileView({super.key});
@@ -54,7 +54,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(currentUserProvider);
+    final user = ref.watch(userNotifierProvider);
     return AppScaffold(
       appbar: const CustomAppBar(homeScreenAppBar: true),
       body: Column(
@@ -153,18 +153,21 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
     final data = EditProfileModel(phoneNumber: phoneNumber);
     notifier.updateProfile(
       data,
-      onSucess: () => context.showCustomDialog(
-        child: AppSuccessContent(
-          title: 'Success',
-          subtitle: 'Profile Updated Successfully',
-          buttonText: context.l10n.continue_,
-          onPressed: () {
-            context.pop();
-            context.pushReplacement(AppRoutes.profile);
-          },
-        ),
-      ),
-      onError: (message) => context.showError(message)
+      onSuccess: () {
+        context.showCustomDialog(
+          child: AppSuccessContent(
+            title: 'Success',
+            subtitle: 'Profile Updated Successfully',
+            buttonText: context.l10n.continue_,
+            onPressed: () {
+              context.pop();
+              context.pushReplacement(AppRoutes.profile);
+            },
+          ),
+        );
+        ref.read(userNotifierProvider.notifier).refreshUser();
+      },
+      onError: (message) => context.showError(message),
     );
   }
 }

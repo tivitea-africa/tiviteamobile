@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_drawer.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -76,7 +76,7 @@ class Navbar extends StatelessWidget {
             ),
             Consumer(
               builder: (context, ref, _) {
-                final user = ref.watch(currentUserProvider);
+                final user = ref.watch(userNotifierProvider);
                 final isClient = user.entityType == EntityType.client;
                 return NavigationDestination(
                   label: isClient ? context.l10n.myFavorites : context.l10n.myListing,

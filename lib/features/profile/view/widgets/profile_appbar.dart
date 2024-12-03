@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,8 +10,11 @@ import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/kyc/model/enums.dart';
 import 'package:tivi_tea/features/kyc/view/widgets/bottom_sheet_widget.dart';
+import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/profile/view/widgets/profile_appbar_header.dart';
 import 'package:tivi_tea/features/profile/view_model/profile_notifer.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
+import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
@@ -23,9 +24,12 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userRepositoryProvider).getUser();
+    final user = ref.read(userNotifierProvider);
     final profilePicLoadState = ref.watch(profileNotiferProvider.select(
-      (value) => value.profilePicLoadState,
+      (value) => value.editProfileLoadState,
+    ));
+    final imageUploadState = ref.watch(partnerServicesNotiferProvider.select(
+      (value) => value.cloudinaryUploadState,
     ));
     return Stack(
       clipBehavior: Clip.none,
@@ -38,7 +42,8 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
           duration: const Duration(milliseconds: 500),
           child: Column(
             children: [
-              profilePicLoadState == LoadState.loading
+              profilePicLoadState == LoadState.loading ||
+                      imageUploadState == LoadState.loading
                   ? const CupertinoActivityIndicator()
                   : GestureDetector(
                       onTap: () => _showBottomSheet(context, ref),
@@ -104,12 +109,12 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
           children: [
             BottomSheetWidget(
               chooseFileType: ChooseFileType.takePhoto,
-              onImageSelected: (file) => onImageSelected(file, ref, context),
+              onImageSelected: (file) => _updateProfilePic(file, ref, context),
             ),
             20.horizontalSpace,
             BottomSheetWidget(
               chooseFileType: ChooseFileType.selectFromGallery,
-              onImageSelected: (file) => onImageSelected(file, ref, context),
+              onImageSelected: (file) => _updateProfilePic(file, ref, context),
             ),
           ],
         ),
@@ -117,17 +122,33 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
     );
   }
 
-  void onImageSelected(
-      XFile selectedFile, WidgetRef ref, BuildContext context) async {
+  void _updateProfilePic(
+    XFile file,
+    WidgetRef ref,
+    BuildContext context,
+  ) async {
     final notifier = ref.read(profileNotiferProvider.notifier);
-    File file = File(selectedFile.path);
-
-    notifier.uploadProfilePic(
-      file,
-      onSuccess: () =>
-          context.showSuccess('Profile Picture successfully uploaded'),
-      onError: () => context.showError('Failed to Upload Profile Picture'),
+    final user = ref.read(userRepositoryProvider).getUser();
+    final image = await _uploadImages(file, ref);
+    final data = EditProfileModel(
+      phoneNumber: user.phoneNumber,
+      profilePicture: image.first,
     );
+    notifier.updateProfile(
+      data,
+      onSuccess: () {
+        context.showSuccess('Profile Picture successfully uploaded');
+        ref.read(userNotifierProvider.notifier).refreshUser();
+      },
+      onError: (message) => context.showError(message),
+    );
+  }
+
+  Future<List<String>> _uploadImages(XFile file, WidgetRef ref) async {
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    final imageUrls = await notifier.uploadImages([file]);
+
+    return imageUrls;
   }
 
   @override

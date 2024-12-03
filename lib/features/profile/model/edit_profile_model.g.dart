@@ -9,9 +9,11 @@ part of 'edit_profile_model.dart';
 EditProfileModel _$EditProfileModelFromJson(Map<String, dynamic> json) =>
     EditProfileModel(
       phoneNumber: json['phone_number'] as String?,
+      profilePicture: json['profile_picture'] as String?,
     );
 
 Map<String, dynamic> _$EditProfileModelToJson(EditProfileModel instance) =>
     <String, dynamic>{
       'phone_number': instance.phoneNumber,
+      'profile_picture': instance.profilePicture,
     };

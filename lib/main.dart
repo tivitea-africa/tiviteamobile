@@ -31,16 +31,18 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return Consumer(builder: (context, ref, _) {
-          return MaterialApp.router(
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            debugShowCheckedModeBanner: false,
-            title: 'tiviTea',
-            theme: ref.read(lightTheme),
-            routerConfig: router,
-          );
-        });
+        return Consumer(
+          builder: (context, ref, _) {
+            return MaterialApp.router(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              debugShowCheckedModeBanner: false,
+              title: 'tiviTea',
+              theme: ref.read(lightTheme),
+              routerConfig: router,
+            );
+          },
+        );
       },
     );
   }

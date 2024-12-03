@@ -7,7 +7,7 @@ part of 'client_payment_notifier.dart';
 // **************************************************************************
 
 String _$clientPaymentNotifierHash() =>
-    r'8bae167590d40002f772d5bbff12a111a56bb710';
+    r'f7b601e7afe5c7c3eb9a76e4edcda2138593f11a';
 
 /// See also [ClientPaymentNotifier].
 @ProviderFor(ClientPaymentNotifier)

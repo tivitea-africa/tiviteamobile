@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/home/view/general/all_listing_view.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/view/pages/client/client_kyc_view.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_first_view.dart';
@@ -68,18 +69,16 @@ class ServicesRouter {
       return ChooseRoomView(params: params);
     },
   );
-    static final eReceiptView = GoRoute(
+  static final eReceiptView = GoRoute(
     path: AppRoutes.eReceiptView,
     builder: (BuildContext context, GoRouterState state) {
-      final params = state.extra as ChooseRoomViewParams;
       return const EReceiptView();
     },
   );
-  // static final paymentWebview = GoRoute(
-  //   path: AppRoutes.paymentWebview,
-  //   builder: (BuildContext context, GoRouterState state) {
-  //     final params = state.extra as String;
-  //     return PaymentWebview(paystackUrl: params);
-  //   },
-  // );
+  static final allListingsView = GoRoute(
+    path: AppRoutes.allListingsView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const AllListingsView();
+    },
+  );
 }

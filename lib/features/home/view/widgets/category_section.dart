@@ -44,9 +44,7 @@ class _ViewAllRow extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () => context.push(
-              '${AppRoutes.homeView}${AppRoutes.allListingsView}',
-            ),
+            onTap: () => context.go(AppRoutes.servicesView),
             child: Text(
               context.l10n.viewAll,
               style: context.theme.textTheme.bodySmall?.copyWith(

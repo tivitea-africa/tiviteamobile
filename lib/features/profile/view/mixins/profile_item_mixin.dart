@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/profile/model/profile_item_model.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
-import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 mixin ProfileItemMixin {
   List<ProfileItemModel> getProfileItems({
     required BuildContext context,
     required WidgetRef ref,
   }) {
-    final user = ref.watch(currentUserProvider);
+    final user = ref.watch(userNotifierProvider);
     return [
       ProfileItemModel(
         label: '${user.firstName} ${user.lastName}',

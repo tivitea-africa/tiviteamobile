@@ -52,10 +52,14 @@ class DioInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    if (err.response != null &&
-        (err.response!.statusCode == 401 || err.response!.statusCode == 403)) {
-      await _refreshToken(err, handler, dio, userRepository);
-      return;
+    if (err.response?.data != null &&
+        err.response?.data['message'] != "Invalid creditials.") {
+      if (err.response != null &&
+          (err.response!.statusCode == 401 ||
+              err.response!.statusCode == 403)) {
+        await _refreshToken(err, handler, dio, userRepository);
+        return;
+      }
     }
     debugLog('[ERROR] ${err.requestOptions.uri}');
     debugLog('[ERROR] ${err.response}');
@@ -98,7 +102,7 @@ class DioInterceptor extends Interceptor {
       if (r.statusCode == 200) {
         userRepository.saveToken(r.data['access']);
         userRepository.saveRefreshToken(r.data['refresh']);
-        debugLog("Access Token gotten and saved"); 
+        debugLog("Access Token gotten and saved");
       }
       return handleError(handler, error, dio);
     } on DioException catch (e) {
