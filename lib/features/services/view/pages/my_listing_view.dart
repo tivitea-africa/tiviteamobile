@@ -51,28 +51,31 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CreateListingButton(
-                  text: context.l10n.addnew,
-                  onTap: () => context.push(createListingPath),
-                ),
-              ],
-            ),
-            10.verticalSpace,
-            Container(
-              width: context.width,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE8E8EB),
-                borderRadius: BorderRadius.circular(15),
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CreateListingButton(
+                    text: context.l10n.addnew,
+                    onTap: () => context.push(createListingPath),
+                  ),
+                ],
               ),
-              child: const _MyListingsList(),
-            ),
-          ],
+              10.verticalSpace,
+              Container(
+                width: context.width,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE8E8EB),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const _MyListingsList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -89,15 +92,19 @@ class _MyListingsList extends ConsumerWidget {
         (value) => value.listing,
       ),
     );
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: partnerListings.length,
-      separatorBuilder: (ctx, i) => 10.verticalSpace,
-      itemBuilder: (ctx, i) {
-        final listing = partnerListings[i];
-        return PsrtnerListingTile(listing: listing);
-      },
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    return RefreshIndicator(
+      onRefresh: () async => notifier.getPartnerListing(),
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: partnerListings.length,
+        separatorBuilder: (ctx, i) => 10.verticalSpace,
+        itemBuilder: (ctx, i) {
+          final listing = partnerListings[i];
+          return PsrtnerListingTile(listing: listing);
+        },
+      ),
     );
   }
 }

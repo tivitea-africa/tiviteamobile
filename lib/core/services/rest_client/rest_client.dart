@@ -61,7 +61,7 @@ abstract class RestClient {
       getListing();
 
   @POST('/listings/')
-  Future<BaseResponse> postWorkSpace(@Body() PostListingModel data);
+  Future<BaseResponse<ListingResponseModel>> postWorkSpace(@Body() PostListingModel data);
   @GET('/listings/{listingId}')
   Future<BaseResponse<ListingResponseModel>> getListingId(
     @Path('listingId') String listingId,

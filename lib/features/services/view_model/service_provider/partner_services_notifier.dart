@@ -65,6 +65,22 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     }
   }
 
+  // if (response.data != null) {
+  //   _updateListingFromBackend(response.data!);
+  // }
+
+  // void _updateListingFromBackend(ListingResponseModel listing) {
+  //   final existingListingIndex = state.listing.indexWhere(
+  //     (element) => element.id == listing.id,
+  //   );
+
+  //   if (existingListingIndex != -1) {
+  //     state.listing[existingListingIndex] = listing;
+  //   } else {
+  //     debugLog("Listing with id ${listing.id} not found.");
+  //   }
+  // }
+
   void postToolOrOtherListing(
     WorkToolListing model, {
     required VoidCallback onSuccess,

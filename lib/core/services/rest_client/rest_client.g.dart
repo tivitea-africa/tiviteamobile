@@ -332,13 +332,14 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<BaseResponse<dynamic>> postWorkSpace(PostListingModel data) async {
+  Future<BaseResponse<ListingResponseModel>> postWorkSpace(
+      PostListingModel data) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(data.toJson());
-    final _options = _setStreamType<BaseResponse<dynamic>>(Options(
+    final _options = _setStreamType<BaseResponse<ListingResponseModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -355,11 +356,11 @@ class _RestClient implements RestClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
+    late BaseResponse<ListingResponseModel> _value;
     try {
-      _value = BaseResponse<dynamic>.fromJson(
+      _value = BaseResponse<ListingResponseModel>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => ListingResponseModel.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

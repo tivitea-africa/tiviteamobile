@@ -67,16 +67,16 @@ class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       for (var i = 0; i < categories.length; i++)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: InkWell(
-                            onTap: () {
-                              widget.onCategorySelected(categories[i].id ?? '');
-
-                              initialText = categories[i].name ?? '';
-                              isExpanded = false;
-                              setState(() {});
-                            },
+                        InkWell(
+                          onTap: () {
+                            widget.onCategorySelected(categories[i].id ?? '');
+                        
+                            initialText = categories[i].name ?? '';
+                            isExpanded = false;
+                            setState(() {});
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
                             child: Text(categories[i].name ?? ''),
                           ),
                         ),

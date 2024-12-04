@@ -21,7 +21,7 @@ final class ServiceProviderServicesRepo {
     }
   }
 
-  Future<BaseResponse> postWorkSpace(PostListingModel model) async {
+  Future<BaseResponse<ListingResponseModel>> postWorkSpace(PostListingModel model) async {
     try {
       return await restClient.postWorkSpace(model);
     } on DioException catch (e) {

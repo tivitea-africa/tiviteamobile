@@ -8,10 +8,8 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
-import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
-import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class ChooseRoomView extends StatelessWidget {
@@ -134,29 +132,26 @@ class _ImageDetails extends StatelessWidget {
               children: [
                 room.amount.getCurrencyText(
                   style: context.theme.textTheme.displaySmall?.copyWith(
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w700,
                     color: context.theme.primaryColor,
                   ),
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    color: context.theme.primaryColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        context.l10n.chooseRoom,
-                        style: context.theme.textTheme.displaySmall?.copyWith(
-                          fontSize: 10.sp,
-                          color: Colors.white,
-                        ),
+                Flexible(
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: context.theme.primaryColor,
+                    ),
+                    child: Text(
+                      context.l10n.chooseRoom,
+                      style: context.theme.textTheme.displaySmall?.copyWith(
+                        fontSize: 10.sp,
+                        color: Colors.white,
                       ),
-                      5.horizontalSpace,
-                      AppSvgWidget(path: Assets.svgs.arrowRight),
-                    ],
+                    ),
                   ),
                 ),
               ],

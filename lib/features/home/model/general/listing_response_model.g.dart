@@ -42,6 +42,7 @@ ListingResponseModel _$ListingResponseModelFromJson(
       footSoldier: json['foot_soldier'] as bool?,
       cautionaryFee: json['cautionary_fee'] as num?,
       isFavorites: json['is_favorites'] as bool?,
+      availability: json['availability'] as bool?,
     );
 
 Map<String, dynamic> _$ListingResponseModelToJson(
@@ -66,6 +67,7 @@ Map<String, dynamic> _$ListingResponseModelToJson(
       'foot_soldier': instance.footSoldier,
       'cautionary_fee': instance.cautionaryFee,
       'is_favorites': instance.isFavorites,
+      'availability': instance.availability,
     };
 
 Room _$RoomFromJson(Map<String, dynamic> json) => Room(
