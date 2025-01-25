@@ -21,3 +21,15 @@ Map<String, dynamic> _$CreatePaymentResponseToJson(
       'access_code': instance.accessCode,
       'reference': instance.reference,
     };
+
+PaymentCallbackResponse _$PaymentCallbackResponseFromJson(
+        Map<String, dynamic> json) =>
+    PaymentCallbackResponse(
+      status: json['status'] as String?,
+    );
+
+Map<String, dynamic> _$PaymentCallbackResponseToJson(
+        PaymentCallbackResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+    };

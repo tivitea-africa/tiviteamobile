@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,189 +25,199 @@ import 'package:tivi_tea/features/services/view_model/booking_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class BookingSummaryView extends StatefulWidget {
+class BookingSummaryView extends ConsumerStatefulWidget {
   final BookingSummaryParams params;
   const BookingSummaryView({super.key, required this.params});
 
   @override
-  State<BookingSummaryView> createState() => _BookingSummaryViewState();
+  ConsumerState<BookingSummaryView> createState() => _BookingSummaryViewState();
 }
 
-class _BookingSummaryViewState extends State<BookingSummaryView> {
+class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
   bool isBookingCompleted = false;
   String bookingId = "";
   @override
   Widget build(BuildContext context) {
+    final paymentStatusLoadState = ref.watch(
+      clientPaymentNotifierProvider.select(
+        (value) => value.getPaymentStatusLoadState,
+      ),
+    );
     return AppScaffold(
       appbar: CustomAppBar(
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
         onHomeBackButtonTap: () => context.pop(),
       ),
-      body: Column(
-        children: [
-          30.verticalSpace,
-          WorkSpaceWidget(listing: widget.params.listing),
-          50.verticalSpace,
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: (paymentStatusLoadState == LoadState.loading)
+          ? const Center(child: CupertinoActivityIndicator())
+          : Column(
               children: [
-                Flexible(
-                  child: DottedWidget(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 10.w,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            context.l10n.pickUpDate,
-                            style: context.theme.textTheme.titleLarge?.copyWith(
-                              fontSize: 13.sp,
-                              color: const Color(0xFF737380),
+                30.verticalSpace,
+                WorkSpaceWidget(listing: widget.params.listing),
+                50.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: DottedWidget(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12.h,
+                            horizontal: 10.w,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  context.l10n.pickUpDate,
+                                  style: context.theme.textTheme.titleLarge
+                                      ?.copyWith(
+                                    fontSize: 13.sp,
+                                    color: const Color(0xFF737380),
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                Text(
+                                  widget.params.selectedDateFrom.toMonthDate,
+                                  textAlign: TextAlign.center,
+                                  style: context.theme.textTheme.displaySmall
+                                      ?.copyWith(
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          10.verticalSpace,
-                          Text(
-                            widget.params.selectedDateFrom.toMonthDate,
-                            textAlign: TextAlign.center,
-                            style:
-                                context.theme.textTheme.displaySmall?.copyWith(
-                              fontSize: 12.sp,
+                        ),
+                      ),
+                      Flexible(
+                        child: DottedWidget(
+                          padding: EdgeInsets.zero,
+                          dashPattern: const [4, 7],
+                          child: SizedBox(
+                            width: context.width,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: DottedWidget(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12.h,
+                            horizontal: 10.w,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  context.l10n.returnDate,
+                                  style: context.theme.textTheme.titleLarge
+                                      ?.copyWith(
+                                    fontSize: 13.sp,
+                                    color: const Color(0xFF737380),
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                Text(
+                                  widget.params.selectedDateTo.toMonthDate,
+                                  textAlign: TextAlign.center,
+                                  style: context.theme.textTheme.displaySmall
+                                      ?.copyWith(
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
-                Flexible(
+                20.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.w),
                   child: DottedWidget(
-                    padding: EdgeInsets.zero,
-                    dashPattern: const [4, 7],
                     child: SizedBox(
                       width: context.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            AppSvgWidget(
+                              path: Assets.svgs.location,
+                              fit: BoxFit.cover,
+                              width: 20,
+                              height: 20,
+                            ),
+                            10.horizontalSpace,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  context.l10n.pickUpLocation,
+                                  style: context.theme.textTheme.titleLarge
+                                      ?.copyWith(
+                                    fontSize: 13.sp,
+                                    color: const Color(0xFF737380),
+                                  ),
+                                ),
+                                5.verticalSpace,
+                                Text(
+                                  widget.params.listing.address ?? '',
+                                  textAlign: TextAlign.center,
+                                  style: context.theme.textTheme.displaySmall
+                                      ?.copyWith(
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                Flexible(
-                  child: DottedWidget(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 10.w,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            context.l10n.returnDate,
-                            style: context.theme.textTheme.titleLarge?.copyWith(
-                              fontSize: 13.sp,
-                              color: const Color(0xFF737380),
-                            ),
-                          ),
-                          10.verticalSpace,
-                          Text(
-                            widget.params.selectedDateTo.toMonthDate,
-                            textAlign: TextAlign.center,
-                            style:
-                                context.theme.textTheme.displaySmall?.copyWith(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                50.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.w),
+                  child: Consumer(
+                    builder: (context, ref, _) {
+                      final loadState = ref.watch(bookingNotiferProvider.select(
+                        (value) => value.loadState,
+                      ));
+                      final paymentLoadState =
+                          ref.watch(clientPaymentNotifierProvider.select(
+                        (value) => value.createPaymentLoadState,
+                      ));
+                      return AppButton(
+                        isLoading: loadState == LoadState.loading ||
+                            paymentLoadState == LoadState.loading,
+                        buttonText: isBookingCompleted
+                            ? context.l10n.payNow
+                            : context.l10n.continue_,
+                        onPressed: () {
+                          if (isBookingCompleted == false) {
+                            _submit(ref);
+                          } else {
+                            _proceedToPayment(bookingId);
+                          }
+                        },
+                      );
+                    },
                   ),
                 ),
               ],
             ),
-          ),
-          20.verticalSpace,
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.w),
-            child: DottedWidget(
-              child: SizedBox(
-                width: context.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      AppSvgWidget(
-                        path: Assets.svgs.location,
-                        fit: BoxFit.cover,
-                        width: 20,
-                        height: 20,
-                      ),
-                      10.horizontalSpace,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            context.l10n.pickUpLocation,
-                            style: context.theme.textTheme.titleLarge?.copyWith(
-                              fontSize: 13.sp,
-                              color: const Color(0xFF737380),
-                            ),
-                          ),
-                          5.verticalSpace,
-                          Text(
-                            widget.params.listing.address ?? '',
-                            textAlign: TextAlign.center,
-                            style:
-                                context.theme.textTheme.displaySmall?.copyWith(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          50.verticalSpace,
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.w),
-            child: Consumer(
-              builder: (context, ref, _) {
-                final loadState = ref.watch(bookingNotiferProvider.select(
-                  (value) => value.loadState,
-                ));
-                final paymentLoadState =
-                    ref.watch(clientPaymentNotifierProvider.select(
-                  (value) => value.createPaymentLoadState,
-                ));
-                return AppButton(
-                  isLoading: loadState == LoadState.loading ||
-                      paymentLoadState == LoadState.loading,
-                  buttonText: isBookingCompleted
-                      ? context.l10n.payNow
-                      : context.l10n.continue_,
-                  onPressed: () {
-                    if (isBookingCompleted == false) {
-                      _submit(ref);
-                    } else {
-                      _proceedToPayment(ref, bookingId: bookingId);
-                    }
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -248,19 +259,23 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
     setState(() {});
   }
 
-  void _proceedToPayment(WidgetRef ref, {required String bookingId}) {
+  void _proceedToPayment(String bookingId) {
     final paymentNotifier = ref.read(clientPaymentNotifierProvider.notifier);
     paymentNotifier.createPayment(
       bookingId,
       onSuccess: (response) {
         debugLog(response.authorizationUrl);
-        _navigateToPaymentView(response.authorizationUrl ?? '');
+        _navigateToPaymentView(
+          response.authorizationUrl ?? '',
+          response.reference ?? '',
+        );
       },
       onError: (message) => context.showError(message),
     );
   }
 
   void _showSuccessDialog() {
+    final paymentId = ref.read(clientPaymentNotifierProvider.select((value)=> value.paymentId));
     context.showCustomDialog(
       dismissible: false,
       child: AppSuccessContent(
@@ -270,7 +285,7 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
         secondButtonText: context.l10n.backToHome,
         onPressed: () {
           context.pop();
-          context.go(AppRoutes.eReceiptView);
+          context.go('${AppRoutes.servicesView}/${AppRoutes.eReceiptView}', extra: paymentId);
         },
         onSecondButtonPressed: () {
           context.pop();
@@ -280,10 +295,22 @@ class _BookingSummaryViewState extends State<BookingSummaryView> {
     );
   }
 
-  void _navigateToPaymentView(String paymentUrl) {
+  void _navigateToPaymentView(
+    String paymentUrl,
+    String paymentId,
+  ) {
     context.push(AppRoutes.paymentWebview, extra: paymentUrl).then(
-          (value) => _showSuccessDialog(),
+      (value) {
+        final paymentNotifier = ref.read(
+          clientPaymentNotifierProvider.notifier,
         );
+        paymentNotifier.getPaymentStatus(
+          paymentId,
+          onSuccess: (isSuccessful) => _showSuccessDialog(),
+          onError: (message) => context.showError(message),
+        );
+      },
+    );
   }
 }
 

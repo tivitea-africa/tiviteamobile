@@ -1,1008 +1,1016 @@
 {
-    "welcomeToTiviTea":"Welcome to tiviTea",
-    "@welcomeToTiviTea":{
-        "description": "First onboarding slide title"
-    },
-    "discoverWorkSpace":"Discover the perfect workspace/tool to boost your productivity. Let,s get you set up!",
-    "@discoverWorkSpace":{
-        "description": "First onboarding slide subtitle"
-    },
-    "exploreFeatures":"Explore our features",
-    "@exploreFeatures":{
-        "description": "Second onboarding slide title"
-    },
-    "findWorkspaceOrtool":"Find the right workspace or Tool, connect with members and find what you need for work!",
-    "@findWorkspaceOrtool":{
-        "description": "Second onboarding slide subtitle"
-    },
-    "bookWorkspace":"Book Your Workspace or Rent Your Tool",
-    "@bookWorkspace":{
-        "description": "Third onboarding slide title"
-    },
-    "findAndBook":"Easily find and book a workspace or rent tools and get to work wherever business takes you!",
-    "@findAndBook":{
-        "description": "Third onboarding slide subtitle"
-    },
-    "readyToSetUpAccount":"Ready To Set Up an Account?",
-    "@readyToSetUpAccount":{
-        "description": "Last onboarding slide title"
-    },
-    "takeNext3Minutes":"Take the next 3 minutes to set up your account and get started!",
-    "@takeNext3Minutes":{
-        "description": "Last onboarding slide subtitle"
-    },
-    "skip":"Skip",
-    "@skip":{
-        "description": "Skip text"
-    },
-    "continue_":"Continue",
-    "@continue_":{
-        "description": "Continue text"
-    },
-    "next":"Next",
-    "@next":{
-        "description": "Next text"
-    },
-    "getStarted":"Get Started",
-    "@getStarted":{
-        "description": "Get Started text"
-    },
-    "howToRegister":"How do you want to register?",
-    "@howToRegister":{
-        "description": "Select user type text"
-    },
-    "serviceProvider":"Service Provider",
-    "@serviceProvider":{
-        "description": "Service Provider text"
-    },
-    "customer":"Customer",
-    "@customer":{
-        "description": "Customer text"
-    },
-    "firstName":"First Name",
-    "@firstName":{
-        "description": "First Name text"
-    },
-    "firstNameHintText":"Enter First Name",
-    "@firstNameHintText":{
-        "description": "First Name hint text"
-    },
-    "lastName":"Last Name",
-    "@lastName":{
-        "description": "Last Name text"
-    },
-    "lastNameHintText":"Enter Last Name",
-    "@lastNameHintText":{
-        "description": "Last Name hint text"
-    },
-    "phoneNumber":"Phone Number",
-    "@phoneNumber":{
-        "description": "Phone Number text"
-    },
-    "phoneNumberHintText":"Enter Phone Number",
-    "@phoneNumberHintText":{
-        "description": "Phone Number hint text"
-    },
-    "email":"Email",
-    "@email":{
-        "description": "Email text"
-    },
-    "emailHintText":"Enter Email",
-    "@emailHintText":{
-        "description": "Email hint text"
-    },
-    "createPassword":"Create Password",
-    "@createPassword":{
-        "description": "Create Password text"
-    },
-    "createPasswordHintText":"Create New Password",
-    "@createPasswordHintText":{
-        "description": "Create Password hint text"
-    },
-    "confirmPassword":"Confirm Password",
-    "@confirmPassword":{
-        "description": "Confirm Password text"
-    },
-    "confirmPasswordHintText":"Confirm New Password",
-    "@confirmPasswordHintText":{
-        "description": "Confirm Password hint text"
-    },
-    "createAccount":"Create Account",
-    "@createAccount":{
-        "description": "Create Account text"
-    },
-    "alreadyHaveAccount":"Already have an account? ",
-    "@alreadyHaveAccount":{
-        "description": "Already have Account text"
-    },
-    "login":"Login",
-    "@login":{
-        "description": "Login text"
-    },
-    "googleSignUp":"Sign up with Google",
-    "@googleSignUp":{
-        "description": "Sign up with Google text"
-    },
-    "buyerOrCustomer":"Buyer/Customer",
-    "@buyerOrCustomer":{
-        "description": "Buyer/Customer text"
-    },
-    "newTo":"New to tiviTea? create your account and get started.",
-    "@newTo":{
-        "description": "New to tiviTea text"
-    },
-    "registerAsSpaceUser":"Register as a space or tool user",
-    "@registerAsSpaceUser":{
-        "description": "Register as space user text"
-    },
-    "provideInfo":"Provide correct information to setup your account",
-    "@provideInfo":{
-        "description": "Provide correct info text"
-    },
-    "spaceOrTool":"Space/Tool",
-    "@spaceOrTool":{
-        "description": "Space/Tool text"
-    },
-    "regIsEasy":"Registration is quick and easy, Lets help you reach a wider audience  today!",
-    "@regIsEasy":{
-        "description": "Registration is easy text"
-    },
-    "registerAsSpaceOwner":"Register as a space or tool owner",
-    "@registerAsSpaceOwner":{
-        "description": "Register as space owner text"
-    },
-    "personalInfo":"Personal Information",
-    "@personalInfo":{
-        "description": "Personal Information text"
-    },
-    "locationDetails":"Location Details",
-    "@locationDetails":{
-        "description": "Location Details text"
-    },
-    "accountInfo":"Account Information",
-    "@accountInfo":{
-        "description": "Account Information text"
-    },
-    "businessDetails":"Business Details",
-    "@businessDetails":{
-        "description": "Business Details text"
-    },
-    "bankDetails":"Bank Details",
-    "@bankDetails":{
-        "description": "Bank Details text"
-    },
-    "yourAddress":"Your Address",
-    "@yourAddress":{
-        "description": "Your Address text"
-    },
-    "yourAddressHintText":"Enter Address",
-    "@yourAddressHintText":{
-        "description": "Your Address hint text"
-    },
-    "city":"City",
-    "@city":{
-        "description": "City text"
-    },
-    "country":"Country",
-    "@country":{
-        "description": "Country text"
-    },
-    "stateOrProvince":"State/Province",
-    "@stateOrProvince":{
-        "description": "State/Province text"
-    },
-    "postalOrZipCode":"Postal/Zip Code",
-    "@postalOrZipCode":{
-        "description": "Postal/Zip Code text"
-    },
-    "username":"Username",
-    "@username":{
-        "description": "Username text"
-    },
-    "alternativePhone":"Alternative Phone Number",
-    "@alternativePhone":{
-        "description": "Alternative Phone Number text"
-    },
-    "businessName":"Business Name",
-    "@businessName":{
-        "description": "Business name text"
-    },
-    "companyName":"Company Name",
-    "@companyName":{
-        "description": "Business Name hint text"
-    },
-    "registrationStatus":"Registration Status",
-    "@registrationStatus":{
-        "description": "Registration Status text"
-    },
-    "registeredOrIndividual":"Registered or individual business",
-    "@registeredOrIndividual":{
-        "description": "Registration Status hint text"
-    },
-    "website":"Website",
-    "@website":{
-        "description": "Website text"
-    },
-    "optional":"Optional",
-    "@optional":{
-        "description": "Optional text"
-    },
-    "businessDescription":"Business Description",
-    "@businessDescription":{
-        "description": "Business Description text"
-    },
-    "briefDescription":"Brief description of space or tool offered",
-    "@briefDescription":{
-        "description": "Business description hint text"
-    },
-    "bankName":"Bank Name",
-    "@bankName":{
-        "description": "Bank Name text"
-    },
-    "accountName":"Account Name",
-    "@accountName":{
-        "description": "Account Name text"
-    },
-    "enterAccountName":"Enter Account Name",
-    "@enterAccountName":{
-        "description": "Account Name hint text"
-    },
-    "accountNumber":"Account Number",
-    "@accountNumber":{
-        "description": "Account Number text"
-    },
-    "enterAccountNumber":"Enter Account Number",
-    "@enterAccountNumber":{
-        "description": "Account Number hint text"
-    },
-    "allDone":"All Done!",
-    "@allDone":{
-        "description": "All Done text"
-    },
-    "accountSetup":"Your account has been setup",
-    "@accountSetup":{
-        "description": "Account has been setup text"
-    },
-    "proceedToLogin":"Proceed to Login",
-    "@proceedToLogin":{
-        "description": "Proceed to login text"
-    },
-    "goToHome":"Go to home",
-    "@goToHome":{
-        "description": "Go to home text"
-    },
-    "provideCredentials":"Provide your credentials to access your account",
-    "@provideCredentials":{
-        "description": "Provide credentials text"
-    },
-    "rememberMe":"Remember me",
-    "@rememberMe":{
-        "description": "Remember me text"
-    },
-    "forgotPassword":"Forgot Password",
-    "@forgotPassword":{
-        "description": "Forgot Password text"
-    },
-    "logIntoAccount":"Log into Account",
-    "@logIntoAccount":{
-        "description": "Log into Account text"
-    },
-    "dontHaveAccount":"Don''t have an account? ",
-    "@dontHaveAccount":{
-        "description": "Don't have an account text"
-    },
-    "signUp":"Sign Up",
-    "@signUp":{
-        "description": "Sign Up text"
-    },
-    "enterYourEmailForReset":"Enter your email to receive a password reset link",
-    "@enterYourEmailForReset":{
-        "description": "Enter your email to receive a password reset link text"
-    },
-    "sendLink":"Send link",
-    "@sendLink":{
-        "description": "Send link text"
-    },
-    "setNewPassword":"Set a new password for your account",
-    "@setNewPassword":{
-        "description": "Set a new password for your account text"
-    },
-    "enterPass":"Enter Password",
-    "@enterPass":{
-        "description": "Enter Password text"
-    },
-    "enterPassAgain":"Enter Password Again",
-    "@enterPassAgain":{
-        "description": "Enter Password Again text"
-    },
-    "passwordChanged":"Password Changed!",
-    "@passwordChanged":{
-        "description": "Password Changed text"
-    },
-    "youHaveChangedPassword":"You have successfully changed your password",
-    "@youHaveChangedPassword":{
-        "description": "You have successfully changed your password text"
-    },
-    "googleContinue":"Continue with Google",
-    "@googleContinue":{
-        "description": "Continue with Google text"
-    },
-    "home":"Home",
-    "@home":{
-        "description": "Nav bar Home text"
-    },
-    "services":"Services",
-    "@services":{
-        "description": "Nav bar Services text"
-    },
-    "myHistory":"My History",
-    "@myHistory":{
-        "description": "Nav bar My History text"
-    },
-    "profile":"Profile",
-    "@profile":{
-        "description": "Nav bar Profile text"
-    },
-    "dashboard":"Dashboard",
-    "@dashboard":{
-        "description": "Dashboard text"
-    },
-    "myProfile":"My Profile",
-    "@myProfile":{
-        "description": "My Profile text"
-    },
-    "myListing":"My Listing",
-    "@myListing":{
-        "description": "My Listing text"
-    },
-    "myFavorites":"My Favorites",
-    "@myFavorites":{
-        "description": "My Favorites text"
-    },
-    "bookingHistory":"Booking History",
-    "@bookingHistory":{
-        "description": "Booking History text"
-    },
-    "payments":"Payments",
-    "@payments":{
-        "description": "Payments text"
-    },
-    "activities":"Activities",
-    "@activities":{
-        "description": "Activities text"
-    },
-    "messages":"Messages",
-    "@messages":{
-        "description": "Messages text"
-    },
-    "addFootSoldiers":"Add Foot Soldiers",
-    "@addFootSoldiers":{
-        "description": "Add Foot Soldiers text"
-    },
-    "customerReview":"Customer Review",
-    "@customerReview":{
-        "description": "Customer Review text"
-    },
-    "customerSupport":"Customer Support",
-    "@customerSupport":{
-        "description": "Customer Support text"
-    },
-    "settings":"Settings",
-    "@settings":{
-        "description": "Settings text"
-    },
-    "report":"Report",
-    "@report":{
-        "description": "Report text"
-    },
-    "logOut":"Log out",
-    "@logOut":{
-        "description": "Log out text"
-    },
-    "welcomeBack":"Welcome Back!",
-    "@welcomeBack":{
-        "description": "Welcome Back text"
-    },
-    "hiUser": "Hi {firstName}, welcome back to tiviTea admin",
-    "@hiUser": {
-      "description": "Hi user",
-      "placeholders": {
-         "firstName": {
-           "type": "String"
-         }
+  "welcomeToTiviTea": "Welcome to tiviTea",
+  "@welcomeToTiviTea": {
+    "description": "First onboarding slide title"
+  },
+  "discoverWorkSpace": "Discover the perfect workspace/tool to boost your productivity. Let,s get you set up!",
+  "@discoverWorkSpace": {
+    "description": "First onboarding slide subtitle"
+  },
+  "exploreFeatures": "Explore our features",
+  "@exploreFeatures": {
+    "description": "Second onboarding slide title"
+  },
+  "findWorkspaceOrtool": "Find the right workspace or Tool, connect with members and find what you need for work!",
+  "@findWorkspaceOrtool": {
+    "description": "Second onboarding slide subtitle"
+  },
+  "bookWorkspace": "Book Your Workspace or Rent Your Tool",
+  "@bookWorkspace": {
+    "description": "Third onboarding slide title"
+  },
+  "findAndBook": "Easily find and book a workspace or rent tools and get to work wherever business takes you!",
+  "@findAndBook": {
+    "description": "Third onboarding slide subtitle"
+  },
+  "readyToSetUpAccount": "Ready To Set Up an Account?",
+  "@readyToSetUpAccount": {
+    "description": "Last onboarding slide title"
+  },
+  "takeNext3Minutes": "Take the next 3 minutes to set up your account and get started!",
+  "@takeNext3Minutes": {
+    "description": "Last onboarding slide subtitle"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip text"
+  },
+  "continue_": "Continue",
+  "@continue_": {
+    "description": "Continue text"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next text"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get Started text"
+  },
+  "howToRegister": "How do you want to register?",
+  "@howToRegister": {
+    "description": "Select user type text"
+  },
+  "serviceProvider": "Service Provider",
+  "@serviceProvider": {
+    "description": "Service Provider text"
+  },
+  "customer": "Customer",
+  "@customer": {
+    "description": "Customer text"
+  },
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First Name text"
+  },
+  "firstNameHintText": "Enter First Name",
+  "@firstNameHintText": {
+    "description": "First Name hint text"
+  },
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last Name text"
+  },
+  "lastNameHintText": "Enter Last Name",
+  "@lastNameHintText": {
+    "description": "Last Name hint text"
+  },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "Phone Number text"
+  },
+  "phoneNumberHintText": "Enter Phone Number",
+  "@phoneNumberHintText": {
+    "description": "Phone Number hint text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email text"
+  },
+  "emailHintText": "Enter Email",
+  "@emailHintText": {
+    "description": "Email hint text"
+  },
+  "createPassword": "Create Password",
+  "@createPassword": {
+    "description": "Create Password text"
+  },
+  "createPasswordHintText": "Create New Password",
+  "@createPasswordHintText": {
+    "description": "Create Password hint text"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm Password text"
+  },
+  "confirmPasswordHintText": "Confirm New Password",
+  "@confirmPasswordHintText": {
+    "description": "Confirm Password hint text"
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create Account text"
+  },
+  "alreadyHaveAccount": "Already have an account? ",
+  "@alreadyHaveAccount": {
+    "description": "Already have Account text"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login text"
+  },
+  "googleSignUp": "Sign up with Google",
+  "@googleSignUp": {
+    "description": "Sign up with Google text"
+  },
+  "buyerOrCustomer": "Buyer/Customer",
+  "@buyerOrCustomer": {
+    "description": "Buyer/Customer text"
+  },
+  "newTo": "New to tiviTea? create your account and get started.",
+  "@newTo": {
+    "description": "New to tiviTea text"
+  },
+  "registerAsSpaceUser": "Register as a space or tool user",
+  "@registerAsSpaceUser": {
+    "description": "Register as space user text"
+  },
+  "provideInfo": "Provide correct information to setup your account",
+  "@provideInfo": {
+    "description": "Provide correct info text"
+  },
+  "spaceOrTool": "Space/Tool",
+  "@spaceOrTool": {
+    "description": "Space/Tool text"
+  },
+  "regIsEasy": "Registration is quick and easy, Lets help you reach a wider audience  today!",
+  "@regIsEasy": {
+    "description": "Registration is easy text"
+  },
+  "registerAsSpaceOwner": "Register as a space or tool owner",
+  "@registerAsSpaceOwner": {
+    "description": "Register as space owner text"
+  },
+  "personalInfo": "Personal Information",
+  "@personalInfo": {
+    "description": "Personal Information text"
+  },
+  "locationDetails": "Location Details",
+  "@locationDetails": {
+    "description": "Location Details text"
+  },
+  "accountInfo": "Account Information",
+  "@accountInfo": {
+    "description": "Account Information text"
+  },
+  "businessDetails": "Business Details",
+  "@businessDetails": {
+    "description": "Business Details text"
+  },
+  "bankDetails": "Bank Details",
+  "@bankDetails": {
+    "description": "Bank Details text"
+  },
+  "yourAddress": "Your Address",
+  "@yourAddress": {
+    "description": "Your Address text"
+  },
+  "yourAddressHintText": "Enter Address",
+  "@yourAddressHintText": {
+    "description": "Your Address hint text"
+  },
+  "city": "City",
+  "@city": {
+    "description": "City text"
+  },
+  "country": "Country",
+  "@country": {
+    "description": "Country text"
+  },
+  "stateOrProvince": "State/Province",
+  "@stateOrProvince": {
+    "description": "State/Province text"
+  },
+  "postalOrZipCode": "Postal/Zip Code",
+  "@postalOrZipCode": {
+    "description": "Postal/Zip Code text"
+  },
+  "username": "Username",
+  "@username": {
+    "description": "Username text"
+  },
+  "alternativePhone": "Alternative Phone Number",
+  "@alternativePhone": {
+    "description": "Alternative Phone Number text"
+  },
+  "businessName": "Business Name",
+  "@businessName": {
+    "description": "Business name text"
+  },
+  "companyName": "Company Name",
+  "@companyName": {
+    "description": "Business Name hint text"
+  },
+  "registrationStatus": "Registration Status",
+  "@registrationStatus": {
+    "description": "Registration Status text"
+  },
+  "registeredOrIndividual": "Registered or individual business",
+  "@registeredOrIndividual": {
+    "description": "Registration Status hint text"
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website text"
+  },
+  "optional": "Optional",
+  "@optional": {
+    "description": "Optional text"
+  },
+  "businessDescription": "Business Description",
+  "@businessDescription": {
+    "description": "Business Description text"
+  },
+  "briefDescription": "Brief description of space or tool offered",
+  "@briefDescription": {
+    "description": "Business description hint text"
+  },
+  "bankName": "Bank Name",
+  "@bankName": {
+    "description": "Bank Name text"
+  },
+  "accountName": "Account Name",
+  "@accountName": {
+    "description": "Account Name text"
+  },
+  "enterAccountName": "Enter Account Name",
+  "@enterAccountName": {
+    "description": "Account Name hint text"
+  },
+  "accountNumber": "Account Number",
+  "@accountNumber": {
+    "description": "Account Number text"
+  },
+  "enterAccountNumber": "Enter Account Number",
+  "@enterAccountNumber": {
+    "description": "Account Number hint text"
+  },
+  "allDone": "All Done!",
+  "@allDone": {
+    "description": "All Done text"
+  },
+  "accountSetup": "Your account has been setup",
+  "@accountSetup": {
+    "description": "Account has been setup text"
+  },
+  "proceedToLogin": "Proceed to Login",
+  "@proceedToLogin": {
+    "description": "Proceed to login text"
+  },
+  "goToHome": "Go to home",
+  "@goToHome": {
+    "description": "Go to home text"
+  },
+  "provideCredentials": "Provide your credentials to access your account",
+  "@provideCredentials": {
+    "description": "Provide credentials text"
+  },
+  "rememberMe": "Remember me",
+  "@rememberMe": {
+    "description": "Remember me text"
+  },
+  "forgotPassword": "Forgot Password",
+  "@forgotPassword": {
+    "description": "Forgot Password text"
+  },
+  "logIntoAccount": "Log into Account",
+  "@logIntoAccount": {
+    "description": "Log into Account text"
+  },
+  "dontHaveAccount": "Don''t have an account? ",
+  "@dontHaveAccount": {
+    "description": "Don't have an account text"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign Up text"
+  },
+  "enterYourEmailForReset": "Enter your email to receive a password reset link",
+  "@enterYourEmailForReset": {
+    "description": "Enter your email to receive a password reset link text"
+  },
+  "sendLink": "Send link",
+  "@sendLink": {
+    "description": "Send link text"
+  },
+  "setNewPassword": "Set a new password for your account",
+  "@setNewPassword": {
+    "description": "Set a new password for your account text"
+  },
+  "enterPass": "Enter Password",
+  "@enterPass": {
+    "description": "Enter Password text"
+  },
+  "enterPassAgain": "Enter Password Again",
+  "@enterPassAgain": {
+    "description": "Enter Password Again text"
+  },
+  "passwordChanged": "Password Changed!",
+  "@passwordChanged": {
+    "description": "Password Changed text"
+  },
+  "youHaveChangedPassword": "You have successfully changed your password",
+  "@youHaveChangedPassword": {
+    "description": "You have successfully changed your password text"
+  },
+  "googleContinue": "Continue with Google",
+  "@googleContinue": {
+    "description": "Continue with Google text"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Nav bar Home text"
+  },
+  "services": "Services",
+  "@services": {
+    "description": "Nav bar Services text"
+  },
+  "myHistory": "My History",
+  "@myHistory": {
+    "description": "Nav bar My History text"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Nav bar Profile text"
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Dashboard text"
+  },
+  "myProfile": "My Profile",
+  "@myProfile": {
+    "description": "My Profile text"
+  },
+  "myListing": "My Listing",
+  "@myListing": {
+    "description": "My Listing text"
+  },
+  "myFavorites": "My Favorites",
+  "@myFavorites": {
+    "description": "My Favorites text"
+  },
+  "bookingHistory": "Booking History",
+  "@bookingHistory": {
+    "description": "Booking History text"
+  },
+  "payments": "Payments",
+  "@payments": {
+    "description": "Payments text"
+  },
+  "activities": "Activities",
+  "@activities": {
+    "description": "Activities text"
+  },
+  "messages": "Messages",
+  "@messages": {
+    "description": "Messages text"
+  },
+  "addFootSoldiers": "Add Foot Soldiers",
+  "@addFootSoldiers": {
+    "description": "Add Foot Soldiers text"
+  },
+  "customerReview": "Customer Review",
+  "@customerReview": {
+    "description": "Customer Review text"
+  },
+  "customerSupport": "Customer Support",
+  "@customerSupport": {
+    "description": "Customer Support text"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings text"
+  },
+  "report": "Report",
+  "@report": {
+    "description": "Report text"
+  },
+  "logOut": "Log out",
+  "@logOut": {
+    "description": "Log out text"
+  },
+  "welcomeBack": "Welcome Back!",
+  "@welcomeBack": {
+    "description": "Welcome Back text"
+  },
+  "hiUser": "Hi {firstName}, welcome back to tiviTea admin",
+  "@hiUser": {
+    "description": "Hi user",
+    "placeholders": {
+      "firstName": {
+        "type": "String"
       }
-    },
-    "filters":"Filters",
-    "@filters":{
-        "description": "Filters text"
-    },
-    "listings":"Listings",
-    "@listings":{
-        "description": "Listings text"
-    },
-    "search":"Search",
-    "@search":{
-        "description": "Search text"
-    },
-    "findAll":"Find all you need",
-    "@findAll":{
-        "description": "Find all you need text"
-    },
-    "fromWorkTooks":"From work tools to co-working space.",
-    "@fromWorkTooks":{
-        "description": "From work tools to co-working space text"
-    },
-    "category":"Caterory",
-    "@category":{
-        "description": "Caterory text"
-    },
-    "viewAll":"View All",
-    "@viewAll":{
-        "description": "View All text"
-    },
-    "mostPopular":"Most Popular",
-    "@mostPopular":{
-        "description": "Most Popular text"
-    },
-    "createListing":"Create Listing",
-    "@createListing":{
-        "description": "Create Listing text"
-    },
-    "addAccountDetails":"Add Account Details",
-    "@addAccountDetails":{
-        "description": "Add Account Details text"
-    },
-    "listedBy":"Listed by",
-    "@listedBy":{
-        "description": "Listed by text"
-    },
-    "description":"Description",
-    "@description":{
-        "description": "Description text"
-    },
-    "facilities":"Facilities available here",
-    "@facilities":{
-        "description": "Facilities available text"
-    },
-    "location":"Location",
-    "@location":{
-        "description": "Location available text"
-    },
-    "contact":"Contact",
-    "@contact":{
-        "description": "Contact available text"
-    },
-    "youCan":"You can",
-    "@youCan":{
-        "description": "You can text"
-    },
-    "getQuotation":"Get a Quotation",
-    "@getQuotation":{
-        "description": "Get a Quotation text"
-    },
-    "pricesAreAvailable":"Prices are available per room and available facility",
-    "@pricesAreAvailable":{
-        "description": "Prices are available text"
-    },
-    "bookNow":"Book now",
-    "@bookNow":{
-        "description": "Book now text"
-    },
-    "dateFrom":"Date from",
-    "@dateFrom":{
-        "description": "Date from text"
-    },
-    "dateTo":"Date to",
-    "@dateTo":{
-        "description": "Date to text"
-    },
-    "numberOfPeople":"No. of people",
-    "@numberOfPeople":{
-        "description": "No. of people text"
-    },
-    "payNow":"Pay Now",
-    "@payNow":{
-        "description": "Pay Now text"
-    },
-    "summary":"Summary",
-    "@summary":{
-        "description": "Summary text"
-    },
-    "totalBooking":"Total Booking",
-    "@totalBooking":{
-        "description": "Total Booking text"
-    },
-    "totalListing":"Total Listing",
-    "@totalListing":{
-        "description": "Total Listing text"
-    },
-    "totalEarning":"Total Earning",
-    "@totalEarning":{
-        "description": "Total Earning text"
-    },
-    "totalReceived":"Total Received",
-    "@totalReceived":{
-        "description": "Total Received text"
-    },
-    "totalActivities":"Total Activities",
-    "@totalActivities":{
-        "description": "Total Activities text"
-    },
-    "bookingSummary":"Booking Summary",
-    "@bookingSummary":{
-        "description": "Booking Summary text"
-    },
-    "incomingBookings":"Incoming Bookings",
-    "@incomingBookings":{
-        "description": "Incoming Bookings text"
-    },
-    "upcomingBookings":"Upcoming Bookings",
-    "@upcomingBookings":{
-        "description": "Upcoming Bookings text"
-    },
-    "ongoingBookings":"Ongoing Bookings",
-    "@ongoingBookings":{
-        "description": "Ongoing Bookings text"
-    },
-    "completedBookings":"Completed Bookings",
-    "@completedBookings":{
-        "description": "Completed Bookings text"
-    },
-    "financialSummary":"Financial Summary",
-    "@financialSummary":{
-        "description": "Financial Summary text"
-    },
-    "viewReport":"View Report",
-    "@viewReport":{
-        "description": "View Report text"
-    },
-    "newListing":"New listing",
-    "@newListing":{
-        "description": "New listing text"
-    },
-    "whatToList":"What do you want to list?",
-    "@whatToList":{
-        "description": "What do you want to list text"
-    },
-    "coWorkingSpace":"Co-Working Space",
-    "@coWorkingSpace":{
-        "description": "Co-Working Space text"
-    },
-    "workTool":"Work Tool",
-    "@workTool":{
-        "description": "Work Tool text"
-    },
-    "otherListing":"Other Listing",
-    "@otherListing":{
-        "description": "Other Listing text"
-    },
-    "otherListingCategory":"Other Listing Category",
-    "@otherListingCategory":{
-        "description": "Other Listing Category text"
-    },
-    "spaceDetails":"Space Details",
-    "@spaceDetails":{
-        "description": "Space Details text"
-    },
-    "nameOfSpace":"Name of Space",
-    "@nameOfSpace":{
-        "description": "Name of Space text"
-    },
-    "shortDescription":"Short Description",
-    "@shortDescription":{
-        "description": "Short Description text"
-    },
-    "addressOfSpace":"Address of Space",
-    "@addressOfSpace":{
-        "description": "Address of Space text"
-    },
-    "spaceAmenities":"Space Amenities",
-    "@spaceAmenities":{
-        "description": "Space Amenities text"
-    },
-    "e24hr":"24 hrs electricity",
-    "@e24hr":{
-        "description": "24 hrs electricity text"
-    },
-    "parking":"Parking",
-    "@parking":{
-        "description": "Parking text"
-    },
-    "wifi":"WiFi",
-    "@wifi":{
-        "description": "WiFi text"
-    },
-    "cctv":"CCTV",
-    "@cctv":{
-        "description": "CCTV text"
-    },
-    "cafeteria":"Cafeteria",
-    "@cafeteria":{
-        "description": "Cafeteria text"
-    },
-    "addMore":"Add More",
-    "@addMore":{
-        "description": "Add More text"
-    },
-    "addCard":"Add Card",
-    "@addCard":{
-        "description": "Add Card text"
-    },
-    "uploadImagesOf": "Upload images of {tool}",
-    "@uploadImagesOf": {
-      "description": "Upload images of tool or workspace",
-      "placeholders": {
-         "tool": {
-           "type": "String"
-         }
-      }
-    },
-    "addImage":"Add Image",
-    "@addImage":{
-        "description": "Add Image text"
-    },
-    "roomDetails":"Room Details",
-    "@roomDetails":{
-        "description": "Room Details text"
-    },
-    "nameOfRoom":"Name of Room",
-    "@nameOfRoom":{
-        "description": "Name of Room text"
-    },
-    "availableSeats":"Available Seats",
-    "@availableSeats":{
-        "description": "Available Seats text"
-    },
-    "pricingType":"Pricing Type",
-    "@pricingType":{
-        "description": "Pricing Type text"
-    },
-    "saveAndPublish":"Save and Publish",
-    "@saveAndPublish":{
-        "description": "Save and Publish text"
-    },
-    "saveToDraft":"Save to Draft",
-    "@saveToDraft":{
-        "description": "Save to Draft text"
-    },
-    "hourly":"Hourly",
-    "@hourly":{
-        "description": "Hourly text"
-    },
-    "fixed":"Fixed",
-    "@fixed":{
-        "description": "Fixed text"
-    },
-    "add":"Add",
-    "@add":{
-        "description": "Add text"
-    },
-    "addAmenities":"Add Amentities",
-    "@addAmenities":{
-        "description": "Add Amentities text"
-    },
-    "workToolDetails":"Work Tool Details",
-    "@workToolDetails":{
-        "description": "Work Tool Details text"
-    },
-    "nameOfWorkTool":"Name of Work Tool",
-    "@nameOfWorkTool":{
-        "description": "Name of Work Tool text"
-    },
-    "nameOfWhatYouSelling":"Name of What you are listing",
-    "@nameOfWhatYouSelling":{
-        "description": "Name of What you are listing text"
-    },
-    "pickUpLocation":"Pick Up Location",
-    "@pickUpLocation":{
-        "description": "Pick Up Location text"
-    },
-    "rentPrice":"Rent Price",
-    "@rentPrice":{
-        "description": "Rent Price text"
-    },
-    "addnew":"New",
-    "@addnew":{
-        "description": "New text"
-    },
-    "changePassword":"Change Password",
-    "@changePassword":{
-        "description": "Change Password text"
-    },
-    "cautionFee":"Caution Fee (Refundable)",
-    "@cautionFee":{
-        "description": "Caution Fee text"
-    },
-    "total":"Total",
-    "@total":{
-        "description": "Total text"
-    },
-    "bargainPrice":"Bargain Price",
-    "@bargainPrice":{
-        "description": "Bargain Price text"
-    },
-    "rentNow":"Rent now",
-    "@rentNow":{
-        "description": "Rent now text"
-    },
-    "pickUpDate":"Pick up Date",
-    "@pickUpDate":{
-        "description": "Pick up Date text"
-    },
-    "returnDate":"Return Date",
-    "@returnDate":{
-        "description": "Return Date text"
-    },
-    "businessVerification":"Business Verification",
-    "@businessVerification":{
-        "description": "Business Verification text"
-    },
-    "tiviteaRequires":"tiviTea requires a valid Government-issued document in order to verify the authenticity of your business.pt here!",
-    "@tiviteaRequires":{
-        "description": "Business Verification subtitle text"
-    },
-    "documentType":"Document Type",
-    "@documentType":{
-        "description": "Document Type text"
-    },
-    "registrationNumber":"Registration Number",
-    "@registrationNumber":{
-        "description": "Registration Number text"
-    },
-    "enterRegistrationNumber":"Enter Registration Number e.g (RC1234...)",
-    "@enterRegistrationNumber":{
-        "description": "Registration Number text"
-    },
-    "businessRegistrationDocument":"Business Registration Document",
-    "@businessRegistrationDocument":{
-        "description": "Business Registration text"
-    },
-    "uploadScanned":"Upload scanned copy of your business registration document in JPG, PNG, or PDF",
-    "@uploadScanned":{
-        "description": "Upload Scanned text"
-    },
-    "chooseAFile":"Choose a File",
-    "@chooseAFile":{
-        "description": "Choose a file text"
-    },
-    "takeAPicture":"Take a Picture",
-    "@takeAPicture":{
-        "description": "Take a Picture text"
-    },
-    "gallery":"Gallery",
-    "@gallery":{
-        "description": "Gallery text"
-    },
-    "uploadDocument":"Upload Document",
-    "@uploadDocument":{
-        "description": "Upload Document text"
-    },
-    "utilityBillDocument":"Utility Bill Document",
-    "@utilityBillDocument":{
-        "description": "Utility Bill Document text"
-    },
-    "proofOfBusinessAddress":"Utility Bill Document",
-    "@proofOfBusinessAddress":{
-        "description": "Utility Bill Document text"
-    },
-    "confirmAllInfoProvided":"I confirm that all information provided a correct and legitimate.",
-    "@confirmAllInfoProvided":{
-        "description": "Confirm Info text"
-    },
-    "completeKYC":"Complete Your KYC Verification",
-    "@completeKYC":{
-        "description": "Complete KYC text"
-    },
-    "ensureSecureExperience":"To ensure a secure experience, please complete your KYC verification. This helps us confirm your identity and protect your acccount!",
-    "@ensureSecureExperience":{
-        "description": "Ensure secure experience text"
-    },
-    "toContinueBooking":"Please complete your KYC verification to continue with booking.",
-    "@toContinueBooking":{
-        "description": "KYC Verification booking text"
-    },
-    "toContinueListing":"Please complete your KYC verification to continue with listing.",
-    "@toContinueListing":{
-        "description": "KYC Verification listing text"
-    },
-    "startKYCProcess":"Start KYC Process",
-    "@startKYCProcess":{
-        "description": "Start KYC Process text"
-    },
-    "needHelp":"Need Help?",
-    "@needHelp":{
-        "description": "Need Help text"
-    },
-    "contactSupport":"Contact Support",
-    "@contactSupport":{
-        "description": "Contact Support text"
-    },
-    "verificationSuccessful":"Verification Successful!",
-    "@verificationSuccessful":{
-        "description": "Verification Successful text"
-    },
-    "proofOfIdentity":"Proof of Identity",
-    "@proofOfIdentity":{
-        "description": "Proof of Identity text"
-    },
-    "provideCorrectInfo":"Provide correct information to help us verify your account",
-    "@provideCorrectInfo":{
-        "description": "Provide correct information text"
-    },
-    "ninNumber":"NIN Number",
-    "@ninNumber":{
-        "description": "NIN Number text"
-    },
-    "enterNinNumber":"Enter NIN Number",
-    "@enterNinNumber":{
-        "description": "Enter NIN Number text"
-    },
-    "uploadFront":"Upload Front side of ID Card",
-    "@uploadFront":{
-        "description": "Upload Front text"
-    },
-    "uploadBack":"Upload Back side of ID Card",
-    "@uploadBack":{
-        "description": "Upload back text"
-    },
-    "uploadFrontDesc":"Upload the front side of your support document in JPG, PNG, or PDF",
-    "@uploadFrontDesc":{
-        "description": "Upload back text"
-    },
-    "uploadBackDesc":"Upload the back side of your support document in JPG, PNG, or PDF",
-    "@uploadBackDesc":{
-        "description": "Upload back text"
-    },
-    "accountVerification":"Account Verification",
-    "@accountVerification":{
-        "description": "Account Verification text"
-    },
-    "twoBusinessDays":"Please know that account verification may take up to 2 business days. You will be notified about the status of your verification.",
-    "@twoBusinessDays":{
-        "description": "Account Verification description text"
-    },
-    "submitDocuments":"Submit Documents",
-    "@submitDocuments":{
-        "description": "Submit Documents text"
-    },
-    "documentSubmitted":"Documents submitted for verification!",
-    "@documentSubmitted":{
-        "description": "Documents submitted text"
-    },
-    "afterTwoBusinessDays":"We will notify you about your verification status after 2 business days. ",
-    "@afterTwoBusinessDays":{
-        "description": "Documents submitted description text"
-    },
-    "goToDashboard":"Go to Dashboard",
-    "@goToDashboard":{
-        "description": "Go to Dashboard text"
-    },
-    "editProfile":"Edit Profile",
-    "@editProfile":{
-        "description": "Edit Profile text"
-    },
-    "updateProfile":"Update Profile",
-    "@updateProfile":{
-        "description": "Update Profile text"
-    },
-    "oldPassword":"Old Password",
-    "@oldPassword":{
-        "description": "Old Password text"
-    },
-    "newPassword":"New Password",
-    "@newPassword":{
-        "description": "New Password text"
-    },
-    "chooseRoom":"Choose Room",
-    "@chooseRoom":{
-        "description": "Choose Room text"
-    },
-    "package":"Package",
-    "@package":{
-        "description": "Add Package text"
-    },
-    "addPackage":"Add Package",
-    "@addPackage":{
-        "description": "Add Package text"
-    },
-    "packageName":"Name of package",
-    "@packageName":{
-        "description": "Name of package text"
-    },
-    "packageShortDesc":"Package short description",
-    "@packageShortDesc":{
-        "description": "Package short desc text"
-    },
-    "price":"Price",
-    "@price":{
-        "description": "Price text"
-    },
-    "amenities":"Amenities",
-    "@amenities":{
-        "description": "Amenities text"
-    },
-    "paymentSuccessful":"Payment Successful",
-    "@paymentSuccessful":{
-        "description": "Payment Successful text"
-    },
-    "paymentWasSuccessful":"Your Payment was Successful",
-    "@paymentWasSuccessful":{
-        "description": "Your Payment was Successful text"
-    },
-    "eReceipt":"E-Receipt",
-    "@eReceipt":{
-        "description": "E-Receipt text"
-    },
-    "downloadEReceipt":"Download E-Receipt",
-    "@downloadEReceipt":{
-        "description": "Download E-Receipt text"
-    },
-    "downloadEReceiptHere":"Download your E-Receipt here",
-    "@downloadEReceiptHere":{
-        "description": "Download E-Receipt here text"
-    },
-    "paymentReceipt":"Payment Receipt",
-    "@paymentReceipt":{
-        "description": "Payment Receipt text"
-    },
-    "backToHome":"Back to Home",
-    "@backToHome":{
-        "description": "Back to Home text"
-    },
-    "receivedFrom":"Received From",
-    "@receivedFrom":{
-        "description": "Received From text"
-    },
-    "date":"Date",
-    "@date":{
-        "description": "Date text"
-    },
-    "totalAmount":"Total Amount",
-    "@totalAmount":{
-        "description": "Total Amount text"
-    },
-    "item":"Item",
-    "@item":{
-        "description": "Item text"
-    },
-    "discount":"Discount",
-    "@discount":{
-        "description": "Discount text"
-    },
-    "cautionFeePayment":"Caution Fee",
-    "@cautionFeePayment":{
-        "description": "Caution Fee text"
-    },
-    "vat":"VAT(%5)",
-    "@vat":{
-        "description": "VAT text"
-    },
-    "goHome":"Go Home",
-    "@goHome":{
-        "description": "Go Home text"
-    },
-    "print":"Print",
-    "@print":{
-        "description": "Print text"
-    },
-    "share":"Share",
-    "@share":{
-        "description": "Share text"
-    },
-    "eTicket":"E-Ticket",
-    "@eTicket":{
-        "description": "E-Ticket text"
-    },
-    "hereIsETicker":"Here is your ticker",
-    "@hereIsETicker":{
-        "description": "Here is your ticker text"
-    },
-    "totalPayment":"Total Payment",
-    "@totalPayment":{
-        "description": "Total Payment text"
-    },
-    "save":"Save",
-    "@save":{
-        "description": "Save text"
     }
+  },
+  "filters": "Filters",
+  "@filters": {
+    "description": "Filters text"
+  },
+  "listings": "Listings",
+  "@listings": {
+    "description": "Listings text"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search text"
+  },
+  "findAll": "Find all you need",
+  "@findAll": {
+    "description": "Find all you need text"
+  },
+  "fromWorkTooks": "From work tools to co-working space.",
+  "@fromWorkTooks": {
+    "description": "From work tools to co-working space text"
+  },
+  "category": "Caterory",
+  "@category": {
+    "description": "Caterory text"
+  },
+  "viewAll": "View All",
+  "@viewAll": {
+    "description": "View All text"
+  },
+  "mostPopular": "Most Popular",
+  "@mostPopular": {
+    "description": "Most Popular text"
+  },
+  "createListing": "Create Listing",
+  "@createListing": {
+    "description": "Create Listing text"
+  },
+  "addAccountDetails": "Add Account Details",
+  "@addAccountDetails": {
+    "description": "Add Account Details text"
+  },
+  "listedBy": "Listed by",
+  "@listedBy": {
+    "description": "Listed by text"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description text"
+  },
+  "facilities": "Facilities available here",
+  "@facilities": {
+    "description": "Facilities available text"
+  },
+  "location": "Location",
+  "@location": {
+    "description": "Location available text"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Contact available text"
+  },
+  "youCan": "You can",
+  "@youCan": {
+    "description": "You can text"
+  },
+  "getQuotation": "Get a Quotation",
+  "@getQuotation": {
+    "description": "Get a Quotation text"
+  },
+  "pricesAreAvailable": "Prices are available per room and available facility",
+  "@pricesAreAvailable": {
+    "description": "Prices are available text"
+  },
+  "bookNow": "Book now",
+  "@bookNow": {
+    "description": "Book now text"
+  },
+  "dateFrom": "Date from",
+  "@dateFrom": {
+    "description": "Date from text"
+  },
+  "dateTo": "Date to",
+  "@dateTo": {
+    "description": "Date to text"
+  },
+  "numberOfPeople": "No. of people",
+  "@numberOfPeople": {
+    "description": "No. of people text"
+  },
+  "payNow": "Pay Now",
+  "@payNow": {
+    "description": "Pay Now text"
+  },
+  "summary": "Summary",
+  "@summary": {
+    "description": "Summary text"
+  },
+  "totalBooking": "Total Booking",
+  "@totalBooking": {
+    "description": "Total Booking text"
+  },
+  "totalListing": "Total Listing",
+  "@totalListing": {
+    "description": "Total Listing text"
+  },
+  "totalEarning": "Total Earning",
+  "@totalEarning": {
+    "description": "Total Earning text"
+  },
+  "totalReceived": "Total Received",
+  "@totalReceived": {
+    "description": "Total Received text"
+  },
+  "totalActivities": "Total Activities",
+  "@totalActivities": {
+    "description": "Total Activities text"
+  },
+  "bookingSummary": "Booking Summary",
+  "@bookingSummary": {
+    "description": "Booking Summary text"
+  },
+  "incomingBookings": "Incoming Bookings",
+  "@incomingBookings": {
+    "description": "Incoming Bookings text"
+  },
+  "upcomingBookings": "Upcoming Bookings",
+  "@upcomingBookings": {
+    "description": "Upcoming Bookings text"
+  },
+  "ongoingBookings": "Ongoing Bookings",
+  "@ongoingBookings": {
+    "description": "Ongoing Bookings text"
+  },
+  "completedBookings": "Completed Bookings",
+  "@completedBookings": {
+    "description": "Completed Bookings text"
+  },
+  "financialSummary": "Financial Summary",
+  "@financialSummary": {
+    "description": "Financial Summary text"
+  },
+  "viewReport": "View Report",
+  "@viewReport": {
+    "description": "View Report text"
+  },
+  "newListing": "New listing",
+  "@newListing": {
+    "description": "New listing text"
+  },
+  "whatToList": "What do you want to list?",
+  "@whatToList": {
+    "description": "What do you want to list text"
+  },
+  "coWorkingSpace": "Co-Working Space",
+  "@coWorkingSpace": {
+    "description": "Co-Working Space text"
+  },
+  "workTool": "Work Tool",
+  "@workTool": {
+    "description": "Work Tool text"
+  },
+  "otherListing": "Other Listing",
+  "@otherListing": {
+    "description": "Other Listing text"
+  },
+  "otherListingCategory": "Other Listing Category",
+  "@otherListingCategory": {
+    "description": "Other Listing Category text"
+  },
+  "spaceDetails": "Space Details",
+  "@spaceDetails": {
+    "description": "Space Details text"
+  },
+  "nameOfSpace": "Name of Space",
+  "@nameOfSpace": {
+    "description": "Name of Space text"
+  },
+  "shortDescription": "Short Description",
+  "@shortDescription": {
+    "description": "Short Description text"
+  },
+  "addressOfSpace": "Address of Space",
+  "@addressOfSpace": {
+    "description": "Address of Space text"
+  },
+  "spaceAmenities": "Space Amenities",
+  "@spaceAmenities": {
+    "description": "Space Amenities text"
+  },
+  "e24hr": "24 hrs electricity",
+  "@e24hr": {
+    "description": "24 hrs electricity text"
+  },
+  "parking": "Parking",
+  "@parking": {
+    "description": "Parking text"
+  },
+  "wifi": "WiFi",
+  "@wifi": {
+    "description": "WiFi text"
+  },
+  "cctv": "CCTV",
+  "@cctv": {
+    "description": "CCTV text"
+  },
+  "cafeteria": "Cafeteria",
+  "@cafeteria": {
+    "description": "Cafeteria text"
+  },
+  "addMore": "Add More",
+  "@addMore": {
+    "description": "Add More text"
+  },
+  "addCard": "Add Card",
+  "@addCard": {
+    "description": "Add Card text"
+  },
+  "uploadImagesOf": "Upload images of {tool}",
+  "@uploadImagesOf": {
+    "description": "Upload images of tool or workspace",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "addImage": "Add Image",
+  "@addImage": {
+    "description": "Add Image text"
+  },
+  "roomDetails": "Room Details",
+  "@roomDetails": {
+    "description": "Room Details text"
+  },
+  "nameOfRoom": "Name of Room",
+  "@nameOfRoom": {
+    "description": "Name of Room text"
+  },
+  "availableSeats": "Available Seats",
+  "@availableSeats": {
+    "description": "Available Seats text"
+  },
+  "pricingType": "Pricing Type",
+  "@pricingType": {
+    "description": "Pricing Type text"
+  },
+  "saveAndPublish": "Save and Publish",
+  "@saveAndPublish": {
+    "description": "Save and Publish text"
+  },
+  "saveToDraft": "Save to Draft",
+  "@saveToDraft": {
+    "description": "Save to Draft text"
+  },
+  "hourly": "Hourly",
+  "@hourly": {
+    "description": "Hourly text"
+  },
+  "fixed": "Fixed",
+  "@fixed": {
+    "description": "Fixed text"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add text"
+  },
+  "addAmenities": "Add Amentities",
+  "@addAmenities": {
+    "description": "Add Amentities text"
+  },
+  "workToolDetails": "Work Tool Details",
+  "@workToolDetails": {
+    "description": "Work Tool Details text"
+  },
+  "nameOfWorkTool": "Name of Work Tool",
+  "@nameOfWorkTool": {
+    "description": "Name of Work Tool text"
+  },
+  "nameOfWhatYouSelling": "Name of What you are listing",
+  "@nameOfWhatYouSelling": {
+    "description": "Name of What you are listing text"
+  },
+  "pickUpLocation": "Pick Up Location",
+  "@pickUpLocation": {
+    "description": "Pick Up Location text"
+  },
+  "rentPrice": "Rent Price",
+  "@rentPrice": {
+    "description": "Rent Price text"
+  },
+  "addnew": "New",
+  "@addnew": {
+    "description": "New text"
+  },
+  "changePassword": "Change Password",
+  "@changePassword": {
+    "description": "Change Password text"
+  },
+  "cautionFee": "Caution Fee (Refundable)",
+  "@cautionFee": {
+    "description": "Caution Fee text"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total text"
+  },
+  "bargainPrice": "Bargain Price",
+  "@bargainPrice": {
+    "description": "Bargain Price text"
+  },
+  "rentNow": "Rent now",
+  "@rentNow": {
+    "description": "Rent now text"
+  },
+  "pickUpDate": "Pick up Date",
+  "@pickUpDate": {
+    "description": "Pick up Date text"
+  },
+  "returnDate": "Return Date",
+  "@returnDate": {
+    "description": "Return Date text"
+  },
+  "businessVerification": "Business Verification",
+  "@businessVerification": {
+    "description": "Business Verification text"
+  },
+  "tiviteaRequires": "tiviTea requires a valid Government-issued document in order to verify the authenticity of your business.pt here!",
+  "@tiviteaRequires": {
+    "description": "Business Verification subtitle text"
+  },
+  "documentType": "Document Type",
+  "@documentType": {
+    "description": "Document Type text"
+  },
+  "registrationNumber": "Registration Number",
+  "@registrationNumber": {
+    "description": "Registration Number text"
+  },
+  "enterRegistrationNumber": "Enter Registration Number e.g (RC1234...)",
+  "@enterRegistrationNumber": {
+    "description": "Registration Number text"
+  },
+  "businessRegistrationDocument": "Business Registration Document",
+  "@businessRegistrationDocument": {
+    "description": "Business Registration text"
+  },
+  "uploadScanned": "Upload scanned copy of your business registration document in JPG, PNG, or PDF",
+  "@uploadScanned": {
+    "description": "Upload Scanned text"
+  },
+  "chooseAFile": "Choose a File",
+  "@chooseAFile": {
+    "description": "Choose a file text"
+  },
+  "takeAPicture": "Take a Picture",
+  "@takeAPicture": {
+    "description": "Take a Picture text"
+  },
+  "gallery": "Gallery",
+  "@gallery": {
+    "description": "Gallery text"
+  },
+  "uploadDocument": "Upload Document",
+  "@uploadDocument": {
+    "description": "Upload Document text"
+  },
+  "utilityBillDocument": "Utility Bill Document",
+  "@utilityBillDocument": {
+    "description": "Utility Bill Document text"
+  },
+  "proofOfBusinessAddress": "Utility Bill Document",
+  "@proofOfBusinessAddress": {
+    "description": "Utility Bill Document text"
+  },
+  "confirmAllInfoProvided": "I confirm that all information provided a correct and legitimate.",
+  "@confirmAllInfoProvided": {
+    "description": "Confirm Info text"
+  },
+  "completeKYC": "Complete Your KYC Verification",
+  "@completeKYC": {
+    "description": "Complete KYC text"
+  },
+  "ensureSecureExperience": "To ensure a secure experience, please complete your KYC verification. This helps us confirm your identity and protect your acccount!",
+  "@ensureSecureExperience": {
+    "description": "Ensure secure experience text"
+  },
+  "toContinueBooking": "Please complete your KYC verification to continue with booking.",
+  "@toContinueBooking": {
+    "description": "KYC Verification booking text"
+  },
+  "toContinueListing": "Please complete your KYC verification to continue with listing.",
+  "@toContinueListing": {
+    "description": "KYC Verification listing text"
+  },
+  "startKYCProcess": "Start KYC Process",
+  "@startKYCProcess": {
+    "description": "Start KYC Process text"
+  },
+  "needHelp": "Need Help?",
+  "@needHelp": {
+    "description": "Need Help text"
+  },
+  "contactSupport": "Contact Support",
+  "@contactSupport": {
+    "description": "Contact Support text"
+  },
+  "verificationSuccessful": "Verification Successful!",
+  "@verificationSuccessful": {
+    "description": "Verification Successful text"
+  },
+  "proofOfIdentity": "Proof of Identity",
+  "@proofOfIdentity": {
+    "description": "Proof of Identity text"
+  },
+  "provideCorrectInfo": "Provide correct information to help us verify your account",
+  "@provideCorrectInfo": {
+    "description": "Provide correct information text"
+  },
+  "ninNumber": "NIN Number",
+  "@ninNumber": {
+    "description": "NIN Number text"
+  },
+  "enterNinNumber": "Enter NIN Number",
+  "@enterNinNumber": {
+    "description": "Enter NIN Number text"
+  },
+  "uploadFront": "Upload Front side of ID Card",
+  "@uploadFront": {
+    "description": "Upload Front text"
+  },
+  "uploadBack": "Upload Back side of ID Card",
+  "@uploadBack": {
+    "description": "Upload back text"
+  },
+  "uploadFrontDesc": "Upload the front side of your support document in JPG, PNG, or PDF",
+  "@uploadFrontDesc": {
+    "description": "Upload back text"
+  },
+  "uploadBackDesc": "Upload the back side of your support document in JPG, PNG, or PDF",
+  "@uploadBackDesc": {
+    "description": "Upload back text"
+  },
+  "accountVerification": "Account Verification",
+  "@accountVerification": {
+    "description": "Account Verification text"
+  },
+  "twoBusinessDays": "Please know that account verification may take up to 2 business days. You will be notified about the status of your verification.",
+  "@twoBusinessDays": {
+    "description": "Account Verification description text"
+  },
+  "submitDocuments": "Submit Documents",
+  "@submitDocuments": {
+    "description": "Submit Documents text"
+  },
+  "documentSubmitted": "Documents submitted for verification!",
+  "@documentSubmitted": {
+    "description": "Documents submitted text"
+  },
+  "afterTwoBusinessDays": "We will notify you about your verification status after 2 business days. ",
+  "@afterTwoBusinessDays": {
+    "description": "Documents submitted description text"
+  },
+  "goToDashboard": "Go to Dashboard",
+  "@goToDashboard": {
+    "description": "Go to Dashboard text"
+  },
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit Profile text"
+  },
+  "updateProfile": "Update Profile",
+  "@updateProfile": {
+    "description": "Update Profile text"
+  },
+  "oldPassword": "Old Password",
+  "@oldPassword": {
+    "description": "Old Password text"
+  },
+  "newPassword": "New Password",
+  "@newPassword": {
+    "description": "New Password text"
+  },
+  "chooseRoom": "Choose Room",
+  "@chooseRoom": {
+    "description": "Choose Room text"
+  },
+  "package": "Package",
+  "@package": {
+    "description": "Add Package text"
+  },
+  "addPackage": "Add Package",
+  "@addPackage": {
+    "description": "Add Package text"
+  },
+  "packageName": "Name of package",
+  "@packageName": {
+    "description": "Name of package text"
+  },
+  "packageShortDesc": "Package short description",
+  "@packageShortDesc": {
+    "description": "Package short desc text"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Price text"
+  },
+  "amenities": "Amenities",
+  "@amenities": {
+    "description": "Amenities text"
+  },
+  "paymentSuccessful": "Payment Successful",
+  "@paymentSuccessful": {
+    "description": "Payment Successful text"
+  },
+  "paymentWasSuccessful": "Your Payment was Successful",
+  "@paymentWasSuccessful": {
+    "description": "Your Payment was Successful text"
+  },
+  "eReceipt": "E-Receipt",
+  "@eReceipt": {
+    "description": "E-Receipt text"
+  },
+  "downloadEReceipt": "Download E-Receipt",
+  "@downloadEReceipt": {
+    "description": "Download E-Receipt text"
+  },
+  "downloadEReceiptHere": "Download your E-Receipt here",
+  "@downloadEReceiptHere": {
+    "description": "Download E-Receipt here text"
+  },
+  "paymentReceipt": "Payment Receipt",
+  "@paymentReceipt": {
+    "description": "Payment Receipt text"
+  },
+  "backToHome": "Back to Home",
+  "@backToHome": {
+    "description": "Back to Home text"
+  },
+  "receivedFrom": "Received From",
+  "@receivedFrom": {
+    "description": "Received From text"
+  },
+  "date": "Date",
+  "@date": {
+    "description": "Date text"
+  },
+  "totalAmount": "Total Amount",
+  "@totalAmount": {
+    "description": "Total Amount text"
+  },
+  "item": "Item",
+  "@item": {
+    "description": "Item text"
+  },
+  "discount": "Discount",
+  "@discount": {
+    "description": "Discount text"
+  },
+  "cautionFeePayment": "Caution Fee",
+  "@cautionFeePayment": {
+    "description": "Caution Fee text"
+  },
+  "vat": "VAT(%5)",
+  "@vat": {
+    "description": "VAT text"
+  },
+  "goHome": "Go Home",
+  "@goHome": {
+    "description": "Go Home text"
+  },
+  "print": "Print",
+  "@print": {
+    "description": "Print text"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "Share text"
+  },
+  "eTicket": "E-Ticket",
+  "@eTicket": {
+    "description": "E-Ticket text"
+  },
+  "hereIsETicker": "Here is your ticker",
+  "@hereIsETicker": {
+    "description": "Here is your ticker text"
+  },
+  "totalPayment": "Total Payment",
+  "@totalPayment": {
+    "description": "Total Payment text"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save text"
+  },
+  "image": "Image",
+  "@image": {
+    "description": "Image text"
+  },
+  "pdf": "PDF",
+  "@pdf": {
+    "description": "PDF text"
+  }
 }

@@ -72,17 +72,19 @@ class _RoomListingWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SizedBox(
-              width: containerHeight.w,
-              height: containerHeight.h,
-              child: AppImageWidget(
-                imagePath: room.images?.first ?? '',
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8.sp),
-                  bottomLeft: Radius.circular(8.sp),
-                ),
-              ),
-            ),
+            (room.images?.isEmpty ?? false)
+                ? const SizedBox.shrink()
+                : SizedBox(
+                    width: containerHeight.w,
+                    height: containerHeight.h,
+                    child: AppImageWidget(
+                      imagePath: room.images?.first ?? '',
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.sp),
+                        bottomLeft: Radius.circular(8.sp),
+                      ),
+                    ),
+                  ),
             Flexible(child: _ImageDetails(room: room))
           ],
         ),

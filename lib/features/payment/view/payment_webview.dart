@@ -29,6 +29,17 @@ class _PaymentWebviewState extends State<PaymentWebview> {
     _webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
+      ..setOnJavaScriptConfirmDialog(
+          (JavaScriptConfirmDialogRequest dialogRequest) async {
+        debugLog("dialogRequest => ${dialogRequest.message}");
+        return false;
+      })
+      ..setOnConsoleMessage((JavaScriptConsoleMessage message) {
+        debugLog("message => ${message.message}");
+      })
+      ..setOnJavaScriptAlertDialog((JavaScriptAlertDialogRequest dialogRequest) async {
+        debugLog("alertDialogRequest => ${dialogRequest.message}");
+      })
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
@@ -71,7 +82,7 @@ class _PaymentWebviewState extends State<PaymentWebview> {
             controller: _webViewController,
             gestureRecognizers: gestureRecognizers,
           ),
-          _isLoading ? const _WebviewLoader() : Container(),
+          _isLoading ? const _WebviewLoader() : const SizedBox.shrink(),
         ],
       ),
     );

@@ -23,3 +23,17 @@ class CreatePaymentResponse {
 
   Map<String, dynamic> toJson() => _$CreatePaymentResponseToJson(this);
 }
+
+@JsonSerializable()
+class PaymentCallbackResponse {
+  final String? status;
+
+  PaymentCallbackResponse({
+    this.status,
+  });
+
+  factory PaymentCallbackResponse.fromJson(Map<String, dynamic> json) =>
+      _$PaymentCallbackResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PaymentCallbackResponseToJson(this);
+}

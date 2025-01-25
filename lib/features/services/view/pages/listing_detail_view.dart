@@ -34,6 +34,12 @@ class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
     init();
   }
 
+  @override
+  void didUpdateWidget(ListingDetailView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    init();
+  }
+
   void init() async {
     isLoading = true;
     setState(() {});

@@ -61,7 +61,8 @@ abstract class RestClient {
       getListing();
 
   @POST('/listings/')
-  Future<BaseResponse<ListingResponseModel>> postWorkSpace(@Body() PostListingModel data);
+  Future<BaseResponse<ListingResponseModel>> postWorkSpace(
+      @Body() PostListingModel data);
   @GET('/listings/{listingId}')
   Future<BaseResponse<ListingResponseModel>> getListingId(
     @Path('listingId') String listingId,
@@ -119,5 +120,9 @@ abstract class RestClient {
   @POST('/payment/{bookingId}')
   Future<BaseResponse<CreatePaymentResponse>> createPayment({
     @Path('bookingId') required String bookingId,
+  });
+  @GET('/bookings/')
+  Future<BaseResponse<PaymentCallbackResponse>> getPaymentStatus({
+    @Query('payment_id') required String paymentId,
   });
 }

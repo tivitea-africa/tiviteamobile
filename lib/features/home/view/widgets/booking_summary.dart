@@ -16,7 +16,6 @@ class BookingSummarySection extends ConsumerWidget {
       dashboardNotiferProvider.select((value) => value.model),
     );
     return Container(
-      //height: 300,
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.h),
       margin: EdgeInsets.symmetric(horizontal: 18.h),
       decoration: BoxDecoration(
