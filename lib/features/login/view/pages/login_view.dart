@@ -86,8 +86,8 @@ class _LoginViewState extends State<LoginView> {
             ),
             AppTextField(
               controller: passwordController,
-              label: context.l10n.enterPass,
-              hintText: context.l10n.createPasswordHintText,
+              label: context.l10n.password,
+              hintText: context.l10n.enterPass,
               obscureText: obscurePass,
               suffixIcon: InkWell(
                 onTap: _obscurePass,

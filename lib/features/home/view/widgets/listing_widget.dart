@@ -10,6 +10,7 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/onboarding/view/widgets/slide_indicator.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 
 class ListingsView extends ConsumerWidget {
@@ -89,6 +90,11 @@ class __ListingWidgetState extends State<_ListingWidget> {
                     ),
                     child: PageView.builder(
                       itemCount: widget.listing.images?.length,
+                      onPageChanged: (i) {
+                        setState(() {
+                          currentIndex = i;
+                        });
+                      },
                       itemBuilder: (ctx, i) {
                         final imagePath = widget.listing.images?[i] ?? '';
                         return AppImageWidget(imagePath: imagePath);
@@ -124,6 +130,10 @@ class _ImageDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final listingType = listing.listingType?.enumType;
+    final isListingTypeWorkSpace = listingType == CreateListingType.workSpace;
+    final amount =
+        isListingTypeWorkSpace ? listing.rooms?.first.amount : listing.amount;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 0.h),
       child: Column(
@@ -142,15 +152,14 @@ class _ImageDetails extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(),
-              listing.amount.getCurrencyText(
+              amount.getCurrencyText(
                 style: context.theme.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w700,
                   color: AppColors.danger,
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

@@ -87,6 +87,10 @@
   "@email": {
     "description": "Email text"
   },
+  "password": "Password",
+  "@password": {
+    "description": "Password text"
+  },
   "emailHintText": "Enter Email",
   "@emailHintText": {
     "description": "Email hint text"

@@ -11,6 +11,7 @@ import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/favorites/model/favorite_listing_model.dart';
 import 'package:tivi_tea/features/favorites/view_model/favorite_listing_notifier.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -153,11 +154,14 @@ class _ImageDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final listingType = listing.listingType?.enumType;
+    final isListingTypeWorkSpace = listingType == CreateListingType.workSpace;
+    final amount =
+        isListingTypeWorkSpace ? listing.rooms?.first.amount : listing.amount;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             listing.name ?? '',
@@ -171,11 +175,16 @@ class _ImageDetails extends StatelessWidget {
             children: [
               AppSvgWidget(path: Assets.svgs.location),
               5.horizontalSpace,
-              Text(
-                listing.address ?? '',
-                style: context.theme.textTheme.labelMedium?.copyWith(
-                  fontSize: 9.8.sp,
-                  color: const Color(0xFF737380),
+              SizedBox(
+                width: 150.w,
+                child: Text(
+                  listing.address ?? '',
+                  style: context.theme.textTheme.labelMedium?.copyWith(
+                    fontSize: 9.8.sp,
+                    color: const Color(0xFF737380),
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
             ],
@@ -217,7 +226,7 @@ class _ImageDetails extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                listing.amount.getCurrencyText(
+                amount.getCurrencyText(
                   style: context.theme.textTheme.displaySmall?.copyWith(
                     fontWeight: FontWeight.w700,
                     color: context.theme.primaryColor,
