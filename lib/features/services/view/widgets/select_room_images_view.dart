@@ -5,33 +5,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
-import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
-import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
-import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/widgets/delete_icon.dart';
+import 'package:tivi_tea/features/services/view_model/room_image_selector_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class SelectedImagesView extends ConsumerStatefulWidget {
-  final CreateListingType listingType;
-  const SelectedImagesView({super.key, required this.listingType});
+class SelectedRoomImagesView extends ConsumerStatefulWidget {
+  const SelectedRoomImagesView({super.key});
 
   @override
-  ConsumerState<SelectedImagesView> createState() => _SelectedImagesViewState();
+  ConsumerState<SelectedRoomImagesView> createState() =>
+      _SelectedRoomImagesViewState();
 }
 
-class _SelectedImagesViewState extends ConsumerState<SelectedImagesView> {
+class _SelectedRoomImagesViewState
+    extends ConsumerState<SelectedRoomImagesView> {
   @override
   Widget build(BuildContext context) {
-    final selectedImages = ref.watch(imagePickerNotifierProvider);
+    final selectedImages = ref.watch(roomImageSelectorNotifierProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          context.l10n.uploadImagesOf(
-            widget.listingType == CreateListingType.workSpace
-                ? 'Space'
-                : 'Tool',
-          ),
+          context.l10n.uploadImagesOf('Room'),
           style: context.theme.textTheme.displayLarge?.copyWith(
             color: context.theme.primaryColor,
             fontSize: 20.sp,
@@ -82,26 +77,33 @@ class _SelectedImagesViewState extends ConsumerState<SelectedImagesView> {
                 },
               ),
         10.verticalSpace,
-        IntrinsicWidth(
-          child: CreateListingButton(
-            text: context.l10n.addImage,
-            iconColor: Colors.black,
-            textColor: Colors.black,
-            backgroundColor: const Color(0xFFE8E8EB),
-            onTap: _pickImages,
+        InkWell(
+          onTap: _pickImages,
+          child: Row(
+            children: [
+              Icon(Icons.add_rounded, color: context.theme.primaryColor),
+              5.horizontalSpace,
+              Text(
+                context.l10n.addImage,
+                style: context.theme.textTheme.titleLarge?.copyWith(
+                  fontSize: 12.sp,
+                  color: context.theme.primaryColor,
+                ),
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
 
   void _pickImages() async {
-    final notifier = ref.read(imagePickerNotifierProvider.notifier);
+    final notifier = ref.read(roomImageSelectorNotifierProvider.notifier);
     notifier.selectImages();
   }
 
   void _deleteImage(String imagePath) {
-    final notifier = ref.read(imagePickerNotifierProvider.notifier);
+    final notifier = ref.read(roomImageSelectorNotifierProvider.notifier);
     notifier.deleteImage(imagePath);
   }
 }

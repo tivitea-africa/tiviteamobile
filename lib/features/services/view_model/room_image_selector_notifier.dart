@@ -2,10 +2,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/utils/image_picker_util.dart';
 
-part 'image_picker_notifier.g.dart';
+part 'room_image_selector_notifier.g.dart';
 
 @riverpod
-class ImagePickerNotifier extends _$ImagePickerNotifier {
+class RoomImageSelectorNotifier extends _$RoomImageSelectorNotifier {
   @override
   List<XFile> build() => [];
 

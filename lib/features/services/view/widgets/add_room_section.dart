@@ -10,7 +10,10 @@ import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/model/workspace_room_model.dart';
 import 'package:tivi_tea/features/services/view/pages/create_new_listing_second_view.dart';
 import 'package:tivi_tea/features/services/view/widgets/custom_dropdown.dart';
+import 'package:tivi_tea/features/services/view/widgets/select_room_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
+import 'package:tivi_tea/features/services/view_model/room_image_selector_notifier.dart';
+import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/workspace_room_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
@@ -203,6 +206,8 @@ class __RoomContainerState extends State<_RoomContainer> {
             keyboardType: TextInputType.number,
           ),
           const SpaceAmenitiesSection(),
+          20.verticalSpace,
+          const SelectedRoomImagesView(),
           if (canSave)
             Consumer(
               builder: (context, ref, _) {
@@ -230,7 +235,7 @@ class __RoomContainerState extends State<_RoomContainer> {
                                   Icons.save,
                                   color: context.theme.primaryColor,
                                 ),
-                      onTap: () => _submit(ref)
+                      onTap: () => _submit(ref),
                     ),
                   ],
                 );
@@ -241,7 +246,18 @@ class __RoomContainerState extends State<_RoomContainer> {
     );
   }
 
-  void _submit(WidgetRef ref) {
+  Future<List<String>> _uploadImages(WidgetRef ref) async {
+    final images = ref.watch(roomImageSelectorNotifierProvider);
+    if (images.isEmpty) {
+      return [];
+    }
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    final imageUrls = await notifier.uploadImages(images);
+
+    return imageUrls;
+  }
+
+  void _submit(WidgetRef ref) async {
     final notifier = ref.watch(workspaceRoomNotifierProvider.notifier);
     isLoading = true;
     final amenities = ref.watch(amenitiesNotifierProvider);
@@ -250,13 +266,15 @@ class __RoomContainerState extends State<_RoomContainer> {
         .map((amenity) => amenity.label)
         .toList();
 
+    final images = await _uploadImages(ref);
+
     final room = WorkspaceRoomModel(
       name: nameController.text,
       description: shortDescriptionController.text,
       maxCapacity: int.parse(maxCapacityController.text),
       amount: double.parse(amountController.text),
       features: selectedAmenities,
-      images: [],
+      images: images,
     );
     notifier.updateRoom(widget.index, room);
 

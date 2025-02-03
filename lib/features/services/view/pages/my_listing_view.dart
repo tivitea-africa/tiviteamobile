@@ -52,7 +52,6 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             children: [
               Row(
@@ -97,7 +96,7 @@ class _MyListingsList extends ConsumerWidget {
       onRefresh: () async => notifier.getPartnerListing(),
       child: ListView.separated(
         shrinkWrap: true,
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: partnerListings.length,
         separatorBuilder: (ctx, i) => 10.verticalSpace,
         itemBuilder: (ctx, i) {
