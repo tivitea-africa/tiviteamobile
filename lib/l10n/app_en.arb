@@ -1016,5 +1016,17 @@
   "pdf": "PDF",
   "@pdf": {
     "description": "PDF text"
+  },
+  "bookingHistoryView":"Booking History Details",
+  "@bookingHistoryView": {
+    "description": "Booking History header"
+  },
+  "createBooking":"Create Booking",
+  "@createBooking":{
+    "description": "Create Booking text"
+  },
+  "status":"Status",
+  "@status":{
+    "description": "Status text"
   }
 }

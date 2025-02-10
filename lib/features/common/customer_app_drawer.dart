@@ -15,6 +15,8 @@ class CustomerAppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final routePath = GoRouterState.of(context).matchedLocation;
     const dashboard = '${AppRoutes.homeView}${AppRoutes.clientDashboard}';
+    const bookingHistory =
+        '${AppRoutes.homeView}${AppRoutes.bookingHistoryView}';
     return Drawer(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -62,6 +64,8 @@ class CustomerAppDrawer extends StatelessWidget {
           DrawerListTile(
             icon: Assets.svgs.historyDrawerIcon,
             label: context.l10n.bookingHistory,
+            isSelected: routePath == bookingHistory,
+            onTap: () => context.go(bookingHistory),
           ),
           DrawerListTile(
             icon: Assets.svgs.paymentDrawerIcon,

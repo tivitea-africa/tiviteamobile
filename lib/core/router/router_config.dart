@@ -61,6 +61,8 @@ final GoRouter router = GoRouter(
               routes: [
                 HomeRouter.serviceProviderDashboard,
                 HomeRouter.clientDashboard,
+                HomeRouter.bookingHistoryView,
+                HomeRouter.bookingHistoryDetailsView,
               ],
             ),
           ],

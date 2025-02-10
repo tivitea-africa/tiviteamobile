@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
 import 'package:tivi_tea/features/services/view_model/booking_state.dart';
@@ -60,6 +61,22 @@ class BookingNotifer extends _$BookingNotifer {
     } catch (e) {
       state = state.copyWith(loadState: LoadState.error);
       onError(e.toString());
+    }
+  }
+
+  void getBookingHistory({String name = 'space'}) async {
+    state = state.copyWith(loadState: LoadState.loading);
+    try {
+      final response = await _repo.getBookingHistory(name);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? response.message ?? '';
+      }
+      state = state.copyWith(loadState: LoadState.success);
+      if (response.data != null) {
+        debugLog(response.data ?? '');
+      }
+    } catch (e) {
+      state = state.copyWith(loadState: LoadState.error);
     }
   }
 }

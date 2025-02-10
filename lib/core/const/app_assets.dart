@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:tivi_tea/core/const/base.dart';
 
 /// Contains all the paths of image used across the project.

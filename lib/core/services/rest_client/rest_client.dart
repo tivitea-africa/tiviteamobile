@@ -93,6 +93,10 @@ abstract class RestClient {
     @Body() BookWorkToolModel data,
   );
 
+  @GET('/listings/client/booked-listings-history')
+  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
+      getBookingHistory(@Query('name') String name);
+
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')
   Future<BaseResponse<ServiceProviderDashboardModel>>
