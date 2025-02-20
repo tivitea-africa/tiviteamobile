@@ -32,4 +32,5 @@ class AppRoutes {
   static const String eReceiptView = 'eReceiptView';
   static const String bookingHistoryView  = 'bookingHistoryView';
   static const String bookingHistoryDetails = 'bookingHistoryDetails';
+  static const String settingsView = 'settingsView';
 }

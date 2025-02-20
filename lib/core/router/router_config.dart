@@ -115,6 +115,7 @@ final GoRouter router = GoRouter(
                 routes: [
                   ProfileRouter.editProfile,
                   ProfileRouter.changePassword,
+                  ProfileRouter.settings,
                 ]),
           ],
         ),

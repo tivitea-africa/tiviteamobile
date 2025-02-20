@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
+import 'package:tivi_tea/features/history/model/booking_history_model.dart';
 import 'package:tivi_tea/features/history/view/history_detail.dart';
 import 'package:tivi_tea/features/history/view/history_view.dart';
 import 'package:tivi_tea/features/home/view/client/client_dashboard.dart';
@@ -28,7 +29,8 @@ class HomeRouter {
   static final bookingHistoryDetailsView = GoRoute(
     path: AppRoutes.bookingHistoryDetails,
     builder: (BuildContext context, GoRouterState state) {
-      return const HistoryDetailView();
+      final booking = state.extra as BookingHistoryModel;
+      return HistoryDetailView(booking: booking);
     },
   );
 }

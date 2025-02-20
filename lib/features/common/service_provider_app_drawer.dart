@@ -16,6 +16,9 @@ class ServiceProviderAppDrawer extends StatelessWidget {
     final routePath = GoRouterState.of(context).matchedLocation;
     const dashboard =
         '${AppRoutes.homeView}${AppRoutes.serviceProviderDashboard}';
+    const settings = '${AppRoutes.profile}/${AppRoutes.settingsView}';
+    const bookingHistory =
+        '${AppRoutes.homeView}${AppRoutes.bookingHistoryView}';
     return Drawer(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -63,6 +66,8 @@ class ServiceProviderAppDrawer extends StatelessWidget {
           DrawerListTile(
             icon: Assets.svgs.historyDrawerIcon,
             label: context.l10n.bookingHistory,
+            isSelected: routePath == bookingHistory,
+            onTap: () => context.go(bookingHistory),
           ),
           DrawerListTile(
             icon: Assets.svgs.paymentDrawerIcon,
@@ -72,10 +77,10 @@ class ServiceProviderAppDrawer extends StatelessWidget {
             icon: Assets.svgs.activitiesDrawerIcon,
             label: context.l10n.activities,
           ),
-          DrawerListTile(
-            icon: Assets.svgs.messagesDrawerIcon,
-            label: context.l10n.messages,
-          ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.messagesDrawerIcon,
+          //   label: context.l10n.messages,
+          // ),
           DrawerListTile(
             icon: Assets.svgs.soldiersDrawerIcon,
             label: context.l10n.addFootSoldiers,
@@ -95,6 +100,8 @@ class ServiceProviderAppDrawer extends StatelessWidget {
                 DrawerListTile(
                   icon: Assets.svgs.settingsDrawerIcon,
                   label: context.l10n.settings,
+                  isSelected: routePath == settings,
+                  onTap: () => context.go(settings),
                 ),
                 DrawerListTile(
                   icon: Assets.svgs.report,

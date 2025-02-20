@@ -15,6 +15,7 @@ class CustomerAppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final routePath = GoRouterState.of(context).matchedLocation;
     const dashboard = '${AppRoutes.homeView}${AppRoutes.clientDashboard}';
+    const settings ='${AppRoutes.profile}/${AppRoutes.settingsView}';
     const bookingHistory =
         '${AppRoutes.homeView}${AppRoutes.bookingHistoryView}';
     return Drawer(
@@ -79,14 +80,14 @@ class CustomerAppDrawer extends StatelessWidget {
           //   icon: Assets.svgs.soldiersDrawerIcon,
           //   label: context.l10n.addFootSoldiers,
           // ),
-          DrawerListTile(
-            icon: Assets.svgs.messagesDrawerIcon,
-            label: context.l10n.messages,
-          ),
-          DrawerListTile(
-            icon: Assets.svgs.settingsDrawerIcon,
-            label: context.l10n.customerReview,
-          ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.messagesDrawerIcon,
+          //   label: context.l10n.messages,
+          // ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.settingsDrawerIcon,
+          //   label: context.l10n.customerReview,
+          // ),
           Padding(
             padding: EdgeInsets.only(left: 10.w),
             child: Column(
@@ -98,6 +99,8 @@ class CustomerAppDrawer extends StatelessWidget {
                 DrawerListTile(
                   icon: Assets.svgs.settingsDrawerIcon,
                   label: context.l10n.settings,
+                  isSelected: routePath == settings,
+                  onTap: () => context.go(settings),
                 ),
                 // DrawerListTile(
                 //   icon: Assets.svgs.report,

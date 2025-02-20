@@ -64,17 +64,37 @@ class BookingNotifer extends _$BookingNotifer {
     }
   }
 
-  void getBookingHistory({String name = 'space'}) async {
-    state = state.copyWith(loadState: LoadState.loading);
+  void getBookingHistory({required int page, bool loadmore = false}) async {
+    if (loadmore) {
+      state = state.copyWith(loadState: LoadState.loadmore);
+    }
     try {
-      final response = await _repo.getBookingHistory(name);
+      final response = await _repo.getBookingHistory(page: page);
       if (!response.isSuccess()) {
         throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(loadState: LoadState.success);
-      if (response.data != null) {
-        debugLog(response.data ?? '');
+      if (response.data?.results?.isEmpty ?? false) {
+        return;
       }
+      final bookingHistoryList = response.data?.results ?? [];
+      final hasMorePages =
+          (response.data?.page ?? 0) < (response.data?.totalPages ?? 1);
+
+      if (bookingHistoryList.isEmpty) {
+        state = state.copyWith(
+          loadState: hasMorePages ? LoadState.success : LoadState.done,
+        );
+        return;
+      }
+
+      state = state.copyWith(
+        loadState: hasMorePages ? LoadState.success : LoadState.done,
+        bookingHistoryList: loadmore
+            ? [...state.bookingHistoryList, ...bookingHistoryList]
+            : bookingHistoryList,
+      );
+      debugLog(response.data ?? '');
     } catch (e) {
       state = state.copyWith(loadState: LoadState.error);
     }

@@ -63,7 +63,7 @@ class DashboardInfoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
+      //height: 100.h,
       width: width.h,
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.h),
       decoration: BoxDecoration(
@@ -110,20 +110,20 @@ class DashboardInfoContainer extends StatelessWidget {
               color: const Color(0xFF3F3F3F),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                context.l10n.viewAll,
-                style: context.theme.textTheme.labelMedium?.copyWith(
-                  fontSize: 9.sp,
-                  decoration: TextDecoration.underline,
-                  decorationColor: const Color(0xFF5041BC),
-                  color: const Color(0xFF5041BC),
-                ),
-              ),
-            ],
-          )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     Text(
+          //       context.l10n.viewAll,
+          //       style: context.theme.textTheme.labelMedium?.copyWith(
+          //         fontSize: 9.sp,
+          //         decoration: TextDecoration.underline,
+          //         decorationColor: const Color(0xFF5041BC),
+          //         color: const Color(0xFF5041BC),
+          //       ),
+          //     ),
+          //   ],
+          // )
         ],
       ),
     );

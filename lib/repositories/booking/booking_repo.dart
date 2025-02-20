@@ -3,7 +3,7 @@ import 'package:tivi_tea/core/config/exceptions/app_exception.dart';
 import 'package:tivi_tea/core/response/base_response.dart';
 import 'package:tivi_tea/core/response/generic_paginated_response.dart';
 import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
-import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/history/model/booking_history_model.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_response.dart';
@@ -35,10 +35,10 @@ final class BookingRepo {
     }
   }
 
-  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getBookingHistory(String name) async {
+  Future<BaseResponse<GenericPaginatedResponse<BookingHistoryModel>>>
+      getBookingHistory({required int page}) async {
     try {
-      return await restClient.getBookingHistory(name);
+      return await restClient.getBookingHistory(page);
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

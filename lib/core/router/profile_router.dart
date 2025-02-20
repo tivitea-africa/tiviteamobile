@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/profile/view/change_password_view.dart';
 import 'package:tivi_tea/features/profile/view/edit_profile_view.dart';
+import 'package:tivi_tea/features/settings/view/pages/settings.dart';
 
 class ProfileRouter {
   static final editProfile = GoRoute(
@@ -15,6 +16,12 @@ class ProfileRouter {
     path: AppRoutes.changePasswordView,
     builder: (BuildContext context, GoRouterState state) {
       return const ChangePasswordView();
+    },
+  );
+  static final settings = GoRoute(
+    path: AppRoutes.settingsView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const SettingsPage();
     },
   );
 }

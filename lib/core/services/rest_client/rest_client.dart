@@ -6,6 +6,7 @@ import 'package:tivi_tea/core/response/base_response.dart';
 import 'package:tivi_tea/core/response/generic_paginated_response.dart';
 import 'package:tivi_tea/features/favorites/model/favorite_listing_model.dart';
 import 'package:tivi_tea/features/favorites/model/favorite_listing_request_body.dart';
+import 'package:tivi_tea/features/history/model/booking_history_model.dart';
 import 'package:tivi_tea/features/home/model/client/category_response_model.dart';
 import 'package:tivi_tea/features/home/model/client/client_dashboard_model.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
@@ -93,9 +94,9 @@ abstract class RestClient {
     @Body() BookWorkToolModel data,
   );
 
-  @GET('/listings/client/booked-listings-history')
-  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getBookingHistory(@Query('name') String name);
+  @GET('/bookings/list')
+  Future<BaseResponse<GenericPaginatedResponse<BookingHistoryModel>>>
+      getBookingHistory(@Query('page') int page);
 
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')

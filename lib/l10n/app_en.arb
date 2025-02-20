@@ -1017,16 +1017,32 @@
   "@pdf": {
     "description": "PDF text"
   },
-  "bookingHistoryView":"Booking History Details",
+  "bookingHistoryView": "Booking History Details",
   "@bookingHistoryView": {
     "description": "Booking History header"
   },
-  "createBooking":"Create Booking",
-  "@createBooking":{
+  "createBooking": "Create Booking",
+  "@createBooking": {
     "description": "Create Booking text"
   },
-  "status":"Status",
-  "@status":{
+  "status": "Status",
+  "@status": {
     "description": "Status text"
+  },
+  "createWorkspace": "Create Workspace",
+  "@createWorkspace": {
+    "description": "Create Workspace text"
+  },
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Personal Information text"
+  },
+  "securityInformation": "Security Information",
+  "@securityInformation": {
+    "description": "Security Information text"
+  },
+  "uploadPicture": "Upload Picture",
+  "@uploadPicture": {
+    "description": "Upload Picture text"
   }
 }

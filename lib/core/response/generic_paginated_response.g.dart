@@ -12,7 +12,7 @@ GenericPaginatedResponse<T> _$GenericPaginatedResponseFromJson<T>(
 ) =>
     GenericPaginatedResponse<T>(
       results: (json['results'] as List<dynamic>?)?.map(fromJsonT).toList(),
-      page: (json['page'] as num?)?.toInt(),
+      page: GenericPaginatedResponse._pageFromJson(json['page']),
       totalPages: (json['total_pages'] as num?)?.toInt(),
       totalItems: (json['total_items'] as num?)?.toInt(),
     );
@@ -23,7 +23,7 @@ Map<String, dynamic> _$GenericPaginatedResponseToJson<T>(
 ) =>
     <String, dynamic>{
       'results': instance.results?.map(toJsonT).toList(),
-      'page': instance.page,
+      'page': GenericPaginatedResponse._pageToJson(instance.page),
       'total_pages': instance.totalPages,
       'total_items': instance.totalItems,
     };

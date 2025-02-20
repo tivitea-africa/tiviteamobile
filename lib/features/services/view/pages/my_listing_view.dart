@@ -142,68 +142,77 @@ class PsrtnerListingTile extends StatelessWidget {
               ),
             ),
             5.horizontalSpace,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  listing.name ?? '',
-                  style: context.theme.textTheme.bodyLarge?.copyWith(
-                    fontSize: 14.sp,
-                  ),
-                ),
-                Text(
-                  listing.listingType ?? '',
-                  style: context.theme.textTheme.displaySmall?.copyWith(
-                    fontSize: 10.sp,
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  listing.rooms?.length.toString() ?? '',
-                  style: context.theme.textTheme.titleMedium?.copyWith(
-                    fontSize: 14.sp,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      listing.dateCreated.toDateMonthYear2,
-                      style: context.theme.textTheme.displaySmall?.copyWith(
-                        fontSize: 9.sp,
-                      ),
-                    ),
-                    10.horizontalSpace,
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 2, horizontal: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: listing.status?.toLowerCase() ==
-                                PartnerListingStatus.published.name
-                            ? const Color(0xFF006400).withOpacity(0.2)
-                            : const Color(0xFFF9C846),
-                      ),
-                      child: Text(
-                        listing.status ?? '',
-                        style: context.theme.textTheme.titleMedium?.copyWith(
-                          fontSize: 10.sp,
-                          color: listing.status?.toLowerCase() ==
-                                  PartnerListingStatus.published.name
-                              ? const Color(0xFF006400)
-                              : Colors.black,
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        listing.name ?? '',
+                        style: context.theme.textTheme.bodyLarge?.copyWith(
+                          fontSize: 14.sp,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const Spacer(),
+                      Text(
+                        listing.rooms?.length.toString() ?? '',
+                        style: context.theme.textTheme.titleMedium?.copyWith(
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        listing.listingType ?? '',
+                        style: context.theme.textTheme.displaySmall?.copyWith(
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            listing.dateCreated.toDateMonthYear2,
+                            style:
+                                context.theme.textTheme.displaySmall?.copyWith(
+                              fontSize: 9.sp,
+                            ),
+                          ),
+                          10.horizontalSpace,
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 2,
+                              horizontal: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: listing.status?.toLowerCase() ==
+                                      PartnerListingStatus.published.name
+                                  ? const Color(0xFF006400).withOpacity(0.2)
+                                  : const Color(0xFFF9C846),
+                            ),
+                            child: Text(
+                              listing.status ?? '',
+                              style:
+                                  context.theme.textTheme.titleMedium?.copyWith(
+                                fontSize: 10.sp,
+                                color: listing.status?.toLowerCase() ==
+                                        PartnerListingStatus.published.name
+                                    ? const Color(0xFF006400)
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

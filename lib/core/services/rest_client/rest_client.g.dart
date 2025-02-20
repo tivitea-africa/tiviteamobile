@@ -612,21 +612,21 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getBookingHistory(String name) async {
+  Future<BaseResponse<GenericPaginatedResponse<BookingHistoryModel>>>
+      getBookingHistory(int page) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'name': name};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<
-        BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>(Options(
+        BaseResponse<GenericPaginatedResponse<BookingHistoryModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/listings/client/booked-listings-history',
+          '/bookings/list',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -636,14 +636,14 @@ class _RestClient implements RestClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<GenericPaginatedResponse<ListingResponseModel>> _value;
+    late BaseResponse<GenericPaginatedResponse<BookingHistoryModel>> _value;
     try {
       _value =
-          BaseResponse<GenericPaginatedResponse<ListingResponseModel>>.fromJson(
+          BaseResponse<GenericPaginatedResponse<BookingHistoryModel>>.fromJson(
         _result.data!,
-        (json) => GenericPaginatedResponse<ListingResponseModel>.fromJson(
+        (json) => GenericPaginatedResponse<BookingHistoryModel>.fromJson(
           json as Map<String, dynamic>,
-          (json) => ListingResponseModel.fromJson(json as Map<String, dynamic>),
+          (json) => BookingHistoryModel.fromJson(json as Map<String, dynamic>),
         ),
       );
     } on Object catch (e, s) {
