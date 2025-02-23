@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
+import 'package:tivi_tea/core/services/rest_client/custom_rest_client_class.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
@@ -15,7 +18,10 @@ class BookingNotifer extends _$BookingNotifer {
 
   @override
   BookingState build() {
-    _repo = BookingRepo(restClient: ref.read(restClient));
+    _repo = BookingRepo(
+      restClient: ref.read(restClient),
+      customNetworkService: ref.read(networkServiceProvider),
+    );
 
     return BookingState.initial();
   }
@@ -66,14 +72,14 @@ class BookingNotifer extends _$BookingNotifer {
 
   void getBookingHistory({required int page, bool loadmore = false}) async {
     if (loadmore) {
-      state = state.copyWith(loadState: LoadState.loadmore);
+      state = state.copyWith(bookingHistoryLoadstate: LoadState.loadmore);
     }
     try {
       final response = await _repo.getBookingHistory(page: page);
       if (!response.isSuccess()) {
         throw response.error?.message ?? response.message ?? '';
       }
-      state = state.copyWith(loadState: LoadState.success);
+      state = state.copyWith(bookingHistoryLoadstate: LoadState.success);
       if (response.data?.results?.isEmpty ?? false) {
         return;
       }
@@ -83,20 +89,42 @@ class BookingNotifer extends _$BookingNotifer {
 
       if (bookingHistoryList.isEmpty) {
         state = state.copyWith(
-          loadState: hasMorePages ? LoadState.success : LoadState.done,
+          bookingHistoryLoadstate: hasMorePages ? LoadState.success : LoadState.done,
         );
         return;
       }
 
       state = state.copyWith(
-        loadState: hasMorePages ? LoadState.success : LoadState.done,
+        bookingHistoryLoadstate: hasMorePages ? LoadState.success : LoadState.done,
         bookingHistoryList: loadmore
             ? [...state.bookingHistoryList, ...bookingHistoryList]
             : bookingHistoryList,
       );
       debugLog(response.data ?? '');
     } catch (e) {
-      state = state.copyWith(loadState: LoadState.error);
+      state = state.copyWith(bookingHistoryLoadstate: LoadState.error);
+    }
+  }
+
+  void generateBookingTicket(
+    String bookingId, {
+    required Function(File) onSuccess,
+    required Function(String) onError,
+  }) async {
+    state = state.copyWith(generateTicketLoadState: LoadState.loading);
+    try {
+      final result = await _repo.generateBookingTicket(bookingId);
+      if (result.isSuccess() == false) throw result.message ?? '';
+
+      state = state.copyWith(
+        generateTicketLoadState: LoadState.success,
+      );
+      if (result.data != null) {
+        onSuccess(result.data!);
+      }
+    } catch (e) {
+      state = state.copyWith(generateTicketLoadState: LoadState.error);
+      onError(e.toString());
     }
   }
 }

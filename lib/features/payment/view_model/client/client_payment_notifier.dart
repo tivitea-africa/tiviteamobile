@@ -49,7 +49,7 @@ class ClientPaymentNotifier extends _$ClientPaymentNotifier {
 
   void getPaymentStatus(
     String paymentId, {
-    required Function(bool) onSuccess,
+    required Function(bool, String?) onSuccess,
     required Function(String) onError,
   }) async {
     state = state.copyWith(getPaymentStatusLoadState: LoadState.loading);
@@ -59,7 +59,10 @@ class ClientPaymentNotifier extends _$ClientPaymentNotifier {
 
       state = state.copyWith(getPaymentStatusLoadState: LoadState.success);
       if (result.data != null) {
-        onSuccess(result.data!.status!.toLowerCase() == 'success');
+        onSuccess(
+          result.data?.status?.toLowerCase() == 'success',
+          result.data?.status,
+        );
       }
     } catch (e) {
       state = state.copyWith(getPaymentStatusLoadState: LoadState.error);

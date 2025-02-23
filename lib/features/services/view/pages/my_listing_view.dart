@@ -118,10 +118,10 @@ class PsrtnerListingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: () => context.push(
-      //   '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
-      //   extra: listing.id,
-      // ),
+      onTap: () => context.push(
+        '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
+        extra: listing.id,
+      ),
       child: Container(
         height: 70.h,
         width: context.width,

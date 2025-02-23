@@ -86,6 +86,7 @@ final GoRouter router = GoRouter(
                 ServicesRouter.clientKYCView,
                 ServicesRouter.chooseRoomView,
                 ServicesRouter.eReceiptView,
+                ServicesRouter.eTicketView,
               ],
             ),
           ],

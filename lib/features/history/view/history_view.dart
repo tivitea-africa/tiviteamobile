@@ -57,6 +57,9 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
     final bookingHistoryList = state.bookingHistoryList;
     final isLoadingHistory = state.loadState == LoadState.loading;
 
+    const createListingPath =
+        '${AppRoutes.myListingView}/${AppRoutes.createListingView}';
+
     return AppScaffold(
       appbar: CustomAppBar(
         title: context.l10n.bookingHistory,
@@ -73,7 +76,7 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
                 children: [
                   CreateListingButton(
                     text: context.l10n.createBooking,
-                    //onTap: () => context.push(createListingPath),
+                    onTap: () => context.push(createListingPath),
                   ),
                   30.verticalSpace,
                 ],

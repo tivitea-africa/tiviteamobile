@@ -14,26 +14,21 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
-import 'package:tivi_tea/features/payment/view_model/client/client_payment_notifier.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_appbar.dart';
 import 'package:tivi_tea/features/registration/view/widgets/registration_scaffold.dart';
+import 'package:tivi_tea/features/services/view_model/booking_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class PaymentReceiptView extends ConsumerStatefulWidget {
-  final String paymentId;
+class ETicketView extends ConsumerStatefulWidget {
   final String bookingId;
-  const PaymentReceiptView({
-    super.key,
-    required this.paymentId,
-    required this.bookingId,
-  });
+  const ETicketView({super.key, required this.bookingId});
 
   @override
-  ConsumerState<PaymentReceiptView> createState() => _PaymentReceiptViewState();
+  ConsumerState<ETicketView> createState() => _ETicketViewState();
 }
 
-class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
-  File? _receipt;
+class _ETicketViewState extends ConsumerState<ETicketView> {
+  File? _eTicket;
   bool _recieptLoading = true;
   bool _isGeneratingImageForSharing = false;
   bool _isError = false;
@@ -41,16 +36,16 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => generateReceipt());
+    WidgetsBinding.instance.addPostFrameCallback((_) => generateTicket());
   }
 
-  void generateReceipt() {
+  void generateTicket() {
     _recieptLoading = true;
     setState(() {});
-    final notifier = ref.read(clientPaymentNotifierProvider.notifier);
-    notifier.generatePaymentReceipt(widget.paymentId, onSuccess: (data) {
+    final notifier = ref.read(bookingNotiferProvider.notifier);
+    notifier.generateBookingTicket(widget.bookingId, onSuccess: (data) {
       setState(() {
-        _receipt = data;
+        _eTicket = data;
         _isError = false;
         _recieptLoading = false;
       });
@@ -59,7 +54,7 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
         _isError = true;
         _recieptLoading = false;
       });
-      context.showError('An error occurred while generating receipt');
+      context.showError('An error occurred while e-Ticket');
     });
   }
 
@@ -67,8 +62,8 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
   Widget build(BuildContext context) {
     return RegistrationScaffold(
       appbar: RegistrationAppBar(
-        headerSectionTitle: context.l10n.eReceipt,
-        headerSectionSubtitle: context.l10n.downloadEReceiptHere,
+        headerSectionTitle: context.l10n.eTicket,
+        headerSectionSubtitle: context.l10n.hereIsETicker,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -78,7 +73,7 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
                 child: CupertinoActivityIndicator(),
               )
             else
-              (_receipt == null)
+              (_eTicket == null)
                   ? const SizedBox.shrink()
                   : Padding(
                       padding: EdgeInsets.only(bottom: 20.h),
@@ -88,7 +83,7 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
                           height: MediaQuery.of(context).size.height * 0.6,
                           width: MediaQuery.of(context).size.width,
                           child: PDFView(
-                            filePath: _receipt?.path ?? '',
+                            filePath: _eTicket?.path ?? '',
                             enableSwipe: true,
                             swipeHorizontal: true,
                             autoSpacing: false,
@@ -119,15 +114,8 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
                 borderColor: Colors.transparent,
                 backgroundColor: Colors.transparent,
                 textColor: context.theme.primaryColor,
-                onPressed: () => generateReceipt(),
+                onPressed: () => generateTicket(),
               ),
-            AppButton(
-              buttonText: 'View E-Ticket',
-              onPressed: () => context.go(
-                '${AppRoutes.servicesView}/${AppRoutes.eTicketView}',
-                extra: widget.bookingId,
-              ),
-            ),
             AppButton(
               buttonText: context.l10n.goHome,
               onPressed: () => context.go(AppRoutes.homeView),
@@ -153,7 +141,7 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
         children: [
           AppButton(
             buttonText: context.l10n.pdf,
-            onPressed: () => _shareReceipt(_receipt?.path ?? ''),
+            onPressed: () => _shareReceipt(_eTicket?.path ?? ''),
           ),
           20.verticalSpace,
           AppButton(
@@ -180,7 +168,7 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
         }
         final directory = await getTemporaryDirectory();
         final imageFile = await File(
-          '${directory.path}/${widget.paymentId.split('-').last}.png',
+          '${directory.path}/${widget.bookingId.split('-').last}.png',
         ).create();
         await imageFile.writeAsBytes(image);
         return imageFile.path;
@@ -198,7 +186,7 @@ class _PaymentReceiptViewState extends ConsumerState<PaymentReceiptView> {
     final l = await Share.shareXFiles([
       XFile(
         filePath,
-        name: widget.paymentId,
+        name: widget.bookingId,
       )
     ]);
     if (l.status == ShareResultStatus.success && mounted) {

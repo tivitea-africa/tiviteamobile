@@ -5,22 +5,32 @@ class BookingState {
   BookingState({
     required this.loadState,
     required this.bookingHistoryList,
+    required this.bookingHistoryLoadstate,
+    required this.generateTicketLoadState,
   });
   factory BookingState.initial() {
     return BookingState(
-      loadState: LoadState.loading,
+      loadState: LoadState.idle,
+      generateTicketLoadState: LoadState.loading,
       bookingHistoryList: [],
+      bookingHistoryLoadstate: LoadState.loading,
     );
   }
   final LoadState loadState;
+  final LoadState bookingHistoryLoadstate;
+  final LoadState generateTicketLoadState;
   final List<BookingHistoryModel> bookingHistoryList;
 
   BookingState copyWith({
     LoadState? loadState,
+    LoadState? bookingHistoryLoadstate,
+    LoadState? generateTicketLoadState,
     List<BookingHistoryModel>? bookingHistoryList,
   }) {
     return BookingState(
       loadState: loadState ?? this.loadState,
+      bookingHistoryLoadstate: bookingHistoryLoadstate ?? this.bookingHistoryLoadstate,
+      generateTicketLoadState: generateTicketLoadState ?? this.generateTicketLoadState,
       bookingHistoryList: bookingHistoryList ?? this.bookingHistoryList,
     );
   }

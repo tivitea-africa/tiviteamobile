@@ -30,6 +30,7 @@ class AppRoutes {
   static const String chooseRoomView = 'chooseRoomView';
   static const String paymentWebview = '/paymentWebview';
   static const String eReceiptView = 'eReceiptView';
+  static const String eTicketView = 'eTicketView';
   static const String bookingHistoryView  = 'bookingHistoryView';
   static const String bookingHistoryDetails = 'bookingHistoryDetails';
   static const String settingsView = 'settingsView';

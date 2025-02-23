@@ -12,8 +12,10 @@ import 'package:tivi_tea/features/payment/model/create_payment_response.dart';
 final class ClientPaymentRepo {
   final RestClient restClient;
   final NetworkService customNetworkService;
-  ClientPaymentRepo(
-      {required this.restClient, required this.customNetworkService});
+  ClientPaymentRepo({
+    required this.restClient,
+    required this.customNetworkService,
+  });
 
   Future<BaseResponse<CreatePaymentResponse>> createPayment({
     required String bookingId,
@@ -49,7 +51,7 @@ final class ClientPaymentRepo {
       if (response.data == null) {
         return const BaseResponse(
           status: 'Failure',
-          data: null, 
+          data: null,
           message: 'Failed to get PDF data',
         );
       }

@@ -12,6 +12,7 @@ import 'package:tivi_tea/features/payment/view/payment_receipt_view.dart';
 import 'package:tivi_tea/features/services/view/pages/book_workspace_view.dart';
 import 'package:tivi_tea/features/services/view/pages/booking_summary_view.dart';
 import 'package:tivi_tea/features/services/view/pages/choose_room_view.dart';
+import 'package:tivi_tea/features/services/view/pages/e_ticket_view.dart';
 import 'package:tivi_tea/features/services/view/pages/listing_detail_view.dart';
 import 'package:tivi_tea/features/services/view/pages/start_kyc_process_page.dart';
 
@@ -72,8 +73,17 @@ class ServicesRouter {
   static final eReceiptView = GoRoute(
     path: AppRoutes.eReceiptView,
     builder: (BuildContext context, GoRouterState state) {
-      final paymentId = state.extra as String;
-      return PaymentReceiptView(paymentId: paymentId);
+      final extras = state.extra as List<String>;
+      final paymentId = extras[0];
+      final bookingId = extras[1];
+      return PaymentReceiptView(paymentId: paymentId, bookingId: bookingId);
+    },
+  );
+  static final eTicketView = GoRoute(
+    path: AppRoutes.eTicketView,
+    builder: (BuildContext context, GoRouterState state) {
+      final bookingId = state.extra as String;
+      return ETicketView(bookingId: bookingId);
     },
   );
   static final allListingsView = GoRoute(

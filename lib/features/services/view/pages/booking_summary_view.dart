@@ -274,7 +274,9 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
   }
 
   void _showSuccessDialog() {
-    final paymentId = ref.read(clientPaymentNotifierProvider.select((value)=> value.paymentId));
+    final paymentId = ref.read(
+      clientPaymentNotifierProvider.select((value) => value.paymentId),
+    );
     context.showCustomDialog(
       dismissible: false,
       child: AppSuccessContent(
@@ -284,7 +286,10 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
         secondButtonText: context.l10n.backToHome,
         onPressed: () {
           context.pop();
-          context.go('${AppRoutes.servicesView}/${AppRoutes.eReceiptView}', extra: paymentId);
+          context.go(
+            '${AppRoutes.servicesView}/${AppRoutes.eReceiptView}',
+            extra: [paymentId, bookingId],
+          );
         },
         onSecondButtonPressed: () {
           context.pop();
@@ -294,10 +299,7 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
     );
   }
 
-  void _navigateToPaymentView(
-    String paymentUrl,
-    String paymentId,
-  ) {
+  void _navigateToPaymentView(String paymentUrl, String paymentId) {
     context.push(AppRoutes.paymentWebview, extra: paymentUrl).then(
       (value) {
         final paymentNotifier = ref.read(
@@ -305,7 +307,13 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
         );
         paymentNotifier.getPaymentStatus(
           paymentId,
-          onSuccess: (isSuccessful) => _showSuccessDialog(),
+          onSuccess: (isSuccessful, status) {
+            if (!isSuccessful) {
+              context.showSuccess('Your transaction is $status');
+              return;
+            }
+            _showSuccessDialog();
+          },
           onError: (message) => context.showError(message),
         );
       },

@@ -997,9 +997,9 @@
   "@eTicket": {
     "description": "E-Ticket text"
   },
-  "hereIsETicker": "Here is your ticker",
+  "hereIsETicker": "Here is your ticket",
   "@hereIsETicker": {
-    "description": "Here is your ticker text"
+    "description": "Here is your ticket text"
   },
   "totalPayment": "Total Payment",
   "@totalPayment": {
