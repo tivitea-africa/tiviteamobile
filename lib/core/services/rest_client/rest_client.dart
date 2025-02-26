@@ -19,6 +19,8 @@ import 'package:tivi_tea/features/payment/model/create_payment_response.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
+import 'package:tivi_tea/features/registration/model/client/social_auth_model.dart';
+import 'package:tivi_tea/features/registration/model/client/social_auth_response.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
@@ -55,11 +57,13 @@ abstract class RestClient {
   Future<BaseResponse> submitKyc(@Body() PartnerKycRequestBody data);
   @POST('/authentication/client/submit-kyc')
   Future<BaseResponse> submitClientKyc(@Body() ClientKYCRequestBody data);
+  @POST('/authentication/client/social-auth')
+  Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(@Body() SocialAuthModel data);
 
   //<====================> Service <====================>
   @GET('/listings/')
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getListing();
+      getListing(@Query('page') int page);
 
   @POST('/listings/')
   Future<BaseResponse<ListingResponseModel>> postWorkSpace(
@@ -76,7 +80,7 @@ abstract class RestClient {
 
   @GET('/listings/partner/listings')
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getPartnerListing();
+      getPartnerListing(@Query('page') int page);
   @GET('/listings/categories')
   Future<BaseResponse<GenericPaginatedResponse<CategoryResponseModel>>>
       getCategories();

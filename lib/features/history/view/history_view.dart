@@ -47,6 +47,9 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
             _scrollController.position.maxScrollExtent - 100 &&
         state.loadState == LoadState.success) {
       _currentPage++;
+      if (state.loadState == LoadState.done) {
+        return;
+      }
       notifier.getBookingHistory(page: _currentPage, loadmore: true);
     }
   }

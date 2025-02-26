@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
-import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
@@ -30,9 +29,9 @@ class ChooseRoomView extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemCount: params.rooms.length,
-              itemBuilder: (ctx, i) => _RoomListingWidget(
+              itemBuilder: (ctx, i) => RoomListingWidget(
                 room: params.rooms[i],
-                bookingSummaryParams: params.bookingSummaryParams,
+                onRoomSelected: (room) {},
               ),
             ),
           )
@@ -42,12 +41,14 @@ class ChooseRoomView extends StatelessWidget {
   }
 }
 
-class _RoomListingWidget extends StatelessWidget {
+class RoomListingWidget extends StatelessWidget {
   final Room room;
-  final BookingSummaryParams bookingSummaryParams;
-  const _RoomListingWidget({
+  final void Function(Room room)
+      onRoomSelected;
+  const RoomListingWidget({
+    super.key,
     required this.room,
-    required this.bookingSummaryParams,
+    required this.onRoomSelected,
   });
 
   final double containerHeight = 145;
@@ -55,10 +56,11 @@ class _RoomListingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.push(
-        '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
-        extra: bookingSummaryParams.copyWith(roomId: room.id),
-      ),
+      onTap: () => onRoomSelected(room),
+      // context.push(
+      //   '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
+      //   extra: bookingSummaryParams.copyWith(roomId: room.id),
+      // ),
       child: Container(
         width: context.width,
         height: containerHeight.h,
@@ -115,7 +117,6 @@ class _ImageDetails extends StatelessWidget {
           Row(
             children: [
               Flexible(
-                // width: ,
                 child: Text(
                   room.description ?? '',
                   style: context.theme.textTheme.labelMedium?.copyWith(
@@ -139,6 +140,7 @@ class _ImageDetails extends StatelessWidget {
                     color: context.theme.primaryColor,
                   ),
                 ),
+                5.horizontalSpace,
                 Flexible(
                   child: Container(
                     padding:
@@ -150,7 +152,7 @@ class _ImageDetails extends StatelessWidget {
                     child: Text(
                       context.l10n.chooseRoom,
                       style: context.theme.textTheme.displaySmall?.copyWith(
-                        fontSize: 10.sp,
+                        fontSize: 8.sp,
                         color: Colors.white,
                       ),
                     ),

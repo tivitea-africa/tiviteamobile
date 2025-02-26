@@ -82,6 +82,10 @@ Room _$RoomFromJson(Map<String, dynamic> json) => Room(
       name: json['name'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      features: (json['features'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      availability: json['availability'] as bool?,
       description: json['description'] as String?,
       maxCapacity: (json['max_capacity'] as num?)?.toInt(),
       amount: json['amount'] as num?,
@@ -95,6 +99,8 @@ Map<String, dynamic> _$RoomToJson(Room instance) => <String, dynamic>{
       'meta': instance.meta,
       'name': instance.name,
       'images': instance.images,
+      'features': instance.features,
+      'availability': instance.availability,
       'description': instance.description,
       'max_capacity': instance.maxCapacity,
       'amount': instance.amount,

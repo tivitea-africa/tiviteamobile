@@ -137,14 +137,13 @@ class BookNowContainer extends StatelessWidget {
             ),
           ],
           20.verticalSpace,
-          Consumer(
-            builder: (context, ref, _) {
-              return AppButton(
-                buttonText: context.l10n.bookNow,
-                onPressed: () => _navigateToNextView(context, ref)
-              );
-            }
-          ),
+          Consumer(builder: (context, ref, _) {
+            final isWorkspace = listing.listingType?.enumType ==
+                CreateListingType.workSpace;
+            return AppButton(
+                buttonText: isWorkspace ? context.l10n.bookNow : context.l10n.rentNow,
+                onPressed: () => _navigateToNextView(context, ref));
+          }),
         ],
       ),
     );

@@ -33,18 +33,36 @@ class ServicesNotifer extends _$ServicesNotifer {
     }
   }
 
-  void getListing() async {
+  void getListing({int page = 1, bool loadmore = false}) async {
+    if (loadmore) {
+      state = state.copyWith(listingLoadState: LoadState.loadmore);
+    }
     try {
-      final response = await _repo.getListing();
+      final response = await _repo.getListing(page);
       if (!response.isSuccess()) {
         throw response.error?.message ?? response.message ?? '';
       }
+      state = state.copyWith(listingLoadState: LoadState.success);
+      if (response.data?.results?.isEmpty ?? false) {
+        return;
+      }
+      final listings = response.data?.results ?? [];
+      final hasMorePages =
+          (response.data?.page ?? 0) < (response.data?.totalPages ?? 1);
+
+      if (listings.isEmpty) {
+        state = state.copyWith(
+          listingLoadState: hasMorePages ? LoadState.success : LoadState.done,
+        );
+        return;
+      }
+
       state = state.copyWith(
-        loadState: LoadState.success,
-        listing: response.data?.results ?? [],
+        listingLoadState: hasMorePages ? LoadState.success : LoadState.done,
+        listing: loadmore ? [...state.listing, ...listings] : listings,
       );
     } catch (e) {
-      state = state.copyWith(loadState: LoadState.error);
+      state = state.copyWith(listingLoadState: LoadState.error);
     }
   }
 

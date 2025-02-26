@@ -290,10 +290,48 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getListing() async {
+  Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(
+      SocialAuthModel data) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data.toJson());
+    final _options = _setStreamType<BaseResponse<SocialAuthResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/authentication/client/social-auth',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<SocialAuthResponse> _value;
+    try {
+      _value = BaseResponse<SocialAuthResponse>.fromJson(
+        _result.data!,
+        (json) => SocialAuthResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
+      getListing(int page) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<
@@ -446,9 +484,9 @@ class _RestClient implements RestClient {
 
   @override
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getPartnerListing() async {
+      getPartnerListing(int page) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<

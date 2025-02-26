@@ -4,6 +4,7 @@ import 'package:tivi_tea/features/common/app_appbar.dart';
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     required this.body,
+    this.backgroundColor,
     this.drawer,
     super.key,
     this.resizeToAvoidBottomInset,
@@ -25,6 +26,7 @@ class AppScaffold extends StatelessWidget {
   final Widget? footerButton;
   final Widget? underFooterChild;
   final EdgeInsetsGeometry? bodyPadding;
+  final Color? backgroundColor;
   final bool extendBody;
   final bool showSkip;
   @override
@@ -38,7 +40,7 @@ class AppScaffold extends StatelessWidget {
         child: Scaffold(
           appBar: appbar ?? const CustomAppBar(),
           drawer: drawer,
-          backgroundColor: Colors.white,
+          backgroundColor: backgroundColor ?? Colors.white,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           body:body,
           floatingActionButton: floatingActionButton,

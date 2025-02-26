@@ -6,6 +6,7 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/favorites/model/favorite_listing_model.dart';
@@ -16,16 +17,52 @@ import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class SecondaryListingView extends ConsumerWidget {
+class SecondaryListingView extends ConsumerStatefulWidget {
   const SecondaryListingView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SecondaryListingView> createState() =>
+      _SecondaryListingViewState();
+}
+
+class _SecondaryListingViewState extends ConsumerState<SecondaryListingView> {
+  final ScrollController _scrollController = ScrollController();
+  int _currentPage = 1;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final notifier = ref.read(servicesNotiferProvider.notifier);
+    final state = ref.read(servicesNotiferProvider);
+
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 100 &&
+        state.listingLoadState == LoadState.success) {
+      _currentPage++;
+      if (state.listingLoadState == LoadState.done) {
+        return;
+      }
+      notifier.getListing(page: _currentPage, loadmore: true);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final listings = ref.watch(
       servicesNotiferProvider.select((value) => value.listing),
     );
     return Expanded(
       child: ListView.separated(
+        controller: _scrollController,
         itemCount: listings.length,
         separatorBuilder: (ctx, i) => 10.verticalSpace,
         itemBuilder: (ctx, i) => SecondaryListingWidget(listing: listings[i]),

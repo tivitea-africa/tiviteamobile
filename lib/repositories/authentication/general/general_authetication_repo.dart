@@ -9,6 +9,8 @@ import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
+import 'package:tivi_tea/features/registration/model/client/social_auth_model.dart';
+import 'package:tivi_tea/features/registration/model/client/social_auth_response.dart';
 import 'package:tivi_tea/repositories/enums.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 
@@ -20,6 +22,37 @@ final class GeneralAuthenticationRepo {
     required this.restClient,
     this.userRepository,
   });
+
+  Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(
+    SocialAuthModel data,
+  ) async {
+    try {
+      final result = await restClient.signUpWithSocialAuth(data);
+      final userLoginData = result.data;
+      userRepository?.saveToken(userLoginData?.tokens?.access ?? '');
+      userRepository?.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
+
+      userRepository?.saveUser(userLoginData?.user);
+
+      final user = userRepository?.getUser();
+      userRepository?.saveUser(
+        user?.copyWith(kycIsVerified: userLoginData?.kycIsVerified),
+      );
+
+      if (userLoginData?.kycIsVerified == true) {
+        final user = userRepository?.getUser();
+        userRepository?.saveUser(
+          user?.copyWith(
+            kycVerificationStatus: KYCVerificationStatus.documentsVerified,
+          ),
+        );
+      }
+
+      return result;
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
 
   Future<BaseResponse<LoginResponseObject>> login(
     LoginRequestObject data,

@@ -46,7 +46,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
             right: 18.w,
             bottom: 10.h,
           ),
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: color ?? Colors.white),
       width: MediaQuery.sizeOf(context).width,
       child: Row(
         children: [

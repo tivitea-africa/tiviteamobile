@@ -6,6 +6,7 @@ import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/view_model/login_state.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
+import 'package:tivi_tea/features/registration/model/client/social_auth_model.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/repositories/authentication/general/general_authetication_repo.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
@@ -38,7 +39,31 @@ class LoginNotifier extends _$LoginNotifier {
     try {
       final response = await _repo.login(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? response.message ?? 'An error occurred';
+        throw response.error?.message ??
+            response.message ??
+            'An error occurred';
+      }
+      state = state.copyWith(loadState: LoadState.success);
+      if (onSuccess != null) onSuccess(response.data?.user?.entityType);
+    } catch (e) {
+      state = state.copyWith(loadState: LoadState.error);
+      if (onError != null) onError(e.toString());
+    }
+  }
+
+  void signUpWithSocialAuth(
+    SocialAuthModel data, {
+    ///Pass [EntityType] to determine what dashboard would be loaded
+    void Function(EntityType?)? onSuccess,
+    void Function(String)? onError,
+  }) async {
+    state = state.copyWith(loadState: LoadState.loading);
+    try {
+      final response = await _repo.signUpWithSocialAuth(data);
+      if (!response.isSuccess()) {
+        throw response.error?.message ??
+            response.message ??
+            'An error occurred';
       }
       state = state.copyWith(loadState: LoadState.success);
       if (onSuccess != null) onSuccess(response.data?.user?.entityType);
@@ -57,7 +82,9 @@ class LoginNotifier extends _$LoginNotifier {
     try {
       final response = await _repo.forgotPassword(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? response.message ?? 'An error occurred';
+        throw response.error?.message ??
+            response.message ??
+            'An error occurred';
       }
       state = state.copyWith(forgotPasswordLoadState: LoadState.success);
       if (onSuccess != null) onSuccess();
@@ -76,7 +103,9 @@ class LoginNotifier extends _$LoginNotifier {
     try {
       final response = await _repo.changePassword(data);
       if (!response.isSuccess()) {
-        throw response.error?.message ?? response.message ?? 'An error occurred';
+        throw response.error?.message ??
+            response.message ??
+            'An error occurred';
       }
       state = state.copyWith(changePasswordLoadState: LoadState.success);
       if (onSuccess != null) onSuccess();

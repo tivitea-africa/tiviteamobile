@@ -120,6 +120,8 @@ class Room {
   final Map<String, dynamic>? meta;
   final String? name;
   final List<String>? images;
+  final List<String>? features;
+  final bool? availability;
   final String? description;
   @JsonKey(name: 'max_capacity')
   final int? maxCapacity;
@@ -133,6 +135,8 @@ class Room {
     this.meta,
     this.name,
     this.images,
+    this.features,
+    this.availability,
     this.description,
     this.maxCapacity,
     this.amount,

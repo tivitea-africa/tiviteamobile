@@ -136,23 +136,23 @@ class _LoginViewState extends State<LoginView> {
                 onPressed: () => _login(ref),
               );
             }),
-            10.verticalSpace,
-            AppButton(
-              buttonText: context.l10n.googleContinue,
-              backgroundColor: Colors.white,
-              borderColor: const Color(0xFFD8D8DD),
-              textStyle: context.theme.textTheme.displaySmall?.copyWith(
-                color: const Color(0xFF737380),
-              ),
-              prefixIcon: Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: Assets.images.google.image(
-                  fit: BoxFit.scaleDown,
-                  width: 20,
-                ),
-              ),
-              onPressed: () {},
-            ),
+            // 10.verticalSpace,
+            // AppButton(
+            //   buttonText: context.l10n.googleContinue,
+            //   backgroundColor: Colors.white,
+            //   borderColor: const Color(0xFFD8D8DD),
+            //   textStyle: context.theme.textTheme.displaySmall?.copyWith(
+            //     color: const Color(0xFF737380),
+            //   ),
+            //   prefixIcon: Padding(
+            //     padding: EdgeInsets.only(right: 10.w),
+            //     child: Assets.images.google.image(
+            //       fit: BoxFit.scaleDown,
+            //       width: 20,
+            //     ),
+            //   ),
+            //   onPressed: () {},
+            // ),
             10.verticalSpace,
             RichText(
               textAlign: TextAlign.center,
@@ -200,4 +200,27 @@ class _LoginViewState extends State<LoginView> {
       onError: (error) => context.showError(error),
     );
   }
+
+  // void _signInWithGoogle(WidgetRef ref) {
+  //   final data = SocialAuthModel(
+
+  //     email: emailNameController.text,
+  //     password: passwordController.text,
+  //   );
+
+  //   final notifier = ref.read(loginNotifierProvider.notifier);
+  //   notifier.login(
+  //     data,
+  //     onSuccess: (entityType) {
+  //       if (rememberMe == true) {
+  //         notifier.rememberUser(rememberMe);
+  //       }
+  //       context.pushReplacement(
+  //         AppRoutes.homeView,
+  //         extra: entityType,
+  //       );
+  //     },
+  //     onError: (error) => context.showError(error),
+  //   );
+  // }
 }

@@ -23,15 +23,16 @@ final class GeneralServicesRepo {
   }
 
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getListing() async {
+      getListing(int page) async {
     try {
-      return await restClient.getListing();
+      return await restClient.getListing(page);
     } on DioException catch (e) {
       return AppException.handleError(e);
     }
   }
 
-  Future<BaseResponse<ListingResponseModel>> getListingById(String listingId) async {
+  Future<BaseResponse<ListingResponseModel>> getListingById(
+      String listingId) async {
     try {
       return await restClient.getListingId(listingId);
     } on DioException catch (e) {

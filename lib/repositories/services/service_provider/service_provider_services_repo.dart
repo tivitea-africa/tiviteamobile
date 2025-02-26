@@ -13,9 +13,9 @@ final class ServiceProviderServicesRepo {
   ServiceProviderServicesRepo({required this.restClient});
 
   Future<BaseResponse<GenericPaginatedResponse<ListingResponseModel>>>
-      getPartnerListing() async {
+      getPartnerListing(int page) async {
     try {
-      return await restClient.getPartnerListing();
+      return await restClient.getPartnerListing(page);
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

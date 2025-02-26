@@ -6,6 +6,7 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/date_extensions.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
@@ -44,6 +45,7 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
     if (user.entityType == EntityType.client) {
       return const FavoritesListingView();
     }
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     return AppScaffold(
       appbar: CustomAppBar(
         title: context.l10n.myListing,
@@ -51,29 +53,32 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CreateListingButton(
-                    text: context.l10n.addnew,
-                    onTap: () => context.push(createListingPath),
-                  ),
-                ],
-              ),
-              10.verticalSpace,
-              Container(
-                width: context.width,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE8E8EB),
-                  borderRadius: BorderRadius.circular(15),
+        child: RefreshIndicator(
+          onRefresh: () async => notifier.getPartnerListing(),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CreateListingButton(
+                      text: context.l10n.addnew,
+                      onTap: () => context.push(createListingPath),
+                    ),
+                  ],
                 ),
-                child: const _MyListingsList(),
-              ),
-            ],
+                10.verticalSpace,
+                Container(
+                  width: context.width,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8E8EB),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: const _MyListingsList(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -81,11 +86,46 @@ class _MyListingViewState extends ConsumerState<MyListingView> {
   }
 }
 
-class _MyListingsList extends ConsumerWidget {
+class _MyListingsList extends ConsumerStatefulWidget {
   const _MyListingsList();
+  @override
+  ConsumerState<_MyListingsList> createState() => __MyListingsListState();
+}
+
+class __MyListingsListState extends ConsumerState<_MyListingsList> {
+  final ScrollController _scrollController = ScrollController();
+  int _currentPage = 1;
+  @override
+  void initState() {
+    super.initState();
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    notifier.getPartnerListing(page: _currentPage);
+    _scrollController.addListener(_onScroll);
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    final state = ref.read(partnerServicesNotiferProvider);
+
+    if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 100 &&
+        state.listingLoadState == LoadState.success) {
+      _currentPage++;
+      if (state.listingLoadState == LoadState.done) {
+        return;
+      }
+      notifier.getPartnerListing(page: _currentPage, loadmore: true);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final partnerListings = ref.watch(
       partnerServicesNotiferProvider.select(
         (value) => value.listing,
@@ -96,6 +136,8 @@ class _MyListingsList extends ConsumerWidget {
       onRefresh: () async => notifier.getPartnerListing(),
       child: ListView.separated(
         shrinkWrap: true,
+        reverse: true,
+        controller: _scrollController,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: partnerListings.length,
         separatorBuilder: (ctx, i) => 10.verticalSpace,

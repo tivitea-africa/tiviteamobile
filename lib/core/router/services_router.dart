@@ -9,11 +9,13 @@ import 'package:tivi_tea/features/kyc/view/pages/client/client_kyc_view.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_first_view.dart';
 import 'package:tivi_tea/features/kyc/view/pages/partner/partner_kyc_second_view.dart';
 import 'package:tivi_tea/features/payment/view/payment_receipt_view.dart';
+import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/pages/book_workspace_view.dart';
 import 'package:tivi_tea/features/services/view/pages/booking_summary_view.dart';
 import 'package:tivi_tea/features/services/view/pages/choose_room_view.dart';
 import 'package:tivi_tea/features/services/view/pages/e_ticket_view.dart';
 import 'package:tivi_tea/features/services/view/pages/listing_detail_view.dart';
+import 'package:tivi_tea/features/services/view/pages/new_bookworkspace_view.dart';
 import 'package:tivi_tea/features/services/view/pages/start_kyc_process_page.dart';
 
 class ServicesRouter {
@@ -28,7 +30,11 @@ class ServicesRouter {
     path: AppRoutes.bookListingView,
     builder: (BuildContext context, GoRouterState state) {
       final data = state.extra as ListingResponseModel;
-      return BookWorkSpaceOrListingView(listing: data);
+      if (data.listingType?.enumType == CreateListingType.workSpace) {
+        return NewBookWorkspaceOrListingView(listing: data);
+      } else {
+        return BookWorkSpaceOrListingView(listing: data);
+      }
     },
   );
   static final bookingSummaryView = GoRoute(

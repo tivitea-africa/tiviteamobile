@@ -149,6 +149,7 @@ class AmenitiesRow extends StatelessWidget {
               fontSize: 16.sp,
             ),
           ),
+          20.verticalSpace,
           Row(
             children: [
               // AppSvgWidget(path: icon),
@@ -178,7 +179,12 @@ class AmenitiesRow extends StatelessWidget {
 
 class ListingImagesView extends StatelessWidget {
   final List<String> images;
-  const ListingImagesView({super.key, required this.images});
+  final BoxFit? fit;
+  const ListingImagesView({
+    super.key,
+    required this.images,
+    this.fit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -190,6 +196,7 @@ class ListingImagesView extends StatelessWidget {
         itemBuilder: (ctx, i) {
           final imagePath = images[i];
           return AppImageWidget(
+            fit: fit,
             imagePath: imagePath,
             borderRadius: BorderRadius.circular(0),
           );

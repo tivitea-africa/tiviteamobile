@@ -33,7 +33,7 @@ class BookingSummaryParams {
 }
 
 class ChooseRoomViewParams {
-  final BookingSummaryParams bookingSummaryParams;
+  final BookingSummaryParams? bookingSummaryParams;
   final List<Room> rooms;
 
   const ChooseRoomViewParams({
