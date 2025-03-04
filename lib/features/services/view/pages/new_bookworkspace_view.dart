@@ -117,9 +117,10 @@ class _NewBookWorkspaceOrListingViewState
   }
 
   void _navigate() {
+    final updatedParams = params?.copyWith(roomId: selectedRoom?.id ?? '');
     context.push(
       '${AppRoutes.servicesView}/${AppRoutes.bookingSummaryView}',
-      extra: params,
+      extra: updatedParams,
     );
   }
 }

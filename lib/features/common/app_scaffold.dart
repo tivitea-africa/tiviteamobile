@@ -14,7 +14,6 @@ class AppScaffold extends StatelessWidget {
     this.footerButton,
     this.underFooterChild,
     this.bodyPadding,
-    this.extendBody = false,
     this.showSkip = false,
   });
   final Widget body;
@@ -27,7 +26,6 @@ class AppScaffold extends StatelessWidget {
   final Widget? underFooterChild;
   final EdgeInsetsGeometry? bodyPadding;
   final Color? backgroundColor;
-  final bool extendBody;
   final bool showSkip;
   @override
   Widget build(BuildContext context) {
@@ -45,24 +43,6 @@ class AppScaffold extends StatelessWidget {
           body:body,
           floatingActionButton: floatingActionButton,
           bottomNavigationBar: bottomNavigationBar,
-          // persistentFooterButtons: (footerButton != null)
-          //     ? [
-          //         Padding(
-          //           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10),
-          //           child: Container(
-          //             margin: context.bottomPaddingForTextField,
-          //             child: Column(
-          //               children: [
-          //                 footerButton!,
-          //                 10.verticalSpace,
-          //                 if (underFooterChild != null) underFooterChild!
-          //               ],
-          //             ),
-          //           ),
-          //         ),
-          //       ]
-          //     : null,
-          extendBody: extendBody,
         ),
       ),
     );

@@ -19,7 +19,6 @@ class _NewListingsState extends State<NewListings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       appBar: AppBar(
         backgroundColor: const Color(0xffFFFFFF),
         centerTitle: true,

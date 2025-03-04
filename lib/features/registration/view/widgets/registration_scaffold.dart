@@ -12,7 +12,6 @@ class RegistrationScaffold extends StatelessWidget {
     this.footerButton,
     this.underFooterChild,
     this.bodyPadding,
-    this.extendBody = false,
   });
   final Widget body;
   final bool? resizeToAvoidBottomInset;
@@ -22,7 +21,6 @@ class RegistrationScaffold extends StatelessWidget {
   final Widget? footerButton;
   final Widget? underFooterChild;
   final EdgeInsetsGeometry? bodyPadding;
-  final bool extendBody;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,7 +30,7 @@ class RegistrationScaffold extends StatelessWidget {
           dividerTheme: const DividerThemeData(color: Colors.transparent),
         ),
         child: Scaffold(
-          appBar: appbar, // ?? const LuraAppBar(),
+          appBar: appbar,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           body: Padding(
             padding: bodyPadding ?? EdgeInsets.symmetric(horizontal: 18.w),
@@ -40,24 +38,6 @@ class RegistrationScaffold extends StatelessWidget {
           ),
           floatingActionButton: floatingActionButton,
           bottomNavigationBar: bottomNavigationBar,
-          persistentFooterButtons: (footerButton != null)
-              ? [
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10),
-                  //   child: Container(
-                  //     margin: context.bottomPaddingForTextField,
-                  //     child: Column(
-                  //       children: [
-                  //         footerButton!,
-                  //         10.verticalSpace,
-                  //         if (underFooterChild != null) underFooterChild!
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                ]
-              : null,
-          extendBody: extendBody,
         ),
       ),
     );

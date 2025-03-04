@@ -12,8 +12,10 @@ import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/history/model/booking_history_model.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/booking_notifier.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
 
 class HistoryView extends ConsumerStatefulWidget {
   const HistoryView({super.key});
@@ -56,6 +58,9 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.watch(userNotifierProvider);
+    final entityType = user.entityType ?? EntityType.client;
+
     final state = ref.watch(bookingNotiferProvider);
     final bookingHistoryList = state.bookingHistoryList;
     final isLoadingHistory = state.loadState == LoadState.loading;
@@ -78,8 +83,12 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CreateListingButton(
-                    text: context.l10n.createBooking,
-                    onTap: () => context.push(createListingPath),
+                    text: entityType == EntityType.client
+                        ? context.l10n.createBooking
+                        : context.l10n.createListing,
+                    onTap: () => entityType == EntityType.client
+                        ? context.push(AppRoutes.servicesView)
+                        : context.push(createListingPath),
                   ),
                   30.verticalSpace,
                 ],

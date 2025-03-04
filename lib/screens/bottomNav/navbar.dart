@@ -40,7 +40,6 @@ class _NaviBarState extends State<NaviBar> {
       ),
     );
     return Scaffold(
-      extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: pageList[pageIndex],
       bottomNavigationBar: BottomAppBar(

@@ -59,9 +59,12 @@ class BookingStep3 extends StatelessWidget {
             children: [
               if (room?.images?.isNotEmpty ?? false)
                 ListingImagesView(
-                    images: room?.images ?? [], fit: BoxFit.cover),
+                  images: room?.images ?? [],
+                  fit: BoxFit.cover,
+                ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                 child: Text(
                   room?.name ?? '',
                   style: context.theme.textTheme.titleMedium?.copyWith(

@@ -55,90 +55,87 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
                 30.verticalSpace,
                 WorkSpaceWidget(listing: widget.params.listing),
                 50.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: DottedWidget(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 12.h,
-                            horizontal: 10.w,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: DottedWidget(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12.h,
+                          horizontal: 10.w,
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  context.l10n.pickUpDate,
-                                  style: context.theme.textTheme.titleLarge
-                                      ?.copyWith(
-                                    fontSize: 13.sp,
-                                    color: const Color(0xFF737380),
-                                  ),
+                          child: Column(
+                            children: [
+                              Text(
+                                context.l10n.pickUpDate,
+                                style: context.theme.textTheme.titleLarge
+                                    ?.copyWith(
+                                  fontSize: 13.sp,
+                                  color: const Color(0xFF737380),
                                 ),
-                                10.verticalSpace,
-                                Text(
-                                  widget.params.selectedDateFrom.toMonthDate,
-                                  textAlign: TextAlign.center,
-                                  style: context.theme.textTheme.displaySmall
-                                      ?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
+                              ),
+                              10.verticalSpace,
+                              Text(
+                                widget.params.selectedDateFrom.toMonthDate,
+                                textAlign: TextAlign.center,
+                                style: context.theme.textTheme.displaySmall
+                                    ?.copyWith(
+                                  fontSize: 12.sp,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      Flexible(
-                        child: DottedWidget(
-                          padding: EdgeInsets.zero,
-                          dashPattern: const [4, 7],
-                          child: SizedBox(
-                            width: context.width,
+                    ),
+                    Flexible(
+                      child: DottedWidget(
+                        padding: EdgeInsets.zero,
+                        dashPattern: const [4, 7],
+                        child: SizedBox(
+                          width: context.width,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: DottedWidget(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12.h,
+                          horizontal: 10.w,
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                context.l10n.returnDate,
+                                style: context.theme.textTheme.titleLarge
+                                    ?.copyWith(
+                                  fontSize: 13.sp,
+                                  color: const Color(0xFF737380),
+                                ),
+                              ),
+                              10.verticalSpace,
+                              Text(
+                                widget.params.selectedDateTo.toMonthDate,
+                                textAlign: TextAlign.center,
+                                style: context.theme.textTheme.displaySmall
+                                    ?.copyWith(
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      Flexible(
-                        child: DottedWidget(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 12.h,
-                            horizontal: 10.w,
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  context.l10n.returnDate,
-                                  style: context.theme.textTheme.titleLarge
-                                      ?.copyWith(
-                                    fontSize: 13.sp,
-                                    color: const Color(0xFF737380),
-                                  ),
-                                ),
-                                10.verticalSpace,
-                                Text(
-                                  widget.params.selectedDateTo.toMonthDate,
-                                  textAlign: TextAlign.center,
-                                  style: context.theme.textTheme.displaySmall
-                                      ?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 20.verticalSpace,
                 Padding(

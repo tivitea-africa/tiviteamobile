@@ -40,4 +40,5 @@ class ChooseRoomViewParams {
     required this.bookingSummaryParams,
     required this.rooms,
   });
+  
 }

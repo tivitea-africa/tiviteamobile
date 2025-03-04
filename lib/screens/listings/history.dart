@@ -14,7 +14,6 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBody: true,
         appBar: AppBar(
           centerTitle: true,
           leading: const Icon(Icons.arrow_back_ios_new_outlined, size: 17),

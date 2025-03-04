@@ -59,6 +59,13 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   retrofit_generator: ^8.0.6
   riverpod_generator: ^2.4.3
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/launcher-icon.jpg"
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true
