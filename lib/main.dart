@@ -7,6 +7,8 @@ import 'package:tivi_tea/core/router/router_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
 import 'package:tivi_tea/core/theme/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:tivi_tea/firebase_options.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +18,9 @@ void main() {
       DeviceOrientation.portraitDown,
     ],
   ).then((_) async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     await Hive.initFlutter();
     await Hive.openBox(HiveKeys.appBox);
     runApp(const ProviderScope(child: MyApp()));

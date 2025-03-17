@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "650683057857",
+    "project_id": "tivitea-8c801",
+    "storage_bucket": "tivitea-8c801.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650683057857:android:00ad97cba255f7982e7640",
+        "android_client_info": {
+          "package_name": "com.example.tivi_tea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA7UuS1-Fwn6RSp9lT41VZ8JVatdVLyhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

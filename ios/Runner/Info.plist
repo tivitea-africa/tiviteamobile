@@ -22,6 +22,17 @@
 		<string>????</string>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.googleusercontent.apps.650683057857-6gnbedvpmst0jdirtq0ibo0suv72c79v</string>
+				</array>
+			</dict>
+		</array>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>UILaunchStoryboardName</key>
@@ -35,6 +46,8 @@
 		<string>Your app needs access to the camera to take pictures or record videos.</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Your app needs access to the microphone to record audio for videos.</string>
+		<key>GIDClientID</key>
+		<string>650683057857-6gnbedvpmst0jdirtq0ibo0suv72c79v.apps.googleusercontent.com</string>
 		
 		<key>UISupportedInterfaceOrientations</key>
 		<array>

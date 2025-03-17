@@ -1,9 +1,85 @@
 PODS:
+  - AppAuth (1.7.6):
+    - AppAuth/Core (= 1.7.6)
+    - AppAuth/ExternalUserAgent (= 1.7.6)
+  - AppAuth/Core (1.7.6)
+  - AppAuth/ExternalUserAgent (1.7.6):
+    - AppAuth/Core
   - device_info_plus (0.0.1):
     - Flutter
+  - Firebase/Auth (11.8.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 11.8.0)
+  - Firebase/CoreOnly (11.8.0):
+    - FirebaseCore (~> 11.8.0)
+  - firebase_auth (5.5.1):
+    - Firebase/Auth (= 11.8.0)
+    - firebase_core
+    - Flutter
+  - firebase_core (3.12.1):
+    - Firebase/CoreOnly (= 11.8.0)
+    - Flutter
+  - FirebaseAppCheckInterop (11.9.0)
+  - FirebaseAuth (11.8.1):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.8.0)
+    - FirebaseCoreExtension (~> 11.8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
+    - RecaptchaInterop (~> 100.0)
+  - FirebaseAuthInterop (11.9.0)
+  - FirebaseCore (11.8.1):
+    - FirebaseCoreInternal (~> 11.8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/Logger (~> 8.0)
+  - FirebaseCoreExtension (11.8.0):
+    - FirebaseCore (~> 11.8.0)
+  - FirebaseCoreInternal (11.8.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - Flutter (1.0.0)
   - flutter_pdfview (1.0.2):
     - Flutter
+  - google_sign_in_ios (0.0.1):
+    - AppAuth (>= 1.7.4)
+    - Flutter
+    - FlutterMacOS
+    - GoogleSignIn (~> 7.1)
+    - GTMSessionFetcher (>= 3.4.0)
+  - GoogleSignIn (7.1.0):
+    - AppAuth (< 2.0, >= 1.7.3)
+    - GTMAppAuth (< 5.0, >= 4.1.1)
+    - GTMSessionFetcher/Core (~> 3.3)
+  - GoogleUtilities/AppDelegateSwizzler (8.0.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.0.2):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.0.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.0.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.0.2)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.0.2)
+  - GoogleUtilities/Reachability (8.0.2):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMAppAuth (4.1.1):
+    - AppAuth/Core (~> 1.7)
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3)
+  - GTMSessionFetcher (3.5.0):
+    - GTMSessionFetcher/Full (= 3.5.0)
+  - GTMSessionFetcher/Core (3.5.0)
+  - GTMSessionFetcher/Full (3.5.0):
+    - GTMSessionFetcher/Core
   - image_picker_ios (0.0.1):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -11,6 +87,7 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
+  - RecaptchaInterop (100.0.0)
   - share_plus (0.0.1):
     - Flutter
   - sqflite (0.0.3):
@@ -22,8 +99,11 @@ PODS:
 
 DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -31,13 +111,35 @@ DEPENDENCIES:
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
 
+SPEC REPOS:
+  trunk:
+    - AppAuth
+    - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - GoogleSignIn
+    - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - RecaptchaInterop
+
 EXTERNAL SOURCES:
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
+  firebase_core:
+    :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
     :path: Flutter
   flutter_pdfview:
     :path: ".symlinks/plugins/flutter_pdfview/ios"
+  google_sign_in_ios:
+    :path: ".symlinks/plugins/google_sign_in_ios/darwin"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
@@ -52,16 +154,32 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
 
 SPEC CHECKSUMS:
+  AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   device_info_plus: bf2e3232933866d73fe290f2942f2156cdd10342
+  Firebase: d80354ed7f6df5f9aca55e9eb47cc4b634735eaf
+  firebase_auth: 3d848b9b866b201e5c8e0c06d8b2cec272fd8825
+  firebase_core: ac395f994af4e28f6a38b59e05a88ca57abeb874
+  FirebaseAppCheckInterop: 9226f7217b43e99dfa0bc9f674ad8108cef89feb
+  FirebaseAuth: ad59a1a7b161e75f74c39f70179d2482d40e2737
+  FirebaseAuthInterop: 2a26ee1bea6d47df8048683cfa071e7da657798f
+  FirebaseCore: 99fe0c4b44a39f37d99e6404e02009d2db5d718d
+  FirebaseCoreExtension: 3d3f2017a00d06e09ab4ebe065391b0bb642565e
+  FirebaseCoreInternal: df24ce5af28864660ecbd13596fc8dd3a8c34629
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_pdfview: 2e4d13ffb774858562ffbdfdb61b40744b191adc
+  google_sign_in_ios: 4111e87aa5e24a4404f00ea13479f35e571969cc
+  GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
+  GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
+  GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
+  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   webview_flutter_wkwebview: 0982481e3d9c78fd5c6f62a002fcd24fc791f1e4
 
-PODFILE CHECKSUM: f1f2457fd2aab7c91603d3d9dffd3b5e8d6fd247
+PODFILE CHECKSUM: 465f91fcc38b6ec86277c1e6c91c017c6e4558ba
 
 COCOAPODS: 1.16.2

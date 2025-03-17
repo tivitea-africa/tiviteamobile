@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 
@@ -9,6 +10,7 @@ import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/features/registration/model/client/social_auth_model.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/repositories/authentication/general/general_authetication_repo.dart';
+import 'package:tivi_tea/repositories/authentication/general/third_party_auth.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
@@ -18,13 +20,16 @@ part 'login_notifier.g.dart';
 class LoginNotifier extends _$LoginNotifier {
   late final GeneralAuthenticationRepo _repo;
   late final UserRepository _userRepo;
-
+  late final ThirdPartyAuthRepo _thirdPartyAuthRepo;
   @override
   LoginState build() {
     _userRepo = ref.read(userRepositoryProvider);
     _repo = GeneralAuthenticationRepo(
       restClient: ref.read(restClient),
       userRepository: _userRepo,
+    );
+    _thirdPartyAuthRepo = ThirdPartyAuthRepo(
+      googleSignIn: GoogleSignIn(),
     );
     return LoginState.initial();
   }
@@ -130,6 +135,23 @@ class LoginNotifier extends _$LoginNotifier {
       state = state.copyWith(logoutState: LoadState.success);
     } catch (e) {
       state = state.copyWith(logoutState: LoadState.error);
+    }
+  }
+
+  void signInWithGoogle({
+    void Function(EntityType?)? onSuccess,
+    void Function(String)? onError,
+  }) async {
+    state = state.copyWith(signInWithGoogleLoadState: LoadState.loading);
+    final response = await _thirdPartyAuthRepo.signIn();
+    if (response.isSuccess()) {
+      if (response.data != null) {
+        signUpWithSocialAuth(response.data!, onSuccess: onSuccess, onError: onError);
+      }
+      state = state.copyWith(signInWithGoogleLoadState: LoadState.success);
+    } else {
+      state = state.copyWith(signInWithGoogleLoadState: LoadState.error);
+      if (onError != null) onError(response.message ?? 'An error occurred');
     }
   }
 }

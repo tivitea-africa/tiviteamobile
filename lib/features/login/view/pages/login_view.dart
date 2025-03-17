@@ -122,37 +122,50 @@ class _LoginViewState extends State<LoginView> {
               ],
             ),
             40.verticalSpace,
-            Consumer(builder: (context, ref, _) {
-              final loadState = ref.watch(
-                loginNotifierProvider.select(
-                  (value) => value.loadState,
-                ),
-              );
-              final isLoading = loadState == LoadState.loading;
-              return AppButton(
-                buttonText: context.l10n.logIntoAccount,
-                isLoading: isLoading,
-                isEnabled: isEnabled,
-                onPressed: () => _login(ref),
-              );
-            }),
-            // 10.verticalSpace,
-            // AppButton(
-            //   buttonText: context.l10n.googleContinue,
-            //   backgroundColor: Colors.white,
-            //   borderColor: const Color(0xFFD8D8DD),
-            //   textStyle: context.theme.textTheme.displaySmall?.copyWith(
-            //     color: const Color(0xFF737380),
-            //   ),
-            //   prefixIcon: Padding(
-            //     padding: EdgeInsets.only(right: 10.w),
-            //     child: Assets.images.google.image(
-            //       fit: BoxFit.scaleDown,
-            //       width: 20,
-            //     ),
-            //   ),
-            //   onPressed: () {},
-            // ),
+            Consumer(
+              builder: (context, ref, _) {
+                final loadState = ref.watch(
+                  loginNotifierProvider.select(
+                    (value) => value.loadState,
+                  ),
+                );
+                final isLoading = loadState == LoadState.loading;
+                return AppButton(
+                  buttonText: context.l10n.logIntoAccount,
+                  isLoading: isLoading,
+                  isEnabled: isEnabled,
+                  onPressed: () => _login(ref),
+                );
+              },
+            ),
+            10.verticalSpace,
+            Consumer(
+              builder: (context, ref, _) {
+                final loadState = ref.watch(
+                  loginNotifierProvider.select(
+                    (value) => value.signInWithGoogleLoadState,
+                  ),
+                );
+                final isLoading = loadState == LoadState.loading;
+                return AppButton(
+                  buttonText: context.l10n.googleContinue,
+                  isLoading: isLoading,
+                  backgroundColor: Colors.white,
+                  borderColor: const Color(0xFFD8D8DD),
+                  textStyle: context.theme.textTheme.displaySmall?.copyWith(
+                    color: const Color(0xFF737380),
+                  ),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.only(right: 10.w),
+                    child: Assets.images.google.image(
+                      fit: BoxFit.scaleDown,
+                      width: 20,
+                    ),
+                  ),
+                  onPressed: () => _signInWithGoogle(ref),
+                );
+              },
+            ),
             10.verticalSpace,
             RichText(
               textAlign: TextAlign.center,
@@ -167,8 +180,9 @@ class _LoginViewState extends State<LoginView> {
                       fontWeight: FontWeight.w700,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap =
-                          () => context.push(AppRoutes.selectUserTypeView),
+                      ..onTap = () => context.push(
+                            AppRoutes.selectUserTypeView,
+                          ),
                   ),
                 ],
               ),
@@ -201,26 +215,19 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  // void _signInWithGoogle(WidgetRef ref) {
-  //   final data = SocialAuthModel(
-
-  //     email: emailNameController.text,
-  //     password: passwordController.text,
-  //   );
-
-  //   final notifier = ref.read(loginNotifierProvider.notifier);
-  //   notifier.login(
-  //     data,
-  //     onSuccess: (entityType) {
-  //       if (rememberMe == true) {
-  //         notifier.rememberUser(rememberMe);
-  //       }
-  //       context.pushReplacement(
-  //         AppRoutes.homeView,
-  //         extra: entityType,
-  //       );
-  //     },
-  //     onError: (error) => context.showError(error),
-  //   );
-  // }
+  void _signInWithGoogle(WidgetRef ref) {
+    final notifier = ref.read(loginNotifierProvider.notifier);
+    notifier.signInWithGoogle(
+      onSuccess: (entityType) {
+        if (rememberMe == true) {
+          notifier.rememberUser(rememberMe);
+        }
+        context.pushReplacement(
+          AppRoutes.homeView,
+          extra: entityType,
+        );
+      },
+      onError: (error) => context.showError(error),
+    );
+  }
 }
