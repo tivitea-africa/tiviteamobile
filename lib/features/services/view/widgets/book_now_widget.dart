@@ -22,6 +22,11 @@ class BookNowContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isWorkSpace = listing.listingType?.toLowerCase() ==
         CreateListingType.workSpace.requestBodyName.toLowerCase();
+
+    final totalAmount = (listing.amount ?? 0) +
+        (listing.serviceFee ?? 0) +
+        (listing.cautionaryFee ?? 0);
+
     return Container(
       width: context.width,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
@@ -105,6 +110,48 @@ class BookNowContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
+                  context.l10n.serviceFee,
+                  style: context.theme.textTheme.displaySmall?.copyWith(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF737380),
+                  ),
+                ),
+                listing.serviceFee.getCurrencyText(
+                  style: context.theme.textTheme.titleLarge?.copyWith(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            10.verticalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  context.l10n.price,
+                  style: context.theme.textTheme.displaySmall?.copyWith(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF737380),
+                  ),
+                ),
+                listing.amount.getCurrencyText(
+                  style: context.theme.textTheme.titleLarge?.copyWith(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            10.verticalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
                   context.l10n.total,
                   style: context.theme.textTheme.titleLarge?.copyWith(
                     fontSize: 14.sp,
@@ -112,7 +159,7 @@ class BookNowContainer extends StatelessWidget {
                     color: const Color(0xFF5C5C66),
                   ),
                 ),
-                listing.amount.getCurrencyText(
+                totalAmount.getCurrencyText(
                   style: context.theme.textTheme.titleLarge?.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -137,13 +184,17 @@ class BookNowContainer extends StatelessWidget {
             ),
           ],
           20.verticalSpace,
-          Consumer(builder: (context, ref, _) {
-            final isWorkspace = listing.listingType?.enumType ==
-                CreateListingType.workSpace;
-            return AppButton(
-                buttonText: isWorkspace ? context.l10n.bookNow : context.l10n.rentNow,
-                onPressed: () => _navigateToNextView(context, ref));
-          }),
+          Consumer(
+            builder: (context, ref, _) {
+              final isWorkspace =
+                  listing.listingType?.enumType == CreateListingType.workSpace;
+              return AppButton(
+                buttonText:
+                    isWorkspace ? context.l10n.bookNow : context.l10n.rentNow,
+                onPressed: () => _navigateToNextView(context, ref),
+              );
+            },
+          ),
         ],
       ),
     );
