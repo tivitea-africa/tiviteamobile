@@ -23,9 +23,16 @@ import 'package:tivi_tea/features/registration/model/client/social_auth_model.da
 import 'package:tivi_tea/features/registration/model/client/social_auth_response.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_response.dart';
+import 'package:tivi_tea/features/services/model/bank_model.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_response.dart';
+import 'package:tivi_tea/features/services/model/create_foot_soldier_model.dart';
+import 'package:tivi_tea/features/services/model/create_foot_soldier_response.dart';
+import 'package:tivi_tea/features/services/model/create_transfer_recipient_model.dart';
+import 'package:tivi_tea/features/services/model/create_transfer_recipient_response.dart';
+import 'package:tivi_tea/features/services/model/get_account_details_request_body.dart';
+import 'package:tivi_tea/features/services/model/get_account_details_response.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/models/user_model.dart';
@@ -58,7 +65,8 @@ abstract class RestClient {
   @POST('/authentication/client/submit-kyc')
   Future<BaseResponse> submitClientKyc(@Body() ClientKYCRequestBody data);
   @POST('/authentication/client/social-auth')
-  Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(@Body() SocialAuthModel data);
+  Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(
+      @Body() SocialAuthModel data);
 
   //<====================> Service <====================>
   @GET('/listings/')
@@ -72,6 +80,21 @@ abstract class RestClient {
   Future<BaseResponse<ListingResponseModel>> getListingId(
     @Path('listingId') String listingId,
   );
+
+  @POST('/dashboard/partner/foot-soldier/create')
+  Future<BaseResponse<CreateFootSoldierResponse>> createFootSoldier(@Body() CreateFootSoldierModel data);
+  @GET('/payment/banks/list')
+  Future<BaseResponse<ListBanksResponse>> getBanks();
+  @GET('/payment/account/details')
+  Future<BaseResponse<GetAccountDetailsResponse>> getAccountDetails(
+    @Body() GetAccountDetailsRequestBody data,
+  );
+  @POST('/payment/create_transfer_recipient')
+  Future<BaseResponse<CreateTransferRecipientResponse>> createTransferRecipient(
+    @Body() CreateTransferRecipientModel data,
+  );
+
+
 
   ///This is the same endpoint as [postWorkSpace] above.
   ///However we'll call them separetly in case the endpoints are different in the future.

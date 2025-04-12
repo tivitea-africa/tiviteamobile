@@ -87,6 +87,8 @@ final GoRouter router = GoRouter(
                 ServicesRouter.chooseRoomView,
                 ServicesRouter.eReceiptView,
                 ServicesRouter.eTicketView,
+                ServicesRouter.createFootSoldierView,
+                ServicesRouter.createTransferRecepientView,
               ],
             ),
           ],
@@ -95,29 +97,31 @@ final GoRouter router = GoRouter(
           navigatorKey: _shellNavigatorHistoryKey,
           routes: [
             GoRoute(
-                path: AppRoutes.myListingView,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                      child: MyListingView(),
-                    ),
-                routes: [
-                  MyListingsRouter.createListingView,
-                  MyListingsRouter.createListingSecondView,
-                ]),
+              path: AppRoutes.myListingView,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: MyListingView(),
+              ),
+              routes: [
+                MyListingsRouter.createListingView,
+                MyListingsRouter.createListingSecondView,
+              ],
+            ),
           ],
         ),
         StatefulShellBranch(
           navigatorKey: _shellNavigatoProfileKey,
           routes: [
             GoRoute(
-                path: AppRoutes.profile,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                      child: ProfileView(),
-                    ),
-                routes: [
-                  ProfileRouter.editProfile,
-                  ProfileRouter.changePassword,
-                  ProfileRouter.settings,
-                ]),
+              path: AppRoutes.profile,
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: ProfileView(),
+              ),
+              routes: [
+                ProfileRouter.editProfile,
+                ProfileRouter.changePassword,
+                ProfileRouter.settings,
+              ],
+            ),
           ],
         ),
       ],

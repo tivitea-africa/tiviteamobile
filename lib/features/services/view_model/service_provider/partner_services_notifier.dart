@@ -5,6 +5,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/services/third_party_services/cloudinary_service.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/features/services/model/create_foot_soldier_model.dart';
+import 'package:tivi_tea/features/services/model/create_foot_soldier_response.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_state.dart';
@@ -83,6 +85,10 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     }
   }
 
+  void saveWorkToolListing(WorkToolListing model) {
+    state = state.copyWith(savedWorkToolListing: model);
+  }
+
   // if (response.data != null) {
   //   _updateListingFromBackend(response.data!);
   // }
@@ -125,6 +131,23 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     } catch (e) {
       state = state.copyWith(cloudinaryUploadState: LoadState.error);
       return [];
+    }
+  }
+
+  void createFootSoldier({
+    required CreateFootSoldierModel data,
+    required void Function(CreateFootSoldierResponse) onSuccess,
+  }) async {
+    state = state.copyWith(createFootSoldierLoadState: LoadState.loading);
+    try {
+      final response = await _repo.createFootSoldier(data);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? response.message ?? '';
+      }
+      state = state.copyWith(createFootSoldierLoadState: LoadState.success);
+      onSuccess(response.data!);
+    } catch (e) {
+      state = state.copyWith(createFootSoldierLoadState: LoadState.error);
     }
   }
 }

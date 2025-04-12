@@ -34,4 +34,6 @@ class AppRoutes {
   static const String bookingHistoryView  = 'bookingHistoryView';
   static const String bookingHistoryDetails = 'bookingHistoryDetails';
   static const String settingsView = 'settingsView';
+  static const String createFootSoldierView = 'createFootSoldierView';
+  static const String createTransferRecepientView = 'createTransferRecepientView';
 }

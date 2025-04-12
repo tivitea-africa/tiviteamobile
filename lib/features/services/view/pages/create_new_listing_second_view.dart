@@ -47,6 +47,7 @@ class _CreateNewListingSecondViewState
   TextEditingController pickUpLocation = TextEditingController();
   TextEditingController amount = TextEditingController();
   String pricingType = PricingType.fixed.name;
+  ValueNotifier<bool> hasFootSoldier = ValueNotifier(false);
 
   @override
   void dispose() {
@@ -128,6 +129,22 @@ class _CreateNewListingSecondViewState
               ] else ...[
                 20.verticalSpace,
                 SelectedImagesView(listingType: widget.listingType),
+                20.verticalSpace,
+                Text(
+                  'Add Foot Soldier',
+                  style: context.theme.textTheme.displayLarge?.copyWith(
+                    color: context.theme.primaryColor,
+                    fontSize: 20.sp,
+                  ),
+                ),
+                10.verticalSpace,
+                ValueListenableBuilder(
+                  valueListenable: hasFootSoldier,
+                  builder: (context, value, child) => Switch.adaptive(
+                    value: value,
+                    onChanged: (value) => hasFootSoldier.value = value,
+                  ),
+                ),
               ],
               70.verticalSpace,
               Consumer(
@@ -216,6 +233,12 @@ class _CreateNewListingSecondViewState
     );
   }
 
+  void _navigateToCreateFootSoldierView(WidgetRef ref, WorkToolListing model) {
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+    notifier.saveWorkToolListing(model);
+    context.push(AppRoutes.createFootSoldierView);
+  }
+
   void _submitWorkTool(WidgetRef ref) async {
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     final images = await _uploadImages(ref);
@@ -227,17 +250,21 @@ class _CreateNewListingSecondViewState
       categoryId: widget.categoryId,
       images: images,
       listingType: widget.listingType.requestBodyName,
-      footSoldier: "False",
+      footSoldier: hasFootSoldier.value ? "True" : "False",
       amount: num.tryParse(amount.text),
     );
 
-    notifier.postToolOrOtherListing(
-      data,
-      onSuccess: () {
-        ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
-        _showSuccessDialog();
-      },
-    );
+    if (hasFootSoldier.value) {
+      _navigateToCreateFootSoldierView(ref, data);
+    } else {
+      notifier.postToolOrOtherListing(
+        data,
+        onSuccess: () {
+          ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
+          _showSuccessDialog();
+        },
+      );
+    }
   }
 
   void _showSuccessDialog() {

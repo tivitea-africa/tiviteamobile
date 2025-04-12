@@ -13,6 +13,8 @@ import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/pages/book_workspace_view.dart';
 import 'package:tivi_tea/features/services/view/pages/booking_summary_view.dart';
 import 'package:tivi_tea/features/services/view/pages/choose_room_view.dart';
+import 'package:tivi_tea/features/services/view/pages/create_foot_solder_view.dart';
+import 'package:tivi_tea/features/services/view/pages/create_transfer_recipient_view.dart';
 import 'package:tivi_tea/features/services/view/pages/e_ticket_view.dart';
 import 'package:tivi_tea/features/services/view/pages/listing_detail_view.dart';
 import 'package:tivi_tea/features/services/view/pages/new_bookworkspace_view.dart';
@@ -96,6 +98,18 @@ class ServicesRouter {
     path: AppRoutes.allListingsView,
     builder: (BuildContext context, GoRouterState state) {
       return const AllListingsView();
+    },
+  );
+  static final createFootSoldierView = GoRoute(
+    path: AppRoutes.createFootSoldierView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const CreateFootSoldierView();
+    },
+  );
+  static final createTransferRecepientView = GoRoute(
+    path: AppRoutes.createTransferRecepientView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const CreateTransferRecipientView();
     },
   );
 }
