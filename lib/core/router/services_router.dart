@@ -109,7 +109,8 @@ class ServicesRouter {
   static final createTransferRecepientView = GoRoute(
     path: AppRoutes.createTransferRecepientView,
     builder: (BuildContext context, GoRouterState state) {
-      return const CreateTransferRecipientView();
+      final footSoldierEmail = state.extra as String;
+      return CreateTransferRecipientView(footSoldierEmail: footSoldierEmail);
     },
   );
 }

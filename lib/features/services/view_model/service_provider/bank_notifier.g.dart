@@ -7,7 +7,7 @@ part of 'bank_notifier.dart';
 // **************************************************************************
 
 String _$bankOperationNotifierHash() =>
-    r'02bb93f660fde4c34f794b0684888dda00997427';
+    r'5d5bd273f0613a30d230f9e46d47c3164d4e0271';
 
 /// See also [BankOperationNotifier].
 @ProviderFor(BankOperationNotifier)

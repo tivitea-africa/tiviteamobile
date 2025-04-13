@@ -82,6 +82,9 @@ class BankOperationNotifier extends _$BankOperationNotifier {
         throw response.error?.message ?? response.message ?? '';
       }
       state = state.copyWith(getAccountLoadState: LoadState.success);
+      if (response.data != null) {
+        onSuccess(response.data!);
+      }
     } catch (e) {
       state = state.copyWith(getAccountLoadState: LoadState.error);
     }
@@ -90,6 +93,7 @@ class BankOperationNotifier extends _$BankOperationNotifier {
   void createTransferRecipient({
     required CreateTransferRecipientModel data,
     required void Function(CreateTransferRecipientResponse) onSuccess,
+    required void Function(String) onError,
   }) async {
     state = state.copyWith(createTransferRecipientLoadState: LoadState.loading);
     try {
@@ -97,11 +101,13 @@ class BankOperationNotifier extends _$BankOperationNotifier {
       if (!response.isSuccess()) {
         throw response.error?.message ?? response.message ?? '';
       }
-      state =
-          state.copyWith(createTransferRecipientLoadState: LoadState.success);
+      state = state.copyWith(
+        createTransferRecipientLoadState: LoadState.success,
+      );
       onSuccess(response.data!);
     } catch (e) {
       state = state.copyWith(createTransferRecipientLoadState: LoadState.error);
+      onError(e.toString());
     }
   }
 }

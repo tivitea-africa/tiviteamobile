@@ -85,7 +85,7 @@ abstract class RestClient {
   Future<BaseResponse<CreateFootSoldierResponse>> createFootSoldier(@Body() CreateFootSoldierModel data);
   @GET('/payment/banks/list')
   Future<BaseResponse<ListBanksResponse>> getBanks();
-  @GET('/payment/account/details')
+  @GET('/payment/resolve_bank_info')
   Future<BaseResponse<GetAccountDetailsResponse>> getAccountDetails(
     @Body() GetAccountDetailsRequestBody data,
   );

@@ -167,16 +167,22 @@ class _CreateNewListingSecondViewState
                   final isLoading = loadState == LoadState.loading ||
                       cloudinaryLoadState == LoadState.loading ||
                       postWorkToolLoadState == LoadState.loading;
-                  return Center(
-                    child: AppButton(
-                      isLoading: isLoading,
-                      buttonText: context.l10n.saveAndPublish,
-                      onPressed: () =>
-                          widget.listingType == CreateListingType.workSpace
-                              ? _submit(ref)
-                              : _submitWorkTool(ref),
-                    ),
-                  );
+                  return ValueListenableBuilder(
+                      valueListenable: hasFootSoldier,
+                      builder: (context, value, child) {
+                        return Center(
+                          child: AppButton(
+                            isLoading: isLoading,
+                            buttonText: value
+                                ? 'Create Foot Soldier'
+                                : context.l10n.saveAndPublish,
+                            onPressed: () => widget.listingType ==
+                                    CreateListingType.workSpace
+                                ? _submit(ref)
+                                : _submitWorkTool(ref),
+                          ),
+                        );
+                      });
                 },
               ),
               10.verticalSpace,
@@ -236,7 +242,7 @@ class _CreateNewListingSecondViewState
   void _navigateToCreateFootSoldierView(WidgetRef ref, WorkToolListing model) {
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     notifier.saveWorkToolListing(model);
-    context.push(AppRoutes.createFootSoldierView);
+    context.push('${AppRoutes.servicesView}/${AppRoutes.createFootSoldierView}');
   }
 
   void _submitWorkTool(WidgetRef ref) async {
@@ -263,6 +269,7 @@ class _CreateNewListingSecondViewState
           ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
           _showSuccessDialog();
         },
+        onError: (error) => context.showError(error),
       );
     }
   }

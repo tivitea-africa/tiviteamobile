@@ -108,6 +108,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
   void postToolOrOtherListing(
     WorkToolListing model, {
     required VoidCallback onSuccess,
+    required void Function(String) onError,
   }) async {
     state = state.copyWith(postWorkToolLoadState: LoadState.loading);
     try {
@@ -119,6 +120,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       onSuccess();
     } catch (e) {
       state = state.copyWith(postWorkToolLoadState: LoadState.error);
+      onError(e.toString());
     }
   }
 
@@ -137,6 +139,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
   void createFootSoldier({
     required CreateFootSoldierModel data,
     required void Function(CreateFootSoldierResponse) onSuccess,
+    required void Function(String) onError,
   }) async {
     state = state.copyWith(createFootSoldierLoadState: LoadState.loading);
     try {
@@ -148,6 +151,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       onSuccess(response.data!);
     } catch (e) {
       state = state.copyWith(createFootSoldierLoadState: LoadState.error);
+      onError(e.toString());
     }
   }
 }

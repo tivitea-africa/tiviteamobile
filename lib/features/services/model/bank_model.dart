@@ -4,7 +4,7 @@ part 'bank_model.g.dart';
 
 @JsonSerializable()
 class ListBanksResponse {
-  final String? status;
+  final bool? status;
   final String? message;
   final List<BankModel>? data;
 

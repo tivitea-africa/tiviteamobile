@@ -74,7 +74,7 @@ class _BankListDropdownState extends ConsumerState<BankListDropdown> {
                           onTap: () {
                             widget.onItemSelected(widget.banks[i]);
 
-                            initialText = widget.banks[i].toString();
+                            initialText = widget.banks[i].name ?? '';
                             isExpanded = false;
                             setState(() {});
                           },

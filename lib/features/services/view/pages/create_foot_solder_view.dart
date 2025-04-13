@@ -46,74 +46,84 @@ class _CreateFootSoldierViewState extends State<CreateFootSoldierView> {
   Widget build(BuildContext context) {
     return AppScaffold(
       appbar: const CustomAppBar(homeScreenAppBar: true),
-      body: Form(
-        key: _formKey,
-        onChanged: () {
-          setState(() {
-            isEnabled = _formKey.currentState!.validate();
-          });
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Create Foot Soldier',
-              style: context.theme.textTheme.titleLarge?.copyWith(
-                color: Colors.black,
-                fontSize: 16.sp,
-              ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 18.w),
+        child: Form(
+          key: _formKey,
+          onChanged: () {
+            setState(() {
+              isEnabled = _formKey.currentState!.validate();
+            });
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                20.verticalSpace,
+                Text(
+                  'Create Foot Soldier',
+                  style: context.theme.textTheme.titleLarge?.copyWith(
+                    color: context.theme.primaryColor,
+                    fontSize: 16.sp,
+                  ),
+                ),
+                10.verticalSpace,
+                Text(
+                  'Foot Soldiers are essential to ensuring timely and efficient delivery, monitoring and pick-up of tools for our users!',
+                  style: context.theme.textTheme.displaySmall?.copyWith(
+                    color: context.theme.colorScheme.onSurface,
+                  ),
+                ),
+                30.verticalSpace,
+                AppTextField(
+                  controller: firstNameController,
+                  label: 'First Name',
+                  hintText: 'Enter First Name',
+                  validateFunction: Validators.name(),
+                ),
+                AppTextField(
+                  controller: lastNameController,
+                  label: 'Last Name',
+                  hintText: 'Enter Last Name',
+                  validateFunction: Validators.name(),
+                ),
+                AppTextField(
+                  controller: emailController,
+                  label: 'Email',
+                  hintText: 'Enter Email',
+                  validateFunction: Validators.email(),
+                ),
+                AppTextField(
+                  controller: phoneNumberController,
+                  label: 'Phone Number',
+                  hintText: 'Enter Phone Number',
+                  validateFunction: Validators.phone(),
+                ),
+                AppTextField(
+                  controller: addressController,
+                  label: 'Address',
+                  hintText: 'Enter Address',
+                  validateFunction: Validators.name(),
+                ),
+                Consumer(
+                  builder: (context, ref, _) {
+                    final loadState =
+                        ref.watch(partnerServicesNotiferProvider.select(
+                      (value) => value.createFootSoldierLoadState,
+                    ));
+                    return Center(
+                      child: AppButton(
+                        isLoading: loadState == LoadState.loading,
+                        isEnabled: isEnabled,
+                        buttonText: 'Create Foot Soldier',
+                        onPressed: () => _submit(ref),
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
-            10.verticalSpace,
-            Text(
-              'Foot Soldiers are essential to ensuring timely and efficient delivery, monitoring and pick-up of tools for our users!',
-              style: context.theme.textTheme.displaySmall,
-            ),
-            50.verticalSpace,
-            AppTextField(
-              controller: firstNameController,
-              label: 'First Name',
-              hintText: 'Enter First Name',
-              validateFunction: Validators.name(),
-            ),
-            AppTextField(
-              controller: lastNameController,
-              label: 'Last Name',
-              hintText: 'Enter Last Name',
-              validateFunction: Validators.name(),
-            ),
-            AppTextField(
-              controller: emailController,
-              label: 'Email',
-              hintText: 'Enter Email',
-              validateFunction: Validators.email(),
-            ),
-            AppTextField(
-              controller: phoneNumberController,
-              label: 'Phone Number',
-              hintText: 'Enter Phone Number',
-              validateFunction: Validators.phone(),
-            ),
-            AppTextField(
-              controller: addressController,
-              label: 'Address',
-              hintText: 'Enter Address',
-              validateFunction: Validators.name(),
-            ),
-            Consumer(
-              builder: (context, ref, _) {
-                final loadState =
-                    ref.watch(partnerServicesNotiferProvider.select(
-                  (value) => value.createFootSoldierLoadState,
-                ));
-                return AppButton(
-                  isLoading: loadState == LoadState.loading,
-                  isEnabled: isEnabled,
-                  buttonText: 'Create Foot Soldier',
-                  onPressed: () => _submit(ref),
-                );
-              },
-            )
-          ],
+          ),
         ),
       ),
     );
@@ -133,12 +143,17 @@ class _CreateFootSoldierViewState extends State<CreateFootSoldierView> {
       data: data,
       onSuccess: (_) async {
         context.showSuccess('Foot Soldier created successfully');
+        await Future.delayed(const Duration(seconds: 1));
         _navigateToAddAccountPage();
+      },
+      onError: (error) {
+        context.showError(error.toString());
       },
     );
   }
 
   void _navigateToAddAccountPage() => context.push(
-        AppRoutes.createTransferRecepientView,
+        '${AppRoutes.servicesView}/${AppRoutes.createTransferRecepientView}',
+        extra: emailController.text,
       );
 }

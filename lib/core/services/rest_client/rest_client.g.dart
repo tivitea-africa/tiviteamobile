@@ -536,7 +536,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/payment/account/details',
+              '/payment/resolve_bank_info',
               queryParameters: queryParameters,
               data: _data,
             )

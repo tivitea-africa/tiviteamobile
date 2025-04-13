@@ -8,7 +8,7 @@ part of 'bank_model.dart';
 
 ListBanksResponse _$ListBanksResponseFromJson(Map<String, dynamic> json) =>
     ListBanksResponse(
-      status: json['status'] as String?,
+      status: json['status'] as bool?,
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => BankModel.fromJson(e as Map<String, dynamic>))
