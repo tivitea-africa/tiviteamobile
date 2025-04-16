@@ -35,6 +35,8 @@ class ListingResponseModel {
   final num? serviceFee;
   @JsonKey(name: 'is_favorites')
   final bool? isFavorites;
+  @JsonKey(name: 'foot_soldier_amount')
+  final num? footSoldierAmount;
   final bool? availability;
 
   ListingResponseModel({
@@ -59,6 +61,7 @@ class ListingResponseModel {
     this.isFavorites,
     this.availability,
     this.serviceFee,
+    this.footSoldierAmount,
   });
 
   factory ListingResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -88,6 +91,7 @@ class ListingResponseModel {
     bool? isFavorites,
     bool? availability,
     num? serviceFee,
+    num? footSoldierAmount,
   }) {
     return ListingResponseModel(
       id: id ?? this.id,
@@ -111,6 +115,7 @@ class ListingResponseModel {
       isFavorites: isFavorites ?? this.isFavorites,
       availability: availability ?? this.availability,
       serviceFee: serviceFee ?? this.serviceFee,
+      footSoldierAmount: footSoldierAmount ?? this.footSoldierAmount,
     );
   }
 }

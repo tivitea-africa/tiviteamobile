@@ -31,14 +31,16 @@ class WorkSpaceWidget extends StatelessWidget {
           SizedBox(
             width: containerHeight.w,
             height: containerHeight.h,
-            child: AppImageWidget(
-              fit: BoxFit.cover,
-              imagePath: listing.images?.first ?? '',
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8.sp),
-                bottomLeft: Radius.circular(8.sp),
-              ),
-            ),
+            child: (listing.images?.isNotEmpty ?? false)
+                ? AppImageWidget(
+                    fit: BoxFit.cover,
+                    imagePath: listing.images?.first ?? '',
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.sp),
+                      bottomLeft: Radius.circular(8.sp),
+                    ),
+                  )
+                : const SizedBox(),
           ),
           _ImageDetails(listing: listing)
         ],

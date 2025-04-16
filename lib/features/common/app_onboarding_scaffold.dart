@@ -16,7 +16,8 @@ class OnboardingScaffold extends StatelessWidget {
     this.footerButton,
     this.underFooterChild,
     this.bodyPadding,
-    this.showSkip = false,
+    this.showActionButtons = (showBackButton: false, showSkip: false),
+    this.onOnboardingActionTapped = (onBack: null, onSkip: null),
   });
   final Widget body;
   final bool? resizeToAvoidBottomInset;
@@ -26,7 +27,11 @@ class OnboardingScaffold extends StatelessWidget {
   final Widget? footerButton;
   final Widget? underFooterChild;
   final EdgeInsetsGeometry? bodyPadding;
-  final bool showSkip;
+  final ({bool showBackButton, bool showSkip}) showActionButtons;
+  final ({
+    VoidCallback? onBack,
+    VoidCallback? onSkip
+  }) onOnboardingActionTapped;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -49,7 +54,10 @@ class OnboardingScaffold extends StatelessWidget {
                 child: Column(
                   children: [
                     Assets.images.scaffoldArc.image(),
-                    _ItemRow(showSkip: showSkip)
+                    _ItemRow(
+                      showActionButtons: showActionButtons,
+                      onOnboardingActionTapped: onOnboardingActionTapped,
+                    )
                   ],
                 ),
               ),
@@ -64,8 +72,15 @@ class OnboardingScaffold extends StatelessWidget {
 }
 
 class _ItemRow extends StatelessWidget {
-  final bool showSkip;
-  const _ItemRow({this.showSkip = true});
+  final ({bool showBackButton, bool showSkip}) showActionButtons;
+  final ({
+    VoidCallback? onBack,
+    VoidCallback? onSkip
+  }) onOnboardingActionTapped;
+  const _ItemRow({
+    required this.showActionButtons,
+    required this.onOnboardingActionTapped,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +89,24 @@ class _ItemRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppSvgWidget(
-            path: Assets.svgs.backButton,
-            fit: BoxFit.scaleDown,
-            width: 20.w,
-            height: 20.h,
-          ),
-          Text(
-            context.l10n.skip,
-            style: context.theme.textTheme.titleSmall,
-          ),
+          if (showActionButtons.showBackButton)
+            GestureDetector(
+              onTap: onOnboardingActionTapped.onBack,
+              child: AppSvgWidget(
+                path: Assets.svgs.backButton,
+                fit: BoxFit.scaleDown,
+                width: 20.w,
+                height: 20.h,
+              ),
+            ),
+          if (showActionButtons.showSkip)
+            GestureDetector(
+              onTap: onOnboardingActionTapped.onSkip,
+              child: Text(
+                context.l10n.skip,
+                style: context.theme.textTheme.titleSmall,
+              ),
+            ),
         ],
       ),
     );

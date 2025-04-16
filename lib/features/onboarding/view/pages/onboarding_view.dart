@@ -47,6 +47,14 @@ class _OnboardingViewState extends State<OnboardingView> {
   @override
   Widget build(BuildContext context) {
     return OnboardingScaffold(
+      showActionButtons: (
+        showBackButton: currentIndex > 0,
+        showSkip: currentIndex < imagePaths.length - 1
+      ),
+      onOnboardingActionTapped: (
+        onBack: _goToPreviousSlide,
+        onSkip: () => context.push(AppRoutes.selectUserTypeView)
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

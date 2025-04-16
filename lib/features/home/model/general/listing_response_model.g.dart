@@ -44,6 +44,7 @@ ListingResponseModel _$ListingResponseModelFromJson(
       isFavorites: json['is_favorites'] as bool?,
       availability: json['availability'] as bool?,
       serviceFee: json['service_charge'] as num?,
+      footSoldierAmount: json['foot_soldier_amount'] as num?,
     );
 
 Map<String, dynamic> _$ListingResponseModelToJson(
@@ -69,6 +70,7 @@ Map<String, dynamic> _$ListingResponseModelToJson(
       'cautionary_fee': instance.cautionaryFee,
       'service_charge': instance.serviceFee,
       'is_favorites': instance.isFavorites,
+      'foot_soldier_amount': instance.footSoldierAmount,
       'availability': instance.availability,
     };
 

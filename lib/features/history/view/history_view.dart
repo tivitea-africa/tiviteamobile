@@ -104,41 +104,53 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
                           color: const Color(0xFFD8D8DD),
                         ),
                       ),
-                      child: SingleChildScrollView(
-                        controller: _scrollController,
-                        child: Table(
-                          columnWidths: const {0: FlexColumnWidth(2)},
-                          children: [
-                            TableRow(
-                              decoration: const BoxDecoration(
-                                color: Color(0xFFE1E1E6),
-                              ),
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 10.0,
-                                    horizontal: 5,
-                                  ),
-                                  child: Text(context.l10n.customer),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 10.0,
-                                  ),
-                                  child: Text(context.l10n.status),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 10.0,
-                                  ),
-                                  child: Text(context.l10n.price),
-                                ),
-                              ],
-                            ),
-                            for (var i = 0; i < bookingHistoryList.length; i++)
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          _currentPage = 1;
+                          final notifier =
+                              ref.read(bookingNotiferProvider.notifier);
+                          notifier.getBookingHistory(page: _currentPage);
+                        },
+                        child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          controller: _scrollController,
+                          child: Table(
+                            columnWidths: const {0: FlexColumnWidth(2)},
+                            children: [
                               TableRow(
-                                  children: _buildRow(bookingHistoryList[i])),
-                          ],
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFE1E1E6),
+                                ),
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0,
+                                      horizontal: 5,
+                                    ),
+                                    child: Text(context.l10n.customer),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0,
+                                    ),
+                                    child: Text(context.l10n.status),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0,
+                                    ),
+                                    child: Text(context.l10n.price),
+                                  ),
+                                ],
+                              ),
+                              for (var i = 0;
+                                  i < bookingHistoryList.length;
+                                  i++)
+                                TableRow(
+                                  children: _buildRow(bookingHistoryList[i]),
+                                ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

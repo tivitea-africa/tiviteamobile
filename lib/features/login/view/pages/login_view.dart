@@ -50,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return OnboardingScaffold(
+      showActionButtons: (showBackButton: false, showSkip: false),
       body: Form(
         key: _formKey,
         onChanged: () {

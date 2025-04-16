@@ -23,7 +23,9 @@ class BookNowContainer extends StatelessWidget {
     final bool isWorkSpace = listing.listingType?.toLowerCase() ==
         CreateListingType.workSpace.requestBodyName.toLowerCase();
 
-    final totalAmount = (listing.amount ?? 0) +
+    final itemPrice = (listing.amount ?? 0) + (listing.footSoldierAmount ?? 0);
+
+    final totalAmount = itemPrice +
         (listing.serviceFee ?? 0) +
         (listing.cautionaryFee ?? 0);
 
@@ -138,7 +140,7 @@ class BookNowContainer extends StatelessWidget {
                     color: const Color(0xFF737380),
                   ),
                 ),
-                listing.amount.getCurrencyText(
+                itemPrice.getCurrencyText(
                   style: context.theme.textTheme.titleLarge?.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,

@@ -29,45 +29,44 @@ class _PaymentWebviewState extends State<PaymentWebview> {
     _webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
-      ..setOnJavaScriptConfirmDialog(
-          (JavaScriptConfirmDialogRequest dialogRequest) async {
-        debugLog("dialogRequest => ${dialogRequest.message}");
-        return false;
-      })
-      ..setOnConsoleMessage((JavaScriptConsoleMessage message) {
-        debugLog("message => ${message.message}");
-      })
-      ..setOnJavaScriptAlertDialog((JavaScriptAlertDialogRequest dialogRequest) async {
-        debugLog("alertDialogRequest => ${dialogRequest.message}");
-      })
+      // ..setOnJavaScriptConfirmDialog(
+      //     (JavaScriptConfirmDialogRequest dialogRequest) async {
+      //   debugLog("dialogRequest => ${dialogRequest.message}");
+      //   return false;
+      // })
+      // ..setOnConsoleMessage((JavaScriptConsoleMessage message) {
+      //   debugLog("message => ${message.message}");
+      // })
+      // ..setOnJavaScriptAlertDialog((JavaScriptAlertDialogRequest dialogRequest) async {
+      //   debugLog("alertDialogRequest => ${dialogRequest.message}");
+      // })
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
+            setState(() => _isLoading = progress < 100);
+            debugLog('Loading progress: $progress%');
           },
           onPageStarted: (String url) {
+            setState(() => _isLoading = true);
             debugLog('onPageStarted url => $url');
           },
           onPageFinished: (String url) {
-            setState(() {
-              _isLoading = false;
-            });
+            setState(() => _isLoading = false);
             debugLog('onPageFinished url => $url');
           },
-          onHttpError: (HttpResponseError error) {},
-          onWebResourceError: (WebResourceError error) {},
+          onHttpError: (HttpResponseError error) {
+            debugLog('HTTP Error occurred');
+            setState(() => _isLoading = false);
+          },
+          onWebResourceError: (WebResourceError error) {
+            debugLog('Web Resource Error: ${error.errorType}');
+            setState(() => _isLoading = false);
+          },
           onNavigationRequest: (NavigationRequest request) {
             debugLog("onNavigationRequest: ${request.url}");
-            // if (request.url.startsWith('https://www.payoff.ng')) {
-            //   ref.read(cardNotifier.notifier).getUserCards();
-            //   context.pop();
-            //   return NavigationDecision.prevent;
-            // }
             return NavigationDecision.navigate;
           },
-          onUrlChange: (urlChange) {
-            debugLog("onUrlChange: ${urlChange.url}");
-          },
+          onUrlChange: (urlChange) => debugLog("onUrlChange: ${urlChange.url}"),
         ),
       )
       ..loadRequest(Uri.parse(widget.paystackUrl));

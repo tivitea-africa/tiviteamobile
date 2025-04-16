@@ -61,11 +61,18 @@ class _SecondaryListingViewState extends ConsumerState<SecondaryListingView> {
       servicesNotiferProvider.select((value) => value.listing),
     );
     return Expanded(
-      child: ListView.separated(
-        controller: _scrollController,
-        itemCount: listings.length,
-        separatorBuilder: (ctx, i) => 10.verticalSpace,
-        itemBuilder: (ctx, i) => SecondaryListingWidget(listing: listings[i]),
+      child: RefreshIndicator(
+        onRefresh: () async {
+          _currentPage = 1;
+          final notifier = ref.read(servicesNotiferProvider.notifier);
+          notifier.getListing();
+        },
+        child: ListView.separated(
+          controller: _scrollController,
+          itemCount: listings.length,
+          separatorBuilder: (ctx, i) => 10.verticalSpace,
+          itemBuilder: (ctx, i) => SecondaryListingWidget(listing: listings[i]),
+        ),
       ),
     );
   }
@@ -107,13 +114,14 @@ class SecondaryListingWidget extends StatelessWidget {
               height: containerHeight.h,
               child: Stack(
                 children: [
-                  AppImageWidget(
-                    imagePath: listing.images?.first ?? '',
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.sp),
-                      bottomLeft: Radius.circular(8.sp),
+                  if (listing.images?.isNotEmpty ?? false)
+                    AppImageWidget(
+                      imagePath: listing.images?.first ?? '',
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.sp),
+                        bottomLeft: Radius.circular(8.sp),
+                      ),
                     ),
-                  ),
                   if (moreThanOneImage)
                     Align(
                       alignment: Alignment.bottomRight,
