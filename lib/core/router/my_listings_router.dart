@@ -4,6 +4,8 @@ import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/view/pages/create_new_listing_second_view.dart';
 import 'package:tivi_tea/features/services/view/pages/create_new_listing_view.dart';
+import 'package:tivi_tea/features/services/view/pages/edit_listing_second_view.dart';
+import 'package:tivi_tea/features/services/view/pages/edit_listing_view.dart';
 
 class MyListingsRouter {
   static final createListingView = GoRoute(
@@ -19,6 +21,24 @@ class MyListingsRouter {
       final listingType = params[0] as CreateListingType;
       final categoryId = params[1] as String;
       return CreateNewListingSecondView(
+        listingType: listingType,
+        categoryId: categoryId,
+      );
+    },
+  );
+  static final editListingView = GoRoute(
+    path: AppRoutes.editListingView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const EditListingView();
+    },
+  );
+  static final editListingSecondView = GoRoute(
+    path: AppRoutes.editListingSecondView,
+    builder: (BuildContext context, GoRouterState state) {
+      final params = state.extra as List<dynamic>;
+      final listingType = params[0] as CreateListingType;
+      final categoryId = params[1] as String;
+      return EditListingSecondView(
         listingType: listingType,
         categoryId: categoryId,
       );

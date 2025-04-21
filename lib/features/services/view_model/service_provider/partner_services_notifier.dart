@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/services/third_party_services/cloudinary_service.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/services/model/create_foot_soldier_model.dart';
 import 'package:tivi_tea/features/services/model/create_foot_soldier_response.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
@@ -124,6 +125,46 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
     }
   }
 
+  void editWorkSpace(
+    String listingId,
+    PostListingModel model, {
+    required VoidCallback onSuccess,
+    required void Function(String) onError,
+  }) async {
+    state = state.copyWith(editWorkSpaceLoadState: LoadState.loading);
+    try {
+      final response = await _repo.editWorkSpace(listingId, model);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? response.message ?? '';
+      }
+      state = state.copyWith(editWorkSpaceLoadState: LoadState.success);
+      onSuccess();
+    } catch (e) {
+      state = state.copyWith(editWorkSpaceLoadState: LoadState.error);
+      onError(e.toString());
+    }
+  }
+
+  void editWorkTool(
+    String listingId,
+    WorkToolListing model, {
+    required VoidCallback onSuccess,
+    required void Function(String) onError,
+  }) async {
+    state = state.copyWith(editWorkToolLoadState: LoadState.loading);
+    try {
+      final response = await _repo.editWorkTool(listingId, model);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? response.message ?? '';
+      }
+      state = state.copyWith(editWorkToolLoadState: LoadState.success);
+      onSuccess();
+    } catch (e) {
+      state = state.copyWith(editWorkToolLoadState: LoadState.error);
+      onError(e.toString());
+    }
+  }
+
   Future<List<String>> uploadImages(final List<XFile> imagePaths) async {
     state = state.copyWith(cloudinaryUploadState: LoadState.loading);
     try {
@@ -153,5 +194,35 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       state = state.copyWith(createFootSoldierLoadState: LoadState.error);
       onError(e.toString());
     }
+  }
+
+  void removeListing(String listingId) {
+    state = state.copyWith(
+      listing:
+          state.listing.where((listing) => listing.id != listingId).toList(),
+    );
+  }
+
+  void deleteListing(
+    String listingId, {
+    required VoidCallback onSuccess,
+    required void Function(String) onError,
+  }) async {
+    state = state.copyWith(deleteListingLoadState: LoadState.loading);
+    try {
+      final response = await _repo.deleteListing(listingId);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? response.message ?? '';
+      }
+      state = state.copyWith(deleteListingLoadState: LoadState.success);
+      onSuccess();
+    } catch (e) {
+      state = state.copyWith(deleteListingLoadState: LoadState.error);
+      onError(e.toString());
+    }
+  }
+
+  void selectListing(ListingResponseModel model) {
+    state = state.copyWith(selectedListing: model);
   }
 }

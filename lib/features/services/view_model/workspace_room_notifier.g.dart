@@ -7,12 +7,12 @@ part of 'workspace_room_notifier.dart';
 // **************************************************************************
 
 String _$workspaceRoomNotifierHash() =>
-    r'62ac4372578147b5208eaa944554dd3f9af1fca5';
+    r'4f2dd96dcbd5e27aede8eca8b87603a3cf6791a5';
 
 /// See also [WorkspaceRoomNotifier].
 @ProviderFor(WorkspaceRoomNotifier)
 final workspaceRoomNotifierProvider =
-    NotifierProvider<WorkspaceRoomNotifier, List<WorkspaceRoomModel>>.internal(
+    NotifierProvider<WorkspaceRoomNotifier, Set<WorkspaceRoomModel>>.internal(
   WorkspaceRoomNotifier.new,
   name: r'workspaceRoomNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final workspaceRoomNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$WorkspaceRoomNotifier = Notifier<List<WorkspaceRoomModel>>;
+typedef _$WorkspaceRoomNotifier = Notifier<Set<WorkspaceRoomModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

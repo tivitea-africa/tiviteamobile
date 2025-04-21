@@ -202,7 +202,7 @@ class _ImageDetails extends StatelessWidget {
     final listingType = listing.listingType?.enumType;
     final isListingTypeWorkSpace = listingType == CreateListingType.workSpace;
     final amount =
-        isListingTypeWorkSpace ? listing.rooms?.first.amount : listing.amount;
+        isListingTypeWorkSpace ? listing.rooms?.first.amount : listing.amountPlusFootSoldierFee;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
       child: Column(

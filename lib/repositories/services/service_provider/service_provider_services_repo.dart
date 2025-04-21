@@ -45,6 +45,36 @@ final class ServiceProviderServicesRepo {
     }
   }
 
+  Future<BaseResponse<ListingResponseModel>> editWorkSpace(
+    String listingId,
+    PostListingModel model,
+  ) async {
+    try {
+      return await restClient.editWorkSpace(listingId, model);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
+  Future<BaseResponse<ListingResponseModel>> editWorkTool(
+    String listingId,
+    WorkToolListing model,
+  ) async {
+    try {
+      return await restClient.editWorkTool(listingId, model);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
+  Future<BaseResponse> deleteListing(String listingId) async {
+    try {
+      return await restClient.deleteListing(listingId);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
   Future<BaseResponse<ListBanksResponse>> getBanks() async {
     try {
       return await restClient.getBanks();

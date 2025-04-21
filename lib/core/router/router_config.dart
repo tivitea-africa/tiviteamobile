@@ -104,6 +104,8 @@ final GoRouter router = GoRouter(
               routes: [
                 MyListingsRouter.createListingView,
                 MyListingsRouter.createListingSecondView,
+                MyListingsRouter.editListingView,
+                MyListingsRouter.editListingSecondView,
               ],
             ),
           ],

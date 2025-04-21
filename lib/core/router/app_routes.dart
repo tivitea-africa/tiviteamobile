@@ -20,6 +20,8 @@ class AppRoutes {
   static const String myListingView = '/myListingView';
   static const String createListingView = 'createListingView';
   static const String createListingSecondView = 'createListingSecondView';
+  static const String editListingView = 'editListingView';
+  static const String editListingSecondView = 'editListingSecondView';
   static const String bookingSummaryView = 'bookingSummaryView';
   static const String partnerKYCFirstView = 'partnerKYCFirstView';
   static const String partnerKYCSecondView = 'partnerKYCSecondView';

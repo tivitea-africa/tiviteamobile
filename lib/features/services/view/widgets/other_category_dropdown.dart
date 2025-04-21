@@ -8,8 +8,13 @@ import 'package:tivi_tea/features/services/view_model/services_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 
 class OtherCategoryDropdown extends ConsumerStatefulWidget {
+  final String? initialValue;
   final void Function(String) onCategorySelected;
-  const OtherCategoryDropdown({super.key, required this.onCategorySelected});
+  const OtherCategoryDropdown({
+    super.key,
+    required this.onCategorySelected,
+    this.initialValue,
+  });
 
   @override
   ConsumerState<OtherCategoryDropdown> createState() =>
@@ -19,6 +24,13 @@ class OtherCategoryDropdown extends ConsumerStatefulWidget {
 class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
   String initialText = 'Select Option';
   bool isExpanded = false;
+  
+  @override
+  void initState() {
+    super.initState();
+    initialText = widget.initialValue ?? 'Select Option';
+  }
+
   @override
   Widget build(BuildContext context) {
     final categories = ref.watch(servicesNotiferProvider).categories;
@@ -70,7 +82,7 @@ class _OtherCategoryDropdownState extends ConsumerState<OtherCategoryDropdown> {
                         InkWell(
                           onTap: () {
                             widget.onCategorySelected(categories[i].id ?? '');
-                        
+
                             initialText = categories[i].name ?? '';
                             isExpanded = false;
                             setState(() {});

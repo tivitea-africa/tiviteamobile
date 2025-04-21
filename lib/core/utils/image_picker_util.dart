@@ -19,14 +19,16 @@ class ImagePickerUtil {
       final Permission permission =
           Platform.isAndroid ? Permission.storage : Permission.photos;
 
-      PermissionStatus status = await permission.status;
-
-      if (status.isGranted) {
+      if (await permission.status == PermissionStatus.granted) {
         return true;
-      } else if (status.isDenied) {
+      } else if (await permission.status == PermissionStatus.denied) {
         PermissionStatus newStatus = await permission.request();
-        return newStatus.isGranted;
-      } else if (status.isPermanentlyDenied) {
+        if (newStatus.isDenied || newStatus.isPermanentlyDenied) {
+          await openAppSettings();
+        } else {
+          return true;
+        }
+      } else if (await permission.status == PermissionStatus.permanentlyDenied) {
         await openAppSettings();
         return false;
       }

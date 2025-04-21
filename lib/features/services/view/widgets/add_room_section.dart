@@ -43,7 +43,10 @@ class AddRoomSection extends StatelessWidget {
                   itemCount: rooms.length,
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (ctx, i) => 10.verticalSpace,
-                  itemBuilder: (ctx, i) => _RoomContainer(index: i),
+                  itemBuilder: (ctx, i) => _RoomContainer(
+                    index: i,
+                    room: rooms.elementAt(i),
+                  ),
                 );
               },
             ),
@@ -114,8 +117,9 @@ class _SaveButton extends StatelessWidget {
 }
 
 class _RoomContainer extends StatefulWidget {
+  final WorkspaceRoomModel? room;
   final int index;
-  const _RoomContainer({required this.index});
+  const _RoomContainer({required this.index, this.room});
 
   @override
   State<_RoomContainer> createState() => __RoomContainerState();
@@ -137,6 +141,18 @@ class __RoomContainerState extends State<_RoomContainer> {
   @override
   void initState() {
     super.initState();
+    if (widget.room != null) {
+      nameController.text = widget.room?.name ?? '';
+      shortDescriptionController.text = widget.room?.description ?? '';
+      maxCapacityController.text = widget.room?.maxCapacity != null
+          ? widget.room?.maxCapacity.toString() ?? ''
+          : '';
+      amountController.text = widget.room?.amount != null
+          ? widget.room?.amount.toString() ?? ''
+          : '';
+
+      setState(() {});
+    }
 
     Listenable.merge([
       nameController,
@@ -269,6 +285,7 @@ class __RoomContainerState extends State<_RoomContainer> {
     final images = await _uploadImages(ref);
 
     final room = WorkspaceRoomModel(
+      id: widget.room?.id,
       name: nameController.text,
       description: shortDescriptionController.text,
       maxCapacity: int.parse(maxCapacityController.text),

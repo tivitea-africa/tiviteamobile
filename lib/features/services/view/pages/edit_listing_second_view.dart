@@ -14,33 +14,32 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_success_content.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
+import 'package:tivi_tea/features/home/model/extensions/room_model_extension.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
 import 'package:tivi_tea/features/services/view/widgets/add_room_section.dart';
-import 'package:tivi_tea/features/services/view/widgets/selected_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/workspace_room_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
-class CreateNewListingSecondView extends StatefulWidget {
+class EditListingSecondView extends ConsumerStatefulWidget {
   final CreateListingType listingType;
   final String categoryId;
-  const CreateNewListingSecondView({
+  const EditListingSecondView({
     super.key,
     required this.listingType,
     required this.categoryId,
   });
 
   @override
-  State<CreateNewListingSecondView> createState() =>
-      _CreateNewListingSecondViewState();
+  ConsumerState<EditListingSecondView> createState() =>
+      _EditListingSecondViewState();
 }
 
-class _CreateNewListingSecondViewState
-    extends State<CreateNewListingSecondView> {
+class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
   TextEditingController nameController = TextEditingController();
   TextEditingController shortDescription = TextEditingController();
   TextEditingController address = TextEditingController();
@@ -48,6 +47,34 @@ class _CreateNewListingSecondViewState
   TextEditingController amount = TextEditingController();
   String pricingType = PricingType.fixed.name;
   ValueNotifier<bool> hasFootSoldier = ValueNotifier(false);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final notifier = ref.read(workspaceRoomNotifierProvider.notifier);
+
+      final selectedListing = ref.watch(partnerServicesNotiferProvider.select(
+        (value) => value.selectedListing,
+      ));
+
+      notifier.addRoomFromList(
+        selectedListing?.rooms?.map((e) => e.toWorkspaceRoomModel()).toList() ??
+            [],
+      );
+
+      nameController = TextEditingController(text: selectedListing?.name);
+      shortDescription = TextEditingController(
+        text: selectedListing?.description,
+      );
+      address = TextEditingController(text: selectedListing?.address);
+      pickUpLocation = TextEditingController(text: selectedListing?.address);
+      amount = TextEditingController(text: selectedListing?.amount.toString());
+      pricingType = selectedListing?.pricingOption ?? PricingType.fixed.name;
+      hasFootSoldier.value = selectedListing?.footSoldier ?? false;
+      setState(() {});
+    });
+  }
 
   @override
   void dispose() {
@@ -61,8 +88,17 @@ class _CreateNewListingSecondViewState
 
   @override
   Widget build(BuildContext context) {
+    final selectedListing = ref.watch(partnerServicesNotiferProvider.select(
+      (value) => value.selectedListing,
+    ));
     return AppScaffold(
-      appbar: CustomAppBar(title: context.l10n.newListing),
+      appbar: CustomAppBar(
+        title: 'Edit Listing',
+        onTap: () {
+          ref.read(workspaceRoomNotifierProvider.notifier).clearRooms();
+          context.pop();
+        },
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: SingleChildScrollView(
@@ -90,7 +126,7 @@ class _CreateNewListingSecondViewState
                   controller: address,
                   hintText: context.l10n.addressOfSpace,
                 ),
-                SelectedImagesView(listingType: widget.listingType),
+                //SelectedImagesView(listingType: widget.listingType),
               ] else ...[
                 Text(
                   context.l10n.workToolDetails,
@@ -128,10 +164,10 @@ class _CreateNewListingSecondViewState
                 const AddRoomSection(),
               ] else ...[
                 20.verticalSpace,
-                SelectedImagesView(listingType: widget.listingType),
+                //SelectedImagesView(listingType: widget.listingType),
                 20.verticalSpace,
                 Text(
-                  'Add Foot Soldier',
+                  'Has Foot Soldier',
                   style: context.theme.textTheme.displayLarge?.copyWith(
                     color: context.theme.primaryColor,
                     fontSize: 20.sp,
@@ -149,54 +185,48 @@ class _CreateNewListingSecondViewState
               70.verticalSpace,
               Consumer(
                 builder: (context, ref, _) {
-                  final loadState = ref.watch(
+                  final editWorkToolLoadState = ref.watch(
                     partnerServicesNotiferProvider.select(
-                      (value) => value.postLoadState,
+                      (value) => value.editWorkToolLoadState,
                     ),
                   );
-                  final postWorkToolLoadState = ref.watch(
+                  final editWorkSpaceLoadState = ref.watch(
                     partnerServicesNotiferProvider.select(
-                      (value) => value.postWorkToolLoadState,
+                      (value) => value.editWorkSpaceLoadState,
                     ),
                   );
-                  final cloudinaryLoadState = ref.watch(
-                    partnerServicesNotiferProvider.select(
-                      (value) => value.cloudinaryUploadState,
-                    ),
-                  );
-                  final isLoading = loadState == LoadState.loading ||
-                      cloudinaryLoadState == LoadState.loading ||
-                      postWorkToolLoadState == LoadState.loading;
+                  final isLoading =
+                      editWorkToolLoadState == LoadState.loading ||
+                          editWorkSpaceLoadState == LoadState.loading;
                   return ValueListenableBuilder(
-                      valueListenable: hasFootSoldier,
-                      builder: (context, value, child) {
-                        return Center(
-                          child: AppButton(
-                            isLoading: isLoading,
-                            buttonText: value
-                                ? 'Create Foot Soldier'
-                                : context.l10n.saveAndPublish,
-                            onPressed: () => widget.listingType ==
-                                    CreateListingType.workSpace
-                                ? _submit(ref)
-                                : _submitWorkTool(ref),
-                          ),
-                        );
-                      });
-                },
-              ),
-              10.verticalSpace,
-              Consumer(
-                builder: (context, ref, _) {
-                  return AppButton(
-                    buttonText: context.l10n.saveToDraft,
-                    backgroundColor: Colors.white,
-                    textColor: context.theme.primaryColor,
-                    borderColor: context.theme.primaryColor,
-                    onPressed: () {},
+                    valueListenable: hasFootSoldier,
+                    builder: (context, value, child) {
+                      return Center(
+                        child: AppButton(
+                          isLoading: isLoading,
+                          buttonText: 'Edit Listing',
+                          onPressed: () => widget.listingType ==
+                                  CreateListingType.workSpace
+                              ? _editWorkSpace(ref, selectedListing?.id ?? '')
+                              : _editWorkTool(ref, selectedListing?.id ?? ''),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
+              // 10.verticalSpace,
+              // Consumer(
+              //   builder: (context, ref, _) {
+              //     return AppButton(
+              //       buttonText: context.l10n.saveToDraft,
+              //       backgroundColor: Colors.white,
+              //       textColor: context.theme.primaryColor,
+              //       borderColor: context.theme.primaryColor,
+              //       onPressed: () {},
+              //     );
+              //   },
+              // ),
               20.verticalSpace,
             ],
           ),
@@ -205,7 +235,7 @@ class _CreateNewListingSecondViewState
     );
   }
 
-  void _submit(WidgetRef ref) async {
+  void _editWorkSpace(WidgetRef ref, String listingId) async {
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     final rooms = ref.watch(workspaceRoomNotifierProvider);
     final amenities = ref.watch(amenitiesNotifierProvider);
@@ -213,7 +243,7 @@ class _CreateNewListingSecondViewState
         .where((amenity) => amenity.isSelected)
         .map((amenity) => amenity.label)
         .toList();
-    final images = await _uploadImages(ref);
+    //final images = await _uploadImages(ref);
 
     final data = PostListingModel(
       name: nameController.text,
@@ -222,13 +252,16 @@ class _CreateNewListingSecondViewState
       amenities: selectedAmenities,
       categoryId: widget.categoryId,
       room: rooms.toList(),
-      images: images,
+      //images: images,
       listingType: widget.listingType.requestBodyName,
       pricingOption: pricingType,
       //footSoldier: "False",
     );
 
-    notifier.postWorkSpace(
+    print(data.toJson());
+
+    notifier.editWorkSpace(
+      listingId,
       data,
       onSuccess: () {
         ref.read(workspaceRoomNotifierProvider.notifier).clearRooms();
@@ -236,42 +269,34 @@ class _CreateNewListingSecondViewState
 
         _showSuccessDialog();
       },
+      onError: (error) => context.showError(error),
     );
   }
 
-  void _navigateToCreateFootSoldierView(WidgetRef ref, WorkToolListing model) {
+  void _editWorkTool(WidgetRef ref, String listingId) async {
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
-    notifier.saveWorkToolListing(model);
-    context.push('${AppRoutes.servicesView}/${AppRoutes.createFootSoldierView}');
-  }
-
-  void _submitWorkTool(WidgetRef ref) async {
-    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
-    final images = await _uploadImages(ref);
+    //final images = await _uploadImages(ref);
 
     final data = WorkToolListing(
       name: nameController.text,
       description: shortDescription.text,
       address: address.text,
       categoryId: widget.categoryId,
-      images: images,
+      //images: images,
       listingType: widget.listingType.requestBodyName,
       footSoldier: hasFootSoldier.value ? "True" : "False",
       amount: num.tryParse(amount.text),
     );
 
-    if (hasFootSoldier.value) {
-      _navigateToCreateFootSoldierView(ref, data);
-    } else {
-      notifier.postToolOrOtherListing(
-        data,
-        onSuccess: () {
-          ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
-          _showSuccessDialog();
-        },
-        onError: (error) => context.showError(error),
-      );
-    }
+    notifier.editWorkTool(
+      listingId,
+      data,
+      onSuccess: () {
+        ref.read(partnerServicesNotiferProvider.notifier).getPartnerListing();
+        _showSuccessDialog();
+      },
+      onError: (error) => context.showError(error),
+    );
   }
 
   void _showSuccessDialog() {
@@ -279,8 +304,7 @@ class _CreateNewListingSecondViewState
       dismissible: false,
       child: AppSuccessContent(
         title: 'Success',
-        subtitle:
-            "Your post has been created and will be saved as 'Draft' until the admin approves it.",
+        subtitle: "Your post has been edited successfully",
         buttonText: context.l10n.continue_,
         onPressed: () {
           context.pop();

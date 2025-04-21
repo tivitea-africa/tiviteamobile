@@ -75,14 +75,28 @@ abstract class RestClient {
 
   @POST('/listings/')
   Future<BaseResponse<ListingResponseModel>> postWorkSpace(
-      @Body() PostListingModel data);
+    @Body() PostListingModel data,
+  );
   @GET('/listings/{listingId}')
   Future<BaseResponse<ListingResponseModel>> getListingId(
     @Path('listingId') String listingId,
   );
+  @DELETE('/listings/{listingId}')
+  Future<BaseResponse> deleteListing(@Path('listingId') String listingId);
+  @PUT('/listings/{listingId}')
+  Future<BaseResponse<ListingResponseModel>> editWorkSpace(
+    @Path('listingId') String listingId,
+    @Body() PostListingModel data,
+  );
+  @PUT('/listings/{listingId}')
+  Future<BaseResponse<ListingResponseModel>> editWorkTool(
+    @Path('listingId') String listingId,
+    @Body() WorkToolListing data,
+  );
 
   @POST('/dashboard/partner/foot-soldier/create')
-  Future<BaseResponse<CreateFootSoldierResponse>> createFootSoldier(@Body() CreateFootSoldierModel data);
+  Future<BaseResponse<CreateFootSoldierResponse>> createFootSoldier(
+      @Body() CreateFootSoldierModel data);
   @GET('/payment/banks/list')
   Future<BaseResponse<ListBanksResponse>> getBanks();
   @GET('/payment/resolve_bank_info')
@@ -93,8 +107,6 @@ abstract class RestClient {
   Future<BaseResponse<CreateTransferRecipientResponse>> createTransferRecipient(
     @Body() CreateTransferRecipientModel data,
   );
-
-
 
   ///This is the same endpoint as [postWorkSpace] above.
   ///However we'll call them separetly in case the endpoints are different in the future.

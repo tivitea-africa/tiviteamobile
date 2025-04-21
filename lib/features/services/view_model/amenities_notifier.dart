@@ -5,7 +5,6 @@ part 'amenities_notifier.g.dart';
 
 @riverpod
 class AmenitiesNotifier extends _$AmenitiesNotifier {
-
   final List<AmenityModel> _defaultAmenities = [
     AmenityModel(label: '24 hours Electricity', isSelected: true),
     AmenityModel(label: 'Parking', isSelected: true),
@@ -22,6 +21,15 @@ class AmenitiesNotifier extends _$AmenitiesNotifier {
             ? amenity.copyWith(isSelected: !amenity.isSelected)
             : amenity)
         .toList();
+  }
+
+  void addNewAmenityFromList(List<String> newAmenities) {
+    state = [
+      ...state,
+      ...newAmenities.map(
+        (amenity) => AmenityModel(label: amenity, isSelected: true),
+      )
+    ];
   }
 
   void addNewAmenity(String newAmenity) {

@@ -138,7 +138,7 @@ class __MyListingsListState extends ConsumerState<_MyListingsList> {
         shrinkWrap: true,
         reverse: true,
         controller: _scrollController,
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         itemCount: partnerListings.length,
         separatorBuilder: (ctx, i) => 10.verticalSpace,
         itemBuilder: (ctx, i) {
@@ -150,7 +150,7 @@ class __MyListingsListState extends ConsumerState<_MyListingsList> {
   }
 }
 
-class PsrtnerListingTile extends StatelessWidget {
+class PsrtnerListingTile extends ConsumerWidget {
   final ListingResponseModel listing;
   const PsrtnerListingTile({
     super.key,
@@ -158,105 +158,161 @@ class PsrtnerListingTile extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.push(
-        '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
-        extra: listing.id,
-      ),
-      child: Container(
-        height: 70.h,
-        width: context.width,
-        padding: const EdgeInsets.all(10),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final partnerNotifier = ref.read(partnerServicesNotiferProvider.notifier);
+
+    final deleteLoadState = ref.watch(partnerServicesNotiferProvider.select(
+      (value) => value.deleteListingLoadState,
+    ));
+    return Dismissible(
+      key: UniqueKey(),
+      direction: DismissDirection.endToStart,
+      confirmDismiss: (direction) async {
+        return await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Delete Listing'),
+            content: const Text(
+              'Are you sure you want to delete this listing?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => context.pop(false),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => context.pop(true),
+                child: const Text('Delete'),
+              ),
+            ],
+          ),
+        );
+      },
+      onDismissed: (direction) {
+        partnerNotifier.deleteListing(
+          listing.id ?? '',
+          onSuccess: () => partnerNotifier.getPartnerListing(),
+          onError: (e) {
+            partnerNotifier.getPartnerListing();
+            if (e != "Null check operator used on a null value") {
+              context.showError(e);
+            }
+          },
+        );
+      },
+      background: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
+          color: Colors.red,
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 35.w,
-              height: 35.w,
-              decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: AppImageWidget(
-                imagePath: listing.images?.first ?? '',
-                borderRadius: BorderRadius.circular(70),
-              ),
-            ),
-            5.horizontalSpace,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        listing.name ?? '',
-                        style: context.theme.textTheme.bodyLarge?.copyWith(
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        listing.rooms?.length.toString() ?? '',
-                        style: context.theme.textTheme.titleMedium?.copyWith(
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ],
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: deleteLoadState == LoadState.loading
+              ? const CircularProgressIndicator()
+              : const Icon(Icons.delete, color: Colors.white),
+        ),
+      ),
+      child: InkWell(
+        onTap: () => context.push(
+          '${AppRoutes.servicesView}/${AppRoutes.listingDetailsView}',
+          extra: listing.id,
+        ),
+        child: Container(
+          height: 70.h,
+          width: context.width,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.white,
+          ),
+          child: Row(
+            children: [
+              if (listing.images?.isNotEmpty ?? false)
+                Container(
+                  width: 35.w,
+                  height: 35.w,
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  child: AppImageWidget(
+                    imagePath: listing.images?.first ?? '',
+                    borderRadius: BorderRadius.circular(70),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        listing.listingType ?? '',
-                        style: context.theme.textTheme.displaySmall?.copyWith(
-                          fontSize: 10.sp,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            listing.dateCreated.toDateMonthYear2,
-                            style:
-                                context.theme.textTheme.displaySmall?.copyWith(
-                              fontSize: 9.sp,
-                            ),
+                ),
+              5.horizontalSpace,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          listing.name ?? '',
+                          style: context.theme.textTheme.bodyLarge?.copyWith(
+                            fontSize: 14.sp,
                           ),
-                          10.horizontalSpace,
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 2,
-                              horizontal: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: listing.status?.toLowerCase() ==
-                                      PartnerListingStatus.published.name
-                                  ? const Color(0xFF006400).withOpacity(0.2)
-                                  : const Color(0xFFF9C846),
-                            ),
-                            child: Text(
-                              listing.status ?? '',
-                              style:
-                                  context.theme.textTheme.titleMedium?.copyWith(
-                                fontSize: 10.sp,
-                                color: listing.status?.toLowerCase() ==
-                                        PartnerListingStatus.published.name
-                                    ? const Color(0xFF006400)
-                                    : Colors.black,
+                        ),
+                        const Spacer(),
+                        Text(
+                          listing.rooms?.length.toString() ?? '',
+                          style: context.theme.textTheme.titleMedium?.copyWith(
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          listing.listingType ?? '',
+                          style: context.theme.textTheme.displaySmall?.copyWith(
+                            fontSize: 10.sp,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              listing.dateCreated.toDateMonthYear2,
+                              style: context.theme.textTheme.displaySmall
+                                  ?.copyWith(
+                                fontSize: 9.sp,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                            10.horizontalSpace,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: listing.status?.toLowerCase() ==
+                                        PartnerListingStatus.published.name
+                                    ? const Color(0xFF006400).withOpacity(0.2)
+                                    : const Color(0xFFF9C846),
+                              ),
+                              child: Text(
+                                listing.status ?? '',
+                                style: context.theme.textTheme.titleMedium
+                                    ?.copyWith(
+                                  fontSize: 10.sp,
+                                  color: listing.status?.toLowerCase() ==
+                                          PartnerListingStatus.published.name
+                                      ? const Color(0xFF006400)
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

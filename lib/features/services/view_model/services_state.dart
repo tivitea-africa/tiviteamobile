@@ -19,6 +19,7 @@ class ServicesState {
   }
   final LoadState loadState;
   final LoadState listingLoadState;
+  
   final List<CategoryResponseModel> categories;
   final List<ListingResponseModel> listing;
 

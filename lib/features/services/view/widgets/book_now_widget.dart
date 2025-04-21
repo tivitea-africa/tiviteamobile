@@ -23,7 +23,7 @@ class BookNowContainer extends StatelessWidget {
     final bool isWorkSpace = listing.listingType?.toLowerCase() ==
         CreateListingType.workSpace.requestBodyName.toLowerCase();
 
-    final itemPrice = (listing.amount ?? 0) + (listing.footSoldierAmount ?? 0);
+    final itemPrice = listing.amountPlusFootSoldierFee ?? 0;
 
     final totalAmount = itemPrice +
         (listing.serviceFee ?? 0) +

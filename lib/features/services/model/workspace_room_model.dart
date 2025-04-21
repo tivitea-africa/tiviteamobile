@@ -4,6 +4,9 @@ part 'workspace_room_model.g.dart';
 
 @JsonSerializable()
 class WorkspaceRoomModel {
+  @JsonKey(name: 'id')
+  final String? id;
+
   @JsonKey(name: 'name')
   final String? name;
 
@@ -20,7 +23,7 @@ class WorkspaceRoomModel {
   final List<String>? images;
 
   @JsonKey(name: 'amount')
-  final double? amount;
+  final num? amount;
 
   WorkspaceRoomModel({
     this.name,
@@ -29,6 +32,7 @@ class WorkspaceRoomModel {
     this.features,
     this.images,
     this.amount,
+    this.id,
   });
 
   factory WorkspaceRoomModel.fromJson(Map<String, dynamic> json) =>
@@ -38,7 +42,8 @@ class WorkspaceRoomModel {
 
   @override
   String toString() {
-    return 'WorkspaceRoomModel{name: $name, description: $description, '
+    return 'WorkspaceRoomModel{id: $id, name: $name, description: $description, '
         'maxCapacity: $maxCapacity, features: $features, images: $images, amount: $amount}';
   }
 }
+
