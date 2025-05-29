@@ -47,11 +47,11 @@ class _ServiceProviderDashboardState
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CreateListingButton(
-                    text: context.l10n.addAccountDetails,
-                    hasWhiteBackground: true,
-                  ),
-                  10.horizontalSpace,
+                  // CreateListingButton(
+                  //   text: context.l10n.addAccountDetails,
+                  //   hasWhiteBackground: true,
+                  // ),
+                  // 10.horizontalSpace,
                   CreateListingButton(
                     text: context.l10n.createListing,
                     onTap: () => context.push(createListingPath),
