@@ -12,7 +12,20 @@
           "package_name": "com.example.tivi_tea"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "650683057857-t3cnhrj87btq26saftgofajhrfcj1ihb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tivi_tea",
+            "certificate_hash": "058edaaa9aeb72fc1495a99f84393a7eee8f8f7d"
+          }
+        },
+        {
+          "client_id": "650683057857-1m6qhvj6p32occn3jjcbmmpp8v0eq0jn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBA7UuS1-Fwn6RSp9lT41VZ8JVatdVLyhA"
@@ -20,7 +33,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650683057857-1m6qhvj6p32occn3jjcbmmpp8v0eq0jn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "650683057857-6gnbedvpmst0jdirtq0ibo0suv72c79v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tiviTea"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650683057857:android:39ba5de7fd1f24762e7640",
+        "android_client_info": {
+          "package_name": "com.tivitea.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650683057857-1m6qhvj6p32occn3jjcbmmpp8v0eq0jn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA7UuS1-Fwn6RSp9lT41VZ8JVatdVLyhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650683057857-1m6qhvj6p32occn3jjcbmmpp8v0eq0jn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "650683057857-6gnbedvpmst0jdirtq0ibo0suv72c79v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tiviTea"
+              }
+            }
+          ]
         }
       }
     }

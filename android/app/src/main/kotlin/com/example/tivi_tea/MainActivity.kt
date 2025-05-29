@@ -1,4 +1,4 @@
-package com.example.tivi_tea
+package com.tivitea.app
 
 import io.flutter.embedding.android.FlutterActivity
 

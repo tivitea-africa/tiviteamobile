@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBA7UuS1-Fwn6RSp9lT41VZ8JVatdVLyhA',
-    appId: '1:650683057857:android:00ad97cba255f7982e7640',
+    appId: '1:650683057857:android:39ba5de7fd1f24762e7640',
     messagingSenderId: '650683057857',
     projectId: 'tivitea-8c801',
     storageBucket: 'tivitea-8c801.firebasestorage.app',
@@ -59,10 +59,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBWOpYHHBCYUsTVNgsbjdWx2s2EXrJvdXA',
-    appId: '1:650683057857:ios:e8c79651c0a20ae62e7640',
+    appId: '1:650683057857:ios:cf0d4a9898d237fa2e7640',
     messagingSenderId: '650683057857',
     projectId: 'tivitea-8c801',
     storageBucket: 'tivitea-8c801.firebasestorage.app',
-    iosBundleId: 'com.example.tiviTea',
+    androidClientId: '650683057857-t3cnhrj87btq26saftgofajhrfcj1ihb.apps.googleusercontent.com',
+    iosClientId: '650683057857-q5g56k9fo6lr75cb4ug2tk2ft2rjrnbs.apps.googleusercontent.com',
+    iosBundleId: 'com.tivitea.app',
   );
+
 }

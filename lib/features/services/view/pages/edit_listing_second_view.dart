@@ -283,7 +283,7 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
       address: address.text,
       categoryId: widget.categoryId,
       //images: images,
-      listingType: widget.listingType.requestBodyName,
+      //listingType: widget.listingType.requestBodyName,
       footSoldier: hasFootSoldier.value ? "True" : "False",
       amount: num.tryParse(amount.text),
     );

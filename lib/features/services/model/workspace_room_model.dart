@@ -4,7 +4,7 @@ part 'workspace_room_model.g.dart';
 
 @JsonSerializable()
 class WorkspaceRoomModel {
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'room_id')
   final String? id;
 
   @JsonKey(name: 'name')

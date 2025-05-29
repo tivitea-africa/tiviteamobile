@@ -67,7 +67,10 @@ class _EditListingViewState extends ConsumerState<EditListingView> {
               isEnabled: listing?.category?.id != null || categoryId.isNotEmpty,
               onPressed: () => context.push(
                 routePath,
-                extra: [selectedListingType, categoryId],
+                extra: [
+                  selectedListingType,
+                  categoryId.isEmpty ? listing?.id ?? '' : categoryId,
+                ],
               ),
             )
           ],

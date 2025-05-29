@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>650683057857-q5g56k9fo6lr75cb4ug2tk2ft2rjrnbs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.650683057857-q5g56k9fo6lr75cb4ug2tk2ft2rjrnbs</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>650683057857-t3cnhrj87btq26saftgofajhrfcj1ihb.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBWOpYHHBCYUsTVNgsbjdWx2s2EXrJvdXA</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.tiviTea</string>
+	<string>com.tivitea.app</string>
 	<key>PROJECT_ID</key>
 	<string>tivitea-8c801</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:650683057857:ios:e8c79651c0a20ae62e7640</string>
+	<string>1:650683057857:ios:cf0d4a9898d237fa2e7640</string>
 </dict>
 </plist>

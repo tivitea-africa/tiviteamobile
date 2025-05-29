@@ -1,0 +1,10 @@
+package_rename_config:
+  android:
+    app_name: TiviTea
+    package_name: com.tivitea.mobile
+
+  ios:
+    app_name: TiviTea
+    bundle_name: tiviTea
+    bundle_id: com.tivitea.mobile
+    package_name: com.tivitea.app
