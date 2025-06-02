@@ -22,7 +22,9 @@ void main() {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     await Hive.initFlutter();
-    await Hive.openBox(HiveKeys.appBox);
+    if (!Hive.isBoxOpen(HiveKeys.appBox)) {
+      await Hive.openBox(HiveKeys.appBox);
+    }
     runApp(const ProviderScope(child: MyApp()));
   });
 }

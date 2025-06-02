@@ -11,6 +11,7 @@ import 'package:tivi_tea/features/login/model/general/login_response_object.dart
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/features/registration/model/client/social_auth_model.dart';
 import 'package:tivi_tea/features/registration/model/client/social_auth_response.dart';
+import 'package:tivi_tea/models/user_model.dart';
 import 'package:tivi_tea/repositories/enums.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 
@@ -55,10 +56,11 @@ final class GeneralAuthenticationRepo {
   }
 
   Future<BaseResponse<LoginResponseObject>> login(
-    LoginRequestObject data,
-  ) async {
+    LoginRequestObject data, {
+    required void Function(User?) saveUserState,
+  }) async {
     try {
-      //await userRepository?.clearLocalUserInfo();
+      await userRepository?.clearLocalUserInfo();
       final result = await restClient.login(data);
       final userLoginData = result.data;
       userRepository?.saveToken(userLoginData?.tokens?.access ?? '');
@@ -80,6 +82,7 @@ final class GeneralAuthenticationRepo {
         );
       }
 
+      saveUserState(user);
       return result;
     } on DioException catch (e) {
       return AppException.handleError(e);

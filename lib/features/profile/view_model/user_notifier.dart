@@ -15,12 +15,7 @@ class UserNotifier extends _$UserNotifier {
     return _userRepo.getUser();
   }
 
-  void refreshUser() {
-    state = _userRepo.getUser();
-  }
+  void refreshUser() => state = _userRepo.getUser();
 
-  void updateUser(User newUser) {
-    _userRepo.saveUser(newUser);
-    state = newUser;
-  }
+  void updateUser(User? newUser) => state = newUser ?? state;
 }

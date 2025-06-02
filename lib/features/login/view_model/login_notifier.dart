@@ -7,6 +7,7 @@ import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/view_model/login_state.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
+import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/features/registration/model/client/social_auth_model.dart';
 import 'package:tivi_tea/models/enums/enums.dart';
 import 'package:tivi_tea/repositories/authentication/general/general_authetication_repo.dart';
@@ -42,7 +43,13 @@ class LoginNotifier extends _$LoginNotifier {
   }) async {
     state = state.copyWith(loadState: LoadState.loading);
     try {
-      final response = await _repo.login(data);
+      final response = await _repo.login(
+        data,
+        saveUserState: (user) {
+          final userStateNotifier = ref.read(userNotifierProvider.notifier);
+          userStateNotifier.updateUser(user);
+        },
+      );
       if (!response.isSuccess()) {
         throw response.error?.message ??
             response.message ??
@@ -146,7 +153,8 @@ class LoginNotifier extends _$LoginNotifier {
     final response = await _thirdPartyAuthRepo.signIn();
     if (response.isSuccess()) {
       if (response.data != null) {
-        signUpWithSocialAuth(response.data!, onSuccess: onSuccess, onError: onError);
+        signUpWithSocialAuth(response.data!,
+            onSuccess: onSuccess, onError: onError);
       }
       state = state.copyWith(signInWithGoogleLoadState: LoadState.success);
     } else {

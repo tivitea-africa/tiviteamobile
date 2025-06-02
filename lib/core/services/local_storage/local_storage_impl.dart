@@ -8,8 +8,11 @@ import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 
 class LocalStorageImpl implements LocalStorage {
-  LocalStorageImpl(this.box);
-  final Box box;
+  LocalStorageImpl(this.boxName);
+  final String boxName;
+
+  Box get box => Hive.box(boxName);
+
   @override
   Future<void> put(dynamic key, dynamic value) async {
     return await box.put(key, value);
@@ -32,9 +35,17 @@ class LocalStorageImpl implements LocalStorage {
 
   @override
   Future<void> clear() async {
-    await box.clear();
-    await Hive.initFlutter();
-    debugLog("Box length => ${box.length}");
+    try {
+      final currentBox = Hive.box(boxName);
+      await currentBox.clear();
+      await currentBox.close();
+      await Hive.deleteBoxFromDisk(boxName);
+
+      await Hive.openBox(boxName);
+      debugLog("Box cleared, deleted, and reopened successfully");
+    } catch (e) {
+      debugLog("Error clearing box: $e");
+    }
   }
 
   @override
@@ -49,5 +60,5 @@ class LocalStorageImpl implements LocalStorage {
 }
 
 final localDB = Provider<LocalStorage>(
-  (ref) => LocalStorageImpl(Hive.box(HiveKeys.appBox)),
+  (ref) => LocalStorageImpl(HiveKeys.appBox),
 );
