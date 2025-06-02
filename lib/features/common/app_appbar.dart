@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -102,21 +103,32 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
                                     ? onHomeBackButtonTap!()
                                     : null
                                 : scaffoldKey.currentState?.openDrawer(),
-                            child: AppSvgWidget(
-                              path: showBackButtonForHomeScreenAppBar
-                                  ? Assets.svgs.chevronLeft
-                                  : Assets.svgs.hamburger,
-                            ),
+                            child: showBackButtonForHomeScreenAppBar
+                                ? IconButton(
+                                    onPressed: () => onHomeBackButtonTap!(),
+                                    icon: const Icon(
+                                      CupertinoIcons.chevron_back,
+                                    ),
+                                  )
+                                : AppSvgWidget(
+                                    path: showBackButtonForHomeScreenAppBar
+                                        ? Assets.svgs.chevronLeft
+                                        : Assets.svgs.hamburger,
+                                  ),
                           );
                         },
                       ),
                     )
                   else
                     switch (showBackButton) {
-                      true => AppSvgWidget(
-                          path: Assets.svgs.chevronLeft,
-                          onTap: onTap ?? () => context.pop(),
+                      true => IconButton(
+                          onPressed: () => onTap ?? () => context.pop(),
+                          icon: const Icon(CupertinoIcons.chevron_back),
                         ),
+                      // AppSvgWidget(
+                      //     path: Assets.svgs.chevronLeft,
+                      //     onTap: onTap ?? () => context.pop(),
+                      //   ),
                       _ => const SizedBox(),
                     },
                   Center(
