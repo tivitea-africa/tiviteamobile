@@ -9,7 +9,9 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_image_widget.dart';
+import 'package:tivi_tea/features/common/app_paginator_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
+import 'package:tivi_tea/features/common/models/paginator_selector_model.dart';
 import 'package:tivi_tea/features/history/model/booking_history_model.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
@@ -31,29 +33,9 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
   void initState() {
     super.initState();
     final notifier = ref.read(bookingNotiferProvider.notifier);
-    notifier.getBookingHistory(page: _currentPage);
-    _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    final notifier = ref.read(bookingNotiferProvider.notifier);
-    final state = ref.read(bookingNotiferProvider);
-
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 100 &&
-        state.loadState == LoadState.success) {
-      _currentPage++;
-      if (state.loadState == LoadState.done) {
-        return;
-      }
-      notifier.getBookingHistory(page: _currentPage, loadmore: true);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifier.getBookingHistory(page: 1);
+    });
   }
 
   @override
@@ -63,7 +45,7 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
 
     final state = ref.watch(bookingNotiferProvider);
     final bookingHistoryList = state.bookingHistoryList;
-    final isLoadingHistory = state.loadState == LoadState.loading;
+    final isLoadingHistory = state.bookingHistoryLoadstate == LoadState.loading;
 
     const createListingPath =
         '${AppRoutes.myListingView}/${AppRoutes.createListingView}';
@@ -97,68 +79,81 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
             20.verticalSpace,
             (isLoadingHistory)
                 ? const CupertinoActivityIndicator()
-                : Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFD8D8DD),
-                        ),
+                : Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color(0xFFD8D8DD),
                       ),
-                      child: RefreshIndicator(
-                        onRefresh: () async {
-                          _currentPage = 1;
-                          final notifier =
-                              ref.read(bookingNotiferProvider.notifier);
-                          notifier.getBookingHistory(page: _currentPage);
-                        },
-                        child: SingleChildScrollView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          controller: _scrollController,
-                          child: Table(
-                            columnWidths: const {0: FlexColumnWidth(2)},
-                            children: [
-                              TableRow(
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFE1E1E6),
-                                ),
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0,
-                                      horizontal: 5,
-                                    ),
-                                    child: Text(context.l10n.customer),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0,
-                                    ),
-                                    child: Text(context.l10n.status),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0,
-                                    ),
-                                    child: Text(context.l10n.price),
-                                  ),
-                                ],
+                    ),
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        _currentPage = 1;
+                        final notifier =
+                            ref.read(bookingNotiferProvider.notifier);
+                        notifier.getBookingHistory(page: _currentPage);
+                      },
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        controller: _scrollController,
+                        child: Table(
+                          columnWidths: const {0: FlexColumnWidth(2)},
+                          children: [
+                            TableRow(
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFE1E1E6),
                               ),
-                              for (var i = 0;
-                                  i < bookingHistoryList.length;
-                                  i++)
-                                TableRow(
-                                  children: _buildRow(bookingHistoryList[i]),
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                    horizontal: 5,
+                                  ),
+                                  child: Text(context.l10n.customer),
                                 ),
-                            ],
-                          ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                  ),
+                                  child: Text(context.l10n.status),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                  ),
+                                  child: Text(context.l10n.price),
+                                ),
+                              ],
+                            ),
+                            for (var i = 0; i < bookingHistoryList.length; i++)
+                              TableRow(
+                                children: _buildRow(bookingHistoryList[i]),
+                              ),
+                          ],
                         ),
                       ),
                     ),
                   ),
+            10.verticalSpace,
+            AppPaginatorWidget(
+                paginatorSelectorModel: PaginatorSelectorModel(
+                  currentPage: _currentPage,
+                  totalPages: state.paginatorSelectorModel?.totalPages ?? 1,
+                  totalItems: state.paginatorSelectorModel?.totalItems ?? 0,
+                  itemsPerPage:
+                      state.paginatorSelectorModel?.itemsPerPage ?? 10,
+                ),
+                onPageChanged: _onPageChanged),
           ],
         ),
       ),
     );
+  }
+
+  void _onPageChanged(int page) {
+    _currentPage = page;
+    setState(() {});
+    final notifier = ref.read(bookingNotiferProvider.notifier);
+    notifier.getBookingHistory(page: page);
   }
 
   List<Widget> _buildRow(BookingHistoryModel booking) {

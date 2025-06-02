@@ -38,4 +38,6 @@ class AppRoutes {
   static const String settingsView = 'settingsView';
   static const String createFootSoldierView = 'createFootSoldierView';
   static const String createTransferRecepientView = 'createTransferRecepientView';
+  static const String paymentView = 'paymentView';
+  static const String withdrawalView = 'withdrawalView';
 }

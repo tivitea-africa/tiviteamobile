@@ -4,7 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
 import 'package:tivi_tea/core/services/rest_client/custom_rest_client_class.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/core/utils/logger.dart';
+import 'package:tivi_tea/features/common/models/paginator_selector_model.dart';
+import 'package:tivi_tea/features/history/model/booking_history_model.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
 import 'package:tivi_tea/features/services/view_model/booking_state.dart';
@@ -70,37 +71,41 @@ class BookingNotifer extends _$BookingNotifer {
     }
   }
 
-  void getBookingHistory({required int page, bool loadmore = false}) async {
-    if (loadmore) {
-      state = state.copyWith(bookingHistoryLoadstate: LoadState.loadmore);
+  void getBookingHistory({required int page}) async {
+    if (state.pageCache.containsKey(page)) {
+      state = state.copyWith(
+        bookingHistoryLoadstate: LoadState.success,
+        bookingHistoryList: state.pageCache[page] ?? [],
+      );
+      return;
     }
+
+    state = state.copyWith(bookingHistoryLoadstate: LoadState.loading);
+    
     try {
       final response = await _repo.getBookingHistory(page: page);
       if (!response.isSuccess()) {
         throw response.error?.message ?? response.message ?? '';
       }
-      state = state.copyWith(bookingHistoryLoadstate: LoadState.success);
-      if (response.data?.results?.isEmpty ?? false) {
-        return;
-      }
-      final bookingHistoryList = response.data?.results ?? [];
-      final hasMorePages =
-          (response.data?.page ?? 0) < (response.data?.totalPages ?? 1);
 
-      if (bookingHistoryList.isEmpty) {
-        state = state.copyWith(
-          bookingHistoryLoadstate: hasMorePages ? LoadState.success : LoadState.done,
-        );
-        return;
-      }
+      final bookingHistoryList = response.data?.results ?? [];
+      
+      final paginatorSelectorModel = PaginatorSelectorModel(
+        currentPage: page,
+        totalPages: response.data?.totalPages ?? 1,
+        totalItems: response.data?.totalItems ?? 0,
+      );
+
+      final updatedCache = Map<int, List<BookingHistoryModel>>.from(state.pageCache);
+      updatedCache[page] = bookingHistoryList;
 
       state = state.copyWith(
-        bookingHistoryLoadstate: hasMorePages ? LoadState.success : LoadState.done,
-        bookingHistoryList: loadmore
-            ? [...state.bookingHistoryList, ...bookingHistoryList]
-            : bookingHistoryList,
+        bookingHistoryLoadstate: LoadState.success,
+        paginatorSelectorModel: paginatorSelectorModel,
+        bookingHistoryList: bookingHistoryList,
+        pageCache: updatedCache,
       );
-      debugLog(response.data ?? '');
+
     } catch (e) {
       state = state.copyWith(bookingHistoryLoadstate: LoadState.error);
     }

@@ -122,6 +122,8 @@ final GoRouter router = GoRouter(
                 ProfileRouter.editProfile,
                 ProfileRouter.changePassword,
                 ProfileRouter.settings,
+                ProfileRouter.paymentView,
+                ProfileRouter.withdrawalView,
               ],
             ),
           ],
