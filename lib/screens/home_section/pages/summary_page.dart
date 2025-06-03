@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/custom_dialog.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';

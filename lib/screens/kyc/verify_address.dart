@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:tivi_tea/core/widget/reusbale_buttons.dart';
-import 'package:tivi_tea/screens/kyc/account_verification.dart';
 import 'package:tivi_tea/screens/kyc/verify_identity.dart';
 
 class VerifyAddress extends StatefulWidget {

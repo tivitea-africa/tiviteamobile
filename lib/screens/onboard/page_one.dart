@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/widget/custom_clip_path.dart';
-import 'package:tivi_tea/main.dart';
 
 class PageOne extends StatelessWidget {
   const PageOne({super.key});

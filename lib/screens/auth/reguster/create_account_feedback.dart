@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:tivi_tea/screens/bottomNav/navbar.dart';
 
 class OnAccountCreation extends StatelessWidget {

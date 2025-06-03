@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/widget/reusable_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:tivi_tea/main.dart';
 import 'package:tivi_tea/screens/auth/login/log_in_screen.dart';
 import 'package:tivi_tea/screens/auth/reguster/create_account_feedback.dart';
 import '../../../core/const/app_assets.dart';
