@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
-import 'package:tivi_tea/core/router/app_routes.dart';
-import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
-import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_paginator_widget.dart';
 import 'package:tivi_tea/features/common/models/paginator_selector_model.dart';
 import 'package:tivi_tea/features/payment/model/withdrawal_history_model.dart';

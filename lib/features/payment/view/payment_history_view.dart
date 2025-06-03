@@ -14,7 +14,7 @@ class PaymentHistoryView extends StatefulWidget {
 
 class _PaymentHistoryViewState extends State<PaymentHistoryView> {
   bool isLoadingHistory = false;
-  int _currentPage = 1;
+  // int _currentPage = 1;
   @override
   Widget build(BuildContext context) {
     return AppScaffold(

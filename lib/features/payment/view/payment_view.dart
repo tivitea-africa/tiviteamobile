@@ -7,7 +7,6 @@ import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/home/view/client/client_dashboard.dart';
-import 'package:tivi_tea/features/payment/view/widgets/withdrawal_history_table.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 
 class PaymentView extends StatelessWidget {
