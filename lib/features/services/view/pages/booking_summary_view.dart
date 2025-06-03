@@ -299,20 +299,22 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
   void _navigateToPaymentView(String paymentUrl, String paymentId) {
     context.push(AppRoutes.paymentWebview, extra: paymentUrl).then(
       (value) {
-        final paymentNotifier = ref.read(
-          clientPaymentNotifierProvider.notifier,
-        );
-        paymentNotifier.getPaymentStatus(
-          paymentId,
-          onSuccess: (isSuccessful, status) {
-            if (!isSuccessful) {
-              context.showSuccess('Your transaction is $status');
-              return;
-            }
-            _showSuccessDialog();
-          },
-          onError: (message) => context.showError(message),
-        );
+        if (mounted) {
+          final paymentNotifier = ref.read(
+            clientPaymentNotifierProvider.notifier,
+          );
+          paymentNotifier.getPaymentStatus(
+            paymentId,
+            onSuccess: (isSuccessful, status) {
+              if (!isSuccessful) {
+                context.showSuccess('Your transaction is $status');
+                return;
+              }
+              _showSuccessDialog();
+            },
+            onError: (message) => context.showError(message),
+          );
+        }
       },
     );
   }

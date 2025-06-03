@@ -63,26 +63,21 @@ final class GeneralAuthenticationRepo {
       await userRepository?.clearLocalUserInfo();
       final result = await restClient.login(data);
       final userLoginData = result.data;
+      
       userRepository?.saveToken(userLoginData?.tokens?.access ?? '');
       userRepository?.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
 
-      userRepository?.saveUser(userLoginData?.user);
-
-      final user = userRepository?.getUser();
-      userRepository?.saveUser(
-        user?.copyWith(kycIsVerified: userLoginData?.kycIsVerified),
+      final updatedUser = userLoginData?.user?.copyWith(
+        kycIsVerified: userLoginData.kycIsVerified,
+        kycVerificationStatus: userLoginData.kycIsVerified == true 
+            ? KYCVerificationStatus.documentsVerified 
+            : null,
       );
 
-      if (userLoginData?.kycIsVerified == true) {
-        final user = userRepository?.getUser();
-        userRepository?.saveUser(
-          user?.copyWith(
-            kycVerificationStatus: KYCVerificationStatus.documentsVerified,
-          ),
-        );
-      }
-
-      saveUserState(user);
+      userRepository?.saveUser(updatedUser);
+      
+      saveUserState(updatedUser);
+      
       return result;
     } on DioException catch (e) {
       return AppException.handleError(e);

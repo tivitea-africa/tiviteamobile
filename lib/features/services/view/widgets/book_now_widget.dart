@@ -32,7 +32,8 @@ class BookNowContainer extends StatelessWidget {
     return Container(
       width: context.width,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      margin: EdgeInsets.symmetric(horizontal: 20.w) +
+          EdgeInsets.only(top: 10.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),

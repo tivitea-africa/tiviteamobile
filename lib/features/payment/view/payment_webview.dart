@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
@@ -64,6 +65,11 @@ class _PaymentWebviewState extends State<PaymentWebview> {
           },
           onNavigationRequest: (NavigationRequest request) {
             debugLog("onNavigationRequest: ${request.url}");
+            if(request.url.contains('https://tivitea.africa/')) {
+              if (mounted) {
+                context.pop();
+              }
+            }
             return NavigationDecision.navigate;
           },
           onUrlChange: (urlChange) => debugLog("onUrlChange: ${urlChange.url}"),

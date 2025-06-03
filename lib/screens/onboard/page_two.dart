@@ -15,8 +15,10 @@ class PageTwo extends StatelessWidget {
           clipper: CustomClipperPath(),
           child: Container(
             decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Color(0xff000090), Color(0xff000050)])),
+              gradient: LinearGradient(
+                colors: [Color(0xff000090), Color(0xff000050)],
+              ),
+            ),
             height: 120.h,
           ),
         ),
