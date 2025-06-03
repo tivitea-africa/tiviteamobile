@@ -135,14 +135,14 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
                   ),
             10.verticalSpace,
             AppPaginatorWidget(
-                paginatorSelectorModel: PaginatorSelectorModel(
-                  currentPage: _currentPage,
-                  totalPages: state.paginatorSelectorModel?.totalPages ?? 1,
-                  totalItems: state.paginatorSelectorModel?.totalItems ?? 0,
-                  itemsPerPage:
-                      state.paginatorSelectorModel?.itemsPerPage ?? 10,
-                ),
-                onPageChanged: _onPageChanged),
+              paginatorSelectorModel: PaginatorSelectorModel(
+                currentPage: _currentPage,
+                totalPages: state.paginatorSelectorModel?.totalPages ?? 1,
+                totalItems: state.paginatorSelectorModel?.totalItems ?? 0,
+                itemsPerPage: state.paginatorSelectorModel?.itemsPerPage ?? 10,
+              ),
+              onPageChanged: _onPageChanged,
+            ),
           ],
         ),
       ),

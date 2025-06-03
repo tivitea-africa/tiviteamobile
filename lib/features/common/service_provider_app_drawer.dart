@@ -19,6 +19,8 @@ class ServiceProviderAppDrawer extends StatelessWidget {
     const settings = '${AppRoutes.profile}/${AppRoutes.settingsView}';
     const bookingHistory =
         '${AppRoutes.homeView}${AppRoutes.bookingHistoryView}';
+    const payment = '${AppRoutes.profile}/${AppRoutes.paymentView}';
+    const withdrawals = '${AppRoutes.profile}/${AppRoutes.withdrawalView}';
     return Drawer(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -72,6 +74,14 @@ class ServiceProviderAppDrawer extends StatelessWidget {
           DrawerListTile(
             icon: Assets.svgs.paymentDrawerIcon,
             label: context.l10n.payments,
+            isSelected: routePath == payment,
+            onTap: () => context.go(payment),
+          ),
+          DrawerListTile(
+            icon: Assets.svgs.paymentDrawerIcon,
+            label: 'Withdrawals',
+            isSelected: routePath == withdrawals,
+            onTap: () => context.go(withdrawals),
           ),
           DrawerListTile(
             icon: Assets.svgs.activitiesDrawerIcon,

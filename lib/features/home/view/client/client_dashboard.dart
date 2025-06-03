@@ -15,12 +15,10 @@ class ClientDashboard extends ConsumerStatefulWidget {
   const ClientDashboard({super.key});
 
   @override
-  ConsumerState<ClientDashboard> createState() =>
-      _ClientDashboardState();
+  ConsumerState<ClientDashboard> createState() => _ClientDashboardState();
 }
 
-class _ClientDashboardState
-    extends ConsumerState<ClientDashboard> {
+class _ClientDashboardState extends ConsumerState<ClientDashboard> {
   @override
   void initState() {
     super.initState();
@@ -69,6 +67,7 @@ class CreateListingButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final Color? textColor;
+  final bool showIcon;
   const CreateListingButton({
     super.key,
     required this.text,
@@ -77,6 +76,7 @@ class CreateListingButton extends StatelessWidget {
     this.iconColor,
     this.textColor,
     this.onTap,
+    this.showIcon = true,
   });
 
   @override
@@ -95,14 +95,15 @@ class CreateListingButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(
-              Icons.add_rounded,
-              color: iconColor ??
-                  (hasWhiteBackground
-                      ? context.theme.primaryColor
-                      : Colors.white),
-            ),
-            5.horizontalSpace,
+            if (showIcon)
+              Icon(
+                Icons.add_rounded,
+                color: iconColor ??
+                    (hasWhiteBackground
+                        ? context.theme.primaryColor
+                        : Colors.white),
+              ),
+            if (showIcon) 5.horizontalSpace,
             Text(
               text,
               style: context.theme.textTheme.titleLarge?.copyWith(
