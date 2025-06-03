@@ -21,41 +21,41 @@ class HistoryDetailView extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: Container(
           margin: const EdgeInsets.only(top: 50),
-          padding: const EdgeInsets.symmetric(horizontal: 15) + const EdgeInsets.only(top: 20, bottom: 100),
+          padding: const EdgeInsets.symmetric(horizontal: 15) +
+              const EdgeInsets.symmetric(vertical: 20),
           decoration: BoxDecoration(
             border: Border.all(
               color: const Color(0xFFD8D8DD),
             ),
           ),
-          child: IntrinsicHeight(
-            child: Column(
-              children: [
-                _buildRow(
-                  context,
-                  title: context.l10n.customer,
-                  value:
-                      '${booking.client?.user?.firstName ?? ''} ${booking.client?.user?.lastName ?? ''}',
-                ),
-                20.verticalSpace,
-                _buildRow(
-                  context,
-                  title: context.l10n.status,
-                  value: booking.status ?? '',
-                ),
-                20.verticalSpace,
-                _buildRow(
-                  context,
-                  title: 'Service',
-                  value: booking.listing?.listingType ?? '',
-                ),
-                20.verticalSpace,
-                _buildRow(
-                  context,
-                  title: 'Amount',
-                  value: (booking.listing?.amount ?? 0).formatAmount,
-                )
-              ],
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildRow(
+                context,
+                title: context.l10n.customer,
+                value:
+                    '${booking.client?.user?.firstName ?? ''} ${booking.client?.user?.lastName ?? ''}',
+              ),
+              20.verticalSpace,
+              _buildRow(
+                context,
+                title: context.l10n.status,
+                value: booking.status ?? '',
+              ),
+              20.verticalSpace,
+              _buildRow(
+                context,
+                title: 'Service',
+                value: booking.listing?.listingType ?? '',
+              ),
+              20.verticalSpace,
+              _buildRow(
+                context,
+                title: 'Amount',
+                value: (booking.listing?.amount ?? 0).formatAmount,
+              )
+            ],
           ),
         ),
       ),

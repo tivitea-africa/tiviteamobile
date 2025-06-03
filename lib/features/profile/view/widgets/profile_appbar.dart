@@ -24,7 +24,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userNotifierProvider);
+    final user = ref.watch(userNotifierProvider);
     final profilePicLoadState = ref.watch(profileNotiferProvider.select(
       (value) => value.editProfileLoadState,
     ));
