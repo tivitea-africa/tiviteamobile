@@ -74,10 +74,9 @@ class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
     const editListingPath =
         '${AppRoutes.myListingView}/${AppRoutes.editListingView}';
     return AppScaffold(
-      appbar: CustomAppBar(
+      appbar: const CustomAppBar(
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
-        onHomeBackButtonTap: () => context.pop(),
       ),
       body: SingleChildScrollView(
         child: Column(

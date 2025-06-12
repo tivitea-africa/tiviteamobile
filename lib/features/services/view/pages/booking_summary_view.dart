@@ -43,10 +43,9 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
       ),
     );
     return AppScaffold(
-      appbar: CustomAppBar(
+      appbar: const CustomAppBar(
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
-        onHomeBackButtonTap: () => context.pop(),
       ),
       body: (paymentStatusLoadState == LoadState.loading)
           ? const Center(child: CupertinoActivityIndicator())
@@ -256,6 +255,7 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
         pickUpDate: widget.params.selectedDateFrom.toAcceptedDateTimeFormat,
         returnDate: widget.params.selectedDateTo.toAcceptedDateTimeFormat,
       );
+      debugLog(data.toJson().toString());
       notifier.bookWorktool(
         listingId: widget.params.listing.id ?? '',
         data: data,
@@ -330,7 +330,9 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
                 context.showSuccess('Your transaction is $status');
                 return;
               }
-              _showSuccessDialog();
+              if (mounted) {
+                _showSuccessDialog();
+              }
             },
             onError: (message) => context.showError(message),
           );

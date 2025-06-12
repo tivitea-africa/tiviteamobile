@@ -75,10 +75,9 @@ class _BookWorkSpaceOrListingViewState
     final bothTimesAreSelected =
         (_selectedTimeFrom != null) && (_selectedTimeTo != null);
     return AppScaffold(
-      appbar: CustomAppBar(
+      appbar: const CustomAppBar(
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
-        onHomeBackButtonTap: () => context.pop(),
       ),
       body: Column(
         children: [

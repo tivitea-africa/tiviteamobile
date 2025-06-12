@@ -20,7 +20,6 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
     this.title,
     this.userName,
     this.onTap,
-    this.onHomeBackButtonTap,
     this.color,
     this.padding,
     super.key,
@@ -29,7 +28,6 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final bool showHamburgerMenu;
   final bool showBackButton;
   final bool showBackButtonForHomeScreenAppBar;
-  final VoidCallback? onHomeBackButtonTap;
   final String? title;
   final String? userName;
   final Color? color;
@@ -56,9 +54,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
               builder: (context) {
                 return InkWell(
                   onTap: () => showBackButtonForHomeScreenAppBar
-                      ? onHomeBackButtonTap != null
-                          ? onHomeBackButtonTap!()
-                          : null
+                      ? context.pop()
                       : scaffoldKey.currentState?.openDrawer(),
                   child: AppSvgWidget(
                     path: showBackButtonForHomeScreenAppBar
@@ -99,13 +95,11 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         builder: (context) {
                           return InkWell(
                             onTap: () => showBackButtonForHomeScreenAppBar
-                                ? onHomeBackButtonTap != null
-                                    ? onHomeBackButtonTap!()
-                                    : null
+                                ? context.pop()
                                 : scaffoldKey.currentState?.openDrawer(),
                             child: showBackButtonForHomeScreenAppBar
                                 ? IconButton(
-                                    onPressed: () => onHomeBackButtonTap!(),
+                                    onPressed: () => context.pop(),
                                     icon: const Icon(
                                       CupertinoIcons.chevron_back,
                                     ),

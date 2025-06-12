@@ -21,7 +21,6 @@ class ChooseRoomView extends StatelessWidget {
       appbar: CustomAppBar(
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
-        onHomeBackButtonTap: () => context.pop(),
         title: context.l10n.chooseRoom,
       ),
       body: Column(
