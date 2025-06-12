@@ -80,6 +80,8 @@ class CreateListingButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final Color? textColor;
+  final double? width;
+  
   const CreateListingButton({
     super.key,
     required this.text,
@@ -88,6 +90,7 @@ class CreateListingButton extends StatelessWidget {
     this.iconColor,
     this.textColor,
     this.onTap,
+    this.width,
   });
 
   @override
@@ -95,6 +98,7 @@ class CreateListingButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        width: width,
         padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
         decoration: BoxDecoration(
           border: Border.all(
@@ -105,6 +109,7 @@ class CreateListingButton extends StatelessWidget {
               (hasWhiteBackground ? Colors.white : context.theme.primaryColor),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.add_rounded,

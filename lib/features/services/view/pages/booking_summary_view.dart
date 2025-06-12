@@ -87,6 +87,15 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
                                   fontSize: 12.sp,
                                 ),
                               ),
+                              5.verticalSpace,
+                              Text(
+                                widget.params.selectedDateFrom.toTime,
+                                textAlign: TextAlign.center,
+                                style: context.theme.textTheme.displaySmall
+                                    ?.copyWith(
+                                  fontSize: 12.sp,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -124,6 +133,15 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
                               10.verticalSpace,
                               Text(
                                 widget.params.selectedDateTo.toMonthDate,
+                                textAlign: TextAlign.center,
+                                style: context.theme.textTheme.displaySmall
+                                    ?.copyWith(
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                              5.verticalSpace,
+                              Text(
+                                widget.params.selectedDateTo.toTime,
                                 textAlign: TextAlign.center,
                                 style: context.theme.textTheme.displaySmall
                                     ?.copyWith(
@@ -274,36 +292,38 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
     final paymentId = ref.read(
       clientPaymentNotifierProvider.select((value) => value.paymentId),
     );
-    context.showCustomDialog(
-      dismissible: false,
-      child: AppSuccessContent(
-        title: context.l10n.paymentSuccessful,
-        subtitle: context.l10n.paymentWasSuccessful,
-        buttonText: context.l10n.downloadEReceipt,
-        secondButtonText: context.l10n.backToHome,
-        onPressed: () {
-          context.pop();
-          context.go(
-            '${AppRoutes.servicesView}/${AppRoutes.eReceiptView}',
-            extra: [paymentId, bookingId],
-          );
-        },
-        onSecondButtonPressed: () {
-          context.pop();
-          context.go(AppRoutes.homeView);
-        },
-      ),
-    );
+    if (mounted) {
+      context.showCustomDialog(
+        dismissible: false,
+        child: AppSuccessContent(
+          title: context.l10n.paymentSuccessful,
+          subtitle: context.l10n.paymentWasSuccessful,
+          buttonText: context.l10n.downloadEReceipt,
+          secondButtonText: context.l10n.backToHome,
+          onPressed: () {
+            context.pop();
+            context.go(
+              '${AppRoutes.servicesView}/${AppRoutes.eReceiptView}',
+              extra: [paymentId, bookingId],
+            );
+          },
+          onSecondButtonPressed: () {
+            context.pop();
+            context.go(AppRoutes.homeView);
+          },
+        ),
+      );
+    }
   }
 
   void _navigateToPaymentView(String paymentUrl, String paymentId) {
     context.push(AppRoutes.paymentWebview, extra: paymentUrl).then(
-      (value) {
+      (value) async {
         if (mounted) {
           final paymentNotifier = ref.read(
             clientPaymentNotifierProvider.notifier,
           );
-          paymentNotifier.getPaymentStatus(
+          await paymentNotifier.getPaymentStatus(
             paymentId,
             onSuccess: (isSuccessful, status) {
               if (!isSuccessful) {

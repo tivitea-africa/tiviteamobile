@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
 import 'package:tivi_tea/features/common/app_paginator_widget.dart';
 import 'package:tivi_tea/features/common/models/paginator_selector_model.dart';
 import 'package:tivi_tea/features/payment/model/payment_history_model.dart';
-import 'package:tivi_tea/features/payment/model/withdrawal_history_model.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
 
 class PaymentHistoryTable extends StatefulWidget {
@@ -29,9 +27,7 @@ class _PaymentHistoryTableState extends State<PaymentHistoryTable> {
             ),
           ),
           child: RefreshIndicator(
-            onRefresh: () async {
-              // TODO: Implement refresh
-            },
+            onRefresh: () async {},
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: Table(

@@ -47,7 +47,7 @@ class ClientPaymentNotifier extends _$ClientPaymentNotifier {
     }
   }
 
-  void getPaymentStatus(
+  Future<void> getPaymentStatus(
     String paymentId, {
     required Function(bool, String?) onSuccess,
     required Function(String) onError,
