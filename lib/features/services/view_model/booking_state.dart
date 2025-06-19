@@ -8,6 +8,7 @@ class BookingState {
     required this.bookingHistoryList,
     required this.bookingHistoryLoadstate,
     required this.generateTicketLoadState,
+    required this.checkInCheckOutLoadState,
     this.paginatorSelectorModel,
     this.pageCache = const {},
   });
@@ -17,12 +18,14 @@ class BookingState {
       generateTicketLoadState: LoadState.loading,
       bookingHistoryList: [],
       bookingHistoryLoadstate: LoadState.loading,
+      checkInCheckOutLoadState: LoadState.loading,
       pageCache: {},
     );
   }
   final LoadState loadState;
   final LoadState bookingHistoryLoadstate;
   final LoadState generateTicketLoadState;
+  final LoadState checkInCheckOutLoadState;
   final List<BookingHistoryModel> bookingHistoryList;
   final PaginatorSelectorModel? paginatorSelectorModel;
   final Map<int, List<BookingHistoryModel>> pageCache;
@@ -31,6 +34,7 @@ class BookingState {
     LoadState? loadState,
     LoadState? bookingHistoryLoadstate,
     LoadState? generateTicketLoadState,
+    LoadState? checkInCheckOutLoadState,
     List<BookingHistoryModel>? bookingHistoryList,
     PaginatorSelectorModel? paginatorSelectorModel,
     Map<int, List<BookingHistoryModel>>? pageCache,
@@ -39,6 +43,7 @@ class BookingState {
       loadState: loadState ?? this.loadState,
       bookingHistoryLoadstate: bookingHistoryLoadstate ?? this.bookingHistoryLoadstate,
       generateTicketLoadState: generateTicketLoadState ?? this.generateTicketLoadState,
+      checkInCheckOutLoadState: checkInCheckOutLoadState ?? this.checkInCheckOutLoadState,
       bookingHistoryList: bookingHistoryList ?? this.bookingHistoryList,
       paginatorSelectorModel: paginatorSelectorModel ?? this.paginatorSelectorModel,
       pageCache: pageCache ?? this.pageCache,

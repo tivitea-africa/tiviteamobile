@@ -63,6 +63,7 @@ final GoRouter router = GoRouter(
                 HomeRouter.clientDashboard,
                 HomeRouter.bookingHistoryView,
                 HomeRouter.bookingHistoryDetailsView,
+                HomeRouter.scanQRCodeView,
               ],
             ),
           ],

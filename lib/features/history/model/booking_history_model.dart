@@ -15,6 +15,10 @@ class BookingHistoryModel {
   final String? paymentStatus;
   @JsonKey(name: 'payment_id')
   final String? paymentId;
+  @JsonKey(name: 'pick_up_date')
+  final DateTime? pickUpDate;
+  @JsonKey(name: 'return_date')
+  final DateTime? returnDate;
 
   BookingHistoryModel({
     this.id,
@@ -24,6 +28,8 @@ class BookingHistoryModel {
     this.status,
     this.paymentStatus,
     this.paymentId,
+    this.pickUpDate,
+    this.returnDate,
   });
 
   factory BookingHistoryModel.fromJson(Map<String, dynamic> json) => _$BookingHistoryModelFromJson(json);

@@ -6,6 +6,7 @@ import 'package:tivi_tea/features/history/view/history_detail.dart';
 import 'package:tivi_tea/features/history/view/history_view.dart';
 import 'package:tivi_tea/features/home/view/client/client_dashboard.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
+import 'package:tivi_tea/features/services/view/pages/scan_qr_code_view.dart';
 
 class HomeRouter {
   static final serviceProviderDashboard = GoRoute(
@@ -31,6 +32,12 @@ class HomeRouter {
     builder: (BuildContext context, GoRouterState state) {
       final booking = state.extra as BookingHistoryModel;
       return HistoryDetailView(booking: booking);
+    },
+  );
+  static final scanQRCodeView = GoRoute(
+    path: AppRoutes.scanQRCodeView,
+    builder: (BuildContext context, GoRouterState state) {
+      return const ScanQRCodeView();
     },
   );
 }

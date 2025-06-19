@@ -20,6 +20,12 @@ BookingHistoryModel _$BookingHistoryModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
       paymentStatus: json['payment_status'] as String?,
       paymentId: json['payment_id'] as String?,
+      pickUpDate: json['pick_up_date'] == null
+          ? null
+          : DateTime.parse(json['pick_up_date'] as String),
+      returnDate: json['return_date'] == null
+          ? null
+          : DateTime.parse(json['return_date'] as String),
     );
 
 Map<String, dynamic> _$BookingHistoryModelToJson(
@@ -32,6 +38,8 @@ Map<String, dynamic> _$BookingHistoryModelToJson(
       'status': instance.status,
       'payment_status': instance.paymentStatus,
       'payment_id': instance.paymentId,
+      'pick_up_date': instance.pickUpDate?.toIso8601String(),
+      'return_date': instance.returnDate?.toIso8601String(),
     };
 
 Client _$ClientFromJson(Map<String, dynamic> json) => Client(

@@ -81,7 +81,7 @@ class BookingNotifer extends _$BookingNotifer {
     }
 
     state = state.copyWith(bookingHistoryLoadstate: LoadState.loading);
-    
+
     try {
       final response = await _repo.getBookingHistory(page: page);
       if (!response.isSuccess()) {
@@ -89,14 +89,15 @@ class BookingNotifer extends _$BookingNotifer {
       }
 
       final bookingHistoryList = response.data?.results ?? [];
-      
+
       final paginatorSelectorModel = PaginatorSelectorModel(
         currentPage: page,
         totalPages: response.data?.totalPages ?? 1,
         totalItems: response.data?.totalItems ?? 0,
       );
 
-      final updatedCache = Map<int, List<BookingHistoryModel>>.from(state.pageCache);
+      final updatedCache =
+          Map<int, List<BookingHistoryModel>>.from(state.pageCache);
       updatedCache[page] = bookingHistoryList;
 
       state = state.copyWith(
@@ -105,7 +106,6 @@ class BookingNotifer extends _$BookingNotifer {
         bookingHistoryList: bookingHistoryList,
         pageCache: updatedCache,
       );
-
     } catch (e) {
       state = state.copyWith(bookingHistoryLoadstate: LoadState.error);
     }
@@ -129,6 +129,24 @@ class BookingNotifer extends _$BookingNotifer {
       }
     } catch (e) {
       state = state.copyWith(generateTicketLoadState: LoadState.error);
+      onError(e.toString());
+    }
+  }
+
+  void checkInCheckOut(
+    String bookingId, {
+    required Function(String) onSuccess,
+    required Function(String) onError,
+  }) async {
+    state = state.copyWith(checkInCheckOutLoadState: LoadState.loading);
+    try {
+      final result = await _repo.checkInCheckOut(bookingId);
+      if (result.isSuccess() == false) throw result.message ?? '';
+
+      state = state.copyWith(checkInCheckOutLoadState: LoadState.success);
+      onSuccess(result.message ?? '');
+    } catch (e) {
+      state = state.copyWith(checkInCheckOutLoadState: LoadState.error);
       onError(e.toString());
     }
   }

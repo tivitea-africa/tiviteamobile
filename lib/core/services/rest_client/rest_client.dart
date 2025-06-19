@@ -137,6 +137,11 @@ abstract class RestClient {
   Future<BaseResponse<GenericPaginatedResponse<BookingHistoryModel>>>
       getBookingHistory(@Query('page') int page);
 
+  @POST('/bookings/{bookingId}/check-in-or-out')
+  Future<BaseResponse> checkInCheckOut({
+    @Path('bookingId') required String bookingId,
+  });
+
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')
   Future<BaseResponse<ServiceProviderDashboardModel>>

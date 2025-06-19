@@ -40,4 +40,5 @@ class AppRoutes {
   static const String createTransferRecepientView = 'createTransferRecepientView';
   static const String paymentView = 'paymentView';
   static const String withdrawalView = 'withdrawalView';
+  static const String scanQRCodeView = 'scanQRCodeView';
 }

@@ -116,7 +116,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   else
                     switch (showBackButton) {
                       true => IconButton(
-                          onPressed: () => onTap ?? () => context.pop(),
+                          onPressed: () => onTap != null ? onTap!() : context.pop(),
                           icon: const Icon(CupertinoIcons.chevron_back),
                         ),
                       // AppSvgWidget(

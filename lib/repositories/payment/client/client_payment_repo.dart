@@ -41,12 +41,17 @@ final class ClientPaymentRepo {
     String paymentId,
   ) async {
     try {
+      debugLog('Generating payment receipt for: $paymentId');
       final response = await customNetworkService.get<List<int>>(
         '/payment/receipt-pdf/$paymentId',
         options: Options(
           responseType: ResponseType.bytes,
         ),
       );
+
+      debugLog('Response status: ${response.statusCode}');
+      debugLog('Response data type: ${response.data.runtimeType}');
+      debugLog('Response data length: ${response.data?.length}');
 
       if (response.data == null) {
         return const BaseResponse(
@@ -76,6 +81,8 @@ final class ClientPaymentRepo {
         await file.create();
       }
       await file.writeAsBytes(response.data!);
+
+      debugLog('PDF saved successfully to: ${file.path}');
 
       return BaseResponse(
         status: 'Success',

@@ -79,120 +79,122 @@ class _BookWorkSpaceOrListingViewState
         showHamburgerMenu: true,
         showBackButtonForHomeScreenAppBar: true,
       ),
-      body: Column(
-        children: [
-          30.verticalSpace,
-          WorkSpaceWidget(listing: widget.listing),
-          50.verticalSpace,
-          Form(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Flexible(
-                        child: AppTextField(
-                          focusNode: _dateFromFocusNode,
-                          hintText: '--/--/----',
-                          label: workSpace
-                              ? context.l10n.dateFrom
-                              : context.l10n.pickUpDate,
-                          controller: _dateFromController,
-                          showCursor: false,
-                          suffixIcon: AppSvgWidget(
-                            path: Assets.svgs.calendar,
-                            fit: BoxFit.scaleDown,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            30.verticalSpace,
+            WorkSpaceWidget(listing: widget.listing),
+            50.verticalSpace,
+            Form(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18.w),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: AppTextField(
+                            focusNode: _dateFromFocusNode,
+                            hintText: '--/--/----',
+                            label: workSpace
+                                ? context.l10n.dateFrom
+                                : context.l10n.pickUpDate,
+                            controller: _dateFromController,
+                            showCursor: false,
+                            suffixIcon: AppSvgWidget(
+                              path: Assets.svgs.calendar,
+                              fit: BoxFit.scaleDown,
+                            ),
+                            onTap: _selectDateFrom,
                           ),
-                          onTap: _selectDateFrom,
                         ),
-                      ),
-                      10.horizontalSpace,
-                      Flexible(
-                        child: AppTextField(
-                          focusNode: _timeFromFocusNode,
-                          hintText: '-- : --',
-                          label: 'Pick up time',
-                          controller: _timeFromController,
-                          showCursor: false,
-                          suffixIcon: AppSvgWidget(
-                            path: Assets.svgs.calendar,
-                            fit: BoxFit.scaleDown,
+                        10.horizontalSpace,
+                        Flexible(
+                          child: AppTextField(
+                            focusNode: _timeFromFocusNode,
+                            hintText: '-- : --',
+                            label: 'Pick up time',
+                            controller: _timeFromController,
+                            showCursor: false,
+                            suffixIcon: AppSvgWidget(
+                              path: Assets.svgs.calendar,
+                              fit: BoxFit.scaleDown,
+                            ),
+                            onTap: _selectTimeFrom,
                           ),
-                          onTap: _selectTimeFrom,
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Flexible(
-                        child: AppTextField(
-                          hintText: '--/--/----',
-                          label: workSpace
-                              ? context.l10n.dateTo
-                              : context.l10n.returnDate,
-                          controller: _dateToController,
-                          showCursor: false,
-                          suffixIcon: AppSvgWidget(
-                            path: Assets.svgs.calendar,
-                            fit: BoxFit.scaleDown,
-                          ),
-                          readOnly: true,
-                          onTap: _selectDateTo,
-                        ),
-                      ),
-                      10.horizontalSpace,
-                      Flexible(
-                        child: AppTextField(
-                          hintText: '-- : --',
-                          label: 'Return time',
-                          controller: _timeToController,
-                          showCursor: false,
-                          suffixIcon: AppSvgWidget(
-                            path: Assets.svgs.calendar,
-                            fit: BoxFit.scaleDown,
-                          ),
-                          onTap: _selectTimeTo,
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (bothDatesAreSelected && (canProceed == false))
-                    Text(
-                      'Pick up date cannot be after Return date',
-                      style: context.theme.textTheme.displaySmall?.copyWith(
-                        color: AppColors.danger,
-                      ),
+                      ],
                     ),
-                  if (bothTimesAreSelected && (canProceedTime == false))
-                    Text(
-                      'Pick up time cannot be after Return time',
-                      style: context.theme.textTheme.displaySmall?.copyWith(
-                        color: AppColors.danger,
-                      ),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: AppTextField(
+                            hintText: '--/--/----',
+                            label: workSpace
+                                ? context.l10n.dateTo
+                                : context.l10n.returnDate,
+                            controller: _dateToController,
+                            showCursor: false,
+                            suffixIcon: AppSvgWidget(
+                              path: Assets.svgs.calendar,
+                              fit: BoxFit.scaleDown,
+                            ),
+                            readOnly: true,
+                            onTap: _selectDateTo,
+                          ),
+                        ),
+                        10.horizontalSpace,
+                        Flexible(
+                          child: AppTextField(
+                            hintText: '-- : --',
+                            label: 'Return time',
+                            controller: _timeToController,
+                            showCursor: false,
+                            suffixIcon: AppSvgWidget(
+                              path: Assets.svgs.calendar,
+                              fit: BoxFit.scaleDown,
+                            ),
+                            onTap: _selectTimeTo,
+                          ),
+                        ),
+                      ],
                     ),
-                  if (workSpace)
-                    AppTextField(
-                      label: context.l10n.numberOfPeople,
-                      controller: _numberOfPeople,
-                      suffixIcon: AppSvgWidget(
-                        path: Assets.svgs.userGroup,
-                        fit: BoxFit.scaleDown,
+                    if (bothDatesAreSelected && (canProceed == false))
+                      Text(
+                        'Pick up date cannot be after Return date',
+                        style: context.theme.textTheme.displaySmall?.copyWith(
+                          color: AppColors.danger,
+                        ),
                       ),
-                      keyboardType: TextInputType.number,
+                    if (bothTimesAreSelected && (canProceedTime == false))
+                      Text(
+                        'Pick up time cannot be after Return time',
+                        style: context.theme.textTheme.displaySmall?.copyWith(
+                          color: AppColors.danger,
+                        ),
+                      ),
+                    if (workSpace)
+                      AppTextField(
+                        label: context.l10n.numberOfPeople,
+                        controller: _numberOfPeople,
+                        suffixIcon: AppSvgWidget(
+                          path: Assets.svgs.userGroup,
+                          fit: BoxFit.scaleDown,
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    50.verticalSpace,
+                    AppButton(
+                      isEnabled: (bothDatesAreSelected && canProceed),
+                      buttonText: context.l10n.next,
+                      onPressed: _navigate,
                     ),
-                  50.verticalSpace,
-                  AppButton(
-                    isEnabled: (bothDatesAreSelected && canProceed),
-                    buttonText: context.l10n.next,
-                    onPressed: _navigate,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

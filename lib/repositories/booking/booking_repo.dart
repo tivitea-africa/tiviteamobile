@@ -55,10 +55,15 @@ final class BookingRepo {
 
   Future<BaseResponse<File>> generateBookingTicket(String bookingId) async {
     try {
+      debugLog('Generating booking ticket for: $bookingId');
       final response = await customNetworkService.get<List<int>>(
         '/bookings/ticket-pdf/$bookingId',
         options: Options(responseType: ResponseType.bytes),
       );
+
+      debugLog('Response status: ${response.statusCode}');
+      debugLog('Response data type: ${response.data.runtimeType}');
+      debugLog('Response data length: ${response.data?.length}');
 
       if (response.data == null) {
         return const BaseResponse(
@@ -68,32 +73,50 @@ final class BookingRepo {
         );
       }
 
-      final Directory? appDir = Platform.isAndroid
-          ? await getExternalStorageDirectory()
-          : await getApplicationDocumentsDirectory();
+      if (response.data is List<int>) {
+        final Directory? appDir = Platform.isAndroid
+            ? await getExternalStorageDirectory()
+            : await getApplicationDocumentsDirectory();
 
-      if (appDir == null) {
-        debugLog('PDF Save error');
+        if (appDir == null) {
+          debugLog('PDF Save error');
+          return const BaseResponse(
+            status: 'Failure',
+            data: null,
+            message: 'Unable to access storage',
+          );
+        }
+
+        final String fileName = '${bookingId.split('-').last}.pdf';
+        final File file = File('${appDir.path}/$fileName');
+
+        if (!await file.exists()) {
+          await file.create();
+        }
+        await file.writeAsBytes(response.data!);
+
+        debugLog('PDF saved successfully to: ${file.path}');
+
+        return BaseResponse(
+          status: 'Success',
+          data: file,
+          message: 'Receipt successfully generated',
+        );
+      } else {
         return const BaseResponse(
           status: 'Failure',
           data: null,
-          message: 'Unable to access storage',
+          message: 'Failed to get PDF data',
         );
       }
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
 
-      final String fileName = '${bookingId.split('-').last}.pdf';
-      final File file = File('${appDir.path}/$fileName');
-
-      if (!await file.exists()) {
-        await file.create();
-      }
-      await file.writeAsBytes(response.data!);
-
-      return BaseResponse(
-        status: 'Success',
-        data: file,
-        message: 'Receipt successfully generated',
-      );
+  Future<BaseResponse> checkInCheckOut(String bookingId) async {
+    try {
+      return await restClient.checkInCheckOut(bookingId: bookingId);
     } on DioException catch (e) {
       return AppException.handleError(e);
     }

@@ -52,6 +52,11 @@ class DioInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
+    debugLog('[ERROR] ${err.response?.data}');
+    debugLog('[ERROR STATUS] ${err.response?.statusCode}');
+    debugLog('[ERROR PATH] ${err.requestOptions.path}');
+    debugLog('[ERROR RESPONSE TYPE] ${err.requestOptions.responseType}');
+    
     if (err.response?.data != null &&
         err.response?.data['message'] != "Invalid creditials.") {
       if (err.response != null &&
@@ -74,9 +79,13 @@ class DioInterceptor extends Interceptor {
   ) async {
     final opts = Options(
       method: err.requestOptions.method,
-      headers: err.requestOptions.headers,
+      headers: {
+        ...err.requestOptions.headers,
+        'Authorization': 'JWT ${userRepository.getToken()}',
+      },
+      responseType: err.requestOptions.responseType,
     );
-    final cloneReq = await dio.request<Map<String, dynamic>?>(
+    final cloneReq = await dio.request(
       err.requestOptions.path,
       options: opts,
       data: err.requestOptions.data,

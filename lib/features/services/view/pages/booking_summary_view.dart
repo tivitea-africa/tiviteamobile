@@ -252,10 +252,12 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
       );
     } else {
       final data = BookWorkToolModel(
-        pickUpDate: widget.params.selectedDateFrom.toAcceptedDateTimeFormat,
-        returnDate: widget.params.selectedDateTo.toAcceptedDateTimeFormat,
+        pickUpDate: widget.params.selectedDateFrom.toUtc().toAcceptedDateTimeFormat,
+        returnDate: widget.params.selectedDateTo.toUtc().toAcceptedDateTimeFormat,
       );
-      debugLog(data.toJson().toString());
+      // debugLog(widget.params.selectedDateFrom.toUtc().toAcceptedDateTimeFormat);
+      // debugLog(widget.params.selectedDateTo.toUtc().toAcceptedDateTimeFormat);
+      // debugLog(data.toJson().toString());
       notifier.bookWorktool(
         listingId: widget.params.listing.id ?? '',
         data: data,

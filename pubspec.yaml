@@ -47,6 +47,7 @@ dependencies:
   google_sign_in: ^6.2.2
   firebase_auth: ^5.5.1
   package_rename: ^1.10.0
+  mobile_scanner: ^6.0.10
 
 # flutter_native_splash:
 #   android: true
