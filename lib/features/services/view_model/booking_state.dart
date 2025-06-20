@@ -18,7 +18,7 @@ class BookingState {
       generateTicketLoadState: LoadState.loading,
       bookingHistoryList: [],
       bookingHistoryLoadstate: LoadState.loading,
-      checkInCheckOutLoadState: LoadState.loading,
+      checkInCheckOutLoadState: LoadState.idle,
       pageCache: {},
     );
   }

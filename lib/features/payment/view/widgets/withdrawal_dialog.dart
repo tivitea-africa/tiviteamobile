@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/features/common/app_success_content.dart';
 import 'package:tivi_tea/features/payment/model/withdrawal_account_model.dart';
 import 'package:tivi_tea/features/payment/view/widgets/withdrawal_dialog_step1.dart';
@@ -20,12 +21,15 @@ class _WithdrawalDialogState extends State<WithdrawalDialog> {
   Widget build(BuildContext context) {
     return AnimatedSize(
       duration: const Duration(milliseconds: 300),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: _buildViews(),
         ),
-        child: _buildViews(),
       ),
     );
   }
@@ -34,9 +38,9 @@ class _WithdrawalDialogState extends State<WithdrawalDialog> {
     switch (_currentStep) {
       case _WithdrawalDialogSteps.enterBank:
         return WithdrawalDialogStep1(
-          onNext: (step1Model) {
-            _onStepChanged(_WithdrawalDialogSteps.confirm);
-          },
+          onWithdrawalSuccess: () => _onStepChanged(
+            _WithdrawalDialogSteps.success,
+          ),
         );
       case _WithdrawalDialogSteps.confirm:
         return WithdrawalDialogStep2(
@@ -54,7 +58,7 @@ class _WithdrawalDialogState extends State<WithdrawalDialog> {
           title: 'Withdrawal Successful',
           subtitle: 'Your withdrawal has been successful',
           buttonText: 'Go to Dashboard',
-          onPressed: () {},
+          onPressed: () => context.pop(),
         );
     }
   }

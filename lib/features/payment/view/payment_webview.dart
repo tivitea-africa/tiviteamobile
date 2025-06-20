@@ -44,24 +44,34 @@ class _PaymentWebviewState extends State<PaymentWebview> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            setState(() => _isLoading = progress < 100);
+            if (mounted) {
+              setState(() => _isLoading = progress < 100);
+            }
             debugLog('Loading progress: $progress%');
           },
           onPageStarted: (String url) {
-            setState(() => _isLoading = true);
+            if (mounted) {
+              setState(() => _isLoading = true);
+            }
             debugLog('onPageStarted url => $url');
           },
           onPageFinished: (String url) {
-            setState(() => _isLoading = false);
+            if (mounted) {
+              setState(() => _isLoading = false);
+            }
             debugLog('onPageFinished url => $url');
           },
           onHttpError: (HttpResponseError error) {
             debugLog('HTTP Error occurred');
-            setState(() => _isLoading = false);
+            if (mounted) {
+              setState(() => _isLoading = false);
+            }
           },
           onWebResourceError: (WebResourceError error) {
             debugLog('Web Resource Error: ${error.errorType}');
-            setState(() => _isLoading = false);
+            if (mounted) {
+              setState(() => _isLoading = false);
+            }
           },
           onNavigationRequest: (NavigationRequest request) {
             debugLog("onNavigationRequest: ${request.url}");

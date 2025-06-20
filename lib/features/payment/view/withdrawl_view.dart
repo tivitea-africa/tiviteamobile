@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/config/extensions/data_type_extensions.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/home/view/client/client_dashboard.dart';
+import 'package:tivi_tea/features/payment/view/widgets/create_pin_dialog.dart';
 import 'package:tivi_tea/features/payment/view/widgets/withdrawal_dialog.dart';
 import 'package:tivi_tea/features/payment/view/widgets/withdrawal_history_table.dart';
+import 'package:tivi_tea/features/payment/view_model/partner/wallet_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 
-class WithdrawalView extends StatelessWidget {
+class WithdrawalView extends ConsumerStatefulWidget {
   const WithdrawalView({super.key});
 
   @override
+  ConsumerState<WithdrawalView> createState() => _WithdrawalViewState();
+}
+
+class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
+  @override
+  void initState() {
+    super.initState();
+    final notifier = ref.read(walletNotifierProvider.notifier);
+    notifier.getWalletDetails(
+      onError: (wallet) {
+        if (mounted) {
+          context.showError(wallet);
+        }
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final wallet = ref.watch(
+      walletNotifierProvider.select(
+        (state) => state.walletDetails,
+      ),
+    );
     return AppScaffold(
       appbar: const CustomAppBar(
         title: 'Withdrawals',
@@ -31,9 +58,28 @@ class WithdrawalView extends StatelessWidget {
               children: [
                 CreateListingButton(
                   text: 'Withdraw',
-                  onTap: () => context.showCustomDialog(
-                    child: const WithdrawalDialog(),
-                  ),
+                  onTap: () {
+                    if (wallet == null) return;
+                    if (wallet.hasTransPin == false) {
+                      context.showCustomDialog(
+                        child: CreateOrUpdatePinDialog(
+                          isCreate: wallet.hasTransPin == false,
+                          onSuccess: (ctx) {
+                            ctx.pop();
+                            if (wallet.hasTransPin) {
+                              context.showCustomDialog(
+                                child: const WithdrawalDialog(),
+                              );
+                            }
+                          },
+                        ),
+                      );
+                    } else {
+                      context.showCustomDialog(
+                        child: const WithdrawalDialog(),
+                      );
+                    }
+                  },
                   showIcon: false,
                 ),
               ],
@@ -72,12 +118,13 @@ class WithdrawalView extends StatelessWidget {
                           color: const Color(0xFF748189),
                         ),
                       ),
-                      10.verticalSpace,
-                      250.getCurrencyText(
-                        style: context.theme.textTheme.displayLarge?.copyWith(
-                          color: const Color(0xFF748189),
+                      if (wallet != null) 10.verticalSpace,
+                      if (wallet != null)
+                        wallet.availableBalance.getCurrencyText(
+                          style: context.theme.textTheme.displayLarge?.copyWith(
+                            color: const Color(0xFF748189),
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ],

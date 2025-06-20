@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 
 class DrawerListTile extends StatelessWidget {
@@ -22,7 +23,10 @@ class DrawerListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        onTap?.call();
+        scaffoldKey.currentState?.closeDrawer();
+      },
       child: Container(
         width: 200.w,
         margin: EdgeInsets.only(left: 20.w, bottom: 10.h),

@@ -37,7 +37,8 @@ class HomeRouter {
   static final scanQRCodeView = GoRoute(
     path: AppRoutes.scanQRCodeView,
     builder: (BuildContext context, GoRouterState state) {
-      return const ScanQRCodeView();
+      final bookingId = state.extra as String;
+      return ScanQRCodeView(bookingId: bookingId);
     },
   );
 }

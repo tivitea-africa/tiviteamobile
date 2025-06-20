@@ -16,6 +16,7 @@ import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
 import 'package:tivi_tea/features/payment/model/create_payment_response.dart';
+import 'package:tivi_tea/features/payment/model/wallet_details_model.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
 import 'package:tivi_tea/features/profile/model/edit_profile_model.dart';
 import 'package:tivi_tea/features/registration/model/client/customer_sign_up_request_body.dart';
@@ -174,4 +175,12 @@ abstract class RestClient {
   Future<BaseResponse<PaymentCallbackResponse>> getPaymentStatus({
     @Query('payment_id') required String paymentId,
   });
+
+  //<====================> Wallet <====================>
+  @GET('/payment/wallet')
+  Future<BaseResponse<WalletDetailsModel>> getWalletDetails();
+  @POST('/payment/create-transaction-pin')
+  Future<BaseResponse> createTransactionPin(@Body() UpdatePinModel data);
+  @POST('/payment/withdraw-from-wallet')
+  Future<BaseResponse> withdrawFromWallet(@Body() WithdrawFromWalletModel data);
 }

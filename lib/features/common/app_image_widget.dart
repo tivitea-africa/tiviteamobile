@@ -37,7 +37,5 @@ class _NoImage extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
     );
-
-    ///TODO: Add to [l10n]
   }
 }

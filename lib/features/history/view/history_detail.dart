@@ -87,9 +87,7 @@ class _HistoryDetailViewState extends ConsumerState<HistoryDetailView> {
     return AppScaffold(
       appbar: CustomAppBar(
         title: context.l10n.bookingHistoryView,
-        onTap: () {
-          debugLog('onTap');
-        },
+        onTap: () => context.pop(),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
@@ -131,8 +129,7 @@ class _HistoryDetailViewState extends ConsumerState<HistoryDetailView> {
                   title: 'Amount',
                   value: (widget.booking.listing?.amount ?? 0).formatAmount,
                 ),
-                if (entityType == EntityType.partner &&
-                    _isCheckInDateStillValid) ...[
+                if (entityType == EntityType.partner) ...[
                   50.verticalSpace,
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -143,12 +140,13 @@ class _HistoryDetailViewState extends ConsumerState<HistoryDetailView> {
                       buttonText: 'Scan QR Code',
                       onPressed: () => context.push(
                         '${AppRoutes.homeView}${AppRoutes.scanQRCodeView}',
+                        extra: widget.booking.id,
                       ),
                     ),
                   ),
                 ] else ...[
                   50.verticalSpace,
-                  if (_isCheckInDateStillValid && _recieptLoading)
+                  if (_recieptLoading)
                     const Center(
                       child: CupertinoActivityIndicator(),
                     )
