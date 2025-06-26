@@ -18,9 +18,9 @@ class Validators {
     };
   }
 
-  static Validator confirmPass(String val1, String val2) {
+  static Validator confirmPass(String valueToCompareAgainst) {
     return (String? value) {
-      if (val1 != val2) {
+      if (valueToCompareAgainst != value) {
         return 'Passwords do not match';
       } else {
         return null;

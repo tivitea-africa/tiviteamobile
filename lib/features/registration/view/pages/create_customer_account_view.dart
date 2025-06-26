@@ -150,23 +150,23 @@ class _CreateCustomerAccountState extends State<CreateCustomerAccount> {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                // validateFunction: Validators.confirmPass(
-                //   passwordController.text,
-                //   confirmPasswordController.text,
-                // ),
+                validateFunction: Validators.confirmPass(
+                  passwordController.text,
+                ),
               ),
               20.verticalSpace,
-              Consumer(builder: (context, ref, _) {
-                final loadState =
-                    ref.watch(customerRegistrationNotifierProvider).loadState;
-                final isLoading = loadState == LoadState.loading;
-                return AppButton(
-                  buttonText: context.l10n.createAccount,
-                  isEnabled: isEnabled,
-                  isLoading: isLoading,
-                  onPressed: () => _submit(ref),
-                );
-              }),
+              Consumer(
+                builder: (context, ref, _) {
+                  final loadState = ref.watch(customerRegistrationNotifierProvider).loadState;
+                  final isLoading = loadState == LoadState.loading;
+                  return AppButton(
+                    buttonText: context.l10n.createAccount,
+                    isEnabled: isEnabled,
+                    isLoading: isLoading,
+                    onPressed: () => _submit(ref),
+                  );
+                },
+              ),
               10.verticalSpace,
               RichText(
                 textAlign: TextAlign.center,

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 
 class AppTextField extends StatefulWidget {
   const AppTextField({
@@ -139,15 +140,23 @@ class _AppTextFieldState extends State<AppTextField> {
                       return null;
                     },
               onSaved: (val) {
-                error = widget.validateFunction!(val);
-                setState(() {});
-                widget.onSaved!(val!);
-              },
-              onChanged: (val) {
                 widget.validateFunction != null
                     ? error = widget.validateFunction!(val)
                     : error = null;
                 setState(() {});
+                if (widget.onSaved != null) widget.onSaved!(val!);
+              },
+              onChanged: (val) {
+                if (widget.validateFunction != null) {
+                  final result = widget.validateFunction!(val);
+                  if (result != null) {
+                    error = result;
+                    setState(() {});
+                  } else {
+                    error = null;
+                    setState(() {});
+                  }
+                }
                 if (widget.onChange != null) widget.onChange!.call(val);
               },
               style: widget.textStyle ?? context.theme.textTheme.displaySmall,

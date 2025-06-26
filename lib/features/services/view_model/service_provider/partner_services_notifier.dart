@@ -72,6 +72,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
   void postWorkSpace(
     PostListingModel model, {
     required VoidCallback onSuccess,
+    required void Function(String) onError,
   }) async {
     state = state.copyWith(postLoadState: LoadState.loading);
     try {
@@ -83,6 +84,7 @@ class PartnerServicesNotifer extends _$PartnerServicesNotifer {
       onSuccess();
     } catch (e) {
       state = state.copyWith(postLoadState: LoadState.error);
+      onError(e.toString());
     }
   }
 

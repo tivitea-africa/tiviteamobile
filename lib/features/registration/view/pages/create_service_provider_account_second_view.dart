@@ -46,6 +46,8 @@ class _CreateServiceProviderAccountSecondViewState
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
   String alternativePhoneNumber = "";
+  bool obscurePass = true;
+  bool obscureConfirmPass = true;
 
   @override
   void dispose() {
@@ -58,6 +60,16 @@ class _CreateServiceProviderAccountSecondViewState
     businessDescriptionController.dispose();
 
     super.dispose();
+  }
+
+  void _obscurePass() {
+    obscurePass = !obscurePass;
+    setState(() {});
+  }
+
+  void _obscureConfirmPass() {
+    obscureConfirmPass = !obscureConfirmPass;
+    setState(() {});
   }
 
   @override
@@ -114,9 +126,12 @@ class _CreateServiceProviderAccountSecondViewState
                 controller: passwordController,
                 label: context.l10n.createPassword,
                 hintText: context.l10n.createPasswordHintText,
-                obscureText: true,
+                obscureText: obscurePass,
                 suffixIcon: AppSvgWidget(
-                  path: Assets.svgs.eye,
+                  onTap: _obscurePass,
+                  path: obscurePass
+                      ? Assets.svgs.eye
+                      : Assets.svgs.eyeSlash,
                   fit: BoxFit.scaleDown,
                 ),
               ),
@@ -126,11 +141,13 @@ class _CreateServiceProviderAccountSecondViewState
                 hintText: context.l10n.confirmPasswordHintText,
                 validateFunction: Validators.confirmPass(
                   passwordController.text,
-                  confirmPasswordController.text,
                 ),
-                obscureText: true,
+                obscureText: obscureConfirmPass,
                 suffixIcon: AppSvgWidget(
-                  path: Assets.svgs.eye,
+                  onTap: _obscureConfirmPass,
+                  path: obscureConfirmPass
+                      ? Assets.svgs.eye
+                      : Assets.svgs.eyeSlash,
                   fit: BoxFit.scaleDown,
                 ),
               ),

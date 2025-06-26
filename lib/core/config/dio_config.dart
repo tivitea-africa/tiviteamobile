@@ -7,7 +7,7 @@ import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class BaseEnv {
-  static const String baseUrl = "https://api.tivitea.org";
+  static const String baseUrl = "https://api.tivitea.africa";
 }
 
 ProviderFamily<Dio, String> _dio = Provider.family<Dio, String>((ref, baseUrl) {

@@ -83,22 +83,22 @@ class ServiceProviderAppDrawer extends StatelessWidget {
             isSelected: routePath == withdrawals,
             onTap: () => context.go(withdrawals),
           ),
-          DrawerListTile(
-            icon: Assets.svgs.activitiesDrawerIcon,
-            label: context.l10n.activities,
-          ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.activitiesDrawerIcon,
+          //   label: context.l10n.activities,
+          // ),
           // DrawerListTile(
           //   icon: Assets.svgs.messagesDrawerIcon,
           //   label: context.l10n.messages,
           // ),
-          DrawerListTile(
-            icon: Assets.svgs.soldiersDrawerIcon,
-            label: context.l10n.addFootSoldiers,
-          ),
-          DrawerListTile(
-            icon: Assets.svgs.settingsDrawerIcon,
-            label: context.l10n.customerReview,
-          ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.soldiersDrawerIcon,
+          //   label: context.l10n.addFootSoldiers,
+          // ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.settingsDrawerIcon,
+          //   label: context.l10n.customerReview,
+          // ),
           Padding(
             padding: EdgeInsets.only(left: 10.w),
             child: Column(

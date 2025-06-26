@@ -185,18 +185,18 @@ class _CreateNewListingSecondViewState
                       });
                 },
               ),
-              10.verticalSpace,
-              Consumer(
-                builder: (context, ref, _) {
-                  return AppButton(
-                    buttonText: context.l10n.saveToDraft,
-                    backgroundColor: Colors.white,
-                    textColor: context.theme.primaryColor,
-                    borderColor: context.theme.primaryColor,
-                    onPressed: () {},
-                  );
-                },
-              ),
+              // 10.verticalSpace,
+              // Consumer(
+              //   builder: (context, ref, _) {
+              //     return AppButton(
+              //       buttonText: context.l10n.saveToDraft,
+              //       backgroundColor: Colors.white,
+              //       textColor: context.theme.primaryColor,
+              //       borderColor: context.theme.primaryColor,
+              //       onPressed: () {},
+              //     );
+              //   },
+              // ),
               20.verticalSpace,
             ],
           ),
@@ -236,6 +236,7 @@ class _CreateNewListingSecondViewState
 
         _showSuccessDialog();
       },
+      onError: (error) => context.showError(error),
     );
   }
 
