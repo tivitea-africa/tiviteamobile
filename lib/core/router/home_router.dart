@@ -30,8 +30,8 @@ class HomeRouter {
   static final bookingHistoryDetailsView = GoRoute(
     path: AppRoutes.bookingHistoryDetails,
     builder: (BuildContext context, GoRouterState state) {
-      final booking = state.extra as BookingHistoryModel;
-      return HistoryDetailView(booking: booking);
+      final bookingId = state.extra as String;
+      return HistoryDetailView(bookingId: bookingId);
     },
   );
   static final scanQRCodeView = GoRoute(

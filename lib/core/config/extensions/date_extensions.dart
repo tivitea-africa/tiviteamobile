@@ -68,6 +68,11 @@ extension ToDateTime on DateTime? {
   String get toTime => (this == null)
       ? ''
       : DateFormat('hh:mm a').format(this!.toLocal()).toLowerCase();
+
+  bool isCurrentTimeWithinCheckInPeriod({required DateTime checkOutDate}) {
+    final now = DateTime.now();
+    return now.isAfter(this!) && now.isBefore(checkOutDate);
+  }
 }
 
 String calculateDateRange(DateTime startDate, DateTime endDate) {

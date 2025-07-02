@@ -53,6 +53,16 @@ final class BookingRepo {
     }
   }
 
+  Future<BaseResponse<BookingHistoryModel>> getSingleBookingDetails(
+    String bookingId,
+  ) async {
+    try {
+      return await restClient.getSingleBookingDetails(bookingId: bookingId);
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
   Future<BaseResponse<File>> generateBookingTicket(String bookingId) async {
     try {
       debugLog('Generating booking ticket for: $bookingId');

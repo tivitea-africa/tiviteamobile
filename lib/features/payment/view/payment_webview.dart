@@ -4,13 +4,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PaymentWebview extends StatefulWidget {
+class PaymentWebviewArgs {
+  final String bookingId;
   final String paystackUrl;
-  const PaymentWebview({super.key, required this.paystackUrl});
+  PaymentWebviewArgs({required this.bookingId, required this.paystackUrl});
+}
+
+class PaymentWebview extends StatefulWidget {
+  final PaymentWebviewArgs args;
+  const PaymentWebview({super.key, required this.args});
 
   @override
   State<PaymentWebview> createState() => _PaymentWebviewState();
@@ -75,9 +82,11 @@ class _PaymentWebviewState extends State<PaymentWebview> {
           },
           onNavigationRequest: (NavigationRequest request) {
             debugLog("onNavigationRequest: ${request.url}");
-            if(request.url.contains('https://tivitea.africa/')) {
+            if (request.url.contains('https://tivitea.africa/')) {
               if (mounted) {
-                context.pop();
+                const bookingHistoryDetail =
+                    '${AppRoutes.homeView}${AppRoutes.bookingHistoryDetails}';
+                context.go(bookingHistoryDetail, extra: widget.args.bookingId);
               }
             }
             return NavigationDecision.navigate;
@@ -85,7 +94,7 @@ class _PaymentWebviewState extends State<PaymentWebview> {
           onUrlChange: (urlChange) => debugLog("onUrlChange: ${urlChange.url}"),
         ),
       )
-      ..loadRequest(Uri.parse(widget.paystackUrl));
+      ..loadRequest(Uri.parse(widget.args.paystackUrl));
   }
 
   @override

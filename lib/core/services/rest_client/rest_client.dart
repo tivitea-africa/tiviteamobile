@@ -143,6 +143,11 @@ abstract class RestClient {
     @Path('bookingId') required String bookingId,
   });
 
+  @GET('/bookings/{bookingId}')
+  Future<BaseResponse<BookingHistoryModel>> getSingleBookingDetails({
+    @Path('bookingId') required String bookingId,
+  });
+
   //<====================> Dashboard <====================>
   @GET('/dashboard/partner')
   Future<BaseResponse<ServiceProviderDashboardModel>>

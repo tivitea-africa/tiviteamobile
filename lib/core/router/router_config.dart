@@ -183,8 +183,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoutes.paymentWebview,
       builder: (BuildContext context, GoRouterState state) {
-        final params = state.extra as String;
-        return PaymentWebview(paystackUrl: params);
+        final args = state.extra as PaymentWebviewArgs;
+        return PaymentWebview(args: args);
       },
     ),
   ],

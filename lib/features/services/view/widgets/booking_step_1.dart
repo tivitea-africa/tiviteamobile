@@ -30,11 +30,21 @@ class BookingStep1 extends StatefulWidget {
 class _BookingStep1State extends State<BookingStep1> {
   final TextEditingController _dateFromController = TextEditingController();
   final TextEditingController _dateToController = TextEditingController();
+  final TextEditingController _timeFromController = TextEditingController();
+  final TextEditingController _timeToController = TextEditingController();
   late TextEditingController _numberOfPeople;
+
+  final FocusNode _dateFromFocusNode = FocusNode();
+  final FocusNode _dateToFocusNode = FocusNode();
+  final FocusNode _timeFromFocusNode = FocusNode();
+  final FocusNode _timeToFocusNode = FocusNode();
 
   DateTime? _selectedDateFrom;
   DateTime? _selectedDateTo;
+  TimeOfDay? _selectedTimeFrom;
+  TimeOfDay? _selectedTimeTo;
   bool canProceed = false;
+  bool canProceedTime = false;
 
   final DateFormat _dateFormatter = DateFormat('dd/MM/yyyy');
 
@@ -48,6 +58,8 @@ class _BookingStep1State extends State<BookingStep1> {
   void dispose() {
     _dateFromController.dispose();
     _dateToController.dispose();
+    _timeFromController.dispose();
+    _timeToController.dispose();
     _numberOfPeople.dispose();
     super.dispose();
   }
@@ -58,6 +70,8 @@ class _BookingStep1State extends State<BookingStep1> {
         widget.listing.listingType?.enumType == CreateListingType.workSpace;
     final bothDatesAreSelected =
         (_selectedDateFrom != null) && (_selectedDateTo != null);
+    final bothTimesAreSelected =
+        (_selectedTimeFrom != null) && (_selectedTimeTo != null);
     return Column(
       children: [
         Text(
@@ -101,36 +115,79 @@ class _BookingStep1State extends State<BookingStep1> {
                   padding: EdgeInsets.symmetric(horizontal: 18.w),
                   child: Column(
                     children: [
-                      AppTextField(
-                        hintText: '--/--/----',
-                        label: isWorkspace
-                            ? context.l10n.dateFrom
-                            : context.l10n.pickUpDate,
-                        controller: _dateFromController,
-                        showCursor: false,
-                        suffixIcon: AppSvgWidget(
-                          path: Assets.svgs.calendar,
-                          fit: BoxFit.scaleDown,
-                        ),
-                        onTap: _selectDateFrom,
+                      Row(
+                        children: [
+                          Flexible(
+                            child: AppTextField(
+                              hintText: '--/--/----',
+                              label: "Check in Date",
+                              controller: _dateFromController,
+                              showCursor: false,
+                              suffixIcon: AppSvgWidget(
+                                path: Assets.svgs.calendar,
+                                fit: BoxFit.scaleDown,
+                              ),
+                              onTap: _selectDateFrom,
+                            ),
+                          ),
+                          10.horizontalSpace,
+                          Flexible(
+                            child: AppTextField(
+                              hintText: '-- : --',
+                              label: 'Check in time',
+                              controller: _timeFromController,
+                              showCursor: false,
+                              suffixIcon: AppSvgWidget(
+                                path: Assets.svgs.calendar,
+                                fit: BoxFit.scaleDown,
+                              ),
+                              onTap: _selectTimeFrom,
+                            ),
+                          ),
+                        ],
                       ),
-                      AppTextField(
-                        hintText: '--/--/----',
-                        label: isWorkspace
-                            ? context.l10n.dateTo
-                            : context.l10n.returnDate,
-                        controller: _dateToController,
-                        showCursor: false,
-                        suffixIcon: AppSvgWidget(
-                          path: Assets.svgs.calendar,
-                          fit: BoxFit.scaleDown,
-                        ),
-                        readOnly: true,
-                        onTap: _selectDateTo,
+                      Row(
+                        children: [
+                          Flexible(
+                            child: AppTextField(
+                              hintText: '--/--/----',
+                              label: "Check out Date",
+                              controller: _dateToController,
+                              showCursor: false,
+                              suffixIcon: AppSvgWidget(
+                                path: Assets.svgs.calendar,
+                                fit: BoxFit.scaleDown,
+                              ),
+                              readOnly: true,
+                              onTap: _selectDateTo,
+                            ),
+                          ),
+                          10.horizontalSpace,
+                          Flexible(
+                            child: AppTextField(
+                              hintText: '-- : --',
+                              label: 'Check out time',
+                              controller: _timeToController,
+                              showCursor: false,
+                              suffixIcon: AppSvgWidget(
+                                path: Assets.svgs.calendar,
+                                fit: BoxFit.scaleDown,
+                              ),
+                              onTap: _selectTimeTo,
+                            ),
+                          ),
+                        ],
                       ),
                       if (bothDatesAreSelected && (canProceed == false))
                         Text(
                           'Pick up date cannot be after Return date',
+                          style: context.theme.textTheme.displaySmall?.copyWith(
+                            color: AppColors.danger,
+                          ),
+                        ),
+                      if (bothTimesAreSelected && (canProceedTime == false))
+                        Text(
+                          'Pick up time cannot be after Return time',
                           style: context.theme.textTheme.displaySmall?.copyWith(
                             color: AppColors.danger,
                           ),
@@ -151,16 +208,7 @@ class _BookingStep1State extends State<BookingStep1> {
                         child: AppButton(
                           isEnabled: (bothDatesAreSelected && canProceed),
                           buttonText: context.l10n.continue_,
-                          onPressed: () {
-                            final data = BookingSummaryParams(
-                              selectedDateFrom: _selectedDateFrom!,
-                              selectedDateTo: _selectedDateTo!,
-                              listing: widget.listing,
-                              numOfPeople: int.parse(_numberOfPeople.text),
-                            );
-
-                            widget.moveToNextStep(data);
-                          },
+                          onPressed: _moveToNextStep,
                         ),
                       ),
                     ],
@@ -174,34 +222,73 @@ class _BookingStep1State extends State<BookingStep1> {
     );
   }
 
-  void _selectDateFrom() async {
-    final DateTime? picked = await showDatePicker(
+  Future<DateTime?> _selectDate(DateTime initialDate) async {
+    return showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: initialDate,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
+  }
 
-    if (picked != null) {
-      _selectedDateFrom = picked;
-      _dateFromController.text = _dateFormatter.format(picked);
+  Future<TimeOfDay?> _selectTime() async {
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      initialEntryMode: TimePickerEntryMode.dialOnly,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!,
+        );
+      },
+    );
+  }
+
+  DateTime _mergeDateAndTime(DateTime date, TimeOfDay time) {
+    return DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+  }
+
+  void _handleDateSelection({
+    required bool isFromDate,
+    required DateTime? selectedDate,
+    required TextEditingController controller,
+    required FocusNode nextFocusNode,
+  }) {
+    if (selectedDate != null) {
+      if (isFromDate) {
+        _selectedDateFrom = selectedDate;
+      } else {
+        _selectedDateTo = selectedDate;
+      }
+      controller.text = _dateFormatter.format(selectedDate);
       _validateDates();
+      nextFocusNode.requestFocus();
       setState(() {});
     }
   }
 
-  void _selectDateTo() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
-
-    if (picked != null) {
-      _selectedDateTo = picked;
-      _dateToController.text = _dateFormatter.format(picked);
-      _validateDates();
+  void _handleTimeSelection({
+    required bool isFromTime,
+    required TimeOfDay? selectedTime,
+    required TextEditingController controller,
+    required FocusNode nextFocusNode,
+  }) {
+    if (selectedTime != null) {
+      if (isFromTime) {
+        _selectedTimeFrom = selectedTime;
+      } else {
+        _selectedTimeTo = selectedTime;
+      }
+      controller.text = selectedTime.format(context);
+      _validateTimes();
+      nextFocusNode.requestFocus();
       setState(() {});
     }
   }
@@ -213,5 +300,95 @@ class _BookingStep1State extends State<BookingStep1> {
     } else {
       canProceed = false;
     }
+  }
+
+  void _validateTimes() {
+    if (_selectedTimeFrom != null && _selectedTimeTo != null) {
+      // First check if dates are valid
+      if (_selectedDateFrom == null || _selectedDateTo == null) {
+        canProceedTime = false;
+        setState(() {});
+        return;
+      }
+
+      // If dates are different, only validate if return date is after pickup date
+      if (!_selectedDateFrom!.isAtSameMomentAs(_selectedDateTo!)) {
+        canProceedTime = _selectedDateFrom!.isBefore(_selectedDateTo!);
+        setState(() {});
+        return;
+      }
+
+      // If same date, validate the times
+      canProceedTime = _selectedTimeFrom!.hour < _selectedTimeTo!.hour ||
+          (_selectedTimeFrom!.hour == _selectedTimeTo!.hour &&
+              _selectedTimeFrom!.minute < _selectedTimeTo!.minute);
+      setState(() {});
+    } else {
+      canProceedTime = false;
+      setState(() {});
+    }
+  }
+
+  void _selectDateFrom() async {
+    final picked = await _selectDate(DateTime.now());
+    _handleDateSelection(
+      isFromDate: true,
+      selectedDate: picked,
+      controller: _dateFromController,
+      nextFocusNode: _timeFromFocusNode,
+    );
+  }
+
+  void _selectDateTo() async {
+    final picked = await _selectDate(DateTime.now());
+    _handleDateSelection(
+      isFromDate: false,
+      selectedDate: picked,
+      controller: _dateToController,
+      nextFocusNode: _timeToFocusNode,
+    );
+  }
+
+  void _selectTimeTo() async {
+    final time = await _selectTime();
+    _handleTimeSelection(
+      isFromTime: false,
+      selectedTime: time,
+      controller: _timeToController,
+      nextFocusNode: _dateToFocusNode,
+    );
+  }
+
+  void _selectTimeFrom() async {
+    final time = await _selectTime();
+    _handleTimeSelection(
+      isFromTime: true,
+      selectedTime: time,
+      controller: _timeFromController,
+      nextFocusNode: _dateToFocusNode,
+    );
+  }
+
+  void _moveToNextStep() {
+    if (_selectedDateFrom == null ||
+        _selectedDateTo == null ||
+        _selectedTimeFrom == null ||
+        _selectedTimeTo == null) {
+      return;
+    }
+
+    final DateTime startDateTime =
+        _mergeDateAndTime(_selectedDateFrom!, _selectedTimeFrom!);
+    final DateTime endDateTime =
+        _mergeDateAndTime(_selectedDateTo!, _selectedTimeTo!);
+
+    final data = BookingSummaryParams(
+      selectedDateFrom: startDateTime,
+      selectedDateTo: endDateTime,
+      listing: widget.listing,
+      numOfPeople: int.parse(_numberOfPeople.text),
+    );
+
+    widget.moveToNextStep(data);
   }
 }

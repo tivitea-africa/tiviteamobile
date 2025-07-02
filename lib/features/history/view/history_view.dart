@@ -161,7 +161,7 @@ class _HistoryViewState extends ConsumerState<HistoryView> {
         '${AppRoutes.homeView}${AppRoutes.bookingHistoryDetails}';
     return [
       GestureDetector(
-        onTap: () => context.push(bookingHistoryDetail, extra: booking),
+        onTap: () => context.push(bookingHistoryDetail, extra: booking.id ?? ''),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(

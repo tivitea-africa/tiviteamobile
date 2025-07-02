@@ -15,6 +15,7 @@ import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_success_content.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/booking_summary_params.dart';
+import 'package:tivi_tea/features/payment/view/payment_webview.dart';
 import 'package:tivi_tea/features/payment/view_model/client/client_payment_notifier.dart';
 import 'package:tivi_tea/features/services/model/book_work_tool_model.dart';
 import 'package:tivi_tea/features/services/model/book_workspace_model.dart';
@@ -42,6 +43,7 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
         (value) => value.getPaymentStatusLoadState,
       ),
     );
+    final isWorkSpace = widget.params.listing.listingType?.enumType == CreateListingType.workSpace;
     return AppScaffold(
       appbar: const CustomAppBar(
         showHamburgerMenu: true,
@@ -176,7 +178,7 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  context.l10n.pickUpLocation,
+                                  isWorkSpace ? context.l10n.pickUpLocation : context.l10n.location,
                                   style: context.theme.textTheme.titleLarge
                                       ?.copyWith(
                                     fontSize: 13.sp,
@@ -319,7 +321,11 @@ class _BookingSummaryViewState extends ConsumerState<BookingSummaryView> {
   }
 
   void _navigateToPaymentView(String paymentUrl, String paymentId) {
-    context.push(AppRoutes.paymentWebview, extra: paymentUrl).then(
+    final args = PaymentWebviewArgs(
+      bookingId: bookingId,
+      paystackUrl: paymentUrl,
+    );
+    context.push(AppRoutes.paymentWebview, extra: args).then(
       (value) async {
         if (mounted) {
           final paymentNotifier = ref.read(

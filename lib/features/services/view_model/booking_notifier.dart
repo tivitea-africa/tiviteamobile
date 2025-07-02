@@ -71,6 +71,22 @@ class BookingNotifer extends _$BookingNotifer {
     }
   }
 
+  void getSingleBookingDetails(
+    String bookingId, {
+    required Function(BookingHistoryModel) onSuccess,
+  }) async {
+    try {
+      final response = await _repo.getSingleBookingDetails(bookingId);
+      if (!response.isSuccess()) {
+        throw response.error?.message ?? response.message ?? '';
+      }
+      state = state.copyWith(getSingleBookingDetails: LoadState.success);
+      if (response.data != null) onSuccess(response.data!);
+    } catch (e) {
+      state = state.copyWith(getSingleBookingDetails: LoadState.error);
+    }
+  }
+
   void getBookingHistory({required int page}) async {
     if (state.pageCache.containsKey(page)) {
       state = state.copyWith(

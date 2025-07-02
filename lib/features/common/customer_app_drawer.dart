@@ -68,14 +68,14 @@ class CustomerAppDrawer extends StatelessWidget {
             isSelected: routePath == bookingHistory,
             onTap: () => context.go(bookingHistory),
           ),
-          DrawerListTile(
-            icon: Assets.svgs.paymentDrawerIcon,
-            label: context.l10n.payments,
-          ),
-          DrawerListTile(
-            icon: Assets.svgs.activitiesDrawerIcon,
-            label: context.l10n.activities,
-          ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.paymentDrawerIcon,
+          //   label: context.l10n.payments,
+          // ),
+          // DrawerListTile(
+          //   icon: Assets.svgs.activitiesDrawerIcon,
+          //   label: context.l10n.activities,
+          // ),
           // DrawerListTile(
           //   icon: Assets.svgs.soldiersDrawerIcon,
           //   label: context.l10n.addFootSoldiers,
