@@ -16,6 +16,7 @@ class OnboardingScaffold extends StatelessWidget {
     this.footerButton,
     this.underFooterChild,
     this.bodyPadding,
+    this.bottomChildren,
     this.showActionButtons = (showBackButton: false, showSkip: false),
     this.onOnboardingActionTapped = (onBack: null, onSkip: null),
   });
@@ -26,12 +27,10 @@ class OnboardingScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final Widget? footerButton;
   final Widget? underFooterChild;
+  final Widget? bottomChildren;
   final EdgeInsetsGeometry? bodyPadding;
   final ({bool showBackButton, bool showSkip}) showActionButtons;
-  final ({
-    VoidCallback? onBack,
-    VoidCallback? onSkip
-  }) onOnboardingActionTapped;
+  final ({VoidCallback? onBack, VoidCallback? onSkip}) onOnboardingActionTapped;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -61,6 +60,10 @@ class OnboardingScaffold extends StatelessWidget {
                   ],
                 ),
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: bottomChildren,
+              ),
             ],
           ),
           floatingActionButton: floatingActionButton,
@@ -73,10 +76,7 @@ class OnboardingScaffold extends StatelessWidget {
 
 class _ItemRow extends StatelessWidget {
   final ({bool showBackButton, bool showSkip}) showActionButtons;
-  final ({
-    VoidCallback? onBack,
-    VoidCallback? onSkip
-  }) onOnboardingActionTapped;
+  final ({VoidCallback? onBack, VoidCallback? onSkip}) onOnboardingActionTapped;
   const _ItemRow({
     required this.showActionButtons,
     required this.onOnboardingActionTapped,

@@ -16,8 +16,10 @@ import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
+import 'package:tivi_tea/features/login/view_model/login_state.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
+import 'package:tivi_tea/models/enums/enums.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -99,25 +101,27 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                AppCheckbox(
-                  onChanged: (value) {
-                    rememberMe = value;
-                    setState(() {});
-                  },
-                ),
-                5.horizontalSpace,
-                Text(
-                  context.l10n.rememberMe,
-                  style: context.theme.textTheme.labelSmall,
-                ),
-                const Spacer(),
+                // AppCheckbox(
+                //   onChanged: (value) {
+                //     rememberMe = value;
+                //     setState(() {});
+                //   },
+                // ),
+                // 5.horizontalSpace,
+                // Text(
+                //   context.l10n.rememberMe,
+                //   style: context.theme.textTheme.labelSmall,
+                // ),
+                // const Spacer(),
                 InkWell(
                   onTap: () => context.push(AppRoutes.forgotPasswordView),
                   child: Text(
                     '${context.l10n.forgotPassword}?',
-                    style: context.theme.textTheme.labelSmall
-                        ?.copyWith(color: AppColors.danger),
+                    style: context.theme.textTheme.labelSmall?.copyWith(
+                      color: AppColors.danger,
+                    ),
                   ),
                 ),
               ],
@@ -176,19 +180,38 @@ class _LoginViewState extends State<LoginView> {
                 children: [
                   TextSpan(
                     text: context.l10n.signUp,
-                    style: context.theme.textTheme.bodySmall?.copyWith(
+                    style: context.theme.textTheme.displaySmall?.copyWith(
                       color: const Color(0xFFEC8305),
                       fontWeight: FontWeight.w700,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => context.push(
-                            AppRoutes.selectUserTypeView,
-                          ),
+                      ..onTap =
+                          () => context.push(AppRoutes.selectUserTypeView),
                   ),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+      bottomChildren: Padding(
+        padding: const EdgeInsets.only(bottom: 32.0),
+        child: Consumer(
+          builder: (context, ref, _) {
+            return InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () => _onGuestLoginSuccess(ref),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  'Continue as a Guest',
+                  style: context.theme.textTheme.displaySmall?.copyWith(
+                    color: const Color(0xFFEC8305),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -203,15 +226,7 @@ class _LoginViewState extends State<LoginView> {
     final notifier = ref.read(loginNotifierProvider.notifier);
     notifier.login(
       data,
-      onSuccess: (entityType) {
-        if (rememberMe == true) {
-          notifier.rememberUser(rememberMe);
-        }
-        context.pushReplacement(
-          AppRoutes.homeView,
-          extra: entityType,
-        );
-      },
+      onSuccess: (entityType) => _onLoginSuccess(ref, entityType),
       onError: (error) => context.showError(error),
     );
   }
@@ -219,16 +234,23 @@ class _LoginViewState extends State<LoginView> {
   void _signInWithGoogle(WidgetRef ref) {
     final notifier = ref.read(loginNotifierProvider.notifier);
     notifier.signInWithGoogle(
-      onSuccess: (entityType) {
-        if (rememberMe == true) {
-          notifier.rememberUser(rememberMe);
-        }
-        context.pushReplacement(
-          AppRoutes.homeView,
-          extra: entityType,
-        );
-      },
+      onSuccess: (entityType) => _onLoginSuccess(ref, entityType),
       onError: (error) => context.showError(error),
     );
+  }
+
+  void _onLoginSuccess(WidgetRef ref, EntityType? entityType) {
+    final notifier = ref.read(loginNotifierProvider.notifier);
+    notifier.setAppAccessState(AppAccessState.user);
+    context.pushReplacement(
+      AppRoutes.homeView,
+      extra: entityType,
+    );
+  }
+
+  void _onGuestLoginSuccess(WidgetRef ref) {
+    final notifier = ref.read(loginNotifierProvider.notifier);
+    notifier.setAppAccessState(AppAccessState.guest);
+    context.pushReplacement(AppRoutes.homeView);
   }
 }

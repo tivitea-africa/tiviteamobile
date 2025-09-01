@@ -30,10 +30,18 @@ class FavoritesListingView extends ConsumerWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: favorites.isEmpty
+            ? MainAxisAlignment.center
+            : MainAxisAlignment.start,
         children: [
           20.verticalSpace,
           if (favorites.isEmpty)
-            const Center(child: Text('No Favorites added'))
+            Center(
+              child: Text(
+                'No Favorites added',
+                style: context.theme.textTheme.displaySmall,
+              ),
+            )
           else
             Expanded(
               child: ListView.separated(

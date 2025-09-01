@@ -13,6 +13,8 @@ import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
+import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
+import 'package:tivi_tea/features/login/view_model/login_state.dart';
 import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/features/services/view/widgets/book_now_widget.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
@@ -61,6 +63,8 @@ class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
     final user = ref.read(userNotifierProvider);
     final userIsServiceProvider = user.entityType == EntityType.partner;
     final userIsListingOwner = listing?.partner?.user?.id == user.id;
+    final appAccessState = ref.watch(loginNotifierProvider).appAccessState;
+    final isGuest = appAccessState == AppAccessState.guest;
 
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     final deleteLoadState = ref.watch(partnerServicesNotiferProvider.select(
@@ -136,6 +140,11 @@ class _ListingDetailViewState extends ConsumerState<ListingDetailView> {
                 ),
               ),
             if (!userIsServiceProvider) BookNowContainer(listing: listing!),
+            if (isGuest)
+              AppButton(
+                buttonText: 'Login to continue',
+                onPressed: () => context.push(AppRoutes.loginView),
+              ),
             if (!userIsServiceProvider) 30.verticalSpace,
           ],
         ),

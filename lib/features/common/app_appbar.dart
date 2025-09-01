@@ -8,6 +8,8 @@ import 'package:tivi_tea/features/common/app_image_widget.dart';
 import 'package:tivi_tea/features/common/app_navbar.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/customizable_row.dart';
+import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
+import 'package:tivi_tea/features/login/view_model/login_state.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
@@ -36,6 +38,8 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appAccessState = ref.watch(loginNotifierProvider).appAccessState;
+    final isGuest = appAccessState == AppAccessState.guest;
     final user = ref.read(userRepositoryProvider).getUser();
     return Container(
       padding: padding ??
@@ -65,8 +69,8 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
               },
             ),
             const Spacer(),
-            AppSvgWidget(path: Assets.svgs.notificationIcon),
-            10.horizontalSpace,
+            if (!isGuest) AppSvgWidget(path: Assets.svgs.notificationIcon),
+            if (!isGuest) 10.horizontalSpace,
             user.profilePicture == null
                 ? const CircleAvatar()
                 : Container(
@@ -116,7 +120,8 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   else
                     switch (showBackButton) {
                       true => IconButton(
-                          onPressed: () => onTap != null ? onTap!() : context.pop(),
+                          onPressed: () =>
+                              onTap != null ? onTap!() : context.pop(),
                           icon: const Icon(CupertinoIcons.chevron_back),
                         ),
                       // AppSvgWidget(
@@ -136,7 +141,8 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   ),
                   Row(
                     children: [
-                      AppSvgWidget(path: Assets.svgs.notificationIcon),
+                      if (!isGuest)
+                        AppSvgWidget(path: Assets.svgs.notificationIcon),
                       10.horizontalSpace,
                       user.profilePicture == null
                           ? const CircleAvatar()

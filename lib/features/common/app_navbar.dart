@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_drawer.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
+import 'package:tivi_tea/features/login/view_model/login_notifier.dart';
+import 'package:tivi_tea/features/login/view_model/login_state.dart';
 import 'package:tivi_tea/features/profile/view_model/user_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 import 'package:tivi_tea/l10n/extensions/l10n_extensions.dart';
@@ -51,53 +53,59 @@ class Navbar extends StatelessWidget {
             },
           ),
         ),
-        child: NavigationBar(
-          selectedIndex: navigationShell.currentIndex,
-          backgroundColor: context.theme.primaryColor,
-          height: 80.h,
-          indicatorColor: Colors.transparent,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          destinations: [
-            NavigationDestination(
-              label: context.l10n.home,
-              icon: AppSvgWidget(
-                path: Assets.svgs.homeNavBarIcon,
-                color: const Color(0xFF737380),
-              ),
-              selectedIcon: AppSvgWidget(path: Assets.svgs.homeNavBarIcon),
-            ),
-            NavigationDestination(
-              label: context.l10n.services,
-              icon: AppSvgWidget(path: Assets.svgs.servicesNavBarIcon),
-              selectedIcon: AppSvgWidget(
-                path: Assets.svgs.servicesNavBarIcon,
-                color: Colors.white,
-              ),
-            ),
-            Consumer(
-              builder: (context, ref, _) {
-                final user = ref.watch(userNotifierProvider);
-                final isClient = user.entityType == EntityType.client;
-                return NavigationDestination(
-                  label: isClient ? context.l10n.myFavorites : context.l10n.myListing,
-                  icon: AppSvgWidget(path: Assets.svgs.historyNavBarIcon),
+        child: Consumer(
+          builder: (context, ref, _) {
+            final user = ref.watch(userNotifierProvider);
+            final isClient = user.entityType == EntityType.client;
+            final appAccessState =
+                ref.watch(loginNotifierProvider).appAccessState;
+            return NavigationBar(
+              selectedIndex: navigationShell.currentIndex,
+              backgroundColor: context.theme.primaryColor,
+              height: 80.h,
+              indicatorColor: Colors.transparent,
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+              destinations: [
+                NavigationDestination(
+                  label: context.l10n.home,
+                  icon: AppSvgWidget(
+                    path: Assets.svgs.homeNavBarIcon,
+                    color: const Color(0xFF737380),
+                  ),
+                  selectedIcon: AppSvgWidget(path: Assets.svgs.homeNavBarIcon),
+                ),
+                NavigationDestination(
+                  label: context.l10n.services,
+                  icon: AppSvgWidget(path: Assets.svgs.servicesNavBarIcon),
                   selectedIcon: AppSvgWidget(
-                    path: Assets.svgs.historyNavBarIcon,
+                    path: Assets.svgs.servicesNavBarIcon,
                     color: Colors.white,
                   ),
-                );
-              }
-            ),
-            NavigationDestination(
-              label: context.l10n.profile,
-              icon: AppSvgWidget(path: Assets.svgs.profileNavBarIcon),
-              selectedIcon: AppSvgWidget(
-                path: Assets.svgs.profileNavBarIcon,
-                color: Colors.white,
-              ),
-            ),
-          ],
-          onDestinationSelected: _goBranch,
+                ),
+                if (appAccessState != AppAccessState.guest)
+                  NavigationDestination(
+                    label: isClient
+                        ? context.l10n.myFavorites
+                        : context.l10n.myListing,
+                    icon: AppSvgWidget(path: Assets.svgs.historyNavBarIcon),
+                    selectedIcon: AppSvgWidget(
+                      path: Assets.svgs.historyNavBarIcon,
+                      color: Colors.white,
+                    ),
+                  ),
+                if (appAccessState != AppAccessState.guest)
+                  NavigationDestination(
+                    label: context.l10n.profile,
+                    icon: AppSvgWidget(path: Assets.svgs.profileNavBarIcon),
+                    selectedIcon: AppSvgWidget(
+                      path: Assets.svgs.profileNavBarIcon,
+                      color: Colors.white,
+                    ),
+                  ),
+              ],
+              onDestinationSelected: _goBranch,
+            );
+          },
         ),
       ),
     );

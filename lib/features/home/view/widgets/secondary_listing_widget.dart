@@ -67,12 +67,16 @@ class _SecondaryListingViewState extends ConsumerState<SecondaryListingView> {
           final notifier = ref.read(servicesNotiferProvider.notifier);
           notifier.getListing();
         },
-        child: ListView.separated(
-          controller: _scrollController,
-          itemCount: listings.length,
-          separatorBuilder: (ctx, i) => 10.verticalSpace,
-          itemBuilder: (ctx, i) => SecondaryListingWidget(listing: listings[i]),
-        ),
+        child: listings.isEmpty
+            ? Center(child: Text('No listings found', style: context.theme.textTheme.displaySmall))
+            : ListView.separated(
+                controller: _scrollController,
+                itemCount: listings.length,
+                separatorBuilder: (ctx, i) => 10.verticalSpace,
+                itemBuilder: (ctx, i) => SecondaryListingWidget(
+                  listing: listings[i],
+                ),
+              ),
       ),
     );
   }
@@ -201,8 +205,9 @@ class _ImageDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final listingType = listing.listingType?.enumType;
     final isListingTypeWorkSpace = listingType == CreateListingType.workSpace;
-    final amount =
-        isListingTypeWorkSpace ? listing.rooms?.first.amount : listing.amountPlusFootSoldierFee;
+    final amount = isListingTypeWorkSpace
+        ? listing.rooms?.first.amount
+        : listing.amountPlusFootSoldierFee;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
       child: Column(

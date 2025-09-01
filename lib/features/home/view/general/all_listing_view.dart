@@ -36,8 +36,8 @@ class AllListingsView extends StatelessWidget {
                 Flexible(
                   child: SearchTextField(hintText: context.l10n.search),
                 ),
-                10.horizontalSpace,
-                const FiltersWidget(),
+                // 10.horizontalSpace,
+                // const FiltersWidget(),
               ],
             ),
           ),

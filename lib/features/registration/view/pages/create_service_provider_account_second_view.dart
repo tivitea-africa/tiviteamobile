@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_phone_text_field.dart';
+import 'package:tivi_tea/features/common/app_success_content.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/registration/model/service_provider/service_provider_sign_up_request_body.dart';
@@ -129,9 +133,7 @@ class _CreateServiceProviderAccountSecondViewState
                 obscureText: obscurePass,
                 suffixIcon: AppSvgWidget(
                   onTap: _obscurePass,
-                  path: obscurePass
-                      ? Assets.svgs.eye
-                      : Assets.svgs.eyeSlash,
+                  path: obscurePass ? Assets.svgs.eye : Assets.svgs.eyeSlash,
                   fit: BoxFit.scaleDown,
                 ),
               ),
@@ -194,17 +196,19 @@ class _CreateServiceProviderAccountSecondViewState
                 validateFunction: Validators.accountNumber(),
               ),
               20.verticalSpace,
-              Consumer(
-                builder: (context, ref, _) {
-                  final loadState =
-                      ref.read(registrationNotifierProvider).loadState;
-                  final isLoading = loadState == LoadState.loading;
-                  return AppButton(
-                    onPressed: _submit,
-                    isLoading: isLoading,
-                    isEnabled: isEnabled,
-                  );
-                },
+              Center(
+                child: Consumer(
+                  builder: (context, ref, _) {
+                    final loadState =
+                        ref.watch(registrationNotifierProvider).loadState;
+                    final isLoading = loadState == LoadState.loading;
+                    return AppButton(
+                      onPressed: _submit,
+                      isLoading: isLoading,
+                      isEnabled: isEnabled,
+                    );
+                  },
+                ),
               ),
               50.verticalSpace,
             ],
@@ -229,8 +233,17 @@ class _CreateServiceProviderAccountSecondViewState
     final notifier = ref.read(registrationNotifierProvider.notifier);
     notifier.signUpAsServiceProvider(
       completeData,
-      onSuccess: () => debugLog('Successfully registered'),
-      onError: (error) => debugLog('Error => $error'),
+      onSuccess: () {
+        context.showCustomDialog(
+          child: AppSuccessContent(
+            title: 'Success',
+            subtitle: 'Successfully registered',
+            buttonText: context.l10n.proceedToLogin,
+            onPressed: () => context.pushReplacement(AppRoutes.loginView),
+          ),
+        );
+      },
+      onError: (error) => context.showError(error),
     );
   }
 }

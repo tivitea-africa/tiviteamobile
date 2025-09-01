@@ -162,4 +162,8 @@ class LoginNotifier extends _$LoginNotifier {
       if (onError != null) onError(response.message ?? 'An error occurred');
     }
   }
+
+  void setAppAccessState(AppAccessState appAccessState) {
+    state = state.copyWith(appAccessState: appAccessState);
+  }
 }
