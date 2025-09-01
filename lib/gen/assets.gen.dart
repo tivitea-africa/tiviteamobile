@@ -45,7 +45,8 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/profile_appbar_header_background_image.png
   AssetGenImage get profileAppbarHeaderBackgroundImage => const AssetGenImage(
-      'assets/images/profile_appbar_header_background_image.png');
+    'assets/images/profile_appbar_header_background_image.png',
+  );
 
   /// File path: assets/images/scaffold-arc.png
   AssetGenImage get scaffoldArc =>
@@ -57,18 +58,18 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        appLogo,
-        appLogoBlue,
-        google,
-        homeContainerImage,
-        onboardingSlide1,
-        onboardingSlide2,
-        onboardingSlide3,
-        onboardingSlide4,
-        profileAppbarHeaderBackgroundImage,
-        scaffoldArc,
-        sectionHeader
-      ];
+    appLogo,
+    appLogoBlue,
+    google,
+    homeContainerImage,
+    onboardingSlide1,
+    onboardingSlide2,
+    onboardingSlide3,
+    onboardingSlide4,
+    profileAppbarHeaderBackgroundImage,
+    scaffoldArc,
+    sectionHeader,
+  ];
 }
 
 class $AssetsPlaceholdersGen {
@@ -150,27 +151,27 @@ class $AssetsPlaceholdersGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        avatars,
-        draft,
-        google,
-        image1,
-        image2,
-        image3,
-        jobHunt,
-        jobHunt2,
-        logo,
-        o1,
-        o2,
-        o3,
-        o4,
-        onboard1,
-        onboard2,
-        pfp,
-        published,
-        space1,
-        space2,
-        space3
-      ];
+    avatars,
+    draft,
+    google,
+    image1,
+    image2,
+    image3,
+    jobHunt,
+    jobHunt2,
+    logo,
+    o1,
+    o2,
+    o3,
+    o4,
+    onboard1,
+    onboard2,
+    pfp,
+    published,
+    space1,
+    space2,
+    space3,
+  ];
 }
 
 class $AssetsSvgsGen {
@@ -362,72 +363,72 @@ class $AssetsSvgsGen {
 
   /// List of all assets
   List<String> get values => [
-        activitiesDrawerIcon,
-        addPhoto,
-        arrowRight,
-        arrowUpSplit,
-        backButton,
-        balanceIcon,
-        box,
-        brandBooking,
-        calendar,
-        callOutgoing,
-        camera,
-        checkCircle,
-        chevronLeft,
-        cloudUpload,
-        dashboardDrawerIcon,
-        doc,
-        envelope,
-        eye,
-        eyeSlash,
-        filterIcon,
-        greenCheck,
-        greenBox,
-        hamburger,
-        headphonesDrawerIcon,
-        historyDrawerIcon,
-        historyNavBarIcon,
-        homeNavBarIcon,
-        lightning,
-        listingDrawerIcon,
-        location,
-        lock,
-        logout,
-        mail,
-        mapMarker,
-        messagesDrawerIcon,
-        notificationIcon,
-        paymentDrawerIcon,
-        pendingVerification,
-        profileAdd,
-        profileCamera,
-        profileCoworking,
-        profileLocation,
-        profileMail,
-        profilePassword,
-        profilePhone,
-        profileDrawerIcon,
-        profileEdit,
-        profileIcon,
-        profileNavBarIcon,
-        report,
-        search,
-        servicesNavBarIcon,
-        settingsDrawerIcon,
-        soldiersDrawerIcon,
-        star,
-        successfulVerification,
-        suitcase,
-        taxi,
-        userGroup,
-        verified,
-        video
-      ];
+    activitiesDrawerIcon,
+    addPhoto,
+    arrowRight,
+    arrowUpSplit,
+    backButton,
+    balanceIcon,
+    box,
+    brandBooking,
+    calendar,
+    callOutgoing,
+    camera,
+    checkCircle,
+    chevronLeft,
+    cloudUpload,
+    dashboardDrawerIcon,
+    doc,
+    envelope,
+    eye,
+    eyeSlash,
+    filterIcon,
+    greenCheck,
+    greenBox,
+    hamburger,
+    headphonesDrawerIcon,
+    historyDrawerIcon,
+    historyNavBarIcon,
+    homeNavBarIcon,
+    lightning,
+    listingDrawerIcon,
+    location,
+    lock,
+    logout,
+    mail,
+    mapMarker,
+    messagesDrawerIcon,
+    notificationIcon,
+    paymentDrawerIcon,
+    pendingVerification,
+    profileAdd,
+    profileCamera,
+    profileCoworking,
+    profileLocation,
+    profileMail,
+    profilePassword,
+    profilePhone,
+    profileDrawerIcon,
+    profileEdit,
+    profileIcon,
+    profileNavBarIcon,
+    report,
+    search,
+    servicesNavBarIcon,
+    settingsDrawerIcon,
+    soldiersDrawerIcon,
+    star,
+    successfulVerification,
+    suitcase,
+    taxi,
+    userGroup,
+    verified,
+    video,
+  ];
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsPlaceholdersGen placeholders = $AssetsPlaceholdersGen();
@@ -435,11 +436,7 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -464,10 +461,10 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
-    FilterQuality filterQuality = FilterQuality.low,
+    FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
   }) {
@@ -499,15 +496,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;

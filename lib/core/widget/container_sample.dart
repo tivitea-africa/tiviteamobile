@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:tivi_tea/core/const/app_assets.dart';
@@ -9,10 +8,10 @@ class CustomPageView extends StatefulWidget {
   const CustomPageView({super.key});
 
   @override
-  _CustomPageViewState createState() => _CustomPageViewState();
+  CustomPageViewState createState() => CustomPageViewState();
 }
 
-class _CustomPageViewState extends State<CustomPageView> {
+class CustomPageViewState extends State<CustomPageView> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 

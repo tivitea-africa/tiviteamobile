@@ -26,7 +26,7 @@ class BookingSummarySection extends ConsumerWidget {
             spreadRadius: 5,
             blurRadius: 10,
             offset: const Offset(0.0, 5),
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withValues(alpha: 0.15),
           ),
         ],
       ),

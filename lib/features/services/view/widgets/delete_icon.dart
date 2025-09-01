@@ -12,7 +12,7 @@ class DeleteIcon extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(5.0),
         decoration: BoxDecoration(
-          color: context.theme.primaryColor.withOpacity(0.7),
+          color: context.theme.primaryColor.withValues(alpha: 0.7),
           shape: BoxShape.circle,
         ),
         child: const Icon(

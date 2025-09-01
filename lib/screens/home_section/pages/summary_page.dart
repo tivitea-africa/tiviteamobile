@@ -9,10 +9,10 @@ class SummaryPage extends StatefulWidget {
   const SummaryPage({super.key});
 
   @override
-  _SummaryPageState createState() => _SummaryPageState();
+  SummaryPageState createState() => SummaryPageState();
 }
 
-class _SummaryPageState extends State<SummaryPage> {
+class SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

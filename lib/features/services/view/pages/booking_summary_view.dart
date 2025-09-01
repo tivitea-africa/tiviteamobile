@@ -369,7 +369,7 @@ class DottedWidget extends StatelessWidget {
       borderType: BorderType.RRect,
       radius: Radius.circular(radius),
       padding: padding,
-      color: const Color(0xFF9D9DAA).withOpacity(0.5),
+      color: const Color(0xFF9D9DAA).withValues(alpha: 0.5),
       dashPattern: dashPattern ?? const [5, 2],
       child: child,
     );

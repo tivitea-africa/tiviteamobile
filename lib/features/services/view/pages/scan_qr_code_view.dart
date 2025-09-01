@@ -122,7 +122,7 @@ class _ScanQRCodeViewState extends ConsumerState<ScanQRCodeView> {
             ));
             if (loadState == LoadState.loading) {
               return Container(
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withValues(alpha: 0.7),
                 child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -144,7 +144,7 @@ class _ScanQRCodeViewState extends ConsumerState<ScanQRCodeView> {
           // Error Message
           if (_errorMessage != null)
             Container(
-              color: Colors.black.withOpacity(0.8),
+              color: Colors.black.withValues(alpha: 0.8),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -195,7 +195,7 @@ class _ScanQRCodeViewState extends ConsumerState<ScanQRCodeView> {
   Widget _buildScannerFrame() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.black.withValues(alpha: 0.5),
       ),
       child: Center(
         child: SizedBox(

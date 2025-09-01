@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,6 @@ import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
-import 'package:tivi_tea/core/utils/image_picker_notifier.dart';
 import 'package:tivi_tea/features/common/app_appbar.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_scaffold.dart';
@@ -258,7 +258,9 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
       //footSoldier: "False",
     );
 
-    print(data.toJson());
+    if (kDebugMode) {
+      print(data.toJson());
+    }
 
     notifier.editWorkSpace(
       listingId,
@@ -314,16 +316,16 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
     );
   }
 
-  Future<List<String>> _uploadImages(WidgetRef ref) async {
-    final images = ref.watch(imagePickerNotifierProvider);
-    if (images.isEmpty) {
-      return [];
-    }
-    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
-    final imageUrls = await notifier.uploadImages(images);
+  // Future<List<String>> _uploadImages(WidgetRef ref) async {
+  //   final images = ref.watch(imagePickerNotifierProvider);
+  //   if (images.isEmpty) {
+  //     return [];
+  //   }
+  //   final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+  //   final imageUrls = await notifier.uploadImages(images);
 
-    return imageUrls;
-  }
+  //   return imageUrls;
+  // }
 }
 
 class SpaceAmenitiesSection extends ConsumerWidget {

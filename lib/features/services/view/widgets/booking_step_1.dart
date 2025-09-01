@@ -34,7 +34,7 @@ class _BookingStep1State extends State<BookingStep1> {
   final TextEditingController _timeToController = TextEditingController();
   late TextEditingController _numberOfPeople;
 
-  final FocusNode _dateFromFocusNode = FocusNode();
+  // final FocusNode _dateFromFocusNode = FocusNode();
   final FocusNode _dateToFocusNode = FocusNode();
   final FocusNode _timeFromFocusNode = FocusNode();
   final FocusNode _timeToFocusNode = FocusNode();
@@ -86,7 +86,7 @@ class _BookingStep1State extends State<BookingStep1> {
           widget.listing.name ?? '',
           style: context.theme.textTheme.titleMedium?.copyWith(
             fontSize: 16,
-            color: const Color(0xFF737380).withOpacity(0.6),
+            color: const Color(0xFF737380).withValues(alpha: 0.6),
           ),
         ),
         Text(
@@ -95,7 +95,7 @@ class _BookingStep1State extends State<BookingStep1> {
               : widget.listing.address ?? '',
           style: context.theme.textTheme.displaySmall?.copyWith(
             fontSize: 11,
-            color: const Color(0xFF737380).withOpacity(0.6),
+            color: const Color(0xFF737380).withValues(alpha: 0.6),
           ),
         ),
         15.verticalSpace,

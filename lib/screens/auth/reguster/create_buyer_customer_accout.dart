@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -162,10 +163,14 @@ class CreateBuyerAccount extends StatelessWidget {
                     ),
                     languageCode: "en",
                     onChanged: (phone) {
-                      print(phone.completeNumber);
+                      if (kDebugMode) {
+                        print(phone.completeNumber);
+                      }
                     },
                     onCountryChanged: (country) {
-                      print('Country changed to: ' + country.name);
+                      if (kDebugMode) {
+                        print('Country changed to: ${country.name}');
+                      }
                     },
                   ),
                 ),

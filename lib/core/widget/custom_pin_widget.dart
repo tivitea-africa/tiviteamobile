@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
-import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/core/widget/custom_pin_text_field.dart';
 
 /// A customizable PIN input widget with various configuration options.

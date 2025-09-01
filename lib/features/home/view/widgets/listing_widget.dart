@@ -70,7 +70,7 @@ class __ListingWidgetState extends State<_ListingWidget> {
             BoxShadow(
               offset: const Offset(0.0, 5),
               blurRadius: 3,
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
             )
           ],
         ),

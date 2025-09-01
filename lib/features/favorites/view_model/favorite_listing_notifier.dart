@@ -31,28 +31,30 @@ class FavoriteListingNotifier extends _$FavoriteListingNotifier {
     return FavoriteListingState.initial();
   }
 
-  void _fetchFavoritesFromBackend() async {
-    try {
-      final response = await _repo.getFavoriteListings();
-      final favoriteListings = response.data?.results ?? [];
+  // void _fetchFavoritesFromBackend() async {
+  //   try {
+  //     final response = await _repo.getFavoriteListings();
+  //     final favoriteListings = response.data?.results ?? [];
 
-      await _addToDB(favoriteListings);
+  //     await _addToDB(favoriteListings);
 
-      state = state.copyWith(
-        favorites: favoriteListings,
-        currentPage: response.data?.page ?? 0,
-        totalPages: response.data?.totalPages ?? 1,
-        loadState: LoadState.success,
-      );
-    } catch (e) {
-      state = state.copyWith(loadState: LoadState.error);
-      debugLog(e.toString());
-    }
-  }
+  //     state = state.copyWith(
+  //       favorites: favoriteListings,
+  //       currentPage: response.data?.page ?? 0,
+  //       totalPages: response.data?.totalPages ?? 1,
+  //       loadState: LoadState.success,
+  //     );
+  //   } catch (e) {
+  //     state = state.copyWith(loadState: LoadState.error);
+  //     debugLog(e.toString());
+  //   }
+  // }
 
   Future<void> loadNextPage() async {
     if (state.currentPage >= state.totalPages ||
-        (state.loadState == LoadState.loadmore)) return;
+        (state.loadState == LoadState.loadmore)) {
+      return;
+    }
 
     state = state.copyWith(loadState: LoadState.loadmore);
     try {

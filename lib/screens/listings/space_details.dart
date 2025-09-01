@@ -276,9 +276,9 @@ class _SpaceDetailsState extends State<SpaceDetails> {
                                   TextButton(
                                       style: ButtonStyle(
                                           backgroundColor:
-                                              MaterialStateProperty.all(
+                                              WidgetStateProperty.all(
                                                   const Color(0xffFFFFFF)),
-                                          shape: MaterialStateProperty.all(
+                                          shape: WidgetStateProperty.all(
                                               RoundedRectangleBorder(
                                                   side: const BorderSide(
                                                       color: Color(0xff000050),
@@ -402,8 +402,8 @@ class _SpaceDetailsState extends State<SpaceDetails> {
                   const Gap(7),
                   DropdownMenu(
                     menuStyle: const MenuStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.white),
-                        elevation: MaterialStatePropertyAll(0)),
+                        backgroundColor: WidgetStatePropertyAll(Colors.white),
+                        elevation: WidgetStatePropertyAll(0)),
                     textStyle: GoogleFonts.poppins(
                         color: const Color(0xff0E0E1B),
                         fontWeight: FontWeight.w400,
@@ -454,8 +454,8 @@ class _SpaceDetailsState extends State<SpaceDetails> {
             TextButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(const Color(0xff000050)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        WidgetStateProperty.all(const Color(0xff000050)),
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)))),
                 onPressed: () {},
                 child: Padding(
@@ -471,8 +471,8 @@ class _SpaceDetailsState extends State<SpaceDetails> {
             TextButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(const Color(0xffFFFFFF)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        WidgetStateProperty.all(const Color(0xffFFFFFF)),
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
                         side: const BorderSide(
                             color: Color(0xff000050), width: 2),
                         borderRadius: BorderRadius.circular(30)))),

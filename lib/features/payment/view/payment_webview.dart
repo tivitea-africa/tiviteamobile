@@ -122,7 +122,7 @@ class _WebviewLoader extends StatelessWidget {
       width: context.width,
       height: context.height,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.black.withValues(alpha: 0.5),
       ),
       child: const Center(
         child: CupertinoActivityIndicator(),

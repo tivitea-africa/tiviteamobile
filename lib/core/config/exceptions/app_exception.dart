@@ -58,7 +58,7 @@ class AppException {
     );
   }
 
-  static _mapException(DioExceptionType? error) {
+  static String _mapException(DioExceptionType? error) {
     if (DioExceptionType.connectionTimeout == error ||
         DioExceptionType.receiveTimeout == error ||
         DioExceptionType.sendTimeout == error) {

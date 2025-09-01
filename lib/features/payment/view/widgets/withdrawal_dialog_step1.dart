@@ -8,7 +8,6 @@ import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/payment/model/wallet_details_model.dart';
-import 'package:tivi_tea/features/payment/model/withdrawal_account_model.dart';
 import 'package:tivi_tea/features/payment/view_model/partner/wallet_notifier.dart';
 import 'package:tivi_tea/gen/assets.gen.dart';
 

@@ -114,7 +114,7 @@ extension StringExt on String {
   }
 
   String get firstName {
-    String trimmedName = this.trim();
+    String trimmedName = trim();
     List<String> nameParts = trimmedName.split(RegExp(r'\s+'));
     if (nameParts.length >= 2) {
       return nameParts[1];
@@ -124,20 +124,20 @@ extension StringExt on String {
   }
 
   String addDashes() {
-    if (this.length <= 4) {
+    if (length <= 4) {
       return this;
     }
     StringBuffer result = StringBuffer();
-    for (int i = 0; i < this.length - 4; i += 4) {
-      result.write(this.substring(i, i + 4));
+    for (int i = 0; i < length - 4; i += 4) {
+      result.write(substring(i, i + 4));
       result.write('-');
     }
-    result.write(this.substring(this.length - 4));
+    result.write(substring(length - 4));
     return result.toString();
   }
 
   String addLeadingZero() {
-    if (this.startsWith('0')) {
+    if (startsWith('0')) {
       return this;
     } else {
       return '0$this';

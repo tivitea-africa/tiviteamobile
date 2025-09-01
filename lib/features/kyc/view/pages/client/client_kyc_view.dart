@@ -214,7 +214,7 @@ class _ChooseFileContainer extends StatelessWidget {
             if (selectedImage == null)
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE8E8EB).withOpacity(0.3),
+                  color: const Color(0xFFE8E8EB).withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 padding: const EdgeInsets.only(
@@ -254,7 +254,7 @@ class _ChooseFileContainer extends StatelessWidget {
             10.horizontalSpace,
             Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFE8E8EB).withOpacity(0.3),
+                color: const Color(0xFFE8E8EB).withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),

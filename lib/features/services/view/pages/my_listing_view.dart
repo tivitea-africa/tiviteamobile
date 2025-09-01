@@ -289,7 +289,7 @@ class PsrtnerListingTile extends ConsumerWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 color: listing.status?.toLowerCase() ==
                                         PartnerListingStatus.published.name
-                                    ? const Color(0xFF006400).withOpacity(0.2)
+                                    ? const Color(0xFF006400).withValues(alpha: 0.2)
                                     : const Color(0xFFF9C846),
                               ),
                               child: Text(

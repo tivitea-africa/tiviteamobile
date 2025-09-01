@@ -168,8 +168,8 @@ class _NewListingsState extends State<NewListings> {
                 child: TextButton(
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(const Color(0xff000050)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            WidgetStateProperty.all(const Color(0xff000050)),
+                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)))),
                     onPressed: () {
                       if (selectedValue == "working space") {

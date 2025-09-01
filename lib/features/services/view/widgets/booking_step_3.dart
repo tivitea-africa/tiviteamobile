@@ -36,14 +36,14 @@ class BookingStep3 extends StatelessWidget {
             listing.name ?? '',
             style: context.theme.textTheme.titleMedium?.copyWith(
               fontSize: 16,
-              color: const Color(0xFF737380).withOpacity(0.6),
+              color: const Color(0xFF737380).withValues(alpha: 0.6),
             ),
           ),
         Text(
           listing.address ?? '',
           style: context.theme.textTheme.displaySmall?.copyWith(
             fontSize: 11,
-            color: const Color(0xFF737380).withOpacity(0.6),
+            color: const Color(0xFF737380).withValues(alpha: 0.6),
           ),
         ),
         15.verticalSpace,

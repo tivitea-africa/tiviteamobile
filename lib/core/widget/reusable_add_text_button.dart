@@ -19,8 +19,8 @@ class ReusableAddTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(color),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            backgroundColor: WidgetStateProperty.all(color),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30)))),
         onPressed: () {
           onTap();

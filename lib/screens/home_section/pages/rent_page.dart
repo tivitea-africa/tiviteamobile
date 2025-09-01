@@ -8,10 +8,10 @@ import 'package:tivi_tea/screens/home_section/pages/summary_page.dart';
 
 class RentalPage extends StatefulWidget {
   @override
-  _RentalPageState createState() => _RentalPageState();
+  RentalPageState createState() => RentalPageState();
 }
 
-class _RentalPageState extends State<RentalPage> {
+class RentalPageState extends State<RentalPage> {
   DateTime? _pickupDate;
   DateTime? _returnDate;
 

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
-import 'package:tivi_tea/core/utils/logger.dart';
 
 class AppTextField extends StatefulWidget {
   const AppTextField({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tivi_tea/core/const/app_colors.dart';
 
 class OptionsSelector extends StatefulWidget {
-  const OptionsSelector({Key? key}) : super(key: key);
+  const OptionsSelector({super.key});
 
   @override
   State<OptionsSelector> createState() => _OptionsSelectorState();

@@ -71,7 +71,7 @@ class ProfileAppBar extends ConsumerWidget implements PreferredSizeWidget {
                             child: CircleAvatar(
                               radius: 15,
                               backgroundColor:
-                                  context.theme.primaryColor.withOpacity(
+                                  context.theme.primaryColor.withValues(alpha: 
                                 0.5,
                               ),
                               child: AppSvgWidget(

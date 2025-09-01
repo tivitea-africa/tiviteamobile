@@ -29,7 +29,7 @@ class ChooseFileContainer extends StatelessWidget {
           width: context.width,
           padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 10.h),
           decoration: BoxDecoration(
-            color: const Color(0xFFE8E8EB).withOpacity(0.3),
+            color: const Color(0xFFE8E8EB).withValues(alpha: 0.3),
           ),
           child: Column(
             children: [

@@ -29,7 +29,7 @@ class BottomSheetWidget extends ConsumerWidget {
           width: 135.w,
           height: 135.h,
           decoration: BoxDecoration(
-            color: const Color(0xFFCCCCDC).withOpacity(0.1),
+            color: const Color(0xFFCCCCDC).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8.sp),
           ),
           child: Column(

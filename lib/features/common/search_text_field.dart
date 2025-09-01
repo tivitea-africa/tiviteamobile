@@ -106,7 +106,7 @@ class FiltersWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.sp),
         border: Border.all(
           width: 0.5,
-          color: context.theme.primaryColor.withOpacity(0.5),
+          color: context.theme.primaryColor.withValues(alpha: 0.5),
         ),
       ),
       child: Row(
