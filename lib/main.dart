@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tivi_tea/core/router/router_config.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tivi_tea/l10n/app_localizations.dart';
 import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
 import 'package:tivi_tea/core/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';

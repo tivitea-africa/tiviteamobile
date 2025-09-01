@@ -7,7 +7,7 @@ part of 'onboarding_notifier.dart';
 // **************************************************************************
 
 String _$getRememberUserStatusHash() =>
-    r'b6655587b82718b14f2d9f46aa6942e98c1e3a20';
+    r'ca23740ef1cf88c19b496c62b6aa0b124468e5f3';
 
 /// See also [getRememberUserStatus].
 @ProviderFor(getRememberUserStatus)

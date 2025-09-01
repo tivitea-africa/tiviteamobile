@@ -7,6 +7,8 @@ import 'package:tivi_tea/core/widget/reusbale_containers.dart';
 import 'package:tivi_tea/screens/home_section/pages/summary_page.dart';
 
 class RentalPage extends StatefulWidget {
+  const RentalPage({super.key});
+
   @override
   RentalPageState createState() => RentalPageState();
 }
