@@ -2,9 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'workspace_room_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class WorkspaceRoomModel {
-  // @JsonKey(name: 'room_id')
+  @JsonKey(name: 'room_id')
   final String? id;
 
   @JsonKey(name: 'name')

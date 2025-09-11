@@ -31,6 +31,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final TextEditingController emailNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
@@ -38,9 +40,28 @@ class _LoginViewState extends State<LoginView> {
   bool rememberMe = false;
 
   @override
+  void initState() {
+    super.initState();
+    // Give focus to the first text field when the page initializes
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      emailFocusNode.requestFocus();
+    });
+    
+    // Listen to focus changes to detect keyboard visibility
+    emailFocusNode.addListener(() {
+      setState(() {});
+    });
+    passwordFocusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   void dispose() {
     emailNameController.dispose();
     passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     super.dispose();
   }
 
@@ -79,6 +100,7 @@ class _LoginViewState extends State<LoginView> {
             20.verticalSpace,
             AppTextField(
               controller: emailNameController,
+              focusNode: emailFocusNode,
               label: context.l10n.email,
               hintText: context.l10n.emailHintText,
               suffixIcon: AppSvgWidget(
@@ -89,6 +111,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             AppTextField(
               controller: passwordController,
+              focusNode: passwordFocusNode,
               label: context.l10n.password,
               hintText: context.l10n.enterPass,
               obscureText: obscurePass,
@@ -223,11 +246,19 @@ class _LoginViewState extends State<LoginView> {
           ],
         ),
       ),
-      bottomChildren: Padding(
-        padding: const EdgeInsets.only(bottom: 32.0),
-        child: Consumer(
-          builder: (context, ref, _) {
-            return InkWell(
+      bottomChildren: Consumer(
+        builder: (context, ref, _) {
+          // Check if any text field has focus (keyboard is visible)
+          final isKeyboardVisible = emailFocusNode.hasFocus || passwordFocusNode.hasFocus;
+          
+          // Hide the guest login button when keyboard is visible
+          if (isKeyboardVisible) {
+            return const SizedBox.shrink();
+          }
+          
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 32.0),
+            child: InkWell(
               borderRadius: BorderRadius.circular(20),
               onTap: () => _onGuestLoginSuccess(ref),
               child: Padding(
@@ -239,9 +270,9 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

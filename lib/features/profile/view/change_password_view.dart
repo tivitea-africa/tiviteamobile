@@ -44,7 +44,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appbar: const CustomAppBar(homeScreenAppBar: true),
+      appbar: const CustomAppBar(homeScreenAppBar: false),
       body: Form(
         key: _formKey,
         onChanged: () {

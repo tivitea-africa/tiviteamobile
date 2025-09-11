@@ -17,16 +17,16 @@ WorkspaceRoomModel _$WorkspaceRoomModelFromJson(Map<String, dynamic> json) =>
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       amount: json['amount'] as num?,
-      id: json['id'] as String?,
+      id: json['room_id'] as String?,
     );
 
 Map<String, dynamic> _$WorkspaceRoomModelToJson(WorkspaceRoomModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'description': instance.description,
-      'max_capacity': instance.maxCapacity,
-      'features': instance.features,
-      'images': instance.images,
-      'amount': instance.amount,
+      if (instance.id case final value?) 'room_id': value,
+      if (instance.name case final value?) 'name': value,
+      if (instance.description case final value?) 'description': value,
+      if (instance.maxCapacity case final value?) 'max_capacity': value,
+      if (instance.features case final value?) 'features': value,
+      if (instance.images case final value?) 'images': value,
+      if (instance.amount case final value?) 'amount': value,
     };

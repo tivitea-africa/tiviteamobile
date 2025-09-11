@@ -26,13 +26,13 @@ PostListingModel _$PostListingModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PostListingModelToJson(PostListingModel instance) =>
     <String, dynamic>{
-      'listing_type': instance.listingType,
-      'name': instance.name,
-      'description': instance.description,
-      'address': instance.address,
-      'category_id': instance.categoryId,
-      'images': instance.images,
-      'amenities': instance.amenities,
-      'pricing_option': instance.pricingOption,
-      'room': instance.room,
+      if (instance.listingType case final value?) 'listing_type': value,
+      if (instance.name case final value?) 'name': value,
+      if (instance.description case final value?) 'description': value,
+      if (instance.address case final value?) 'address': value,
+      if (instance.categoryId case final value?) 'category_id': value,
+      if (instance.images case final value?) 'images': value,
+      if (instance.amenities case final value?) 'amenities': value,
+      if (instance.pricingOption case final value?) 'pricing_option': value,
+      if (instance.room case final value?) 'room': value,
     };

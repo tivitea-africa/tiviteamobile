@@ -282,7 +282,7 @@ class __RoomContainerState extends State<_RoomContainer> {
     final images = await _uploadImages(ref);
 
     final room = WorkspaceRoomModel(
-      id: widget.room?.id,
+      id: widget.room?.id ?? '',
       name: nameController.text,
       description: shortDescriptionController.text,
       maxCapacity: int.parse(maxCapacityController.text),

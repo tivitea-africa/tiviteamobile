@@ -40,11 +40,11 @@
 		<key>LSRequiresIPhoneOS</key>
 		<true />
 		<key>NSCameraUsageDescription</key>
-		<string>Your app needs access to the camera to take pictures or record videos.</string>
+		<string>Use your camera to take photos and upload them to your profile</string>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>Your app needs access to the microphone to record audio for videos.</string>
+		<string>Use your microphone to record audio for videos.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>Your app needs access to the photo library to select images.</string>
+		<string>Use your photo library to select images for you to upload.</string>
 		<key>NSAppleMusicUsageDescription</key>
 		<string>This app uses Apple Music access to enhance your experience with music-related features.</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
