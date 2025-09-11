@@ -6,6 +6,7 @@ import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
+import 'package:tivi_tea/features/login/model/general/delete_account_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
 import 'package:tivi_tea/features/profile/model/change_password_model.dart';
@@ -60,24 +61,24 @@ final class GeneralAuthenticationRepo {
     required void Function(User?) saveUserState,
   }) async {
     try {
-      await userRepository?.clearLocalUserInfo();
+      await userRepository?.clearUserSession();
       final result = await restClient.login(data);
       final userLoginData = result.data;
-      
+
       userRepository?.saveToken(userLoginData?.tokens?.access ?? '');
       userRepository?.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
 
       final updatedUser = userLoginData?.user?.copyWith(
         kycIsVerified: userLoginData.kycIsVerified,
-        kycVerificationStatus: userLoginData.kycIsVerified == true 
-            ? KYCVerificationStatus.documentsVerified 
+        kycVerificationStatus: userLoginData.kycIsVerified == true
+            ? KYCVerificationStatus.documentsVerified
             : null,
       );
 
       userRepository?.saveUser(updatedUser);
-      
+
       saveUserState(updatedUser);
-      
+
       return result;
     } on DioException catch (e) {
       return AppException.handleError(e);
@@ -116,6 +117,19 @@ final class GeneralAuthenticationRepo {
     }
   }
 
+  Future<BaseResponse> deleteAccount() async {
+    try {
+      final refreshToken = userRepository?.getRefreshToken() ?? '';
+      final requestBody = DeleteAccountRequestBody(refresh: refreshToken);
+      final result = await restClient.deleteAccount(requestBody);
+      // Clear all local data after successful deletion
+      await userRepository?.clearLocalUserInfo();
+      return result;
+    } on DioException catch (e) {
+      return AppException.handleError(e);
+    }
+  }
+
   Future<BaseResponse> submitClientKyc(ClientKYCRequestBody data) async {
     try {
       final result = await restClient.submitClientKyc(data);
@@ -133,7 +147,7 @@ final class GeneralAuthenticationRepo {
 
   void logout({required VoidCallback onDataCleared}) async {
     try {
-      await userRepository?.clearLocalUserInfo();
+      await userRepository?.clearUserSession();
       onDataCleared();
     } catch (e) {
       debugLog(e.toString());

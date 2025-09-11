@@ -16,4 +16,6 @@ abstract interface class UserRepository {
   KYCVerificationStatus getKYCVerificationStatus();
 
   Future<void> clearLocalUserInfo();
+  Future<void> clearUserSession();
+  Future<void> clearAppleAuthData();
 }

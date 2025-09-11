@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tivi_tea/core/config/extensions/build_context_extensions.dart';
+import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
@@ -50,7 +51,9 @@ class ProfileView extends ConsumerWidget with ProfileItemMixin {
                         profileItems[i].label,
                         style: context.theme.textTheme.displayLarge?.copyWith(
                           fontSize: 16.sp,
-                          color: const Color(0xFF5C5C66),
+                          color: profileItems[i].isDeleteAccount
+                              ? AppColors.danger
+                              : const Color(0xFF5C5C66),
                         ),
                       ),
                     ],

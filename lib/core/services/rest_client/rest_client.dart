@@ -13,6 +13,7 @@ import 'package:tivi_tea/features/home/model/general/listing_response_model.dart
 import 'package:tivi_tea/features/home/model/service_provider/service_provider_dashboard_model.dart';
 import 'package:tivi_tea/features/kyc/model/client_kyc_request_body.dart';
 import 'package:tivi_tea/features/kyc/model/partner_kyc_request_body.dart';
+import 'package:tivi_tea/features/login/model/general/delete_account_request_body.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
 import 'package:tivi_tea/features/login/model/general/login_response_object.dart';
 import 'package:tivi_tea/features/payment/model/create_payment_response.dart';
@@ -68,6 +69,8 @@ abstract class RestClient {
   @POST('/authentication/client/social-auth')
   Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(
       @Body() SocialAuthModel data);
+  @DELETE('/authentication/delete-account')
+  Future<BaseResponse> deleteAccount(@Body() DeleteAccountRequestBody data);
 
   //<====================> Service <====================>
   @GET('/listings/')

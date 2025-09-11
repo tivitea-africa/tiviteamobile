@@ -7,7 +7,7 @@ part of 'workspace_room_notifier.dart';
 // **************************************************************************
 
 String _$workspaceRoomNotifierHash() =>
-    r'4f2dd96dcbd5e27aede8eca8b87603a3cf6791a5';
+    r'0b8923e2e88a9db53aed04f86a36d12521480384';
 
 /// See also [WorkspaceRoomNotifier].
 @ProviderFor(WorkspaceRoomNotifier)

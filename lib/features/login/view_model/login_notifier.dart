@@ -186,6 +186,26 @@ class LoginNotifier extends _$LoginNotifier {
     }
   }
 
+  void deleteAccount({
+    VoidCallback? onSuccess,
+    void Function(String)? onError,
+  }) async {
+    state = state.copyWith(loadState: LoadState.loading);
+    try {
+      final response = await _repo.deleteAccount();
+      if (!response.isSuccess()) {
+        throw response.error?.message ??
+            response.message ??
+            'An error occurred';
+      }
+      state = state.copyWith(loadState: LoadState.success);
+      if (onSuccess != null) onSuccess();
+    } catch (e) {
+      state = state.copyWith(loadState: LoadState.error);
+      if (onError != null) onError(e.toString());
+    }
+  }
+
   void setAppAccessState(AppAccessState appAccessState) {
     state = state.copyWith(appAccessState: appAccessState);
   }

@@ -11,7 +11,6 @@ import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
-import 'package:tivi_tea/features/common/app_checkbox.dart';
 import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';

@@ -100,6 +100,25 @@ class UserRepoImpl implements UserRepository {
   Future<void> clearLocalUserInfo() async {
     await _storage.clear();
   }
+
+  @override
+  Future<void> clearUserSession() async {
+    // Clear user session data but preserve Apple auth data
+    await _storage.delete(HiveKeys.token);
+    await _storage.delete(HiveKeys.refreshToken);
+    await _storage.delete(HiveKeys.user);
+    await _storage.delete(HiveKeys.currentState);
+    await _storage.delete(HiveKeys.kycVerificationStatus);
+    // Note: We intentionally preserve Apple auth data (appleFirstName, appleLastName, appleEmail)
+  }
+
+  @override
+  Future<void> clearAppleAuthData() async {
+    // Clear only Apple auth data
+    await _storage.delete(HiveKeys.appleFirstName);
+    await _storage.delete(HiveKeys.appleLastName);
+    await _storage.delete(HiveKeys.appleEmail);
+  }
 }
 
 final userRepositoryProvider = Provider<UserRepository>(

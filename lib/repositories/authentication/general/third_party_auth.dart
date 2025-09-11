@@ -84,16 +84,9 @@ final class ThirdPartyAuthRepo {
         }
       } else {
         // Apple didn't provide name data (subsequent logins)
-        // Try to get from Firebase user displayName first
-        if (user?.displayName != null) {
-          final nameParts = user!.displayName!.split(' ');
-          firstName = nameParts.isNotEmpty ? nameParts.first : null;
-          lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : null;
-        } else {
-          // Fallback to stored values from local storage
-          firstName = localStorage.get<String>(HiveKeys.appleFirstName);
-          lastName = localStorage.get<String>(HiveKeys.appleLastName);
-        }
+        // Get from stored values in local storage
+        firstName = localStorage.get<String>(HiveKeys.appleFirstName);
+        lastName = localStorage.get<String>(HiveKeys.appleLastName);
         
         // Get email from stored value if not available from Apple
         email = appleCredential.email ?? localStorage.get<String>(HiveKeys.appleEmail);
