@@ -9,4 +9,9 @@ class HiveKeys {
   static const String refreshToken = 'refreshToken';
   static const String favoriteListing = 'favoriteListing';
   static const String kycVerificationStatus = 'kycVerificationStatus';
+  
+  // Apple authentication user data
+  static const String appleFirstName = 'apple_first_name';
+  static const String appleLastName = 'apple_last_name';
+  static const String appleEmail = 'apple_email';
 }

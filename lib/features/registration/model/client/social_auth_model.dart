@@ -14,7 +14,7 @@ class SocialAuthModel {
   @JsonKey(name: 'auth_id')
   final String? authId;
   @JsonKey(name: 'profile_picture')
-  final String? profilePicture;
+  final String profilePicture;
   @JsonKey(name: 'auth_provider')
   final String? authProvider;
 
@@ -24,7 +24,7 @@ class SocialAuthModel {
     this.email,
     this.phoneNumber,
     this.authId,
-    this.profilePicture,
+    this.profilePicture = '',
     this.authProvider,
   });
 

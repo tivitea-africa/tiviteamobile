@@ -1,22 +1,18 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/features/services/model/workspace_room_model.dart';
-import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
 
 part 'workspace_room_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class WorkspaceRoomNotifier extends _$WorkspaceRoomNotifier {
   @override
-  Set<WorkspaceRoomModel> build() => {WorkspaceRoomModel()};
+  Set<WorkspaceRoomModel> build() => {};
 
   void addRoom() => state = {...state, WorkspaceRoomModel()};
 
   void addRoomFromList(List<WorkspaceRoomModel> rooms) {
-    for (var room in rooms) {
-      final notifier = ref.read(amenitiesNotifierProvider.notifier);
-      notifier.addNewAmenityFromList(room.features ?? []);
-    }
-    state = {...rooms, ...state};
+    // Clear existing rooms and add the new ones
+    state = rooms.toSet();
   }
 
   void updateRoom(int index, WorkspaceRoomModel room) {

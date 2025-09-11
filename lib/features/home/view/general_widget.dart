@@ -12,9 +12,15 @@ class GeneralHomeScreeen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userNotifierProvider);
     final entityType = user.entityType ?? EntityType.client;
-    return switch (entityType) {
-      EntityType.partner => const ServiceProviderHomeScreen(),
-      EntityType.client => const CustomerHomeScreen(),
-    };
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        return;
+      },
+      child: switch (entityType) {
+        EntityType.partner => const ServiceProviderHomeScreen(),
+        EntityType.client => const CustomerHomeScreen(),
+      },
+    );
   }
 }

@@ -13,7 +13,7 @@ SocialAuthModel _$SocialAuthModelFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String?,
       phoneNumber: json['phone_number'] as String?,
       authId: json['auth_id'] as String?,
-      profilePicture: json['profile_picture'] as String?,
+      profilePicture: json['profile_picture'] as String? ?? '',
       authProvider: json['auth_provider'] as String?,
     );
 

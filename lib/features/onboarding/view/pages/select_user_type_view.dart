@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -28,10 +29,16 @@ class _SelectUserTypeViewState extends State<SelectUserTypeView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.l10n.howToRegister,
+            context.l10n.howToContinue,
             style: context.theme.textTheme.titleMedium,
           ),
           20.verticalSpace,
+          _UserTypeContainer(
+            userType: AppUserType.guest,
+            onTap: (type) => _selectUserType(type),
+            isSelected: selectedAppUserType == AppUserType.guest,
+          ),
+          10.verticalSpace,
           _UserTypeContainer(
             userType: AppUserType.serviceProvier,
             onTap: (type) => _selectUserType(type),
@@ -42,6 +49,27 @@ class _SelectUserTypeViewState extends State<SelectUserTypeView> {
             userType: AppUserType.customer,
             onTap: (type) => _selectUserType(type),
             isSelected: selectedAppUserType == AppUserType.customer,
+          ),
+          20.verticalSpace,
+          Center(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: context.l10n.alreadyHaveAccount,
+                style: context.theme.textTheme.displaySmall,
+                children: [
+                  TextSpan(
+                    text: context.l10n.login,
+                    style: context.theme.textTheme.displaySmall?.copyWith(
+                      color: const Color(0xFFEC8305),
+                      fontWeight: FontWeight.w700,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => context.push(AppRoutes.loginView),
+                  ),
+                ],
+              ),
+            ),
           ),
           100.verticalSpace,
           AppButton(onPressed: _navigateToCreateAccountView),
@@ -61,6 +89,8 @@ class _SelectUserTypeViewState extends State<SelectUserTypeView> {
     switch (selectedAppUserType) {
       case AppUserType.serviceProvier:
         context.push(AppRoutes.createServiceProviderAccount);
+      case AppUserType.guest:
+        context.go(AppRoutes.homeView);
       default:
         context.push(AppRoutes.createCustomerAccount);
     }
@@ -103,6 +133,10 @@ class _UserTypeContainer extends StatelessWidget {
                 AppSvgWidget(path: Assets.svgs.suitcase),
                 10.horizontalSpace,
                 Text(context.l10n.serviceProvider),
+              ] else if (userType == AppUserType.guest) ...[
+                AppSvgWidget(path: Assets.svgs.listingDrawerIcon),
+                10.horizontalSpace,
+                Text(context.l10n.browseListings),
               ] else ...[
                 AppSvgWidget(path: Assets.svgs.profileIcon),
                 10.horizontalSpace,

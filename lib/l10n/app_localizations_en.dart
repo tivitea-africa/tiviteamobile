@@ -52,6 +52,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get howToRegister => 'How do you want to register?';
 
   @override
+  String get howToContinue => 'How do you want to continue?';
+
+  @override
+  String get browseListings => 'Browse Listings';
+
+  @override
   String get serviceProvider => 'Service Provider';
 
   @override

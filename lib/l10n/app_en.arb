@@ -51,6 +51,14 @@
   "@howToRegister": {
     "description": "Select user type text"
   },
+  "howToContinue": "How do you want to continue?",
+  "@howToContinue": {
+    "description": "How do you want to continue text"
+  },
+  "browseListings": "Browse Listings",
+  "@browseListings": {
+    "description": "Browse Listings text"
+  },
   "serviceProvider": "Service Provider",
   "@serviceProvider": {
     "description": "Service Provider text"

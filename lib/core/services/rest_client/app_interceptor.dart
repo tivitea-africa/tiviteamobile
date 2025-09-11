@@ -58,9 +58,9 @@ class DioInterceptor extends Interceptor {
     debugLog('[ERROR RESPONSE TYPE] ${err.requestOptions.responseType}');
     
     if (err.response?.data != null &&
-        err.response?.data['message'] != "Invalid creditials.") {
+        err.response?.data?['message'] != "Invalid creditials.") {
       if (err.response != null &&
-          ((err.response!.statusCode == 401 && err.response!.data['message'].contains("User not verified") == false) ||
+          ((err.response!.statusCode == 401 && err.response?.data?['message']?.contains("User not verified") == false) ||
               err.response!.statusCode == 403)) {
         await _refreshToken(err, handler, dio, userRepository);
         return;

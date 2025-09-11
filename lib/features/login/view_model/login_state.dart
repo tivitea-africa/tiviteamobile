@@ -10,6 +10,7 @@ class LoginState {
     required this.forgotPasswordLoadState,
     required this.changePasswordLoadState,
     required this.signInWithGoogleLoadState,
+    required this.signInWithAppleLoadState,
   });
   factory LoginState.initial() {
     return LoginState(
@@ -19,6 +20,7 @@ class LoginState {
       forgotPasswordLoadState: LoadState.idle,
       changePasswordLoadState: LoadState.idle,
       signInWithGoogleLoadState: LoadState.idle,
+      signInWithAppleLoadState: LoadState.idle,
     );
   }
   final LoadState loadState;
@@ -26,6 +28,7 @@ class LoginState {
   final LoadState forgotPasswordLoadState;
   final LoadState changePasswordLoadState;
   final LoadState signInWithGoogleLoadState;
+  final LoadState signInWithAppleLoadState;
   final AppAccessState appAccessState;
   LoginState copyWith({
     LoadState? loadState,
@@ -33,6 +36,7 @@ class LoginState {
     LoadState? forgotPasswordLoadState,
     LoadState? changePasswordLoadState,
     LoadState? signInWithGoogleLoadState,
+    LoadState? signInWithAppleLoadState,
     AppAccessState? appAccessState,
   }) {
     return LoginState(
@@ -45,6 +49,8 @@ class LoginState {
           changePasswordLoadState ?? this.changePasswordLoadState,
       signInWithGoogleLoadState:
           signInWithGoogleLoadState ?? this.signInWithGoogleLoadState,
+      signInWithAppleLoadState:
+          signInWithAppleLoadState ?? this.signInWithAppleLoadState,
     );
   }
 }

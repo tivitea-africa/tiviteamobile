@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
+import 'package:tivi_tea/core/services/local_storage/local_storage_impl.dart';
 
 import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/features/login/model/general/login_request_object.dart';
@@ -31,6 +32,7 @@ class LoginNotifier extends _$LoginNotifier {
     );
     _thirdPartyAuthRepo = ThirdPartyAuthRepo(
       googleSignIn: GoogleSignIn(),
+      localStorage: ref.read(localDB),
     );
     return LoginState.initial();
   }
@@ -159,6 +161,27 @@ class LoginNotifier extends _$LoginNotifier {
       state = state.copyWith(signInWithGoogleLoadState: LoadState.success);
     } else {
       state = state.copyWith(signInWithGoogleLoadState: LoadState.error);
+      if (onError != null) onError(response.message ?? 'An error occurred');
+    }
+  }
+
+  void signInWithApple({
+    void Function(EntityType?)? onSuccess,
+    void Function(String)? onError,
+  }) async {
+    state = state.copyWith(signInWithAppleLoadState: LoadState.loading);
+    final response = await _thirdPartyAuthRepo.signInWithApple();
+    if (response.isSuccess()) {
+      if (response.data != null) {
+        signUpWithSocialAuth(
+          response.data!,
+          onSuccess: onSuccess,
+          onError: onError,
+        );
+      }
+      state = state.copyWith(signInWithAppleLoadState: LoadState.success);
+    } else {
+      state = state.copyWith(signInWithAppleLoadState: LoadState.error);
       if (onError != null) onError(response.message ?? 'An error occurred');
     }
   }

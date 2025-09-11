@@ -176,7 +176,7 @@ class _CreateCustomerAccountState extends State<CreateCustomerAccount> {
                   children: [
                     TextSpan(
                       text: context.l10n.login,
-                      style: context.theme.textTheme.bodySmall?.copyWith(
+                      style: context.theme.textTheme.displaySmall?.copyWith(
                         color: const Color(0xFFEC8305),
                         fontWeight: FontWeight.w700,
                       ),

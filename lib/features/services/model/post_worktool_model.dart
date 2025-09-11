@@ -41,5 +41,16 @@ class WorkToolListing {
 
   factory WorkToolListing.fromJson(Map<String, dynamic> json) => _$WorkToolListingFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WorkToolListingToJson(this);
+  Map<String, dynamic> toJson() {
+    final json = <String, dynamic>{};
+    if (listingType != null) json['listing_type'] = listingType;
+    if (name != null) json['name'] = name;
+    if (description != null) json['description'] = description;
+    if (address != null) json['address'] = address;
+    if (categoryId != null) json['category_id'] = categoryId;
+    if (images != null) json['images'] = images;
+    if (amount != null) json['amount'] = amount;
+    if (footSoldier != null) json['foot_soldier'] = footSoldier;
+    return json;
+  }
 }

@@ -172,6 +172,18 @@ abstract class AppLocalizations {
   /// **'How do you want to register?'**
   String get howToRegister;
 
+  /// How do you want to continue text
+  ///
+  /// In en, this message translates to:
+  /// **'How do you want to continue?'**
+  String get howToContinue;
+
+  /// Browse Listings text
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Listings'**
+  String get browseListings;
+
   /// Service Provider text
   ///
   /// In en, this message translates to:

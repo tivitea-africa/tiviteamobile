@@ -8,7 +8,6 @@ import 'package:tivi_tea/features/common/app_text_field.dart';
 import 'package:tivi_tea/features/home/view/service_provider/service_provider_dashboard.dart';
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/model/workspace_room_model.dart';
-import 'package:tivi_tea/features/services/view/pages/create_new_listing_second_view.dart';
 import 'package:tivi_tea/features/services/view/widgets/custom_dropdown.dart';
 import 'package:tivi_tea/features/services/view/widgets/select_room_images_view.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
@@ -221,7 +220,10 @@ class __RoomContainerState extends State<_RoomContainer> {
             hintText: context.l10n.price,
             keyboardType: TextInputType.number,
           ),
-          const SpaceAmenitiesSection(),
+          RoomAmenitiesSection(
+            roomIndex: widget.index,
+            initialFeatures: widget.room?.features ?? [],
+          ),
           20.verticalSpace,
           const SelectedRoomImagesView(),
           if (canSave)
@@ -276,11 +278,6 @@ class __RoomContainerState extends State<_RoomContainer> {
   void _submit(WidgetRef ref) async {
     final notifier = ref.watch(workspaceRoomNotifierProvider.notifier);
     isLoading = true;
-    final amenities = ref.watch(amenitiesNotifierProvider);
-    final selectedAmenities = amenities
-        .where((amenity) => amenity.isSelected)
-        .map((amenity) => amenity.label)
-        .toList();
 
     final images = await _uploadImages(ref);
 
@@ -290,7 +287,7 @@ class __RoomContainerState extends State<_RoomContainer> {
       description: shortDescriptionController.text,
       maxCapacity: int.parse(maxCapacityController.text),
       amount: double.parse(amountController.text),
-      features: selectedAmenities,
+      features: widget.room?.features ?? [], // Use room-specific features
       images: images,
     );
     notifier.updateRoom(widget.index, room);
@@ -298,5 +295,173 @@ class __RoomContainerState extends State<_RoomContainer> {
     isLoading = false;
     isSaved = true;
     setState(() {});
+  }
+}
+
+class RoomAmenitiesSection extends ConsumerStatefulWidget {
+  final int roomIndex;
+  final List<String> initialFeatures;
+  
+  const RoomAmenitiesSection({
+    super.key,
+    required this.roomIndex,
+    required this.initialFeatures,
+  });
+
+  @override
+  ConsumerState<RoomAmenitiesSection> createState() => _RoomAmenitiesSectionState();
+}
+
+class _RoomAmenitiesSectionState extends ConsumerState<RoomAmenitiesSection> {
+  late List<String> selectedFeatures;
+  
+  @override
+  void initState() {
+    super.initState();
+    selectedFeatures = List.from(widget.initialFeatures);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final amenities = ref.watch(amenitiesNotifierProvider);
+    final amenityLabels = amenities.map((a) => a.label).toList();
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          context.l10n.amenities,
+          style: context.theme.textTheme.displayLarge?.copyWith(
+            color: context.theme.primaryColor,
+            fontSize: 20.sp,
+          ),
+        ),
+        20.verticalSpace,
+        Column(
+          children: List.generate(
+            (amenityLabels.length / 2).ceil(),
+            (rowIndex) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      child: _RoomAmenityCheckbox(
+                        onChanged: () => _toggleAmenity(
+                          amenityLabels[rowIndex * 2],
+                        ),
+                        label: amenityLabels[rowIndex * 2],
+                        isSelected: selectedFeatures.contains(amenityLabels[rowIndex * 2]),
+                      ),
+                    ),
+                  ),
+                  if (rowIndex * 2 + 1 < amenityLabels.length)
+                    Expanded(
+                      child: SizedBox(
+                        child: _RoomAmenityCheckbox(
+                          onChanged: () => _toggleAmenity(
+                            amenityLabels[rowIndex * 2 + 1],
+                          ),
+                          label: amenityLabels[rowIndex * 2 + 1],
+                          isSelected: selectedFeatures.contains(amenityLabels[rowIndex * 2 + 1]),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _toggleAmenity(String amenity) {
+    setState(() {
+      if (selectedFeatures.contains(amenity)) {
+        selectedFeatures.remove(amenity);
+      } else {
+        selectedFeatures.add(amenity);
+      }
+    });
+    
+    // Update the room with the new features
+    _updateRoomFeatures();
+  }
+
+  void _updateRoomFeatures() {
+    final notifier = ref.read(workspaceRoomNotifierProvider.notifier);
+    final rooms = ref.read(workspaceRoomNotifierProvider).toList();
+    if (widget.roomIndex < rooms.length) {
+      final currentRoom = rooms[widget.roomIndex];
+      final updatedRoom = WorkspaceRoomModel(
+        id: currentRoom.id,
+        name: currentRoom.name,
+        description: currentRoom.description,
+        maxCapacity: currentRoom.maxCapacity,
+        amount: currentRoom.amount,
+        features: selectedFeatures,
+        images: currentRoom.images,
+      );
+      notifier.updateRoom(widget.roomIndex, updatedRoom);
+    }
+  }
+}
+
+class _RoomAmenityCheckbox extends StatefulWidget {
+  final VoidCallback onChanged;
+  final String label;
+  final bool isSelected;
+  const _RoomAmenityCheckbox({
+    required this.label,
+    required this.onChanged,
+    this.isSelected = false,
+  });
+
+  @override
+  State<_RoomAmenityCheckbox> createState() => __RoomAmenityCheckboxState();
+}
+
+class __RoomAmenityCheckboxState extends State<_RoomAmenityCheckbox> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: widget.onChanged,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: widget.isSelected
+                    ? context.theme.primaryColor
+                    : Colors.white,
+                border: Border.all(
+                  color: const Color(0xFFD8D8DD),
+                ),
+                borderRadius: BorderRadiusDirectional.circular(5),
+              ),
+              child: const Center(
+                child: Icon(
+                  CupertinoIcons.check_mark,
+                  color: Colors.white,
+                  size: 15,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 5.w),
+              child: Text(
+                widget.label,
+                style: context.theme.textTheme.displayLarge?.copyWith(
+                  fontSize: 12.sp,
+                  color: const Color(0xFF737380),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

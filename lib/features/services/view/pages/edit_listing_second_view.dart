@@ -18,6 +18,8 @@ import 'package:tivi_tea/features/home/model/extensions/room_model_extension.dar
 import 'package:tivi_tea/features/services/model/enums.dart';
 import 'package:tivi_tea/features/services/model/post_listing_model.dart';
 import 'package:tivi_tea/features/services/model/post_worktool_model.dart';
+import 'package:tivi_tea/features/services/model/workspace_room_model.dart';
+import 'package:tivi_tea/features/home/model/general/listing_response_model.dart';
 import 'package:tivi_tea/features/services/view/widgets/add_room_section.dart';
 import 'package:tivi_tea/features/services/view_model/amenities_notifier.dart';
 import 'package:tivi_tea/features/services/view_model/service_provider/partner_services_notifier.dart';
@@ -63,6 +65,12 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
             [],
       );
 
+      // Initialize global amenities with selected listing amenities
+      if (selectedListing?.amenities != null) {
+        final amenitiesNotifier = ref.read(amenitiesNotifierProvider.notifier);
+        amenitiesNotifier.initializeWithSelectedAmenities(selectedListing!.amenities!);
+      }
+      
       nameController = TextEditingController(text: selectedListing?.name);
       shortDescription = TextEditingController(
         text: selectedListing?.description,
@@ -160,7 +168,9 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
                 20.verticalSpace,
               ],
               if (widget.listingType == CreateListingType.workSpace) ...[
-                50.verticalSpace,
+                20.verticalSpace,
+                const SpaceAmenitiesSection(),
+                30.verticalSpace,
                 const AddRoomSection(),
               ] else ...[
                 20.verticalSpace,
@@ -205,10 +215,11 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
                         child: AppButton(
                           isLoading: isLoading,
                           buttonText: 'Edit Listing',
-                          onPressed: () => widget.listingType ==
-                                  CreateListingType.workSpace
-                              ? _editWorkSpace(ref, selectedListing?.id ?? '')
-                              : _editWorkTool(ref, selectedListing?.id ?? ''),
+                          onPressed: () => selectedListing != null
+                              ? (widget.listingType == CreateListingType.workSpace
+                                  ? _editWorkSpace(ref, selectedListing.id!, selectedListing)
+                                  : _editWorkTool(ref, selectedListing.id!, selectedListing))
+                              : null,
                         ),
                       );
                     },
@@ -235,30 +246,122 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
     );
   }
 
-  void _editWorkSpace(WidgetRef ref, String listingId) async {
-    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
+  // Helper method to build PostListingModel with only modified fields (no null values)
+  PostListingModel _buildModifiedWorkSpaceModel(ListingResponseModel selectedListing) {
     final rooms = ref.watch(workspaceRoomNotifierProvider);
     final amenities = ref.watch(amenitiesNotifierProvider);
     final selectedAmenities = amenities
         .where((amenity) => amenity.isSelected)
         .map((amenity) => amenity.label)
         .toList();
+    
+    // Build the model with only modified fields
+    final Map<String, dynamic> modelData = {};
+    
+    // Always include these fields
+    modelData['category_id'] = widget.categoryId;
+    
+    // Only include modified fields
+    if (nameController.text != selectedListing.name) {
+      modelData['name'] = nameController.text;
+    }
+    if (shortDescription.text != selectedListing.description) {
+      modelData['description'] = shortDescription.text;
+    }
+    if (address.text != selectedListing.address) {
+      modelData['address'] = address.text;
+    }
+    if (pricingType != selectedListing.pricingOption) {
+      modelData['pricing_option'] = pricingType;
+    }
+    if (_amenitiesChanged(selectedListing.amenities, selectedAmenities)) {
+      modelData['amenities'] = selectedAmenities;
+    }
+    if (_roomsChanged(selectedListing.rooms, rooms.toList())) {
+      modelData['room'] = rooms.toList();
+    }
+
+    // Create model with only the fields present in the map
+    return PostListingModel(
+      // categoryId: modelData['category_id'],
+      name: modelData['name'],
+      description: modelData['description'],
+      address: modelData['address'],
+      pricingOption: modelData['pricing_option'],
+      amenities: modelData['amenities']?.cast<String>(),
+      room: modelData['room']?.cast<WorkspaceRoomModel>(),
+    );
+  }
+
+  // Helper method to build WorkToolListing with only modified fields (no null values)
+  WorkToolListing _buildModifiedWorkToolModel(ListingResponseModel selectedListing) {
+    // Build the model with only modified fields
+    final Map<String, dynamic> modelData = {};
+    
+    // Always include these fields
+    modelData['category_id'] = widget.categoryId;
+    
+    // Only include modified fields
+    if (nameController.text != selectedListing.name) {
+      modelData['name'] = nameController.text;
+    }
+    if (shortDescription.text != selectedListing.description) {
+      modelData['description'] = shortDescription.text;
+    }
+    if (address.text != selectedListing.address) {
+      modelData['address'] = address.text;
+    }
+    if (hasFootSoldier.value != selectedListing.footSoldier) {
+      modelData['foot_soldier'] = hasFootSoldier.value ? "True" : "False";
+    }
+    if (amount.text != selectedListing.amount?.toString()) {
+      modelData['amount'] = num.tryParse(amount.text);
+    }
+
+    // Create model with only the fields present in the map
+    return WorkToolListing(
+      categoryId: modelData['category_id'],
+      name: modelData['name'],
+      description: modelData['description'],
+      address: modelData['address'],
+      footSoldier: modelData['foot_soldier'],
+      amount: modelData['amount'],
+    );
+  }
+
+  // Helper methods to check if fields have changed
+  bool _amenitiesChanged(List<String>? original, List<String> current) {
+    if (original == null && current.isEmpty) return false;
+    if (original == null || current.isEmpty) return true;
+    
+    // Sort both lists for comparison
+    final originalSorted = List<String>.from(original)..sort();
+    final currentSorted = List<String>.from(current)..sort();
+    
+    return originalSorted.toString() != currentSorted.toString();
+  }
+  
+  bool _roomsChanged(List<Room>? original, List<WorkspaceRoomModel> current) {
+    if (original == null && current.isEmpty) return false;
+    if (original == null || current.isEmpty) return true;
+    
+    // Convert original rooms to WorkspaceRoomModel for comparison
+    final originalRooms = original.map((r) => r.toWorkspaceRoomModel()).toList();
+    final originalJson = originalRooms.map((r) => r.toJson()).toList();
+    final currentJson = current.map((r) => r.toJson()).toList();
+    
+    return originalJson.toString() != currentJson.toString();
+  }
+
+  void _editWorkSpace(WidgetRef ref, String listingId, ListingResponseModel selectedListing) async {
+    final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     //final images = await _uploadImages(ref);
 
-    final data = PostListingModel(
-      name: nameController.text,
-      description: shortDescription.text,
-      address: address.text,
-      amenities: selectedAmenities,
-      categoryId: widget.categoryId,
-      room: rooms.toList(),
-      //images: images,
-      listingType: widget.listingType.requestBodyName,
-      pricingOption: pricingType,
-      //footSoldier: "False",
-    );
+    // Build model with only modified fields
+    final data = _buildModifiedWorkSpaceModel(selectedListing);
 
     if (kDebugMode) {
+      print('Modified fields only:');
       print(data.toJson());
     }
 
@@ -275,20 +378,17 @@ class _EditListingSecondViewState extends ConsumerState<EditListingSecondView> {
     );
   }
 
-  void _editWorkTool(WidgetRef ref, String listingId) async {
+  void _editWorkTool(WidgetRef ref, String listingId, ListingResponseModel selectedListing) async {
     final notifier = ref.read(partnerServicesNotiferProvider.notifier);
     //final images = await _uploadImages(ref);
 
-    final data = WorkToolListing(
-      name: nameController.text,
-      description: shortDescription.text,
-      address: address.text,
-      categoryId: widget.categoryId,
-      //images: images,
-      //listingType: widget.listingType.requestBodyName,
-      footSoldier: hasFootSoldier.value ? "True" : "False",
-      amount: num.tryParse(amount.text),
-    );
+    // Build model with only modified fields
+    final data = _buildModifiedWorkToolModel(selectedListing);
+
+    if (kDebugMode) {
+      print('Modified fields only:');
+      print(data.toJson());
+    }
 
     notifier.editWorkTool(
       listingId,
@@ -503,3 +603,4 @@ class __AmenityCheckboxState extends State<_AmenityCheckbox> {
     );
   }
 }
+

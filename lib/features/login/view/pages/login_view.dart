@@ -8,6 +8,7 @@ import 'package:tivi_tea/core/const/app_colors.dart';
 import 'package:tivi_tea/core/router/app_routes.dart';
 import 'package:tivi_tea/core/theme/extensions/theme_extensions.dart';
 import 'package:tivi_tea/core/utils/enums.dart';
+import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
 import 'package:tivi_tea/features/common/app_checkbox.dart';
@@ -172,6 +173,35 @@ class _LoginViewState extends State<LoginView> {
               },
             ),
             10.verticalSpace,
+            Consumer(
+              builder: (context, ref, _) {
+                final loadState = ref.watch(
+                  loginNotifierProvider.select(
+                    (value) => value.signInWithAppleLoadState,
+                  ),
+                );
+                final isLoading = loadState == LoadState.loading;
+                return AppButton(
+                  buttonText: 'Continue with Apple',
+                  isLoading: isLoading,
+                  backgroundColor: Colors.black,
+                  borderColor: Colors.black,
+                  textStyle: context.theme.textTheme.displaySmall?.copyWith(
+                    color: Colors.white,
+                  ),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.only(right: 10.w),
+                    child: Icon(
+                      Icons.apple,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                  onPressed: () => _signInWithApple(ref),
+                );
+              },
+            ),
+            10.verticalSpace,
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
@@ -239,18 +269,26 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  void _signInWithApple(WidgetRef ref) {
+    final notifier = ref.read(loginNotifierProvider.notifier);
+    notifier.signInWithApple(
+      onSuccess: (entityType) => _onLoginSuccess(ref, entityType),
+      onError: (error) {
+        debugLog(error);
+        context.showError(error);
+      },
+    );
+  }
+
   void _onLoginSuccess(WidgetRef ref, EntityType? entityType) {
     final notifier = ref.read(loginNotifierProvider.notifier);
     notifier.setAppAccessState(AppAccessState.user);
-    context.pushReplacement(
-      AppRoutes.homeView,
-      extra: entityType,
-    );
+    context.go(AppRoutes.homeView, extra: entityType);
   }
 
   void _onGuestLoginSuccess(WidgetRef ref) {
     final notifier = ref.read(loginNotifierProvider.notifier);
     notifier.setAppAccessState(AppAccessState.guest);
-    context.pushReplacement(AppRoutes.homeView);
+    context.go(AppRoutes.homeView);
   }
 }
