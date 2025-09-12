@@ -18,4 +18,5 @@ abstract interface class UserRepository {
   Future<void> clearLocalUserInfo();
   Future<void> clearUserSession();
   Future<void> clearAppleAuthData();
+  Future<void> clearGoogleAuthData();
 }

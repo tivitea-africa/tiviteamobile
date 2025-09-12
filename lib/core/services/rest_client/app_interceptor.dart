@@ -2,13 +2,20 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:tivi_tea/core/config/dio_config.dart';
+import 'package:tivi_tea/core/services/token_expiration_service.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/repositories/user/user_repo.dart';
 
 class DioInterceptor extends Interceptor {
   final Dio dio;
   final UserRepository userRepository;
-  DioInterceptor({required this.dio, required this.userRepository});
+  final TokenExpirationService tokenExpirationService;
+
+  DioInterceptor({
+    required this.dio,
+    required this.userRepository,
+    required this.tokenExpirationService,
+  });
 
   @override
   FutureOr<dynamic> onRequest(
@@ -56,11 +63,14 @@ class DioInterceptor extends Interceptor {
     debugLog('[ERROR STATUS] ${err.response?.statusCode}');
     debugLog('[ERROR PATH] ${err.requestOptions.path}');
     debugLog('[ERROR RESPONSE TYPE] ${err.requestOptions.responseType}');
-    
+
     if (err.response?.data != null &&
         err.response?.data?['message'] != "Invalid creditials.") {
       if (err.response != null &&
-          ((err.response!.statusCode == 401 && err.response?.data?['message']?.contains("User not verified") == false) ||
+          ((err.response!.statusCode == 401 &&
+                  err.response?.data?['message']
+                          ?.contains("User not verified") ==
+                      false) ||
               err.response!.statusCode == 403)) {
         await _refreshToken(err, handler, dio, userRepository);
         return;
@@ -116,6 +126,8 @@ class DioInterceptor extends Interceptor {
       return handleError(handler, error, dio);
     } on DioException catch (e) {
       debugLog('refresh error===>> $e');
+      // Emit token expiration event when refresh fails
+      tokenExpirationService.emitTokenExpired();
       //ref.read(profileNotifierProvider.notifier).logout();
       return;
     }

@@ -14,4 +14,9 @@ class HiveKeys {
   static const String appleFirstName = 'apple_first_name';
   static const String appleLastName = 'apple_last_name';
   static const String appleEmail = 'apple_email';
+
+  // Google authentication user data
+  static const String googleFirstName = 'google_first_name';
+  static const String googleLastName = 'google_last_name';
+  static const String googleEmail = 'google_email';
 }

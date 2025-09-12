@@ -26,29 +26,31 @@ final class GeneralAuthenticationRepo {
   });
 
   Future<BaseResponse<SocialAuthResponse>> signUpWithSocialAuth(
-    SocialAuthModel data,
-  ) async {
+    SocialAuthModel data, {
+    required void Function(User?) saveUserState,
+  }) async {
     try {
       final result = await restClient.signUpWithSocialAuth(data);
       final userLoginData = result.data;
       userRepository?.saveToken(userLoginData?.tokens?.access ?? '');
       userRepository?.saveRefreshToken(userLoginData?.tokens?.refresh ?? '');
 
-      userRepository?.saveUser(userLoginData?.user);
+      await userRepository?.saveUser(userLoginData?.user);
 
       final user = userRepository?.getUser();
-      userRepository?.saveUser(
-        user?.copyWith(kycIsVerified: userLoginData?.kycIsVerified),
-      );
+      User? updatedUser;
+      updatedUser = user?.copyWith(kycIsVerified: userLoginData?.kycIsVerified);
+      await userRepository?.saveUser(updatedUser);
 
       if (userLoginData?.kycIsVerified == true) {
         final user = userRepository?.getUser();
-        userRepository?.saveUser(
-          user?.copyWith(
-            kycVerificationStatus: KYCVerificationStatus.documentsVerified,
-          ),
+        updatedUser = user?.copyWith(
+          kycVerificationStatus: KYCVerificationStatus.documentsVerified,
         );
+        await userRepository?.saveUser(updatedUser);
       }
+
+      saveUserState(updatedUser);
 
       return result;
     } on DioException catch (e) {
@@ -75,7 +77,7 @@ final class GeneralAuthenticationRepo {
             : null,
       );
 
-      userRepository?.saveUser(updatedUser);
+      await userRepository?.saveUser(updatedUser);
 
       saveUserState(updatedUser);
 
@@ -148,6 +150,7 @@ final class GeneralAuthenticationRepo {
   void logout({required VoidCallback onDataCleared}) async {
     try {
       await userRepository?.clearUserSession();
+      userRepository?.saveRememberMe(false);
       onDataCleared();
     } catch (e) {
       debugLog(e.toString());

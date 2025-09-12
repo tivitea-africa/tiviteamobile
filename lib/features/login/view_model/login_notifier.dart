@@ -39,6 +39,7 @@ class LoginNotifier extends _$LoginNotifier {
 
   void login(
     LoginRequestObject data, {
+    bool rememberMe = false,
     ///Pass [EntityType] to determine what dashboard would be loaded
     void Function(EntityType?)? onSuccess,
     void Function(String)? onError,
@@ -48,6 +49,9 @@ class LoginNotifier extends _$LoginNotifier {
       final response = await _repo.login(
         data,
         saveUserState: (user) {
+          if (rememberMe) {
+            _userRepo.saveRememberMe(rememberMe);
+          }
           final userStateNotifier = ref.read(userNotifierProvider.notifier);
           userStateNotifier.updateUser(user);
         },
@@ -57,6 +61,7 @@ class LoginNotifier extends _$LoginNotifier {
             response.message ??
             'An error occurred';
       }
+
       state = state.copyWith(loadState: LoadState.success);
       if (onSuccess != null) onSuccess(response.data?.user?.entityType);
     } catch (e) {
@@ -73,7 +78,10 @@ class LoginNotifier extends _$LoginNotifier {
   }) async {
     state = state.copyWith(loadState: LoadState.loading);
     try {
-      final response = await _repo.signUpWithSocialAuth(data);
+      final response = await _repo.signUpWithSocialAuth(data, saveUserState: (user) {
+        final userStateNotifier = ref.read(userNotifierProvider.notifier);
+        userStateNotifier.updateUser(user);
+      });
       if (!response.isSuccess()) {
         throw response.error?.message ??
             response.message ??

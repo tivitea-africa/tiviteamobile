@@ -24,12 +24,49 @@ final class ThirdPartyAuthRepo {
         final userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
         final user = userCredential.user;
+        final providerData = user?.providerData.firstWhere((element) => element.providerId == 'google.com');
+        
+        // Extract name from Google user data
+        String firstName = '';
+        String lastName = '';
+        String email = '';
+        
+        // Check if Google provided name data
+        if (providerData?.displayName != null) {
+          final nameParts = providerData?.displayName?.split(' ') ?? [];
+          firstName = nameParts.isNotEmpty ? nameParts.first : '';
+          lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
+          email = user?.email ?? '';
+          
+          // Store the user data locally for future logins
+          if (firstName.isNotEmpty) {
+            await localStorage.put(HiveKeys.googleFirstName, firstName);
+          }
+          if (lastName.isNotEmpty) {
+            await localStorage.put(HiveKeys.googleLastName, lastName);
+          }
+          if (email.isNotEmpty) {
+            await localStorage.put(HiveKeys.googleEmail, email);
+          }
+        } else {
+          // Google didn't provide name data, get from stored values in local storage
+          firstName = localStorage.get<String>(HiveKeys.googleFirstName) ?? '';
+          lastName = localStorage.get<String>(HiveKeys.googleLastName) ?? '';
+          
+          // Get email from stored value if not available from Google
+          email = user?.email ?? localStorage.get<String>(HiveKeys.googleEmail) ?? '';
+        }
+        
+        debugLog(email);
+        debugLog(firstName);
+        debugLog(lastName);
+        
         return BaseResponse(
           status: 'success',
           data: SocialAuthModel(
-            email: user?.email,
-            firstName: user?.displayName,
-            lastName: user?.displayName,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
             authId: user?.uid,
             authProvider: 'google',
             profilePicture: user?.photoURL ?? '',

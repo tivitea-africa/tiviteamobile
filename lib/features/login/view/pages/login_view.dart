@@ -11,6 +11,7 @@ import 'package:tivi_tea/core/utils/enums.dart';
 import 'package:tivi_tea/core/utils/logger.dart';
 import 'package:tivi_tea/core/utils/validators.dart';
 import 'package:tivi_tea/features/common/app_button.dart';
+import 'package:tivi_tea/features/common/app_checkbox.dart';
 import 'package:tivi_tea/features/common/app_onboarding_scaffold.dart';
 import 'package:tivi_tea/features/common/app_svg_widget.dart';
 import 'package:tivi_tea/features/common/app_text_field.dart';
@@ -43,9 +44,9 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
     // Give focus to the first text field when the page initializes
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      emailFocusNode.requestFocus();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   emailFocusNode.requestFocus();
+    // });
     
     // Listen to focus changes to detect keyboard visibility
     emailFocusNode.addListener(() {
@@ -126,18 +127,18 @@ class _LoginViewState extends State<LoginView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                // AppCheckbox(
-                //   onChanged: (value) {
-                //     rememberMe = value;
-                //     setState(() {});
-                //   },
-                // ),
-                // 5.horizontalSpace,
-                // Text(
-                //   context.l10n.rememberMe,
-                //   style: context.theme.textTheme.labelSmall,
-                // ),
-                // const Spacer(),
+                AppCheckbox(
+                  onChanged: (value) {
+                    rememberMe = value;
+                    setState(() {});
+                  },
+                ),
+                5.horizontalSpace,
+                Text(
+                  context.l10n.rememberMe,
+                  style: context.theme.textTheme.labelSmall,
+                ),
+                const Spacer(),
                 InkWell(
                   onTap: () => context.push(AppRoutes.forgotPasswordView),
                   child: Text(
@@ -286,6 +287,7 @@ class _LoginViewState extends State<LoginView> {
     final notifier = ref.read(loginNotifierProvider.notifier);
     notifier.login(
       data,
+      rememberMe: rememberMe,
       onSuccess: (entityType) => _onLoginSuccess(ref, entityType),
       onError: (error) => context.showError(error),
     );

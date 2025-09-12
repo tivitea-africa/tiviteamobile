@@ -4,6 +4,7 @@ import 'package:tivi_tea/core/services/local_storage/local_storage_impl.dart';
 import 'package:tivi_tea/core/services/local_storage/storage_keys.dart';
 import 'package:tivi_tea/core/services/rest_client/app_interceptor.dart';
 import 'package:tivi_tea/core/services/rest_client/rest_client.dart';
+import 'package:tivi_tea/core/services/token_expiration_service.dart';
 import 'package:tivi_tea/repositories/user/user_repo_impl.dart';
 
 class BaseEnv {
@@ -27,6 +28,7 @@ ProviderFamily<Dio, String> _dio = Provider.family<Dio, String>((ref, baseUrl) {
     DioInterceptor(
       dio: dio,
       userRepository: UserRepoImpl(LocalStorageImpl(HiveKeys.appBox)),
+      tokenExpirationService: TokenExpirationService(),
       //ref: ref,
     ),
   );
